@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLivingDex } from "./store";
 import speciesData from "./species.json";
 import movesData from "./moves.json";
@@ -426,19 +426,52 @@ function StatusBadge({
 }
 
 function ExpProgress({ level, exp, rate }: { level: number; exp: number; rate: GrowthRate }) {
-  if (level >= 100) {
+  const isMax = level >= 100;
+  const curLevelExp = expForLevel(level, rate);
+  const nextLevelExp = expForLevel(level + 1, rate);
+  const span = Math.max(1, nextLevelExp - curLevelExp);
+  const into = Math.max(0, exp - curLevelExp);
+  const toGo = Math.max(0, nextLevelExp - exp);
+  const pct = isMax ? 100 : Math.min(100, Math.max(0, (into / span) * 100));
+
+  // Mimic the in-game bar: on level up, fill to 100% first, snap back to 0, then
+  // animate to the new percent. We track the previous level and stage the transition.
+  const [displayPct, setDisplayPct] = useState(pct);
+  const [animate, setAnimate] = useState(true);
+  const prevLevel = useRef(level);
+
+  useEffect(() => {
+    if (level === prevLevel.current) {
+      setAnimate(true);
+      setDisplayPct(pct);
+      return;
+    }
+    // Leveled up (or down). Fill to 100 with animation, then snap to 0, then go to pct.
+    prevLevel.current = level;
+    setAnimate(true);
+    setDisplayPct(100);
+    const t1 = setTimeout(() => {
+      setAnimate(false);
+      setDisplayPct(0);
+      // Next frame: re-enable animation and go to target.
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setAnimate(true);
+          setDisplayPct(pct);
+        });
+      });
+    }, 750);
+    return () => clearTimeout(t1);
+  }, [level, pct]);
+
+  if (isMax) {
     return (
       <div style={{ fontSize: 12, opacity: 0.7, marginTop: 4 }}>
         EXP {formatInt(exp)} · <span style={{ fontWeight: 600 }}>Max level</span>
       </div>
     );
   }
-  const curLevelExp = expForLevel(level, rate);
-  const nextLevelExp = expForLevel(level + 1, rate);
-  const span = Math.max(1, nextLevelExp - curLevelExp);
-  const into = Math.max(0, exp - curLevelExp);
-  const toGo = Math.max(0, nextLevelExp - exp);
-  const pct = Math.min(100, Math.max(0, (into / span) * 100));
+
   return (
     <div style={{ fontSize: 12, marginTop: 6, display: "flex", flexDirection: "column", gap: 3 }}>
       <div style={{ display: "flex", justifyContent: "space-between", gap: 8, opacity: 0.8 }}>
@@ -458,7 +491,14 @@ function ExpProgress({ level, exp, rate }: { level: number; exp: number; rate: G
         }}
         title={`${formatInt(into)} / ${formatInt(span)} EXP this level · ${rate}`}
       >
-        <div style={{ width: `${pct}%`, height: "100%", background: "var(--accent)" }} />
+        <div
+          style={{
+            width: `${displayPct}%`,
+            height: "100%",
+            background: "var(--accent)",
+            transition: animate ? "width 700ms cubic-bezier(0.22, 1, 0.36, 1)" : "none",
+          }}
+        />
       </div>
     </div>
   );
