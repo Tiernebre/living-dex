@@ -24,3 +24,7 @@ Will be using mgba for the game boy games, and Dolphin for the gamecube ones.
     - Safari Zone pokemon will need to utilize breeding.
 - Only the vanilla games can be played.
 
+## Architecture & References
+
+See [`docs/technical-foundation.md`](docs/technical-foundation.md) for the architecture, target ROM revisions, decomp references, prior art, and design decisions.
+

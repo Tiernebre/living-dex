@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "verify-roms": "deno run --allow-read scripts/verify-rom.ts"
+  }
+}
