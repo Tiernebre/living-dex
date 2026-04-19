@@ -352,7 +352,7 @@ function PokemonCard({ mon }: { mon: DecodedPokemon }) {
         <img src={info.sprite} alt={info.name} width={64} height={64} style={{ imageRendering: "pixelated" }} />
       )}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontWeight: 600 }}>
+        <div style={{ fontWeight: 600, marginBottom: 4 }}>
           {mon.nickname}
           {info && (
             <span style={{ fontWeight: 400, opacity: 0.7 }}>
