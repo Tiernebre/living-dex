@@ -288,6 +288,49 @@ function StatsTable({
   );
 }
 
+const BADGE_TONES: Record<string, { bg: string; fg: string; dot: string }> = {
+  success: { bg: "#dcfce7", fg: "#14532d", dot: "#16a34a" },
+  danger: { bg: "#fee2e2", fg: "#7f1d1d", dot: "#dc2626" },
+  info: { bg: "#dbeafe", fg: "#1e3a8a", dot: "#2563eb" },
+  muted: { bg: "#f1f5f9", fg: "#475569", dot: "#94a3b8" },
+};
+
+function StatusBadge({
+  label,
+  value,
+  tone,
+  detail,
+}: {
+  label: string;
+  value: string;
+  tone: keyof typeof BADGE_TONES;
+  detail?: string;
+}) {
+  const t = BADGE_TONES[tone];
+  return (
+    <span
+      title={detail}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 6,
+        padding: "4px 10px",
+        borderRadius: 999,
+        background: t.bg,
+        color: t.fg,
+        fontSize: 12,
+        fontWeight: 600,
+        lineHeight: 1.4,
+      }}
+    >
+      <span style={{ width: 8, height: 8, borderRadius: 999, background: t.dot }} />
+      <span style={{ opacity: 0.7, textTransform: "uppercase", letterSpacing: 0.5, fontSize: 10 }}>{label}</span>
+      <span>{value}</span>
+      {detail && <span style={{ opacity: 0.6, fontWeight: 400 }}>· {detail}</span>}
+    </span>
+  );
+}
+
 function PokemonCard({ mon }: { mon: DecodedPokemon }) {
   const info = lookup(mon.species);
   return (
@@ -326,15 +369,21 @@ export function App() {
   const activeEnemy = enemyParty.find((p) => p !== null) ?? null;
   return (
     <main style={{ fontFamily: "system-ui, sans-serif", padding: 24 }}>
-      <h1>Living Dex</h1>
-      <p>
-        <strong>mGBA:</strong> {connected ? "connected" : "disconnected"}
-        {game && ` — ${game.name} (rev ${game.revision})`}
-      </p>
-      <p>
-        <strong>Source:</strong> {source ?? "none"}
-        {lastUpdateAt && ` — updated ${new Date(lastUpdateAt).toLocaleTimeString()}`}
-      </p>
+      <header style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", marginBottom: 16 }}>
+        <h1 style={{ margin: 0, marginRight: "auto" }}>Living Dex</h1>
+        <StatusBadge
+          label="mGBA"
+          value={connected ? "connected" : "disconnected"}
+          tone={connected ? "success" : "danger"}
+          detail={game ? `${game.name} (rev ${game.revision})` : undefined}
+        />
+        <StatusBadge
+          label="Source"
+          value={source ?? "none"}
+          tone={source ? "info" : "muted"}
+          detail={lastUpdateAt ? new Date(lastUpdateAt).toLocaleTimeString() : undefined}
+        />
+      </header>
       <h2>Current Matchup</h2>
       {inBattle && activeEnemy ? (
         <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: 12, alignItems: "start" }}>
