@@ -16,13 +16,13 @@ async function sha1(path: string): Promise<string> {
     .join("");
 }
 
-const DUMPS_DIR = new URL("../dumps/", import.meta.url).pathname;
+const ROMS_DIR = new URL("../roms/", import.meta.url).pathname;
 
 async function listDumps(): Promise<string[]> {
   const paths: string[] = [];
-  for await (const entry of Deno.readDir(DUMPS_DIR)) {
+  for await (const entry of Deno.readDir(ROMS_DIR)) {
     if (entry.isFile && entry.name.toLowerCase().endsWith(".gba")) {
-      paths.push(`${DUMPS_DIR}${entry.name}`);
+      paths.push(`${ROMS_DIR}${entry.name}`);
     }
   }
   return paths.sort();
@@ -31,7 +31,7 @@ async function listDumps(): Promise<string[]> {
 if (import.meta.main) {
   const paths = Deno.args.length > 0 ? Deno.args : await listDumps();
   if (paths.length === 0) {
-    console.error(`no .gba files found in ${DUMPS_DIR}`);
+    console.error(`no .gba files found in ${ROMS_DIR}`);
     Deno.exit(1);
   }
 
