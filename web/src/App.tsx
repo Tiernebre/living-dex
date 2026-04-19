@@ -100,7 +100,7 @@ const TYPE_COLORS: Record<string, string> = {
 function MovesList({ moves }: { moves: { id: number; pp: number }[] }) {
   if (moves.length === 0) return null;
   return (
-    <div style={{ marginTop: 8, display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 6, maxWidth: 520 }}>
+    <div style={{ marginTop: 8, display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 6, maxWidth: 520 }}>
       {moves.map((m, i) => {
         const info = lookupMove(m.id);
         return (
@@ -114,10 +114,21 @@ function MovesList({ moves }: { moves: { id: number; pp: number }[] }) {
               border: "1px solid #e5e7eb",
               borderRadius: 6,
               fontSize: 12,
+              minWidth: 0,
+              overflow: "hidden",
             }}
           >
             {info ? <TypeBadge type={info.type} /> : <span style={{ opacity: 0.5 }}>?</span>}
-            <span style={{ fontWeight: 600, flex: 1 }}>
+            <span
+              style={{
+                fontWeight: 600,
+                flex: 1,
+                minWidth: 0,
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+              }}
+            >
               {info ? formatSpeciesName(info.name) : `Move #${m.id}`}
             </span>
             <span style={{ opacity: 0.7, fontVariantNumeric: "tabular-nums" }}>
@@ -335,7 +346,7 @@ function StatusBadge({
   );
 }
 
-function PokemonCard({ mon }: { mon: DecodedPokemon }) {
+function PokemonCard({ mon, movesRight = false }: { mon: DecodedPokemon; movesRight?: boolean }) {
   const info = lookup(mon.species);
   return (
     <div
@@ -372,8 +383,21 @@ function PokemonCard({ mon }: { mon: DecodedPokemon }) {
           <span>Lv {mon.level} · {mon.nature}</span>
           {info && info.types.map((t) => <TypeBadge key={t} type={t} />)}
         </div>
-        <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} />
-        <MovesList moves={mon.moves} />
+        {movesRight ? (
+          <div style={{ display: "flex", gap: 12, alignItems: "flex-start", flexWrap: "wrap" }}>
+            <div style={{ flex: "1 1 240px", minWidth: 0 }}>
+              <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} />
+            </div>
+            <div style={{ flex: "1 1 240px", minWidth: 0 }}>
+              <MovesList moves={mon.moves} />
+            </div>
+          </div>
+        ) : (
+          <>
+            <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} />
+            <MovesList moves={mon.moves} />
+          </>
+        )}
       </div>
     </div>
   );
@@ -402,15 +426,15 @@ export function App() {
       </header>
       <h2>Current Matchup</h2>
       {inBattle && activeEnemy ? (
-        <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: 12, alignItems: "start" }}>
-          <div>
+        <div className="matchup">
+          <div className="matchup-card">
             <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: 0.5 }}>
               You
             </div>
             {activeMon ? <PokemonCard mon={activeMon} /> : <div style={{ opacity: 0.5 }}>—</div>}
           </div>
-          <div style={{ fontSize: 24, fontWeight: 700, opacity: 0.4, alignSelf: "center" }}>vs</div>
-          <div>
+          <div className="matchup-vs">vs</div>
+          <div className="matchup-card">
             <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: 0.5 }}>
               Opponent
             </div>
@@ -424,7 +448,7 @@ export function App() {
       <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
         {party.map((mon, i) => (
           <li key={i} style={mon ? undefined : { opacity: 0.4 }}>
-            {mon ? <PokemonCard mon={mon} /> : "—"}
+            {mon ? <PokemonCard mon={mon} movesRight /> : "—"}
           </li>
         ))}
       </ol>

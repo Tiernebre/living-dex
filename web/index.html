@@ -4,6 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Living Dex</title>
+    <style>
+      .matchup { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; }
+      .matchup-card { flex: 1 1 320px; min-width: 0; }
+      .matchup-vs { font-size: 24px; font-weight: 700; opacity: 0.4; align-self: center; text-align: center; }
+      @media (max-width: 720px) {
+        .matchup-card { flex: 1 1 100%; }
+        .matchup-vs { flex: 0 0 100%; }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
