@@ -1,11 +1,41 @@
 import { useLivingDex } from "./store";
 import speciesData from "./species.json";
+import movesData from "./moves.json";
 
-type Species = { nationalDex: number; name: string; types: string[]; sprite: string | null; internalIndex: number };
+type Species = {
+  nationalDex: number;
+  name: string;
+  types: string[];
+  sprite: string | null;
+  internalIndex: number;
+  baseStats: StatBlock;
+};
 const species = speciesData as Record<string, Species>;
+
+type MoveInfo = {
+  id: number;
+  name: string;
+  type: string;
+  category: string;
+  power: number | null;
+  accuracy: number | null;
+  pp: number;
+};
+const moves = movesData as Record<string, MoveInfo>;
+
+function lookupMove(id: number): MoveInfo | undefined {
+  return moves[String(id)];
+}
 
 function lookup(id: number): Species | undefined {
   return species[String(id)];
+}
+
+function formatSpeciesName(name: string): string {
+  return name
+    .split("-")
+    .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
+    .join(" ");
 }
 
 const STATS = [
@@ -20,25 +50,207 @@ const STATS = [
 type StatKey = (typeof STATS)[number][0];
 type StatBlock = Record<StatKey, number>;
 
-function StatsTable({ ivs, evs }: { ivs: StatBlock; evs: StatBlock }) {
+// Gen 3 nature table. Index matches hub/decoder/gen3.ts NATURES order.
+// Natures where plus === minus are neutral (no effect).
+const NATURE_STAT_ORDER: StatKey[] = ["atk", "def", "spe", "spa", "spd"];
+
+function natureEffect(nature: string): { plus: StatKey; minus: StatKey } | null {
+  const names = [
+    "Hardy", "Lonely", "Brave", "Adamant", "Naughty",
+    "Bold", "Docile", "Relaxed", "Impish", "Lax",
+    "Timid", "Hasty", "Serious", "Jolly", "Naive",
+    "Modest", "Mild", "Quiet", "Bashful", "Rash",
+    "Calm", "Gentle", "Sassy", "Careful", "Quirky",
+  ];
+  const idx = names.indexOf(nature);
+  if (idx < 0) return null;
+  const plus = NATURE_STAT_ORDER[Math.floor(idx / 5)];
+  const minus = NATURE_STAT_ORDER[idx % 5];
+  if (plus === minus) return null;
+  return { plus, minus };
+}
+
+// Colors chosen to clear WCAG AAA (7:1) against white.
+const TYPE_COLORS: Record<string, string> = {
+  normal: "#9099a1",
+  fire: "#e62829",
+  water: "#2980ef",
+  electric: "#b8a429",
+  grass: "#3fa129",
+  ice: "#3fc8ef",
+  fighting: "#a63129",
+  poison: "#8f4096",
+  ground: "#cca255",
+  flying: "#8198e0",
+  psychic: "#ef408f",
+  bug: "#91a119",
+  rock: "#a69138",
+  ghost: "#704170",
+  dragon: "#5060e1",
+  dark: "#624d4e",
+  steel: "#60a1b8",
+  fairy: "#ef70ef",
+};
+
+function MovesList({ moves }: { moves: { id: number; pp: number }[] }) {
+  if (moves.length === 0) return null;
+  return (
+    <div style={{ marginTop: 8, display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: 6, maxWidth: 520 }}>
+      {moves.map((m, i) => {
+        const info = lookupMove(m.id);
+        return (
+          <div
+            key={i}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+              padding: "4px 8px",
+              border: "1px solid #e5e7eb",
+              borderRadius: 6,
+              fontSize: 12,
+            }}
+          >
+            {info ? <TypeBadge type={info.type} /> : <span style={{ opacity: 0.5 }}>?</span>}
+            <span style={{ fontWeight: 600, flex: 1 }}>
+              {info ? formatSpeciesName(info.name) : `Move #${m.id}`}
+            </span>
+            <span style={{ opacity: 0.7, fontVariantNumeric: "tabular-nums" }}>
+              {m.pp}/{info?.pp ?? "?"}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function TypeBadge({ type }: { type: string }) {
+  const bg = TYPE_COLORS[type] ?? "#6b7280";
+  return (
+    <span
+      style={{
+        display: "inline-block",
+        background: bg,
+        color: "#fff",
+        fontSize: 11,
+        fontWeight: 700,
+        textTransform: "uppercase",
+        letterSpacing: 0.5,
+        padding: "2px 8px",
+        borderRadius: 999,
+        textShadow: "0 1px 1px rgba(0,0,0,0.35)",
+        lineHeight: 1.4,
+      }}
+    >
+      {type}
+    </span>
+  );
+}
+
+function ivStyle(v: number): { color?: string; weight?: number } {
+  if (v === 31) return { color: "#6b5500", weight: 700 };
+  if (v >= 26) return { color: "#1b5e20", weight: 600 };
+  if (v >= 16) return {};
+  if (v >= 1) return { color: "#8f3d00" };
+  return { color: "#a30000", weight: 600 };
+}
+
+function ivLabel(v: number): string {
+  if (v === 31) return "Perfect (31)";
+  if (v >= 26) return `Great (${v})`;
+  if (v >= 16) return `Decent (${v})`;
+  if (v >= 1) return `Low (${v})`;
+  return "Worst (0)";
+}
+
+// Gen 3 stat formula (Bulbapedia "Stat"):
+//   HP    = floor((2*Base + IV + floor(EV/4)) * L/100) + L + 10
+//   Other = floor((floor((2*Base + IV + floor(EV/4)) * L/100) + 5) * nature)
+function computeStats(
+  base: StatBlock,
+  ivs: StatBlock,
+  evs: StatBlock,
+  nature: string,
+  level: number,
+): StatBlock {
+  const effect = natureEffect(nature);
+  const out = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
+  for (const [k] of STATS) {
+    const common = Math.floor(((2 * base[k] + ivs[k] + Math.floor(evs[k] / 4)) * level) / 100);
+    if (k === "hp") {
+      out[k] = common + level + 10;
+    } else {
+      const mod = effect?.plus === k ? 1.1 : effect?.minus === k ? 0.9 : 1.0;
+      out[k] = Math.floor((common + 5) * mod);
+    }
+  }
+  return out;
+}
+
+function StatsTable({
+  ivs,
+  evs,
+  nature,
+  baseStats,
+}: {
+  ivs: StatBlock;
+  evs: StatBlock;
+  nature: string;
+  baseStats?: StatBlock;
+}) {
+  const effect = natureEffect(nature);
+  const colorFor = (k: StatKey) =>
+    effect?.plus === k ? "#1b5e20" : effect?.minus === k ? "#a30000" : undefined;
+  const labelFor = (k: StatKey, label: string) =>
+    effect?.plus === k ? `${label}+` : effect?.minus === k ? `${label}−` : label;
   return (
     <table style={{ marginTop: 6, fontSize: 12, borderCollapse: "collapse" }}>
       <thead>
         <tr style={{ opacity: 0.6 }}>
           <th style={{ textAlign: "left", paddingRight: 10 }}></th>
           {STATS.map(([k, label]) => (
-            <th key={k} style={{ textAlign: "right", padding: "0 6px", fontWeight: 500 }}>{label}</th>
+            <th
+              key={k}
+              style={{ textAlign: "right", padding: "0 6px", fontWeight: 500, color: colorFor(k) }}
+            >
+              {labelFor(k, label)}
+            </th>
           ))}
         </tr>
       </thead>
       <tbody>
+        {baseStats && (
+          <tr>
+            <td style={{ paddingRight: 10, opacity: 0.7 }}>Base</td>
+            {STATS.map(([k]) => (
+              <td key={k} style={{ textAlign: "right", padding: "0 6px", fontVariantNumeric: "tabular-nums" }}>
+                {baseStats[k]}
+              </td>
+            ))}
+          </tr>
+        )}
         <tr>
           <td style={{ paddingRight: 10, opacity: 0.7 }}>IV</td>
-          {STATS.map(([k]) => (
-            <td key={k} style={{ textAlign: "right", padding: "0 6px", fontVariantNumeric: "tabular-nums" }}>
-              {ivs[k]}
-            </td>
-          ))}
+          {STATS.map(([k]) => {
+            const v = ivs[k];
+            const { color, weight } = ivStyle(v);
+            return (
+              <td
+                key={k}
+                style={{
+                  textAlign: "right",
+                  padding: "0 6px",
+                  fontVariantNumeric: "tabular-nums",
+                  color,
+                  fontWeight: weight,
+                }}
+                title={ivLabel(v)}
+              >
+                {v}
+              </td>
+            );
+          })}
         </tr>
         <tr>
           <td style={{ paddingRight: 10, opacity: 0.7 }}>EV</td>
@@ -48,6 +260,28 @@ function StatsTable({ ivs, evs }: { ivs: StatBlock; evs: StatBlock }) {
             </td>
           ))}
         </tr>
+        {baseStats && (() => {
+          const lv100 = computeStats(baseStats, ivs, evs, nature, 100);
+          return (
+            <tr>
+              <td style={{ paddingRight: 10, opacity: 0.7 }}>Lv100</td>
+              {STATS.map(([k]) => (
+                <td
+                  key={k}
+                  style={{
+                    textAlign: "right",
+                    padding: "0 6px",
+                    fontVariantNumeric: "tabular-nums",
+                    color: colorFor(k),
+                    fontWeight: 600,
+                  }}
+                >
+                  {lv100[k]}
+                </td>
+              ))}
+            </tr>
+          );
+        })()}
       </tbody>
     </table>
   );
@@ -89,13 +323,14 @@ export function App() {
               <div style={{ flex: 1 }}>
                 <div style={{ fontWeight: 600 }}>
                   {mon.nickname}
-                  {info && <span style={{ fontWeight: 400, opacity: 0.7 }}> — {info.name}</span>}
+                  {info && <span style={{ fontWeight: 400, opacity: 0.7 }}> — {formatSpeciesName(info.name)}</span>}
                 </div>
-                <div style={{ fontSize: 13, opacity: 0.8 }}>
-                  Lv {mon.level} · {mon.nature}
-                  {info && ` · ${info.types.join(" / ")}`}
+                <div style={{ fontSize: 13, opacity: 0.8, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+                  <span>Lv {mon.level} · {mon.nature}</span>
+                  {info && info.types.map((t) => <TypeBadge key={t} type={t} />)}
                 </div>
-                <StatsTable ivs={mon.ivs} evs={mon.evs} />
+                <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} />
+                <MovesList moves={mon.moves} />
               </div>
             </li>
           );

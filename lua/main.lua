@@ -44,6 +44,7 @@ local function emit_region(region_id, index, addr, length)
 end
 
 local adapter = nil
+local frame_cb_id = nil
 
 local function on_frame()
   if not adapter then return end
@@ -86,7 +87,18 @@ local function boot()
   end
 
   socket_client.send(envelope.hello(adapter.game_code, adapter.revision))
-  callbacks:add("frame", on_frame)
+  frame_cb_id = callbacks:add("frame", on_frame)
 end
+
+local function shutdown()
+  if frame_cb_id then
+    callbacks:remove(frame_cb_id)
+    frame_cb_id = nil
+  end
+  socket_client.close()
+  adapter = nil
+end
+
+callbacks:add("shutdown", shutdown)
 
 boot()

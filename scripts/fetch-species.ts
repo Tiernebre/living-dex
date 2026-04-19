@@ -7,15 +7,28 @@ const MAX_DEX = 386;
 const CONCURRENCY = 16;
 const OUT = new URL("../web/src/species.json", import.meta.url);
 
+type StatBlock = { hp: number; atk: number; def: number; spa: number; spd: number; spe: number };
+
 type Species = {
   nationalDex: number;
   name: string;
   types: string[];
   sprite: string;
   internalIndex: number;
+  baseStats: StatBlock;
 };
 
 type GameIndex = { game_index: number; version: { name: string } };
+type StatEntry = { base_stat: number; stat: { name: string } };
+
+const STAT_NAME_MAP: Record<string, keyof StatBlock> = {
+  "hp": "hp",
+  "attack": "atk",
+  "defense": "def",
+  "special-attack": "spa",
+  "special-defense": "spd",
+  "speed": "spe",
+};
 
 async function fetchOne(id: number): Promise<Species> {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -23,12 +36,18 @@ async function fetchOne(id: number): Promise<Species> {
   const data = await res.json();
   const ruby = data.game_indices.find((g: GameIndex) => g.version.name === "ruby");
   if (!ruby) throw new Error(`dex ${id}: no Ruby game_index`);
+  const baseStats = { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
+  for (const s of data.stats as StatEntry[]) {
+    const key = STAT_NAME_MAP[s.stat.name];
+    if (key) baseStats[key] = s.base_stat;
+  }
   return {
     nationalDex: id,
     name: data.name,
     types: data.types.map((t: { type: { name: string } }) => t.type.name),
     sprite: data.sprites.front_default,
     internalIndex: ruby.game_index,
+    baseStats,
   };
 }
 

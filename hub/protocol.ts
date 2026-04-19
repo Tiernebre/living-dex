@@ -40,7 +40,8 @@ export type DecodedPokemon = {
   ivs: { hp: number; atk: number; def: number; spa: number; spd: number; spe: number };
   evs: { hp: number; atk: number; def: number; spa: number; spd: number; spe: number };
   nature: string;
-  // TODO: ability, moves, hidden power, ribbons, OT info, etc.
+  moves: { id: number; pp: number }[];
+  // TODO: ability, hidden power, ribbons, OT info, etc.
 };
 
 export type HubState = {

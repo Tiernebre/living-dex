@@ -134,6 +134,7 @@ export function decodePokemon(bytes: Uint8Array): DecodedPokemon | null {
 
   const order = SUBSTRUCTURE_ORDERS[pid % 24];
   const G = pickSubstruct(decrypted, order, "G");
+  const A = pickSubstruct(decrypted, order, "A");
   const M = pickSubstruct(decrypted, order, "M");
   const E = pickSubstruct(decrypted, order, "E");
 
@@ -157,6 +158,13 @@ export function decodePokemon(bytes: Uint8Array): DecodedPokemon | null {
   const hasPartyTail = bytes.length >= 0x55 && bytes[0x54] !== 0;
   const level = hasPartyTail ? bytes[0x54] : 0;
 
+  const moves = [
+    { id: readU16LE(A, 0), pp: A[8] },
+    { id: readU16LE(A, 2), pp: A[9] },
+    { id: readU16LE(A, 4), pp: A[10] },
+    { id: readU16LE(A, 6), pp: A[11] },
+  ].filter((m) => m.id !== 0);
+
   return {
     pid,
     species,
@@ -165,5 +173,6 @@ export function decodePokemon(bytes: Uint8Array): DecodedPokemon | null {
     ivs,
     evs,
     nature: NATURES[pid % 25],
+    moves,
   };
 }

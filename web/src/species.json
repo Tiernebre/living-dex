@@ -7,7 +7,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
-    "internalIndex": 1
+    "internalIndex": 1,
+    "baseStats": {
+      "hp": 45,
+      "atk": 49,
+      "def": 49,
+      "spa": 65,
+      "spd": 65,
+      "spe": 45
+    }
   },
   "2": {
     "nationalDex": 2,
@@ -17,7 +25,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png",
-    "internalIndex": 2
+    "internalIndex": 2,
+    "baseStats": {
+      "hp": 60,
+      "atk": 62,
+      "def": 63,
+      "spa": 80,
+      "spd": 80,
+      "spe": 60
+    }
   },
   "3": {
     "nationalDex": 3,
@@ -27,7 +43,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
-    "internalIndex": 3
+    "internalIndex": 3,
+    "baseStats": {
+      "hp": 80,
+      "atk": 82,
+      "def": 83,
+      "spa": 100,
+      "spd": 100,
+      "spe": 80
+    }
   },
   "4": {
     "nationalDex": 4,
@@ -36,7 +60,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png",
-    "internalIndex": 4
+    "internalIndex": 4,
+    "baseStats": {
+      "hp": 39,
+      "atk": 52,
+      "def": 43,
+      "spa": 60,
+      "spd": 50,
+      "spe": 65
+    }
   },
   "5": {
     "nationalDex": 5,
@@ -45,7 +77,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png",
-    "internalIndex": 5
+    "internalIndex": 5,
+    "baseStats": {
+      "hp": 58,
+      "atk": 64,
+      "def": 58,
+      "spa": 80,
+      "spd": 65,
+      "spe": 80
+    }
   },
   "6": {
     "nationalDex": 6,
@@ -55,7 +95,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png",
-    "internalIndex": 6
+    "internalIndex": 6,
+    "baseStats": {
+      "hp": 78,
+      "atk": 84,
+      "def": 78,
+      "spa": 109,
+      "spd": 85,
+      "spe": 100
+    }
   },
   "7": {
     "nationalDex": 7,
@@ -64,7 +112,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png",
-    "internalIndex": 7
+    "internalIndex": 7,
+    "baseStats": {
+      "hp": 44,
+      "atk": 48,
+      "def": 65,
+      "spa": 50,
+      "spd": 64,
+      "spe": 43
+    }
   },
   "8": {
     "nationalDex": 8,
@@ -73,7 +129,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png",
-    "internalIndex": 8
+    "internalIndex": 8,
+    "baseStats": {
+      "hp": 59,
+      "atk": 63,
+      "def": 80,
+      "spa": 65,
+      "spd": 80,
+      "spe": 58
+    }
   },
   "9": {
     "nationalDex": 9,
@@ -82,7 +146,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png",
-    "internalIndex": 9
+    "internalIndex": 9,
+    "baseStats": {
+      "hp": 79,
+      "atk": 83,
+      "def": 100,
+      "spa": 85,
+      "spd": 105,
+      "spe": 78
+    }
   },
   "10": {
     "nationalDex": 10,
@@ -91,7 +163,15 @@
       "bug"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/10.png",
-    "internalIndex": 10
+    "internalIndex": 10,
+    "baseStats": {
+      "hp": 45,
+      "atk": 30,
+      "def": 35,
+      "spa": 20,
+      "spd": 20,
+      "spe": 45
+    }
   },
   "11": {
     "nationalDex": 11,
@@ -100,7 +180,15 @@
       "bug"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/11.png",
-    "internalIndex": 11
+    "internalIndex": 11,
+    "baseStats": {
+      "hp": 50,
+      "atk": 20,
+      "def": 55,
+      "spa": 25,
+      "spd": 25,
+      "spe": 30
+    }
   },
   "12": {
     "nationalDex": 12,
@@ -110,7 +198,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png",
-    "internalIndex": 12
+    "internalIndex": 12,
+    "baseStats": {
+      "hp": 60,
+      "atk": 45,
+      "def": 50,
+      "spa": 90,
+      "spd": 80,
+      "spe": 70
+    }
   },
   "13": {
     "nationalDex": 13,
@@ -120,7 +216,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/13.png",
-    "internalIndex": 13
+    "internalIndex": 13,
+    "baseStats": {
+      "hp": 40,
+      "atk": 35,
+      "def": 30,
+      "spa": 20,
+      "spd": 20,
+      "spe": 50
+    }
   },
   "14": {
     "nationalDex": 14,
@@ -130,7 +234,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/14.png",
-    "internalIndex": 14
+    "internalIndex": 14,
+    "baseStats": {
+      "hp": 45,
+      "atk": 25,
+      "def": 50,
+      "spa": 25,
+      "spd": 25,
+      "spe": 35
+    }
   },
   "15": {
     "nationalDex": 15,
@@ -140,7 +252,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/15.png",
-    "internalIndex": 15
+    "internalIndex": 15,
+    "baseStats": {
+      "hp": 65,
+      "atk": 90,
+      "def": 40,
+      "spa": 45,
+      "spd": 80,
+      "spe": 75
+    }
   },
   "16": {
     "nationalDex": 16,
@@ -150,7 +270,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/16.png",
-    "internalIndex": 16
+    "internalIndex": 16,
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 40,
+      "spa": 35,
+      "spd": 35,
+      "spe": 56
+    }
   },
   "17": {
     "nationalDex": 17,
@@ -160,7 +288,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/17.png",
-    "internalIndex": 17
+    "internalIndex": 17,
+    "baseStats": {
+      "hp": 63,
+      "atk": 60,
+      "def": 55,
+      "spa": 50,
+      "spd": 50,
+      "spe": 71
+    }
   },
   "18": {
     "nationalDex": 18,
@@ -170,7 +306,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png",
-    "internalIndex": 18
+    "internalIndex": 18,
+    "baseStats": {
+      "hp": 83,
+      "atk": 80,
+      "def": 75,
+      "spa": 70,
+      "spd": 70,
+      "spe": 101
+    }
   },
   "19": {
     "nationalDex": 19,
@@ -179,7 +323,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/19.png",
-    "internalIndex": 19
+    "internalIndex": 19,
+    "baseStats": {
+      "hp": 30,
+      "atk": 56,
+      "def": 35,
+      "spa": 25,
+      "spd": 35,
+      "spe": 72
+    }
   },
   "20": {
     "nationalDex": 20,
@@ -188,7 +340,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/20.png",
-    "internalIndex": 20
+    "internalIndex": 20,
+    "baseStats": {
+      "hp": 55,
+      "atk": 81,
+      "def": 60,
+      "spa": 50,
+      "spd": 70,
+      "spe": 97
+    }
   },
   "21": {
     "nationalDex": 21,
@@ -198,7 +358,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/21.png",
-    "internalIndex": 21
+    "internalIndex": 21,
+    "baseStats": {
+      "hp": 40,
+      "atk": 60,
+      "def": 30,
+      "spa": 31,
+      "spd": 31,
+      "spe": 70
+    }
   },
   "22": {
     "nationalDex": 22,
@@ -208,7 +376,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/22.png",
-    "internalIndex": 22
+    "internalIndex": 22,
+    "baseStats": {
+      "hp": 65,
+      "atk": 90,
+      "def": 65,
+      "spa": 61,
+      "spd": 61,
+      "spe": 100
+    }
   },
   "23": {
     "nationalDex": 23,
@@ -217,7 +393,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/23.png",
-    "internalIndex": 23
+    "internalIndex": 23,
+    "baseStats": {
+      "hp": 35,
+      "atk": 60,
+      "def": 44,
+      "spa": 40,
+      "spd": 54,
+      "spe": 55
+    }
   },
   "24": {
     "nationalDex": 24,
@@ -226,7 +410,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/24.png",
-    "internalIndex": 24
+    "internalIndex": 24,
+    "baseStats": {
+      "hp": 60,
+      "atk": 95,
+      "def": 69,
+      "spa": 65,
+      "spd": 79,
+      "spe": 80
+    }
   },
   "25": {
     "nationalDex": 25,
@@ -235,7 +427,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
-    "internalIndex": 25
+    "internalIndex": 25,
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 40,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    }
   },
   "26": {
     "nationalDex": 26,
@@ -244,7 +444,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png",
-    "internalIndex": 26
+    "internalIndex": 26,
+    "baseStats": {
+      "hp": 60,
+      "atk": 90,
+      "def": 55,
+      "spa": 90,
+      "spd": 80,
+      "spe": 110
+    }
   },
   "27": {
     "nationalDex": 27,
@@ -253,7 +461,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/27.png",
-    "internalIndex": 27
+    "internalIndex": 27,
+    "baseStats": {
+      "hp": 50,
+      "atk": 75,
+      "def": 85,
+      "spa": 20,
+      "spd": 30,
+      "spe": 40
+    }
   },
   "28": {
     "nationalDex": 28,
@@ -262,7 +478,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/28.png",
-    "internalIndex": 28
+    "internalIndex": 28,
+    "baseStats": {
+      "hp": 75,
+      "atk": 100,
+      "def": 110,
+      "spa": 45,
+      "spd": 55,
+      "spe": 65
+    }
   },
   "29": {
     "nationalDex": 29,
@@ -271,7 +495,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/29.png",
-    "internalIndex": 29
+    "internalIndex": 29,
+    "baseStats": {
+      "hp": 55,
+      "atk": 47,
+      "def": 52,
+      "spa": 40,
+      "spd": 40,
+      "spe": 41
+    }
   },
   "30": {
     "nationalDex": 30,
@@ -280,7 +512,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/30.png",
-    "internalIndex": 30
+    "internalIndex": 30,
+    "baseStats": {
+      "hp": 70,
+      "atk": 62,
+      "def": 67,
+      "spa": 55,
+      "spd": 55,
+      "spe": 56
+    }
   },
   "31": {
     "nationalDex": 31,
@@ -290,7 +530,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/31.png",
-    "internalIndex": 31
+    "internalIndex": 31,
+    "baseStats": {
+      "hp": 90,
+      "atk": 92,
+      "def": 87,
+      "spa": 75,
+      "spd": 85,
+      "spe": 76
+    }
   },
   "32": {
     "nationalDex": 32,
@@ -299,7 +547,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/32.png",
-    "internalIndex": 32
+    "internalIndex": 32,
+    "baseStats": {
+      "hp": 46,
+      "atk": 57,
+      "def": 40,
+      "spa": 40,
+      "spd": 40,
+      "spe": 50
+    }
   },
   "33": {
     "nationalDex": 33,
@@ -308,7 +564,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/33.png",
-    "internalIndex": 33
+    "internalIndex": 33,
+    "baseStats": {
+      "hp": 61,
+      "atk": 72,
+      "def": 57,
+      "spa": 55,
+      "spd": 55,
+      "spe": 65
+    }
   },
   "34": {
     "nationalDex": 34,
@@ -318,7 +582,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/34.png",
-    "internalIndex": 34
+    "internalIndex": 34,
+    "baseStats": {
+      "hp": 81,
+      "atk": 102,
+      "def": 77,
+      "spa": 85,
+      "spd": 75,
+      "spe": 85
+    }
   },
   "35": {
     "nationalDex": 35,
@@ -327,7 +599,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/35.png",
-    "internalIndex": 35
+    "internalIndex": 35,
+    "baseStats": {
+      "hp": 70,
+      "atk": 45,
+      "def": 48,
+      "spa": 60,
+      "spd": 65,
+      "spe": 35
+    }
   },
   "36": {
     "nationalDex": 36,
@@ -336,7 +616,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/36.png",
-    "internalIndex": 36
+    "internalIndex": 36,
+    "baseStats": {
+      "hp": 95,
+      "atk": 70,
+      "def": 73,
+      "spa": 95,
+      "spd": 90,
+      "spe": 60
+    }
   },
   "37": {
     "nationalDex": 37,
@@ -345,7 +633,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/37.png",
-    "internalIndex": 37
+    "internalIndex": 37,
+    "baseStats": {
+      "hp": 38,
+      "atk": 41,
+      "def": 40,
+      "spa": 50,
+      "spd": 65,
+      "spe": 65
+    }
   },
   "38": {
     "nationalDex": 38,
@@ -354,7 +650,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/38.png",
-    "internalIndex": 38
+    "internalIndex": 38,
+    "baseStats": {
+      "hp": 73,
+      "atk": 76,
+      "def": 75,
+      "spa": 81,
+      "spd": 100,
+      "spe": 100
+    }
   },
   "39": {
     "nationalDex": 39,
@@ -364,7 +668,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png",
-    "internalIndex": 39
+    "internalIndex": 39,
+    "baseStats": {
+      "hp": 115,
+      "atk": 45,
+      "def": 20,
+      "spa": 45,
+      "spd": 25,
+      "spe": 20
+    }
   },
   "40": {
     "nationalDex": 40,
@@ -374,7 +686,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/40.png",
-    "internalIndex": 40
+    "internalIndex": 40,
+    "baseStats": {
+      "hp": 140,
+      "atk": 70,
+      "def": 45,
+      "spa": 85,
+      "spd": 50,
+      "spe": 45
+    }
   },
   "41": {
     "nationalDex": 41,
@@ -384,7 +704,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/41.png",
-    "internalIndex": 41
+    "internalIndex": 41,
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 35,
+      "spa": 30,
+      "spd": 40,
+      "spe": 55
+    }
   },
   "42": {
     "nationalDex": 42,
@@ -394,7 +722,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/42.png",
-    "internalIndex": 42
+    "internalIndex": 42,
+    "baseStats": {
+      "hp": 75,
+      "atk": 80,
+      "def": 70,
+      "spa": 65,
+      "spd": 75,
+      "spe": 90
+    }
   },
   "43": {
     "nationalDex": 43,
@@ -404,7 +740,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/43.png",
-    "internalIndex": 43
+    "internalIndex": 43,
+    "baseStats": {
+      "hp": 45,
+      "atk": 50,
+      "def": 55,
+      "spa": 75,
+      "spd": 65,
+      "spe": 30
+    }
   },
   "44": {
     "nationalDex": 44,
@@ -414,7 +758,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/44.png",
-    "internalIndex": 44
+    "internalIndex": 44,
+    "baseStats": {
+      "hp": 60,
+      "atk": 65,
+      "def": 70,
+      "spa": 85,
+      "spd": 75,
+      "spe": 40
+    }
   },
   "45": {
     "nationalDex": 45,
@@ -424,7 +776,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/45.png",
-    "internalIndex": 45
+    "internalIndex": 45,
+    "baseStats": {
+      "hp": 75,
+      "atk": 80,
+      "def": 85,
+      "spa": 110,
+      "spd": 90,
+      "spe": 50
+    }
   },
   "46": {
     "nationalDex": 46,
@@ -434,7 +794,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/46.png",
-    "internalIndex": 46
+    "internalIndex": 46,
+    "baseStats": {
+      "hp": 35,
+      "atk": 70,
+      "def": 55,
+      "spa": 45,
+      "spd": 55,
+      "spe": 25
+    }
   },
   "47": {
     "nationalDex": 47,
@@ -444,7 +812,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/47.png",
-    "internalIndex": 47
+    "internalIndex": 47,
+    "baseStats": {
+      "hp": 60,
+      "atk": 95,
+      "def": 80,
+      "spa": 60,
+      "spd": 80,
+      "spe": 30
+    }
   },
   "48": {
     "nationalDex": 48,
@@ -454,7 +830,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/48.png",
-    "internalIndex": 48
+    "internalIndex": 48,
+    "baseStats": {
+      "hp": 60,
+      "atk": 55,
+      "def": 50,
+      "spa": 40,
+      "spd": 55,
+      "spe": 45
+    }
   },
   "49": {
     "nationalDex": 49,
@@ -464,7 +848,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/49.png",
-    "internalIndex": 49
+    "internalIndex": 49,
+    "baseStats": {
+      "hp": 70,
+      "atk": 65,
+      "def": 60,
+      "spa": 90,
+      "spd": 75,
+      "spe": 90
+    }
   },
   "50": {
     "nationalDex": 50,
@@ -473,7 +865,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/50.png",
-    "internalIndex": 50
+    "internalIndex": 50,
+    "baseStats": {
+      "hp": 10,
+      "atk": 55,
+      "def": 25,
+      "spa": 35,
+      "spd": 45,
+      "spe": 95
+    }
   },
   "51": {
     "nationalDex": 51,
@@ -482,7 +882,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/51.png",
-    "internalIndex": 51
+    "internalIndex": 51,
+    "baseStats": {
+      "hp": 35,
+      "atk": 100,
+      "def": 50,
+      "spa": 50,
+      "spd": 70,
+      "spe": 120
+    }
   },
   "52": {
     "nationalDex": 52,
@@ -491,7 +899,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/52.png",
-    "internalIndex": 52
+    "internalIndex": 52,
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 35,
+      "spa": 40,
+      "spd": 40,
+      "spe": 90
+    }
   },
   "53": {
     "nationalDex": 53,
@@ -500,7 +916,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/53.png",
-    "internalIndex": 53
+    "internalIndex": 53,
+    "baseStats": {
+      "hp": 65,
+      "atk": 70,
+      "def": 60,
+      "spa": 65,
+      "spd": 65,
+      "spe": 115
+    }
   },
   "54": {
     "nationalDex": 54,
@@ -509,7 +933,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png",
-    "internalIndex": 54
+    "internalIndex": 54,
+    "baseStats": {
+      "hp": 50,
+      "atk": 52,
+      "def": 48,
+      "spa": 65,
+      "spd": 50,
+      "spe": 55
+    }
   },
   "55": {
     "nationalDex": 55,
@@ -518,7 +950,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/55.png",
-    "internalIndex": 55
+    "internalIndex": 55,
+    "baseStats": {
+      "hp": 80,
+      "atk": 82,
+      "def": 78,
+      "spa": 95,
+      "spd": 80,
+      "spe": 85
+    }
   },
   "56": {
     "nationalDex": 56,
@@ -527,7 +967,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/56.png",
-    "internalIndex": 56
+    "internalIndex": 56,
+    "baseStats": {
+      "hp": 40,
+      "atk": 80,
+      "def": 35,
+      "spa": 35,
+      "spd": 45,
+      "spe": 70
+    }
   },
   "57": {
     "nationalDex": 57,
@@ -536,7 +984,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/57.png",
-    "internalIndex": 57
+    "internalIndex": 57,
+    "baseStats": {
+      "hp": 65,
+      "atk": 105,
+      "def": 60,
+      "spa": 60,
+      "spd": 70,
+      "spe": 95
+    }
   },
   "58": {
     "nationalDex": 58,
@@ -545,7 +1001,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/58.png",
-    "internalIndex": 58
+    "internalIndex": 58,
+    "baseStats": {
+      "hp": 55,
+      "atk": 70,
+      "def": 45,
+      "spa": 70,
+      "spd": 50,
+      "spe": 60
+    }
   },
   "59": {
     "nationalDex": 59,
@@ -554,7 +1018,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/59.png",
-    "internalIndex": 59
+    "internalIndex": 59,
+    "baseStats": {
+      "hp": 90,
+      "atk": 110,
+      "def": 80,
+      "spa": 100,
+      "spd": 80,
+      "spe": 95
+    }
   },
   "60": {
     "nationalDex": 60,
@@ -563,7 +1035,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/60.png",
-    "internalIndex": 60
+    "internalIndex": 60,
+    "baseStats": {
+      "hp": 40,
+      "atk": 50,
+      "def": 40,
+      "spa": 40,
+      "spd": 40,
+      "spe": 90
+    }
   },
   "61": {
     "nationalDex": 61,
@@ -572,7 +1052,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/61.png",
-    "internalIndex": 61
+    "internalIndex": 61,
+    "baseStats": {
+      "hp": 65,
+      "atk": 65,
+      "def": 65,
+      "spa": 50,
+      "spd": 50,
+      "spe": 90
+    }
   },
   "62": {
     "nationalDex": 62,
@@ -582,7 +1070,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/62.png",
-    "internalIndex": 62
+    "internalIndex": 62,
+    "baseStats": {
+      "hp": 90,
+      "atk": 95,
+      "def": 95,
+      "spa": 70,
+      "spd": 90,
+      "spe": 70
+    }
   },
   "63": {
     "nationalDex": 63,
@@ -591,7 +1087,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/63.png",
-    "internalIndex": 63
+    "internalIndex": 63,
+    "baseStats": {
+      "hp": 25,
+      "atk": 20,
+      "def": 15,
+      "spa": 105,
+      "spd": 55,
+      "spe": 90
+    }
   },
   "64": {
     "nationalDex": 64,
@@ -600,7 +1104,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/64.png",
-    "internalIndex": 64
+    "internalIndex": 64,
+    "baseStats": {
+      "hp": 40,
+      "atk": 35,
+      "def": 30,
+      "spa": 120,
+      "spd": 70,
+      "spe": 105
+    }
   },
   "65": {
     "nationalDex": 65,
@@ -609,7 +1121,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png",
-    "internalIndex": 65
+    "internalIndex": 65,
+    "baseStats": {
+      "hp": 55,
+      "atk": 50,
+      "def": 45,
+      "spa": 135,
+      "spd": 95,
+      "spe": 120
+    }
   },
   "66": {
     "nationalDex": 66,
@@ -618,7 +1138,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/66.png",
-    "internalIndex": 66
+    "internalIndex": 66,
+    "baseStats": {
+      "hp": 70,
+      "atk": 80,
+      "def": 50,
+      "spa": 35,
+      "spd": 35,
+      "spe": 35
+    }
   },
   "67": {
     "nationalDex": 67,
@@ -627,7 +1155,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/67.png",
-    "internalIndex": 67
+    "internalIndex": 67,
+    "baseStats": {
+      "hp": 80,
+      "atk": 100,
+      "def": 70,
+      "spa": 50,
+      "spd": 60,
+      "spe": 45
+    }
   },
   "68": {
     "nationalDex": 68,
@@ -636,7 +1172,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/68.png",
-    "internalIndex": 68
+    "internalIndex": 68,
+    "baseStats": {
+      "hp": 90,
+      "atk": 130,
+      "def": 80,
+      "spa": 65,
+      "spd": 85,
+      "spe": 55
+    }
   },
   "69": {
     "nationalDex": 69,
@@ -646,7 +1190,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/69.png",
-    "internalIndex": 69
+    "internalIndex": 69,
+    "baseStats": {
+      "hp": 50,
+      "atk": 75,
+      "def": 35,
+      "spa": 70,
+      "spd": 30,
+      "spe": 40
+    }
   },
   "70": {
     "nationalDex": 70,
@@ -656,7 +1208,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/70.png",
-    "internalIndex": 70
+    "internalIndex": 70,
+    "baseStats": {
+      "hp": 65,
+      "atk": 90,
+      "def": 50,
+      "spa": 85,
+      "spd": 45,
+      "spe": 55
+    }
   },
   "71": {
     "nationalDex": 71,
@@ -666,7 +1226,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/71.png",
-    "internalIndex": 71
+    "internalIndex": 71,
+    "baseStats": {
+      "hp": 80,
+      "atk": 105,
+      "def": 65,
+      "spa": 100,
+      "spd": 70,
+      "spe": 70
+    }
   },
   "72": {
     "nationalDex": 72,
@@ -676,7 +1244,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/72.png",
-    "internalIndex": 72
+    "internalIndex": 72,
+    "baseStats": {
+      "hp": 40,
+      "atk": 40,
+      "def": 35,
+      "spa": 50,
+      "spd": 100,
+      "spe": 70
+    }
   },
   "73": {
     "nationalDex": 73,
@@ -686,7 +1262,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/73.png",
-    "internalIndex": 73
+    "internalIndex": 73,
+    "baseStats": {
+      "hp": 80,
+      "atk": 70,
+      "def": 65,
+      "spa": 80,
+      "spd": 120,
+      "spe": 100
+    }
   },
   "74": {
     "nationalDex": 74,
@@ -696,7 +1280,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/74.png",
-    "internalIndex": 74
+    "internalIndex": 74,
+    "baseStats": {
+      "hp": 40,
+      "atk": 80,
+      "def": 100,
+      "spa": 30,
+      "spd": 30,
+      "spe": 20
+    }
   },
   "75": {
     "nationalDex": 75,
@@ -706,7 +1298,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/75.png",
-    "internalIndex": 75
+    "internalIndex": 75,
+    "baseStats": {
+      "hp": 55,
+      "atk": 95,
+      "def": 115,
+      "spa": 45,
+      "spd": 45,
+      "spe": 35
+    }
   },
   "76": {
     "nationalDex": 76,
@@ -716,7 +1316,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/76.png",
-    "internalIndex": 76
+    "internalIndex": 76,
+    "baseStats": {
+      "hp": 80,
+      "atk": 120,
+      "def": 130,
+      "spa": 55,
+      "spd": 65,
+      "spe": 45
+    }
   },
   "77": {
     "nationalDex": 77,
@@ -725,7 +1333,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/77.png",
-    "internalIndex": 77
+    "internalIndex": 77,
+    "baseStats": {
+      "hp": 50,
+      "atk": 85,
+      "def": 55,
+      "spa": 65,
+      "spd": 65,
+      "spe": 90
+    }
   },
   "78": {
     "nationalDex": 78,
@@ -734,7 +1350,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/78.png",
-    "internalIndex": 78
+    "internalIndex": 78,
+    "baseStats": {
+      "hp": 65,
+      "atk": 100,
+      "def": 70,
+      "spa": 80,
+      "spd": 80,
+      "spe": 105
+    }
   },
   "79": {
     "nationalDex": 79,
@@ -744,7 +1368,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/79.png",
-    "internalIndex": 79
+    "internalIndex": 79,
+    "baseStats": {
+      "hp": 90,
+      "atk": 65,
+      "def": 65,
+      "spa": 40,
+      "spd": 40,
+      "spe": 15
+    }
   },
   "80": {
     "nationalDex": 80,
@@ -754,7 +1386,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/80.png",
-    "internalIndex": 80
+    "internalIndex": 80,
+    "baseStats": {
+      "hp": 95,
+      "atk": 75,
+      "def": 110,
+      "spa": 100,
+      "spd": 80,
+      "spe": 30
+    }
   },
   "81": {
     "nationalDex": 81,
@@ -764,7 +1404,15 @@
       "steel"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/81.png",
-    "internalIndex": 81
+    "internalIndex": 81,
+    "baseStats": {
+      "hp": 25,
+      "atk": 35,
+      "def": 70,
+      "spa": 95,
+      "spd": 55,
+      "spe": 45
+    }
   },
   "82": {
     "nationalDex": 82,
@@ -774,7 +1422,15 @@
       "steel"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/82.png",
-    "internalIndex": 82
+    "internalIndex": 82,
+    "baseStats": {
+      "hp": 50,
+      "atk": 60,
+      "def": 95,
+      "spa": 120,
+      "spd": 70,
+      "spe": 70
+    }
   },
   "83": {
     "nationalDex": 83,
@@ -784,7 +1440,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/83.png",
-    "internalIndex": 83
+    "internalIndex": 83,
+    "baseStats": {
+      "hp": 52,
+      "atk": 90,
+      "def": 55,
+      "spa": 58,
+      "spd": 62,
+      "spe": 60
+    }
   },
   "84": {
     "nationalDex": 84,
@@ -794,7 +1458,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/84.png",
-    "internalIndex": 84
+    "internalIndex": 84,
+    "baseStats": {
+      "hp": 35,
+      "atk": 85,
+      "def": 45,
+      "spa": 35,
+      "spd": 35,
+      "spe": 75
+    }
   },
   "85": {
     "nationalDex": 85,
@@ -804,7 +1476,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/85.png",
-    "internalIndex": 85
+    "internalIndex": 85,
+    "baseStats": {
+      "hp": 60,
+      "atk": 110,
+      "def": 70,
+      "spa": 60,
+      "spd": 60,
+      "spe": 110
+    }
   },
   "86": {
     "nationalDex": 86,
@@ -813,7 +1493,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/86.png",
-    "internalIndex": 86
+    "internalIndex": 86,
+    "baseStats": {
+      "hp": 65,
+      "atk": 45,
+      "def": 55,
+      "spa": 45,
+      "spd": 70,
+      "spe": 45
+    }
   },
   "87": {
     "nationalDex": 87,
@@ -823,7 +1511,15 @@
       "ice"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/87.png",
-    "internalIndex": 87
+    "internalIndex": 87,
+    "baseStats": {
+      "hp": 90,
+      "atk": 70,
+      "def": 80,
+      "spa": 70,
+      "spd": 95,
+      "spe": 70
+    }
   },
   "88": {
     "nationalDex": 88,
@@ -832,7 +1528,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/88.png",
-    "internalIndex": 88
+    "internalIndex": 88,
+    "baseStats": {
+      "hp": 80,
+      "atk": 80,
+      "def": 50,
+      "spa": 40,
+      "spd": 50,
+      "spe": 25
+    }
   },
   "89": {
     "nationalDex": 89,
@@ -841,7 +1545,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/89.png",
-    "internalIndex": 89
+    "internalIndex": 89,
+    "baseStats": {
+      "hp": 105,
+      "atk": 105,
+      "def": 75,
+      "spa": 65,
+      "spd": 100,
+      "spe": 50
+    }
   },
   "90": {
     "nationalDex": 90,
@@ -850,7 +1562,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/90.png",
-    "internalIndex": 90
+    "internalIndex": 90,
+    "baseStats": {
+      "hp": 30,
+      "atk": 65,
+      "def": 100,
+      "spa": 45,
+      "spd": 25,
+      "spe": 40
+    }
   },
   "91": {
     "nationalDex": 91,
@@ -860,7 +1580,15 @@
       "ice"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/91.png",
-    "internalIndex": 91
+    "internalIndex": 91,
+    "baseStats": {
+      "hp": 50,
+      "atk": 95,
+      "def": 180,
+      "spa": 85,
+      "spd": 45,
+      "spe": 70
+    }
   },
   "92": {
     "nationalDex": 92,
@@ -870,7 +1598,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/92.png",
-    "internalIndex": 92
+    "internalIndex": 92,
+    "baseStats": {
+      "hp": 30,
+      "atk": 35,
+      "def": 30,
+      "spa": 100,
+      "spd": 35,
+      "spe": 80
+    }
   },
   "93": {
     "nationalDex": 93,
@@ -880,7 +1616,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/93.png",
-    "internalIndex": 93
+    "internalIndex": 93,
+    "baseStats": {
+      "hp": 45,
+      "atk": 50,
+      "def": 45,
+      "spa": 115,
+      "spd": 55,
+      "spe": 95
+    }
   },
   "94": {
     "nationalDex": 94,
@@ -890,7 +1634,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png",
-    "internalIndex": 94
+    "internalIndex": 94,
+    "baseStats": {
+      "hp": 60,
+      "atk": 65,
+      "def": 60,
+      "spa": 130,
+      "spd": 75,
+      "spe": 110
+    }
   },
   "95": {
     "nationalDex": 95,
@@ -900,7 +1652,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/95.png",
-    "internalIndex": 95
+    "internalIndex": 95,
+    "baseStats": {
+      "hp": 35,
+      "atk": 45,
+      "def": 160,
+      "spa": 30,
+      "spd": 45,
+      "spe": 70
+    }
   },
   "96": {
     "nationalDex": 96,
@@ -909,7 +1669,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/96.png",
-    "internalIndex": 96
+    "internalIndex": 96,
+    "baseStats": {
+      "hp": 60,
+      "atk": 48,
+      "def": 45,
+      "spa": 43,
+      "spd": 90,
+      "spe": 42
+    }
   },
   "97": {
     "nationalDex": 97,
@@ -918,7 +1686,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/97.png",
-    "internalIndex": 97
+    "internalIndex": 97,
+    "baseStats": {
+      "hp": 85,
+      "atk": 73,
+      "def": 70,
+      "spa": 73,
+      "spd": 115,
+      "spe": 67
+    }
   },
   "98": {
     "nationalDex": 98,
@@ -927,7 +1703,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/98.png",
-    "internalIndex": 98
+    "internalIndex": 98,
+    "baseStats": {
+      "hp": 30,
+      "atk": 105,
+      "def": 90,
+      "spa": 25,
+      "spd": 25,
+      "spe": 50
+    }
   },
   "99": {
     "nationalDex": 99,
@@ -936,7 +1720,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/99.png",
-    "internalIndex": 99
+    "internalIndex": 99,
+    "baseStats": {
+      "hp": 55,
+      "atk": 130,
+      "def": 115,
+      "spa": 50,
+      "spd": 50,
+      "spe": 75
+    }
   },
   "100": {
     "nationalDex": 100,
@@ -945,7 +1737,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/100.png",
-    "internalIndex": 100
+    "internalIndex": 100,
+    "baseStats": {
+      "hp": 40,
+      "atk": 30,
+      "def": 50,
+      "spa": 55,
+      "spd": 55,
+      "spe": 100
+    }
   },
   "101": {
     "nationalDex": 101,
@@ -954,7 +1754,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/101.png",
-    "internalIndex": 101
+    "internalIndex": 101,
+    "baseStats": {
+      "hp": 60,
+      "atk": 50,
+      "def": 70,
+      "spa": 80,
+      "spd": 80,
+      "spe": 150
+    }
   },
   "102": {
     "nationalDex": 102,
@@ -964,7 +1772,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/102.png",
-    "internalIndex": 102
+    "internalIndex": 102,
+    "baseStats": {
+      "hp": 60,
+      "atk": 40,
+      "def": 80,
+      "spa": 60,
+      "spd": 45,
+      "spe": 40
+    }
   },
   "103": {
     "nationalDex": 103,
@@ -974,7 +1790,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/103.png",
-    "internalIndex": 103
+    "internalIndex": 103,
+    "baseStats": {
+      "hp": 95,
+      "atk": 95,
+      "def": 85,
+      "spa": 125,
+      "spd": 75,
+      "spe": 55
+    }
   },
   "104": {
     "nationalDex": 104,
@@ -983,7 +1807,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/104.png",
-    "internalIndex": 104
+    "internalIndex": 104,
+    "baseStats": {
+      "hp": 50,
+      "atk": 50,
+      "def": 95,
+      "spa": 40,
+      "spd": 50,
+      "spe": 35
+    }
   },
   "105": {
     "nationalDex": 105,
@@ -992,7 +1824,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/105.png",
-    "internalIndex": 105
+    "internalIndex": 105,
+    "baseStats": {
+      "hp": 60,
+      "atk": 80,
+      "def": 110,
+      "spa": 50,
+      "spd": 80,
+      "spe": 45
+    }
   },
   "106": {
     "nationalDex": 106,
@@ -1001,7 +1841,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/106.png",
-    "internalIndex": 106
+    "internalIndex": 106,
+    "baseStats": {
+      "hp": 50,
+      "atk": 120,
+      "def": 53,
+      "spa": 35,
+      "spd": 110,
+      "spe": 87
+    }
   },
   "107": {
     "nationalDex": 107,
@@ -1010,7 +1858,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/107.png",
-    "internalIndex": 107
+    "internalIndex": 107,
+    "baseStats": {
+      "hp": 50,
+      "atk": 105,
+      "def": 79,
+      "spa": 35,
+      "spd": 110,
+      "spe": 76
+    }
   },
   "108": {
     "nationalDex": 108,
@@ -1019,7 +1875,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/108.png",
-    "internalIndex": 108
+    "internalIndex": 108,
+    "baseStats": {
+      "hp": 90,
+      "atk": 55,
+      "def": 75,
+      "spa": 60,
+      "spd": 75,
+      "spe": 30
+    }
   },
   "109": {
     "nationalDex": 109,
@@ -1028,7 +1892,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/109.png",
-    "internalIndex": 109
+    "internalIndex": 109,
+    "baseStats": {
+      "hp": 40,
+      "atk": 65,
+      "def": 95,
+      "spa": 60,
+      "spd": 45,
+      "spe": 35
+    }
   },
   "110": {
     "nationalDex": 110,
@@ -1037,7 +1909,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/110.png",
-    "internalIndex": 110
+    "internalIndex": 110,
+    "baseStats": {
+      "hp": 65,
+      "atk": 90,
+      "def": 120,
+      "spa": 85,
+      "spd": 70,
+      "spe": 60
+    }
   },
   "111": {
     "nationalDex": 111,
@@ -1047,7 +1927,15 @@
       "rock"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/111.png",
-    "internalIndex": 111
+    "internalIndex": 111,
+    "baseStats": {
+      "hp": 80,
+      "atk": 85,
+      "def": 95,
+      "spa": 30,
+      "spd": 30,
+      "spe": 25
+    }
   },
   "112": {
     "nationalDex": 112,
@@ -1057,7 +1945,15 @@
       "rock"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/112.png",
-    "internalIndex": 112
+    "internalIndex": 112,
+    "baseStats": {
+      "hp": 105,
+      "atk": 130,
+      "def": 120,
+      "spa": 45,
+      "spd": 45,
+      "spe": 40
+    }
   },
   "113": {
     "nationalDex": 113,
@@ -1066,7 +1962,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/113.png",
-    "internalIndex": 113
+    "internalIndex": 113,
+    "baseStats": {
+      "hp": 250,
+      "atk": 5,
+      "def": 5,
+      "spa": 35,
+      "spd": 105,
+      "spe": 50
+    }
   },
   "114": {
     "nationalDex": 114,
@@ -1075,7 +1979,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/114.png",
-    "internalIndex": 114
+    "internalIndex": 114,
+    "baseStats": {
+      "hp": 65,
+      "atk": 55,
+      "def": 115,
+      "spa": 100,
+      "spd": 40,
+      "spe": 60
+    }
   },
   "115": {
     "nationalDex": 115,
@@ -1084,7 +1996,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/115.png",
-    "internalIndex": 115
+    "internalIndex": 115,
+    "baseStats": {
+      "hp": 105,
+      "atk": 95,
+      "def": 80,
+      "spa": 40,
+      "spd": 80,
+      "spe": 90
+    }
   },
   "116": {
     "nationalDex": 116,
@@ -1093,7 +2013,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/116.png",
-    "internalIndex": 116
+    "internalIndex": 116,
+    "baseStats": {
+      "hp": 30,
+      "atk": 40,
+      "def": 70,
+      "spa": 70,
+      "spd": 25,
+      "spe": 60
+    }
   },
   "117": {
     "nationalDex": 117,
@@ -1102,7 +2030,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/117.png",
-    "internalIndex": 117
+    "internalIndex": 117,
+    "baseStats": {
+      "hp": 55,
+      "atk": 65,
+      "def": 95,
+      "spa": 95,
+      "spd": 45,
+      "spe": 85
+    }
   },
   "118": {
     "nationalDex": 118,
@@ -1111,7 +2047,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/118.png",
-    "internalIndex": 118
+    "internalIndex": 118,
+    "baseStats": {
+      "hp": 45,
+      "atk": 67,
+      "def": 60,
+      "spa": 35,
+      "spd": 50,
+      "spe": 63
+    }
   },
   "119": {
     "nationalDex": 119,
@@ -1120,7 +2064,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/119.png",
-    "internalIndex": 119
+    "internalIndex": 119,
+    "baseStats": {
+      "hp": 80,
+      "atk": 92,
+      "def": 65,
+      "spa": 65,
+      "spd": 80,
+      "spe": 68
+    }
   },
   "120": {
     "nationalDex": 120,
@@ -1129,7 +2081,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/120.png",
-    "internalIndex": 120
+    "internalIndex": 120,
+    "baseStats": {
+      "hp": 30,
+      "atk": 45,
+      "def": 55,
+      "spa": 70,
+      "spd": 55,
+      "spe": 85
+    }
   },
   "121": {
     "nationalDex": 121,
@@ -1139,7 +2099,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/121.png",
-    "internalIndex": 121
+    "internalIndex": 121,
+    "baseStats": {
+      "hp": 60,
+      "atk": 75,
+      "def": 85,
+      "spa": 100,
+      "spd": 85,
+      "spe": 115
+    }
   },
   "122": {
     "nationalDex": 122,
@@ -1149,7 +2117,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/122.png",
-    "internalIndex": 122
+    "internalIndex": 122,
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 65,
+      "spa": 100,
+      "spd": 120,
+      "spe": 90
+    }
   },
   "123": {
     "nationalDex": 123,
@@ -1159,7 +2135,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/123.png",
-    "internalIndex": 123
+    "internalIndex": 123,
+    "baseStats": {
+      "hp": 70,
+      "atk": 110,
+      "def": 80,
+      "spa": 55,
+      "spd": 80,
+      "spe": 105
+    }
   },
   "124": {
     "nationalDex": 124,
@@ -1169,7 +2153,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/124.png",
-    "internalIndex": 124
+    "internalIndex": 124,
+    "baseStats": {
+      "hp": 65,
+      "atk": 50,
+      "def": 35,
+      "spa": 115,
+      "spd": 95,
+      "spe": 95
+    }
   },
   "125": {
     "nationalDex": 125,
@@ -1178,7 +2170,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/125.png",
-    "internalIndex": 125
+    "internalIndex": 125,
+    "baseStats": {
+      "hp": 65,
+      "atk": 83,
+      "def": 57,
+      "spa": 95,
+      "spd": 85,
+      "spe": 105
+    }
   },
   "126": {
     "nationalDex": 126,
@@ -1187,7 +2187,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/126.png",
-    "internalIndex": 126
+    "internalIndex": 126,
+    "baseStats": {
+      "hp": 65,
+      "atk": 95,
+      "def": 57,
+      "spa": 100,
+      "spd": 85,
+      "spe": 93
+    }
   },
   "127": {
     "nationalDex": 127,
@@ -1196,7 +2204,15 @@
       "bug"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/127.png",
-    "internalIndex": 127
+    "internalIndex": 127,
+    "baseStats": {
+      "hp": 65,
+      "atk": 125,
+      "def": 100,
+      "spa": 55,
+      "spd": 70,
+      "spe": 85
+    }
   },
   "128": {
     "nationalDex": 128,
@@ -1205,7 +2221,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/128.png",
-    "internalIndex": 128
+    "internalIndex": 128,
+    "baseStats": {
+      "hp": 75,
+      "atk": 100,
+      "def": 95,
+      "spa": 40,
+      "spd": 70,
+      "spe": 110
+    }
   },
   "129": {
     "nationalDex": 129,
@@ -1214,7 +2238,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/129.png",
-    "internalIndex": 129
+    "internalIndex": 129,
+    "baseStats": {
+      "hp": 20,
+      "atk": 10,
+      "def": 55,
+      "spa": 15,
+      "spd": 20,
+      "spe": 80
+    }
   },
   "130": {
     "nationalDex": 130,
@@ -1224,7 +2256,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png",
-    "internalIndex": 130
+    "internalIndex": 130,
+    "baseStats": {
+      "hp": 95,
+      "atk": 125,
+      "def": 79,
+      "spa": 60,
+      "spd": 100,
+      "spe": 81
+    }
   },
   "131": {
     "nationalDex": 131,
@@ -1234,7 +2274,15 @@
       "ice"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/131.png",
-    "internalIndex": 131
+    "internalIndex": 131,
+    "baseStats": {
+      "hp": 130,
+      "atk": 85,
+      "def": 80,
+      "spa": 85,
+      "spd": 95,
+      "spe": 60
+    }
   },
   "132": {
     "nationalDex": 132,
@@ -1243,7 +2291,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
-    "internalIndex": 132
+    "internalIndex": 132,
+    "baseStats": {
+      "hp": 48,
+      "atk": 48,
+      "def": 48,
+      "spa": 48,
+      "spd": 48,
+      "spe": 48
+    }
   },
   "133": {
     "nationalDex": 133,
@@ -1252,7 +2308,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png",
-    "internalIndex": 133
+    "internalIndex": 133,
+    "baseStats": {
+      "hp": 55,
+      "atk": 55,
+      "def": 50,
+      "spa": 45,
+      "spd": 65,
+      "spe": 55
+    }
   },
   "134": {
     "nationalDex": 134,
@@ -1261,7 +2325,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/134.png",
-    "internalIndex": 134
+    "internalIndex": 134,
+    "baseStats": {
+      "hp": 130,
+      "atk": 65,
+      "def": 60,
+      "spa": 110,
+      "spd": 95,
+      "spe": 65
+    }
   },
   "135": {
     "nationalDex": 135,
@@ -1270,7 +2342,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/135.png",
-    "internalIndex": 135
+    "internalIndex": 135,
+    "baseStats": {
+      "hp": 65,
+      "atk": 65,
+      "def": 60,
+      "spa": 110,
+      "spd": 95,
+      "spe": 130
+    }
   },
   "136": {
     "nationalDex": 136,
@@ -1279,7 +2359,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/136.png",
-    "internalIndex": 136
+    "internalIndex": 136,
+    "baseStats": {
+      "hp": 65,
+      "atk": 130,
+      "def": 60,
+      "spa": 95,
+      "spd": 110,
+      "spe": 65
+    }
   },
   "137": {
     "nationalDex": 137,
@@ -1288,7 +2376,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/137.png",
-    "internalIndex": 137
+    "internalIndex": 137,
+    "baseStats": {
+      "hp": 65,
+      "atk": 60,
+      "def": 70,
+      "spa": 85,
+      "spd": 75,
+      "spe": 40
+    }
   },
   "138": {
     "nationalDex": 138,
@@ -1298,7 +2394,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/138.png",
-    "internalIndex": 138
+    "internalIndex": 138,
+    "baseStats": {
+      "hp": 35,
+      "atk": 40,
+      "def": 100,
+      "spa": 90,
+      "spd": 55,
+      "spe": 35
+    }
   },
   "139": {
     "nationalDex": 139,
@@ -1308,7 +2412,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/139.png",
-    "internalIndex": 139
+    "internalIndex": 139,
+    "baseStats": {
+      "hp": 70,
+      "atk": 60,
+      "def": 125,
+      "spa": 115,
+      "spd": 70,
+      "spe": 55
+    }
   },
   "140": {
     "nationalDex": 140,
@@ -1318,7 +2430,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/140.png",
-    "internalIndex": 140
+    "internalIndex": 140,
+    "baseStats": {
+      "hp": 30,
+      "atk": 80,
+      "def": 90,
+      "spa": 55,
+      "spd": 45,
+      "spe": 55
+    }
   },
   "141": {
     "nationalDex": 141,
@@ -1328,7 +2448,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/141.png",
-    "internalIndex": 141
+    "internalIndex": 141,
+    "baseStats": {
+      "hp": 60,
+      "atk": 115,
+      "def": 105,
+      "spa": 65,
+      "spd": 70,
+      "spe": 80
+    }
   },
   "142": {
     "nationalDex": 142,
@@ -1338,7 +2466,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/142.png",
-    "internalIndex": 142
+    "internalIndex": 142,
+    "baseStats": {
+      "hp": 80,
+      "atk": 105,
+      "def": 65,
+      "spa": 60,
+      "spd": 75,
+      "spe": 130
+    }
   },
   "143": {
     "nationalDex": 143,
@@ -1347,7 +2483,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png",
-    "internalIndex": 143
+    "internalIndex": 143,
+    "baseStats": {
+      "hp": 160,
+      "atk": 110,
+      "def": 65,
+      "spa": 65,
+      "spd": 110,
+      "spe": 30
+    }
   },
   "144": {
     "nationalDex": 144,
@@ -1357,7 +2501,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/144.png",
-    "internalIndex": 144
+    "internalIndex": 144,
+    "baseStats": {
+      "hp": 90,
+      "atk": 85,
+      "def": 100,
+      "spa": 95,
+      "spd": 125,
+      "spe": 85
+    }
   },
   "145": {
     "nationalDex": 145,
@@ -1367,7 +2519,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/145.png",
-    "internalIndex": 145
+    "internalIndex": 145,
+    "baseStats": {
+      "hp": 90,
+      "atk": 90,
+      "def": 85,
+      "spa": 125,
+      "spd": 90,
+      "spe": 100
+    }
   },
   "146": {
     "nationalDex": 146,
@@ -1377,7 +2537,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/146.png",
-    "internalIndex": 146
+    "internalIndex": 146,
+    "baseStats": {
+      "hp": 90,
+      "atk": 100,
+      "def": 90,
+      "spa": 125,
+      "spd": 85,
+      "spe": 90
+    }
   },
   "147": {
     "nationalDex": 147,
@@ -1386,7 +2554,15 @@
       "dragon"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/147.png",
-    "internalIndex": 147
+    "internalIndex": 147,
+    "baseStats": {
+      "hp": 41,
+      "atk": 64,
+      "def": 45,
+      "spa": 50,
+      "spd": 50,
+      "spe": 50
+    }
   },
   "148": {
     "nationalDex": 148,
@@ -1395,7 +2571,15 @@
       "dragon"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/148.png",
-    "internalIndex": 148
+    "internalIndex": 148,
+    "baseStats": {
+      "hp": 61,
+      "atk": 84,
+      "def": 65,
+      "spa": 70,
+      "spd": 70,
+      "spe": 70
+    }
   },
   "149": {
     "nationalDex": 149,
@@ -1405,7 +2589,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png",
-    "internalIndex": 149
+    "internalIndex": 149,
+    "baseStats": {
+      "hp": 91,
+      "atk": 134,
+      "def": 95,
+      "spa": 100,
+      "spd": 100,
+      "spe": 80
+    }
   },
   "150": {
     "nationalDex": 150,
@@ -1414,7 +2606,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
-    "internalIndex": 150
+    "internalIndex": 150,
+    "baseStats": {
+      "hp": 106,
+      "atk": 110,
+      "def": 90,
+      "spa": 154,
+      "spd": 90,
+      "spe": 130
+    }
   },
   "151": {
     "nationalDex": 151,
@@ -1423,7 +2623,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
-    "internalIndex": 151
+    "internalIndex": 151,
+    "baseStats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 100,
+      "spa": 100,
+      "spd": 100,
+      "spe": 100
+    }
   },
   "152": {
     "nationalDex": 152,
@@ -1432,7 +2640,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/152.png",
-    "internalIndex": 152
+    "internalIndex": 152,
+    "baseStats": {
+      "hp": 45,
+      "atk": 49,
+      "def": 65,
+      "spa": 49,
+      "spd": 65,
+      "spe": 45
+    }
   },
   "153": {
     "nationalDex": 153,
@@ -1441,7 +2657,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/153.png",
-    "internalIndex": 153
+    "internalIndex": 153,
+    "baseStats": {
+      "hp": 60,
+      "atk": 62,
+      "def": 80,
+      "spa": 63,
+      "spd": 80,
+      "spe": 60
+    }
   },
   "154": {
     "nationalDex": 154,
@@ -1450,7 +2674,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/154.png",
-    "internalIndex": 154
+    "internalIndex": 154,
+    "baseStats": {
+      "hp": 80,
+      "atk": 82,
+      "def": 100,
+      "spa": 83,
+      "spd": 100,
+      "spe": 80
+    }
   },
   "155": {
     "nationalDex": 155,
@@ -1459,7 +2691,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/155.png",
-    "internalIndex": 155
+    "internalIndex": 155,
+    "baseStats": {
+      "hp": 39,
+      "atk": 52,
+      "def": 43,
+      "spa": 60,
+      "spd": 50,
+      "spe": 65
+    }
   },
   "156": {
     "nationalDex": 156,
@@ -1468,7 +2708,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/156.png",
-    "internalIndex": 156
+    "internalIndex": 156,
+    "baseStats": {
+      "hp": 58,
+      "atk": 64,
+      "def": 58,
+      "spa": 80,
+      "spd": 65,
+      "spe": 80
+    }
   },
   "157": {
     "nationalDex": 157,
@@ -1477,7 +2725,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/157.png",
-    "internalIndex": 157
+    "internalIndex": 157,
+    "baseStats": {
+      "hp": 78,
+      "atk": 84,
+      "def": 78,
+      "spa": 109,
+      "spd": 85,
+      "spe": 100
+    }
   },
   "158": {
     "nationalDex": 158,
@@ -1486,7 +2742,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/158.png",
-    "internalIndex": 158
+    "internalIndex": 158,
+    "baseStats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 64,
+      "spa": 44,
+      "spd": 48,
+      "spe": 43
+    }
   },
   "159": {
     "nationalDex": 159,
@@ -1495,7 +2759,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/159.png",
-    "internalIndex": 159
+    "internalIndex": 159,
+    "baseStats": {
+      "hp": 65,
+      "atk": 80,
+      "def": 80,
+      "spa": 59,
+      "spd": 63,
+      "spe": 58
+    }
   },
   "160": {
     "nationalDex": 160,
@@ -1504,7 +2776,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/160.png",
-    "internalIndex": 160
+    "internalIndex": 160,
+    "baseStats": {
+      "hp": 85,
+      "atk": 105,
+      "def": 100,
+      "spa": 79,
+      "spd": 83,
+      "spe": 78
+    }
   },
   "161": {
     "nationalDex": 161,
@@ -1513,7 +2793,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/161.png",
-    "internalIndex": 161
+    "internalIndex": 161,
+    "baseStats": {
+      "hp": 35,
+      "atk": 46,
+      "def": 34,
+      "spa": 35,
+      "spd": 45,
+      "spe": 20
+    }
   },
   "162": {
     "nationalDex": 162,
@@ -1522,7 +2810,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/162.png",
-    "internalIndex": 162
+    "internalIndex": 162,
+    "baseStats": {
+      "hp": 85,
+      "atk": 76,
+      "def": 64,
+      "spa": 45,
+      "spd": 55,
+      "spe": 90
+    }
   },
   "163": {
     "nationalDex": 163,
@@ -1532,7 +2828,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/163.png",
-    "internalIndex": 163
+    "internalIndex": 163,
+    "baseStats": {
+      "hp": 60,
+      "atk": 30,
+      "def": 30,
+      "spa": 36,
+      "spd": 56,
+      "spe": 50
+    }
   },
   "164": {
     "nationalDex": 164,
@@ -1542,7 +2846,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/164.png",
-    "internalIndex": 164
+    "internalIndex": 164,
+    "baseStats": {
+      "hp": 100,
+      "atk": 50,
+      "def": 50,
+      "spa": 86,
+      "spd": 96,
+      "spe": 70
+    }
   },
   "165": {
     "nationalDex": 165,
@@ -1552,7 +2864,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/165.png",
-    "internalIndex": 165
+    "internalIndex": 165,
+    "baseStats": {
+      "hp": 40,
+      "atk": 20,
+      "def": 30,
+      "spa": 40,
+      "spd": 80,
+      "spe": 55
+    }
   },
   "166": {
     "nationalDex": 166,
@@ -1562,7 +2882,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/166.png",
-    "internalIndex": 166
+    "internalIndex": 166,
+    "baseStats": {
+      "hp": 55,
+      "atk": 35,
+      "def": 50,
+      "spa": 55,
+      "spd": 110,
+      "spe": 85
+    }
   },
   "167": {
     "nationalDex": 167,
@@ -1572,7 +2900,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/167.png",
-    "internalIndex": 167
+    "internalIndex": 167,
+    "baseStats": {
+      "hp": 40,
+      "atk": 60,
+      "def": 40,
+      "spa": 40,
+      "spd": 40,
+      "spe": 30
+    }
   },
   "168": {
     "nationalDex": 168,
@@ -1582,7 +2918,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/168.png",
-    "internalIndex": 168
+    "internalIndex": 168,
+    "baseStats": {
+      "hp": 70,
+      "atk": 90,
+      "def": 70,
+      "spa": 60,
+      "spd": 70,
+      "spe": 40
+    }
   },
   "169": {
     "nationalDex": 169,
@@ -1592,7 +2936,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/169.png",
-    "internalIndex": 169
+    "internalIndex": 169,
+    "baseStats": {
+      "hp": 85,
+      "atk": 90,
+      "def": 80,
+      "spa": 70,
+      "spd": 80,
+      "spe": 130
+    }
   },
   "170": {
     "nationalDex": 170,
@@ -1602,7 +2954,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/170.png",
-    "internalIndex": 170
+    "internalIndex": 170,
+    "baseStats": {
+      "hp": 75,
+      "atk": 38,
+      "def": 38,
+      "spa": 56,
+      "spd": 56,
+      "spe": 67
+    }
   },
   "171": {
     "nationalDex": 171,
@@ -1612,7 +2972,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/171.png",
-    "internalIndex": 171
+    "internalIndex": 171,
+    "baseStats": {
+      "hp": 125,
+      "atk": 58,
+      "def": 58,
+      "spa": 76,
+      "spd": 76,
+      "spe": 67
+    }
   },
   "172": {
     "nationalDex": 172,
@@ -1621,7 +2989,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/172.png",
-    "internalIndex": 172
+    "internalIndex": 172,
+    "baseStats": {
+      "hp": 20,
+      "atk": 40,
+      "def": 15,
+      "spa": 35,
+      "spd": 35,
+      "spe": 60
+    }
   },
   "173": {
     "nationalDex": 173,
@@ -1630,7 +3006,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/173.png",
-    "internalIndex": 173
+    "internalIndex": 173,
+    "baseStats": {
+      "hp": 50,
+      "atk": 25,
+      "def": 28,
+      "spa": 45,
+      "spd": 55,
+      "spe": 15
+    }
   },
   "174": {
     "nationalDex": 174,
@@ -1640,7 +3024,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/174.png",
-    "internalIndex": 174
+    "internalIndex": 174,
+    "baseStats": {
+      "hp": 90,
+      "atk": 30,
+      "def": 15,
+      "spa": 40,
+      "spd": 20,
+      "spe": 15
+    }
   },
   "175": {
     "nationalDex": 175,
@@ -1649,7 +3041,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/175.png",
-    "internalIndex": 175
+    "internalIndex": 175,
+    "baseStats": {
+      "hp": 35,
+      "atk": 20,
+      "def": 65,
+      "spa": 40,
+      "spd": 65,
+      "spe": 20
+    }
   },
   "176": {
     "nationalDex": 176,
@@ -1659,7 +3059,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/176.png",
-    "internalIndex": 176
+    "internalIndex": 176,
+    "baseStats": {
+      "hp": 55,
+      "atk": 40,
+      "def": 85,
+      "spa": 80,
+      "spd": 105,
+      "spe": 40
+    }
   },
   "177": {
     "nationalDex": 177,
@@ -1669,7 +3077,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/177.png",
-    "internalIndex": 177
+    "internalIndex": 177,
+    "baseStats": {
+      "hp": 40,
+      "atk": 50,
+      "def": 45,
+      "spa": 70,
+      "spd": 45,
+      "spe": 70
+    }
   },
   "178": {
     "nationalDex": 178,
@@ -1679,7 +3095,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/178.png",
-    "internalIndex": 178
+    "internalIndex": 178,
+    "baseStats": {
+      "hp": 65,
+      "atk": 75,
+      "def": 70,
+      "spa": 95,
+      "spd": 70,
+      "spe": 95
+    }
   },
   "179": {
     "nationalDex": 179,
@@ -1688,7 +3112,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/179.png",
-    "internalIndex": 179
+    "internalIndex": 179,
+    "baseStats": {
+      "hp": 55,
+      "atk": 40,
+      "def": 40,
+      "spa": 65,
+      "spd": 45,
+      "spe": 35
+    }
   },
   "180": {
     "nationalDex": 180,
@@ -1697,7 +3129,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/180.png",
-    "internalIndex": 180
+    "internalIndex": 180,
+    "baseStats": {
+      "hp": 70,
+      "atk": 55,
+      "def": 55,
+      "spa": 80,
+      "spd": 60,
+      "spe": 45
+    }
   },
   "181": {
     "nationalDex": 181,
@@ -1706,7 +3146,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/181.png",
-    "internalIndex": 181
+    "internalIndex": 181,
+    "baseStats": {
+      "hp": 90,
+      "atk": 75,
+      "def": 85,
+      "spa": 115,
+      "spd": 90,
+      "spe": 55
+    }
   },
   "182": {
     "nationalDex": 182,
@@ -1715,7 +3163,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/182.png",
-    "internalIndex": 182
+    "internalIndex": 182,
+    "baseStats": {
+      "hp": 75,
+      "atk": 80,
+      "def": 95,
+      "spa": 90,
+      "spd": 100,
+      "spe": 50
+    }
   },
   "183": {
     "nationalDex": 183,
@@ -1725,7 +3181,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/183.png",
-    "internalIndex": 183
+    "internalIndex": 183,
+    "baseStats": {
+      "hp": 70,
+      "atk": 20,
+      "def": 50,
+      "spa": 20,
+      "spd": 50,
+      "spe": 40
+    }
   },
   "184": {
     "nationalDex": 184,
@@ -1735,7 +3199,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/184.png",
-    "internalIndex": 184
+    "internalIndex": 184,
+    "baseStats": {
+      "hp": 100,
+      "atk": 50,
+      "def": 80,
+      "spa": 60,
+      "spd": 80,
+      "spe": 50
+    }
   },
   "185": {
     "nationalDex": 185,
@@ -1744,7 +3216,15 @@
       "rock"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/185.png",
-    "internalIndex": 185
+    "internalIndex": 185,
+    "baseStats": {
+      "hp": 70,
+      "atk": 100,
+      "def": 115,
+      "spa": 30,
+      "spd": 65,
+      "spe": 30
+    }
   },
   "186": {
     "nationalDex": 186,
@@ -1753,7 +3233,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/186.png",
-    "internalIndex": 186
+    "internalIndex": 186,
+    "baseStats": {
+      "hp": 90,
+      "atk": 75,
+      "def": 75,
+      "spa": 90,
+      "spd": 100,
+      "spe": 70
+    }
   },
   "187": {
     "nationalDex": 187,
@@ -1763,7 +3251,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/187.png",
-    "internalIndex": 187
+    "internalIndex": 187,
+    "baseStats": {
+      "hp": 35,
+      "atk": 35,
+      "def": 40,
+      "spa": 35,
+      "spd": 55,
+      "spe": 50
+    }
   },
   "188": {
     "nationalDex": 188,
@@ -1773,7 +3269,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/188.png",
-    "internalIndex": 188
+    "internalIndex": 188,
+    "baseStats": {
+      "hp": 55,
+      "atk": 45,
+      "def": 50,
+      "spa": 45,
+      "spd": 65,
+      "spe": 80
+    }
   },
   "189": {
     "nationalDex": 189,
@@ -1783,7 +3287,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/189.png",
-    "internalIndex": 189
+    "internalIndex": 189,
+    "baseStats": {
+      "hp": 75,
+      "atk": 55,
+      "def": 70,
+      "spa": 55,
+      "spd": 95,
+      "spe": 110
+    }
   },
   "190": {
     "nationalDex": 190,
@@ -1792,7 +3304,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/190.png",
-    "internalIndex": 190
+    "internalIndex": 190,
+    "baseStats": {
+      "hp": 55,
+      "atk": 70,
+      "def": 55,
+      "spa": 40,
+      "spd": 55,
+      "spe": 85
+    }
   },
   "191": {
     "nationalDex": 191,
@@ -1801,7 +3321,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/191.png",
-    "internalIndex": 191
+    "internalIndex": 191,
+    "baseStats": {
+      "hp": 30,
+      "atk": 30,
+      "def": 30,
+      "spa": 30,
+      "spd": 30,
+      "spe": 30
+    }
   },
   "192": {
     "nationalDex": 192,
@@ -1810,7 +3338,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/192.png",
-    "internalIndex": 192
+    "internalIndex": 192,
+    "baseStats": {
+      "hp": 75,
+      "atk": 75,
+      "def": 55,
+      "spa": 105,
+      "spd": 85,
+      "spe": 30
+    }
   },
   "193": {
     "nationalDex": 193,
@@ -1820,7 +3356,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/193.png",
-    "internalIndex": 193
+    "internalIndex": 193,
+    "baseStats": {
+      "hp": 65,
+      "atk": 65,
+      "def": 45,
+      "spa": 75,
+      "spd": 45,
+      "spe": 95
+    }
   },
   "194": {
     "nationalDex": 194,
@@ -1830,7 +3374,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/194.png",
-    "internalIndex": 194
+    "internalIndex": 194,
+    "baseStats": {
+      "hp": 55,
+      "atk": 45,
+      "def": 45,
+      "spa": 25,
+      "spd": 25,
+      "spe": 15
+    }
   },
   "195": {
     "nationalDex": 195,
@@ -1840,7 +3392,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/195.png",
-    "internalIndex": 195
+    "internalIndex": 195,
+    "baseStats": {
+      "hp": 95,
+      "atk": 85,
+      "def": 85,
+      "spa": 65,
+      "spd": 65,
+      "spe": 35
+    }
   },
   "196": {
     "nationalDex": 196,
@@ -1849,7 +3409,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/196.png",
-    "internalIndex": 196
+    "internalIndex": 196,
+    "baseStats": {
+      "hp": 65,
+      "atk": 65,
+      "def": 60,
+      "spa": 130,
+      "spd": 95,
+      "spe": 110
+    }
   },
   "197": {
     "nationalDex": 197,
@@ -1858,7 +3426,15 @@
       "dark"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/197.png",
-    "internalIndex": 197
+    "internalIndex": 197,
+    "baseStats": {
+      "hp": 95,
+      "atk": 65,
+      "def": 110,
+      "spa": 60,
+      "spd": 130,
+      "spe": 65
+    }
   },
   "198": {
     "nationalDex": 198,
@@ -1868,7 +3444,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/198.png",
-    "internalIndex": 198
+    "internalIndex": 198,
+    "baseStats": {
+      "hp": 60,
+      "atk": 85,
+      "def": 42,
+      "spa": 85,
+      "spd": 42,
+      "spe": 91
+    }
   },
   "199": {
     "nationalDex": 199,
@@ -1878,7 +3462,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/199.png",
-    "internalIndex": 199
+    "internalIndex": 199,
+    "baseStats": {
+      "hp": 95,
+      "atk": 75,
+      "def": 80,
+      "spa": 100,
+      "spd": 110,
+      "spe": 30
+    }
   },
   "200": {
     "nationalDex": 200,
@@ -1887,7 +3479,15 @@
       "ghost"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/200.png",
-    "internalIndex": 200
+    "internalIndex": 200,
+    "baseStats": {
+      "hp": 60,
+      "atk": 60,
+      "def": 60,
+      "spa": 85,
+      "spd": 85,
+      "spe": 85
+    }
   },
   "201": {
     "nationalDex": 201,
@@ -1896,7 +3496,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/201.png",
-    "internalIndex": 201
+    "internalIndex": 201,
+    "baseStats": {
+      "hp": 48,
+      "atk": 72,
+      "def": 48,
+      "spa": 72,
+      "spd": 48,
+      "spe": 48
+    }
   },
   "202": {
     "nationalDex": 202,
@@ -1905,7 +3513,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/202.png",
-    "internalIndex": 202
+    "internalIndex": 202,
+    "baseStats": {
+      "hp": 190,
+      "atk": 33,
+      "def": 58,
+      "spa": 33,
+      "spd": 58,
+      "spe": 33
+    }
   },
   "203": {
     "nationalDex": 203,
@@ -1915,7 +3531,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/203.png",
-    "internalIndex": 203
+    "internalIndex": 203,
+    "baseStats": {
+      "hp": 70,
+      "atk": 80,
+      "def": 65,
+      "spa": 90,
+      "spd": 65,
+      "spe": 85
+    }
   },
   "204": {
     "nationalDex": 204,
@@ -1924,7 +3548,15 @@
       "bug"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/204.png",
-    "internalIndex": 204
+    "internalIndex": 204,
+    "baseStats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 90,
+      "spa": 35,
+      "spd": 35,
+      "spe": 15
+    }
   },
   "205": {
     "nationalDex": 205,
@@ -1934,7 +3566,15 @@
       "steel"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/205.png",
-    "internalIndex": 205
+    "internalIndex": 205,
+    "baseStats": {
+      "hp": 75,
+      "atk": 90,
+      "def": 140,
+      "spa": 60,
+      "spd": 60,
+      "spe": 40
+    }
   },
   "206": {
     "nationalDex": 206,
@@ -1943,7 +3583,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/206.png",
-    "internalIndex": 206
+    "internalIndex": 206,
+    "baseStats": {
+      "hp": 100,
+      "atk": 70,
+      "def": 70,
+      "spa": 65,
+      "spd": 65,
+      "spe": 45
+    }
   },
   "207": {
     "nationalDex": 207,
@@ -1953,7 +3601,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/207.png",
-    "internalIndex": 207
+    "internalIndex": 207,
+    "baseStats": {
+      "hp": 65,
+      "atk": 75,
+      "def": 105,
+      "spa": 35,
+      "spd": 65,
+      "spe": 85
+    }
   },
   "208": {
     "nationalDex": 208,
@@ -1963,7 +3619,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/208.png",
-    "internalIndex": 208
+    "internalIndex": 208,
+    "baseStats": {
+      "hp": 75,
+      "atk": 85,
+      "def": 200,
+      "spa": 55,
+      "spd": 65,
+      "spe": 30
+    }
   },
   "209": {
     "nationalDex": 209,
@@ -1972,7 +3636,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/209.png",
-    "internalIndex": 209
+    "internalIndex": 209,
+    "baseStats": {
+      "hp": 60,
+      "atk": 80,
+      "def": 50,
+      "spa": 40,
+      "spd": 40,
+      "spe": 30
+    }
   },
   "210": {
     "nationalDex": 210,
@@ -1981,7 +3653,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/210.png",
-    "internalIndex": 210
+    "internalIndex": 210,
+    "baseStats": {
+      "hp": 90,
+      "atk": 120,
+      "def": 75,
+      "spa": 60,
+      "spd": 60,
+      "spe": 45
+    }
   },
   "211": {
     "nationalDex": 211,
@@ -1991,7 +3671,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/211.png",
-    "internalIndex": 211
+    "internalIndex": 211,
+    "baseStats": {
+      "hp": 65,
+      "atk": 95,
+      "def": 85,
+      "spa": 55,
+      "spd": 55,
+      "spe": 85
+    }
   },
   "212": {
     "nationalDex": 212,
@@ -2001,7 +3689,15 @@
       "steel"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/212.png",
-    "internalIndex": 212
+    "internalIndex": 212,
+    "baseStats": {
+      "hp": 70,
+      "atk": 130,
+      "def": 100,
+      "spa": 55,
+      "spd": 80,
+      "spe": 65
+    }
   },
   "213": {
     "nationalDex": 213,
@@ -2011,7 +3707,15 @@
       "rock"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/213.png",
-    "internalIndex": 213
+    "internalIndex": 213,
+    "baseStats": {
+      "hp": 20,
+      "atk": 10,
+      "def": 230,
+      "spa": 10,
+      "spd": 230,
+      "spe": 5
+    }
   },
   "214": {
     "nationalDex": 214,
@@ -2021,7 +3725,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/214.png",
-    "internalIndex": 214
+    "internalIndex": 214,
+    "baseStats": {
+      "hp": 80,
+      "atk": 125,
+      "def": 75,
+      "spa": 40,
+      "spd": 95,
+      "spe": 85
+    }
   },
   "215": {
     "nationalDex": 215,
@@ -2031,7 +3743,15 @@
       "ice"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/215.png",
-    "internalIndex": 215
+    "internalIndex": 215,
+    "baseStats": {
+      "hp": 55,
+      "atk": 95,
+      "def": 55,
+      "spa": 35,
+      "spd": 75,
+      "spe": 115
+    }
   },
   "216": {
     "nationalDex": 216,
@@ -2040,7 +3760,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/216.png",
-    "internalIndex": 216
+    "internalIndex": 216,
+    "baseStats": {
+      "hp": 60,
+      "atk": 80,
+      "def": 50,
+      "spa": 50,
+      "spd": 50,
+      "spe": 40
+    }
   },
   "217": {
     "nationalDex": 217,
@@ -2049,7 +3777,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/217.png",
-    "internalIndex": 217
+    "internalIndex": 217,
+    "baseStats": {
+      "hp": 90,
+      "atk": 130,
+      "def": 75,
+      "spa": 75,
+      "spd": 75,
+      "spe": 55
+    }
   },
   "218": {
     "nationalDex": 218,
@@ -2058,7 +3794,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/218.png",
-    "internalIndex": 218
+    "internalIndex": 218,
+    "baseStats": {
+      "hp": 40,
+      "atk": 40,
+      "def": 40,
+      "spa": 70,
+      "spd": 40,
+      "spe": 20
+    }
   },
   "219": {
     "nationalDex": 219,
@@ -2068,7 +3812,15 @@
       "rock"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/219.png",
-    "internalIndex": 219
+    "internalIndex": 219,
+    "baseStats": {
+      "hp": 60,
+      "atk": 50,
+      "def": 120,
+      "spa": 90,
+      "spd": 80,
+      "spe": 30
+    }
   },
   "220": {
     "nationalDex": 220,
@@ -2078,7 +3830,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/220.png",
-    "internalIndex": 220
+    "internalIndex": 220,
+    "baseStats": {
+      "hp": 50,
+      "atk": 50,
+      "def": 40,
+      "spa": 30,
+      "spd": 30,
+      "spe": 50
+    }
   },
   "221": {
     "nationalDex": 221,
@@ -2088,7 +3848,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/221.png",
-    "internalIndex": 221
+    "internalIndex": 221,
+    "baseStats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 80,
+      "spa": 60,
+      "spd": 60,
+      "spe": 50
+    }
   },
   "222": {
     "nationalDex": 222,
@@ -2098,7 +3866,15 @@
       "rock"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/222.png",
-    "internalIndex": 222
+    "internalIndex": 222,
+    "baseStats": {
+      "hp": 65,
+      "atk": 55,
+      "def": 95,
+      "spa": 65,
+      "spd": 95,
+      "spe": 35
+    }
   },
   "223": {
     "nationalDex": 223,
@@ -2107,7 +3883,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/223.png",
-    "internalIndex": 223
+    "internalIndex": 223,
+    "baseStats": {
+      "hp": 35,
+      "atk": 65,
+      "def": 35,
+      "spa": 65,
+      "spd": 35,
+      "spe": 65
+    }
   },
   "224": {
     "nationalDex": 224,
@@ -2116,7 +3900,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/224.png",
-    "internalIndex": 224
+    "internalIndex": 224,
+    "baseStats": {
+      "hp": 75,
+      "atk": 105,
+      "def": 75,
+      "spa": 105,
+      "spd": 75,
+      "spe": 45
+    }
   },
   "225": {
     "nationalDex": 225,
@@ -2126,7 +3918,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/225.png",
-    "internalIndex": 225
+    "internalIndex": 225,
+    "baseStats": {
+      "hp": 45,
+      "atk": 55,
+      "def": 45,
+      "spa": 65,
+      "spd": 45,
+      "spe": 75
+    }
   },
   "226": {
     "nationalDex": 226,
@@ -2136,7 +3936,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/226.png",
-    "internalIndex": 226
+    "internalIndex": 226,
+    "baseStats": {
+      "hp": 85,
+      "atk": 40,
+      "def": 70,
+      "spa": 80,
+      "spd": 140,
+      "spe": 70
+    }
   },
   "227": {
     "nationalDex": 227,
@@ -2146,7 +3954,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/227.png",
-    "internalIndex": 227
+    "internalIndex": 227,
+    "baseStats": {
+      "hp": 65,
+      "atk": 80,
+      "def": 140,
+      "spa": 40,
+      "spd": 70,
+      "spe": 70
+    }
   },
   "228": {
     "nationalDex": 228,
@@ -2156,7 +3972,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/228.png",
-    "internalIndex": 228
+    "internalIndex": 228,
+    "baseStats": {
+      "hp": 45,
+      "atk": 60,
+      "def": 30,
+      "spa": 80,
+      "spd": 50,
+      "spe": 65
+    }
   },
   "229": {
     "nationalDex": 229,
@@ -2166,7 +3990,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/229.png",
-    "internalIndex": 229
+    "internalIndex": 229,
+    "baseStats": {
+      "hp": 75,
+      "atk": 90,
+      "def": 50,
+      "spa": 110,
+      "spd": 80,
+      "spe": 95
+    }
   },
   "230": {
     "nationalDex": 230,
@@ -2176,7 +4008,15 @@
       "dragon"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/230.png",
-    "internalIndex": 230
+    "internalIndex": 230,
+    "baseStats": {
+      "hp": 75,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 85
+    }
   },
   "231": {
     "nationalDex": 231,
@@ -2185,7 +4025,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/231.png",
-    "internalIndex": 231
+    "internalIndex": 231,
+    "baseStats": {
+      "hp": 90,
+      "atk": 60,
+      "def": 60,
+      "spa": 40,
+      "spd": 40,
+      "spe": 40
+    }
   },
   "232": {
     "nationalDex": 232,
@@ -2194,7 +4042,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/232.png",
-    "internalIndex": 232
+    "internalIndex": 232,
+    "baseStats": {
+      "hp": 90,
+      "atk": 120,
+      "def": 120,
+      "spa": 60,
+      "spd": 60,
+      "spe": 50
+    }
   },
   "233": {
     "nationalDex": 233,
@@ -2203,7 +4059,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/233.png",
-    "internalIndex": 233
+    "internalIndex": 233,
+    "baseStats": {
+      "hp": 85,
+      "atk": 80,
+      "def": 90,
+      "spa": 105,
+      "spd": 95,
+      "spe": 60
+    }
   },
   "234": {
     "nationalDex": 234,
@@ -2212,7 +4076,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/234.png",
-    "internalIndex": 234
+    "internalIndex": 234,
+    "baseStats": {
+      "hp": 73,
+      "atk": 95,
+      "def": 62,
+      "spa": 85,
+      "spd": 65,
+      "spe": 85
+    }
   },
   "235": {
     "nationalDex": 235,
@@ -2221,7 +4093,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/235.png",
-    "internalIndex": 235
+    "internalIndex": 235,
+    "baseStats": {
+      "hp": 55,
+      "atk": 20,
+      "def": 35,
+      "spa": 20,
+      "spd": 45,
+      "spe": 75
+    }
   },
   "236": {
     "nationalDex": 236,
@@ -2230,7 +4110,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/236.png",
-    "internalIndex": 236
+    "internalIndex": 236,
+    "baseStats": {
+      "hp": 35,
+      "atk": 35,
+      "def": 35,
+      "spa": 35,
+      "spd": 35,
+      "spe": 35
+    }
   },
   "237": {
     "nationalDex": 237,
@@ -2239,7 +4127,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/237.png",
-    "internalIndex": 237
+    "internalIndex": 237,
+    "baseStats": {
+      "hp": 50,
+      "atk": 95,
+      "def": 95,
+      "spa": 35,
+      "spd": 110,
+      "spe": 70
+    }
   },
   "238": {
     "nationalDex": 238,
@@ -2249,7 +4145,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/238.png",
-    "internalIndex": 238
+    "internalIndex": 238,
+    "baseStats": {
+      "hp": 45,
+      "atk": 30,
+      "def": 15,
+      "spa": 85,
+      "spd": 65,
+      "spe": 65
+    }
   },
   "239": {
     "nationalDex": 239,
@@ -2258,7 +4162,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/239.png",
-    "internalIndex": 239
+    "internalIndex": 239,
+    "baseStats": {
+      "hp": 45,
+      "atk": 63,
+      "def": 37,
+      "spa": 65,
+      "spd": 55,
+      "spe": 95
+    }
   },
   "240": {
     "nationalDex": 240,
@@ -2267,7 +4179,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/240.png",
-    "internalIndex": 240
+    "internalIndex": 240,
+    "baseStats": {
+      "hp": 45,
+      "atk": 75,
+      "def": 37,
+      "spa": 70,
+      "spd": 55,
+      "spe": 83
+    }
   },
   "241": {
     "nationalDex": 241,
@@ -2276,7 +4196,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/241.png",
-    "internalIndex": 241
+    "internalIndex": 241,
+    "baseStats": {
+      "hp": 95,
+      "atk": 80,
+      "def": 105,
+      "spa": 40,
+      "spd": 70,
+      "spe": 100
+    }
   },
   "242": {
     "nationalDex": 242,
@@ -2285,7 +4213,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/242.png",
-    "internalIndex": 242
+    "internalIndex": 242,
+    "baseStats": {
+      "hp": 255,
+      "atk": 10,
+      "def": 10,
+      "spa": 75,
+      "spd": 135,
+      "spe": 55
+    }
   },
   "243": {
     "nationalDex": 243,
@@ -2294,7 +4230,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/243.png",
-    "internalIndex": 243
+    "internalIndex": 243,
+    "baseStats": {
+      "hp": 90,
+      "atk": 85,
+      "def": 75,
+      "spa": 115,
+      "spd": 100,
+      "spe": 115
+    }
   },
   "244": {
     "nationalDex": 244,
@@ -2303,7 +4247,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/244.png",
-    "internalIndex": 244
+    "internalIndex": 244,
+    "baseStats": {
+      "hp": 115,
+      "atk": 115,
+      "def": 85,
+      "spa": 90,
+      "spd": 75,
+      "spe": 100
+    }
   },
   "245": {
     "nationalDex": 245,
@@ -2312,7 +4264,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/245.png",
-    "internalIndex": 245
+    "internalIndex": 245,
+    "baseStats": {
+      "hp": 100,
+      "atk": 75,
+      "def": 115,
+      "spa": 90,
+      "spd": 115,
+      "spe": 85
+    }
   },
   "246": {
     "nationalDex": 246,
@@ -2322,7 +4282,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/246.png",
-    "internalIndex": 246
+    "internalIndex": 246,
+    "baseStats": {
+      "hp": 50,
+      "atk": 64,
+      "def": 50,
+      "spa": 45,
+      "spd": 50,
+      "spe": 41
+    }
   },
   "247": {
     "nationalDex": 247,
@@ -2332,7 +4300,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/247.png",
-    "internalIndex": 247
+    "internalIndex": 247,
+    "baseStats": {
+      "hp": 70,
+      "atk": 84,
+      "def": 70,
+      "spa": 65,
+      "spd": 70,
+      "spe": 51
+    }
   },
   "248": {
     "nationalDex": 248,
@@ -2342,7 +4318,15 @@
       "dark"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/248.png",
-    "internalIndex": 248
+    "internalIndex": 248,
+    "baseStats": {
+      "hp": 100,
+      "atk": 134,
+      "def": 110,
+      "spa": 95,
+      "spd": 100,
+      "spe": 61
+    }
   },
   "249": {
     "nationalDex": 249,
@@ -2352,7 +4336,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/249.png",
-    "internalIndex": 249
+    "internalIndex": 249,
+    "baseStats": {
+      "hp": 106,
+      "atk": 90,
+      "def": 130,
+      "spa": 90,
+      "spd": 154,
+      "spe": 110
+    }
   },
   "250": {
     "nationalDex": 250,
@@ -2362,7 +4354,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/250.png",
-    "internalIndex": 250
+    "internalIndex": 250,
+    "baseStats": {
+      "hp": 106,
+      "atk": 130,
+      "def": 90,
+      "spa": 110,
+      "spd": 154,
+      "spe": 90
+    }
   },
   "251": {
     "nationalDex": 251,
@@ -2372,7 +4372,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/251.png",
-    "internalIndex": 251
+    "internalIndex": 251,
+    "baseStats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 100,
+      "spa": 100,
+      "spd": 100,
+      "spe": 100
+    }
   },
   "277": {
     "nationalDex": 252,
@@ -2381,7 +4389,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/252.png",
-    "internalIndex": 277
+    "internalIndex": 277,
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 35,
+      "spa": 65,
+      "spd": 55,
+      "spe": 70
+    }
   },
   "278": {
     "nationalDex": 253,
@@ -2390,7 +4406,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/253.png",
-    "internalIndex": 278
+    "internalIndex": 278,
+    "baseStats": {
+      "hp": 50,
+      "atk": 65,
+      "def": 45,
+      "spa": 85,
+      "spd": 65,
+      "spe": 95
+    }
   },
   "279": {
     "nationalDex": 254,
@@ -2399,7 +4423,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/254.png",
-    "internalIndex": 279
+    "internalIndex": 279,
+    "baseStats": {
+      "hp": 70,
+      "atk": 85,
+      "def": 65,
+      "spa": 105,
+      "spd": 85,
+      "spe": 120
+    }
   },
   "280": {
     "nationalDex": 255,
@@ -2408,7 +4440,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/255.png",
-    "internalIndex": 280
+    "internalIndex": 280,
+    "baseStats": {
+      "hp": 45,
+      "atk": 60,
+      "def": 40,
+      "spa": 70,
+      "spd": 50,
+      "spe": 45
+    }
   },
   "281": {
     "nationalDex": 256,
@@ -2418,7 +4458,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/256.png",
-    "internalIndex": 281
+    "internalIndex": 281,
+    "baseStats": {
+      "hp": 60,
+      "atk": 85,
+      "def": 60,
+      "spa": 85,
+      "spd": 60,
+      "spe": 55
+    }
   },
   "282": {
     "nationalDex": 257,
@@ -2428,7 +4476,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/257.png",
-    "internalIndex": 282
+    "internalIndex": 282,
+    "baseStats": {
+      "hp": 80,
+      "atk": 120,
+      "def": 70,
+      "spa": 110,
+      "spd": 70,
+      "spe": 80
+    }
   },
   "283": {
     "nationalDex": 258,
@@ -2437,7 +4493,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/258.png",
-    "internalIndex": 283
+    "internalIndex": 283,
+    "baseStats": {
+      "hp": 50,
+      "atk": 70,
+      "def": 50,
+      "spa": 50,
+      "spd": 50,
+      "spe": 40
+    }
   },
   "284": {
     "nationalDex": 259,
@@ -2447,7 +4511,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/259.png",
-    "internalIndex": 284
+    "internalIndex": 284,
+    "baseStats": {
+      "hp": 70,
+      "atk": 85,
+      "def": 70,
+      "spa": 60,
+      "spd": 70,
+      "spe": 50
+    }
   },
   "285": {
     "nationalDex": 260,
@@ -2457,7 +4529,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/260.png",
-    "internalIndex": 285
+    "internalIndex": 285,
+    "baseStats": {
+      "hp": 100,
+      "atk": 110,
+      "def": 90,
+      "spa": 85,
+      "spd": 90,
+      "spe": 60
+    }
   },
   "286": {
     "nationalDex": 261,
@@ -2466,7 +4546,15 @@
       "dark"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/261.png",
-    "internalIndex": 286
+    "internalIndex": 286,
+    "baseStats": {
+      "hp": 35,
+      "atk": 55,
+      "def": 35,
+      "spa": 30,
+      "spd": 30,
+      "spe": 35
+    }
   },
   "287": {
     "nationalDex": 262,
@@ -2475,7 +4563,15 @@
       "dark"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/262.png",
-    "internalIndex": 287
+    "internalIndex": 287,
+    "baseStats": {
+      "hp": 70,
+      "atk": 90,
+      "def": 70,
+      "spa": 60,
+      "spd": 60,
+      "spe": 70
+    }
   },
   "288": {
     "nationalDex": 263,
@@ -2484,7 +4580,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/263.png",
-    "internalIndex": 288
+    "internalIndex": 288,
+    "baseStats": {
+      "hp": 38,
+      "atk": 30,
+      "def": 41,
+      "spa": 30,
+      "spd": 41,
+      "spe": 60
+    }
   },
   "289": {
     "nationalDex": 264,
@@ -2493,7 +4597,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/264.png",
-    "internalIndex": 289
+    "internalIndex": 289,
+    "baseStats": {
+      "hp": 78,
+      "atk": 70,
+      "def": 61,
+      "spa": 50,
+      "spd": 61,
+      "spe": 100
+    }
   },
   "290": {
     "nationalDex": 265,
@@ -2502,7 +4614,15 @@
       "bug"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/265.png",
-    "internalIndex": 290
+    "internalIndex": 290,
+    "baseStats": {
+      "hp": 45,
+      "atk": 45,
+      "def": 35,
+      "spa": 20,
+      "spd": 30,
+      "spe": 20
+    }
   },
   "291": {
     "nationalDex": 266,
@@ -2511,7 +4631,15 @@
       "bug"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/266.png",
-    "internalIndex": 291
+    "internalIndex": 291,
+    "baseStats": {
+      "hp": 50,
+      "atk": 35,
+      "def": 55,
+      "spa": 25,
+      "spd": 25,
+      "spe": 15
+    }
   },
   "292": {
     "nationalDex": 267,
@@ -2521,7 +4649,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/267.png",
-    "internalIndex": 292
+    "internalIndex": 292,
+    "baseStats": {
+      "hp": 60,
+      "atk": 70,
+      "def": 50,
+      "spa": 100,
+      "spd": 50,
+      "spe": 65
+    }
   },
   "293": {
     "nationalDex": 268,
@@ -2530,7 +4666,15 @@
       "bug"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/268.png",
-    "internalIndex": 293
+    "internalIndex": 293,
+    "baseStats": {
+      "hp": 50,
+      "atk": 35,
+      "def": 55,
+      "spa": 25,
+      "spd": 25,
+      "spe": 15
+    }
   },
   "294": {
     "nationalDex": 269,
@@ -2540,7 +4684,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/269.png",
-    "internalIndex": 294
+    "internalIndex": 294,
+    "baseStats": {
+      "hp": 60,
+      "atk": 50,
+      "def": 70,
+      "spa": 50,
+      "spd": 90,
+      "spe": 65
+    }
   },
   "295": {
     "nationalDex": 270,
@@ -2550,7 +4702,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/270.png",
-    "internalIndex": 295
+    "internalIndex": 295,
+    "baseStats": {
+      "hp": 40,
+      "atk": 30,
+      "def": 30,
+      "spa": 40,
+      "spd": 50,
+      "spe": 30
+    }
   },
   "296": {
     "nationalDex": 271,
@@ -2560,7 +4720,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/271.png",
-    "internalIndex": 296
+    "internalIndex": 296,
+    "baseStats": {
+      "hp": 60,
+      "atk": 50,
+      "def": 50,
+      "spa": 60,
+      "spd": 70,
+      "spe": 50
+    }
   },
   "297": {
     "nationalDex": 272,
@@ -2570,7 +4738,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/272.png",
-    "internalIndex": 297
+    "internalIndex": 297,
+    "baseStats": {
+      "hp": 80,
+      "atk": 70,
+      "def": 70,
+      "spa": 90,
+      "spd": 100,
+      "spe": 70
+    }
   },
   "298": {
     "nationalDex": 273,
@@ -2579,7 +4755,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/273.png",
-    "internalIndex": 298
+    "internalIndex": 298,
+    "baseStats": {
+      "hp": 40,
+      "atk": 40,
+      "def": 50,
+      "spa": 30,
+      "spd": 30,
+      "spe": 30
+    }
   },
   "299": {
     "nationalDex": 274,
@@ -2589,7 +4773,15 @@
       "dark"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/274.png",
-    "internalIndex": 299
+    "internalIndex": 299,
+    "baseStats": {
+      "hp": 70,
+      "atk": 70,
+      "def": 40,
+      "spa": 60,
+      "spd": 40,
+      "spe": 60
+    }
   },
   "300": {
     "nationalDex": 275,
@@ -2599,7 +4791,15 @@
       "dark"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/275.png",
-    "internalIndex": 300
+    "internalIndex": 300,
+    "baseStats": {
+      "hp": 90,
+      "atk": 100,
+      "def": 60,
+      "spa": 90,
+      "spd": 60,
+      "spe": 80
+    }
   },
   "301": {
     "nationalDex": 290,
@@ -2609,7 +4809,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/290.png",
-    "internalIndex": 301
+    "internalIndex": 301,
+    "baseStats": {
+      "hp": 31,
+      "atk": 45,
+      "def": 90,
+      "spa": 30,
+      "spd": 30,
+      "spe": 40
+    }
   },
   "302": {
     "nationalDex": 291,
@@ -2619,7 +4827,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/291.png",
-    "internalIndex": 302
+    "internalIndex": 302,
+    "baseStats": {
+      "hp": 61,
+      "atk": 90,
+      "def": 45,
+      "spa": 50,
+      "spd": 50,
+      "spe": 160
+    }
   },
   "303": {
     "nationalDex": 292,
@@ -2629,7 +4845,15 @@
       "ghost"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/292.png",
-    "internalIndex": 303
+    "internalIndex": 303,
+    "baseStats": {
+      "hp": 1,
+      "atk": 90,
+      "def": 45,
+      "spa": 30,
+      "spd": 30,
+      "spe": 40
+    }
   },
   "304": {
     "nationalDex": 276,
@@ -2639,7 +4863,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/276.png",
-    "internalIndex": 304
+    "internalIndex": 304,
+    "baseStats": {
+      "hp": 40,
+      "atk": 55,
+      "def": 30,
+      "spa": 30,
+      "spd": 30,
+      "spe": 85
+    }
   },
   "305": {
     "nationalDex": 277,
@@ -2649,7 +4881,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/277.png",
-    "internalIndex": 305
+    "internalIndex": 305,
+    "baseStats": {
+      "hp": 60,
+      "atk": 85,
+      "def": 60,
+      "spa": 75,
+      "spd": 50,
+      "spe": 125
+    }
   },
   "306": {
     "nationalDex": 285,
@@ -2658,7 +4898,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/285.png",
-    "internalIndex": 306
+    "internalIndex": 306,
+    "baseStats": {
+      "hp": 60,
+      "atk": 40,
+      "def": 60,
+      "spa": 40,
+      "spd": 60,
+      "spe": 35
+    }
   },
   "307": {
     "nationalDex": 286,
@@ -2668,7 +4916,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/286.png",
-    "internalIndex": 307
+    "internalIndex": 307,
+    "baseStats": {
+      "hp": 60,
+      "atk": 130,
+      "def": 80,
+      "spa": 60,
+      "spd": 60,
+      "spe": 70
+    }
   },
   "308": {
     "nationalDex": 327,
@@ -2677,7 +4933,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/327.png",
-    "internalIndex": 308
+    "internalIndex": 308,
+    "baseStats": {
+      "hp": 60,
+      "atk": 60,
+      "def": 60,
+      "spa": 60,
+      "spd": 60,
+      "spe": 60
+    }
   },
   "309": {
     "nationalDex": 278,
@@ -2687,7 +4951,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/278.png",
-    "internalIndex": 309
+    "internalIndex": 309,
+    "baseStats": {
+      "hp": 40,
+      "atk": 30,
+      "def": 30,
+      "spa": 55,
+      "spd": 30,
+      "spe": 85
+    }
   },
   "310": {
     "nationalDex": 279,
@@ -2697,7 +4969,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/279.png",
-    "internalIndex": 310
+    "internalIndex": 310,
+    "baseStats": {
+      "hp": 60,
+      "atk": 50,
+      "def": 100,
+      "spa": 95,
+      "spd": 70,
+      "spe": 65
+    }
   },
   "311": {
     "nationalDex": 283,
@@ -2707,7 +4987,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/283.png",
-    "internalIndex": 311
+    "internalIndex": 311,
+    "baseStats": {
+      "hp": 40,
+      "atk": 30,
+      "def": 32,
+      "spa": 50,
+      "spd": 52,
+      "spe": 65
+    }
   },
   "312": {
     "nationalDex": 284,
@@ -2717,7 +5005,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/284.png",
-    "internalIndex": 312
+    "internalIndex": 312,
+    "baseStats": {
+      "hp": 70,
+      "atk": 60,
+      "def": 62,
+      "spa": 100,
+      "spd": 82,
+      "spe": 80
+    }
   },
   "313": {
     "nationalDex": 320,
@@ -2726,7 +5022,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/320.png",
-    "internalIndex": 313
+    "internalIndex": 313,
+    "baseStats": {
+      "hp": 130,
+      "atk": 70,
+      "def": 35,
+      "spa": 70,
+      "spd": 35,
+      "spe": 60
+    }
   },
   "314": {
     "nationalDex": 321,
@@ -2735,7 +5039,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/321.png",
-    "internalIndex": 314
+    "internalIndex": 314,
+    "baseStats": {
+      "hp": 170,
+      "atk": 90,
+      "def": 45,
+      "spa": 90,
+      "spd": 45,
+      "spe": 60
+    }
   },
   "315": {
     "nationalDex": 300,
@@ -2744,7 +5056,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/300.png",
-    "internalIndex": 315
+    "internalIndex": 315,
+    "baseStats": {
+      "hp": 50,
+      "atk": 45,
+      "def": 45,
+      "spa": 35,
+      "spd": 35,
+      "spe": 50
+    }
   },
   "316": {
     "nationalDex": 301,
@@ -2753,7 +5073,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/301.png",
-    "internalIndex": 316
+    "internalIndex": 316,
+    "baseStats": {
+      "hp": 70,
+      "atk": 65,
+      "def": 65,
+      "spa": 55,
+      "spd": 55,
+      "spe": 90
+    }
   },
   "317": {
     "nationalDex": 352,
@@ -2762,7 +5090,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/352.png",
-    "internalIndex": 317
+    "internalIndex": 317,
+    "baseStats": {
+      "hp": 60,
+      "atk": 90,
+      "def": 70,
+      "spa": 60,
+      "spd": 120,
+      "spe": 40
+    }
   },
   "318": {
     "nationalDex": 343,
@@ -2772,7 +5108,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/343.png",
-    "internalIndex": 318
+    "internalIndex": 318,
+    "baseStats": {
+      "hp": 40,
+      "atk": 40,
+      "def": 55,
+      "spa": 40,
+      "spd": 70,
+      "spe": 55
+    }
   },
   "319": {
     "nationalDex": 344,
@@ -2782,7 +5126,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/344.png",
-    "internalIndex": 319
+    "internalIndex": 319,
+    "baseStats": {
+      "hp": 60,
+      "atk": 70,
+      "def": 105,
+      "spa": 70,
+      "spd": 120,
+      "spe": 75
+    }
   },
   "320": {
     "nationalDex": 299,
@@ -2791,7 +5143,15 @@
       "rock"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/299.png",
-    "internalIndex": 320
+    "internalIndex": 320,
+    "baseStats": {
+      "hp": 30,
+      "atk": 45,
+      "def": 135,
+      "spa": 45,
+      "spd": 90,
+      "spe": 30
+    }
   },
   "321": {
     "nationalDex": 324,
@@ -2800,7 +5160,15 @@
       "fire"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/324.png",
-    "internalIndex": 321
+    "internalIndex": 321,
+    "baseStats": {
+      "hp": 70,
+      "atk": 85,
+      "def": 140,
+      "spa": 85,
+      "spd": 70,
+      "spe": 20
+    }
   },
   "322": {
     "nationalDex": 302,
@@ -2810,7 +5178,15 @@
       "ghost"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/302.png",
-    "internalIndex": 322
+    "internalIndex": 322,
+    "baseStats": {
+      "hp": 50,
+      "atk": 75,
+      "def": 75,
+      "spa": 65,
+      "spd": 65,
+      "spe": 50
+    }
   },
   "323": {
     "nationalDex": 339,
@@ -2820,7 +5196,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/339.png",
-    "internalIndex": 323
+    "internalIndex": 323,
+    "baseStats": {
+      "hp": 50,
+      "atk": 48,
+      "def": 43,
+      "spa": 46,
+      "spd": 41,
+      "spe": 60
+    }
   },
   "324": {
     "nationalDex": 340,
@@ -2830,7 +5214,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/340.png",
-    "internalIndex": 324
+    "internalIndex": 324,
+    "baseStats": {
+      "hp": 110,
+      "atk": 78,
+      "def": 73,
+      "spa": 76,
+      "spd": 71,
+      "spe": 60
+    }
   },
   "325": {
     "nationalDex": 370,
@@ -2839,7 +5231,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/370.png",
-    "internalIndex": 325
+    "internalIndex": 325,
+    "baseStats": {
+      "hp": 43,
+      "atk": 30,
+      "def": 55,
+      "spa": 40,
+      "spd": 65,
+      "spe": 97
+    }
   },
   "326": {
     "nationalDex": 341,
@@ -2848,7 +5248,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/341.png",
-    "internalIndex": 326
+    "internalIndex": 326,
+    "baseStats": {
+      "hp": 43,
+      "atk": 80,
+      "def": 65,
+      "spa": 50,
+      "spd": 35,
+      "spe": 35
+    }
   },
   "327": {
     "nationalDex": 342,
@@ -2858,7 +5266,15 @@
       "dark"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/342.png",
-    "internalIndex": 327
+    "internalIndex": 327,
+    "baseStats": {
+      "hp": 63,
+      "atk": 120,
+      "def": 85,
+      "spa": 90,
+      "spd": 55,
+      "spe": 55
+    }
   },
   "328": {
     "nationalDex": 349,
@@ -2867,7 +5283,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/349.png",
-    "internalIndex": 328
+    "internalIndex": 328,
+    "baseStats": {
+      "hp": 20,
+      "atk": 15,
+      "def": 20,
+      "spa": 10,
+      "spd": 55,
+      "spe": 80
+    }
   },
   "329": {
     "nationalDex": 350,
@@ -2876,7 +5300,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/350.png",
-    "internalIndex": 329
+    "internalIndex": 329,
+    "baseStats": {
+      "hp": 95,
+      "atk": 60,
+      "def": 79,
+      "spa": 100,
+      "spd": 125,
+      "spe": 81
+    }
   },
   "330": {
     "nationalDex": 318,
@@ -2886,7 +5318,15 @@
       "dark"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/318.png",
-    "internalIndex": 330
+    "internalIndex": 330,
+    "baseStats": {
+      "hp": 45,
+      "atk": 90,
+      "def": 20,
+      "spa": 65,
+      "spd": 20,
+      "spe": 65
+    }
   },
   "331": {
     "nationalDex": 319,
@@ -2896,7 +5336,15 @@
       "dark"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/319.png",
-    "internalIndex": 331
+    "internalIndex": 331,
+    "baseStats": {
+      "hp": 70,
+      "atk": 120,
+      "def": 40,
+      "spa": 95,
+      "spd": 40,
+      "spe": 95
+    }
   },
   "332": {
     "nationalDex": 328,
@@ -2905,7 +5353,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/328.png",
-    "internalIndex": 332
+    "internalIndex": 332,
+    "baseStats": {
+      "hp": 45,
+      "atk": 100,
+      "def": 45,
+      "spa": 45,
+      "spd": 45,
+      "spe": 10
+    }
   },
   "333": {
     "nationalDex": 329,
@@ -2915,7 +5371,15 @@
       "dragon"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/329.png",
-    "internalIndex": 333
+    "internalIndex": 333,
+    "baseStats": {
+      "hp": 50,
+      "atk": 70,
+      "def": 50,
+      "spa": 50,
+      "spd": 50,
+      "spe": 70
+    }
   },
   "334": {
     "nationalDex": 330,
@@ -2925,7 +5389,15 @@
       "dragon"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/330.png",
-    "internalIndex": 334
+    "internalIndex": 334,
+    "baseStats": {
+      "hp": 80,
+      "atk": 100,
+      "def": 80,
+      "spa": 80,
+      "spd": 80,
+      "spe": 100
+    }
   },
   "335": {
     "nationalDex": 296,
@@ -2934,7 +5406,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/296.png",
-    "internalIndex": 335
+    "internalIndex": 335,
+    "baseStats": {
+      "hp": 72,
+      "atk": 60,
+      "def": 30,
+      "spa": 20,
+      "spd": 30,
+      "spe": 25
+    }
   },
   "336": {
     "nationalDex": 297,
@@ -2943,7 +5423,15 @@
       "fighting"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/297.png",
-    "internalIndex": 336
+    "internalIndex": 336,
+    "baseStats": {
+      "hp": 144,
+      "atk": 120,
+      "def": 60,
+      "spa": 40,
+      "spd": 60,
+      "spe": 50
+    }
   },
   "337": {
     "nationalDex": 309,
@@ -2952,7 +5440,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/309.png",
-    "internalIndex": 337
+    "internalIndex": 337,
+    "baseStats": {
+      "hp": 40,
+      "atk": 45,
+      "def": 40,
+      "spa": 65,
+      "spd": 40,
+      "spe": 65
+    }
   },
   "338": {
     "nationalDex": 310,
@@ -2961,7 +5457,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/310.png",
-    "internalIndex": 338
+    "internalIndex": 338,
+    "baseStats": {
+      "hp": 70,
+      "atk": 75,
+      "def": 60,
+      "spa": 105,
+      "spd": 60,
+      "spe": 105
+    }
   },
   "339": {
     "nationalDex": 322,
@@ -2971,7 +5475,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/322.png",
-    "internalIndex": 339
+    "internalIndex": 339,
+    "baseStats": {
+      "hp": 60,
+      "atk": 60,
+      "def": 40,
+      "spa": 65,
+      "spd": 45,
+      "spe": 35
+    }
   },
   "340": {
     "nationalDex": 323,
@@ -2981,7 +5493,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/323.png",
-    "internalIndex": 340
+    "internalIndex": 340,
+    "baseStats": {
+      "hp": 70,
+      "atk": 100,
+      "def": 70,
+      "spa": 105,
+      "spd": 75,
+      "spe": 40
+    }
   },
   "341": {
     "nationalDex": 363,
@@ -2991,7 +5511,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/363.png",
-    "internalIndex": 341
+    "internalIndex": 341,
+    "baseStats": {
+      "hp": 70,
+      "atk": 40,
+      "def": 50,
+      "spa": 55,
+      "spd": 50,
+      "spe": 25
+    }
   },
   "342": {
     "nationalDex": 364,
@@ -3001,7 +5529,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/364.png",
-    "internalIndex": 342
+    "internalIndex": 342,
+    "baseStats": {
+      "hp": 90,
+      "atk": 60,
+      "def": 70,
+      "spa": 75,
+      "spd": 70,
+      "spe": 45
+    }
   },
   "343": {
     "nationalDex": 365,
@@ -3011,7 +5547,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/365.png",
-    "internalIndex": 343
+    "internalIndex": 343,
+    "baseStats": {
+      "hp": 110,
+      "atk": 80,
+      "def": 90,
+      "spa": 95,
+      "spd": 90,
+      "spe": 65
+    }
   },
   "344": {
     "nationalDex": 331,
@@ -3020,7 +5564,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/331.png",
-    "internalIndex": 344
+    "internalIndex": 344,
+    "baseStats": {
+      "hp": 50,
+      "atk": 85,
+      "def": 40,
+      "spa": 85,
+      "spd": 40,
+      "spe": 35
+    }
   },
   "345": {
     "nationalDex": 332,
@@ -3030,7 +5582,15 @@
       "dark"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/332.png",
-    "internalIndex": 345
+    "internalIndex": 345,
+    "baseStats": {
+      "hp": 70,
+      "atk": 115,
+      "def": 60,
+      "spa": 115,
+      "spd": 60,
+      "spe": 55
+    }
   },
   "346": {
     "nationalDex": 361,
@@ -3039,7 +5599,15 @@
       "ice"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/361.png",
-    "internalIndex": 346
+    "internalIndex": 346,
+    "baseStats": {
+      "hp": 50,
+      "atk": 50,
+      "def": 50,
+      "spa": 50,
+      "spd": 50,
+      "spe": 50
+    }
   },
   "347": {
     "nationalDex": 362,
@@ -3048,7 +5616,15 @@
       "ice"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/362.png",
-    "internalIndex": 347
+    "internalIndex": 347,
+    "baseStats": {
+      "hp": 80,
+      "atk": 80,
+      "def": 80,
+      "spa": 80,
+      "spd": 80,
+      "spe": 80
+    }
   },
   "348": {
     "nationalDex": 337,
@@ -3058,7 +5634,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/337.png",
-    "internalIndex": 348
+    "internalIndex": 348,
+    "baseStats": {
+      "hp": 90,
+      "atk": 55,
+      "def": 65,
+      "spa": 95,
+      "spd": 85,
+      "spe": 70
+    }
   },
   "349": {
     "nationalDex": 338,
@@ -3068,7 +5652,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/338.png",
-    "internalIndex": 349
+    "internalIndex": 349,
+    "baseStats": {
+      "hp": 90,
+      "atk": 95,
+      "def": 85,
+      "spa": 55,
+      "spd": 65,
+      "spe": 70
+    }
   },
   "350": {
     "nationalDex": 298,
@@ -3078,7 +5670,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/298.png",
-    "internalIndex": 350
+    "internalIndex": 350,
+    "baseStats": {
+      "hp": 50,
+      "atk": 20,
+      "def": 40,
+      "spa": 20,
+      "spd": 40,
+      "spe": 20
+    }
   },
   "351": {
     "nationalDex": 325,
@@ -3087,7 +5687,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/325.png",
-    "internalIndex": 351
+    "internalIndex": 351,
+    "baseStats": {
+      "hp": 60,
+      "atk": 25,
+      "def": 35,
+      "spa": 70,
+      "spd": 80,
+      "spe": 60
+    }
   },
   "352": {
     "nationalDex": 326,
@@ -3096,7 +5704,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/326.png",
-    "internalIndex": 352
+    "internalIndex": 352,
+    "baseStats": {
+      "hp": 80,
+      "atk": 45,
+      "def": 65,
+      "spa": 90,
+      "spd": 110,
+      "spe": 80
+    }
   },
   "353": {
     "nationalDex": 311,
@@ -3105,7 +5721,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/311.png",
-    "internalIndex": 353
+    "internalIndex": 353,
+    "baseStats": {
+      "hp": 60,
+      "atk": 50,
+      "def": 40,
+      "spa": 85,
+      "spd": 75,
+      "spe": 95
+    }
   },
   "354": {
     "nationalDex": 312,
@@ -3114,7 +5738,15 @@
       "electric"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/312.png",
-    "internalIndex": 354
+    "internalIndex": 354,
+    "baseStats": {
+      "hp": 60,
+      "atk": 40,
+      "def": 50,
+      "spa": 75,
+      "spd": 85,
+      "spe": 95
+    }
   },
   "355": {
     "nationalDex": 303,
@@ -3124,7 +5756,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/303.png",
-    "internalIndex": 355
+    "internalIndex": 355,
+    "baseStats": {
+      "hp": 50,
+      "atk": 85,
+      "def": 85,
+      "spa": 55,
+      "spd": 55,
+      "spe": 50
+    }
   },
   "356": {
     "nationalDex": 307,
@@ -3134,7 +5774,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/307.png",
-    "internalIndex": 356
+    "internalIndex": 356,
+    "baseStats": {
+      "hp": 30,
+      "atk": 40,
+      "def": 55,
+      "spa": 40,
+      "spd": 55,
+      "spe": 60
+    }
   },
   "357": {
     "nationalDex": 308,
@@ -3144,7 +5792,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/308.png",
-    "internalIndex": 357
+    "internalIndex": 357,
+    "baseStats": {
+      "hp": 60,
+      "atk": 60,
+      "def": 75,
+      "spa": 60,
+      "spd": 75,
+      "spe": 80
+    }
   },
   "358": {
     "nationalDex": 333,
@@ -3154,7 +5810,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/333.png",
-    "internalIndex": 358
+    "internalIndex": 358,
+    "baseStats": {
+      "hp": 45,
+      "atk": 40,
+      "def": 60,
+      "spa": 40,
+      "spd": 75,
+      "spe": 50
+    }
   },
   "359": {
     "nationalDex": 334,
@@ -3164,7 +5828,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/334.png",
-    "internalIndex": 359
+    "internalIndex": 359,
+    "baseStats": {
+      "hp": 75,
+      "atk": 70,
+      "def": 90,
+      "spa": 70,
+      "spd": 105,
+      "spe": 80
+    }
   },
   "360": {
     "nationalDex": 360,
@@ -3173,7 +5845,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/360.png",
-    "internalIndex": 360
+    "internalIndex": 360,
+    "baseStats": {
+      "hp": 95,
+      "atk": 23,
+      "def": 48,
+      "spa": 23,
+      "spd": 48,
+      "spe": 23
+    }
   },
   "361": {
     "nationalDex": 355,
@@ -3182,7 +5862,15 @@
       "ghost"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/355.png",
-    "internalIndex": 361
+    "internalIndex": 361,
+    "baseStats": {
+      "hp": 20,
+      "atk": 40,
+      "def": 90,
+      "spa": 30,
+      "spd": 90,
+      "spe": 25
+    }
   },
   "362": {
     "nationalDex": 356,
@@ -3191,7 +5879,15 @@
       "ghost"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/356.png",
-    "internalIndex": 362
+    "internalIndex": 362,
+    "baseStats": {
+      "hp": 40,
+      "atk": 70,
+      "def": 130,
+      "spa": 60,
+      "spd": 130,
+      "spe": 25
+    }
   },
   "363": {
     "nationalDex": 315,
@@ -3201,7 +5897,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/315.png",
-    "internalIndex": 363
+    "internalIndex": 363,
+    "baseStats": {
+      "hp": 50,
+      "atk": 60,
+      "def": 45,
+      "spa": 100,
+      "spd": 80,
+      "spe": 65
+    }
   },
   "364": {
     "nationalDex": 287,
@@ -3210,7 +5914,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/287.png",
-    "internalIndex": 364
+    "internalIndex": 364,
+    "baseStats": {
+      "hp": 60,
+      "atk": 60,
+      "def": 60,
+      "spa": 35,
+      "spd": 35,
+      "spe": 30
+    }
   },
   "365": {
     "nationalDex": 288,
@@ -3219,7 +5931,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/288.png",
-    "internalIndex": 365
+    "internalIndex": 365,
+    "baseStats": {
+      "hp": 80,
+      "atk": 80,
+      "def": 80,
+      "spa": 55,
+      "spd": 55,
+      "spe": 90
+    }
   },
   "366": {
     "nationalDex": 289,
@@ -3228,7 +5948,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/289.png",
-    "internalIndex": 366
+    "internalIndex": 366,
+    "baseStats": {
+      "hp": 150,
+      "atk": 160,
+      "def": 100,
+      "spa": 95,
+      "spd": 65,
+      "spe": 100
+    }
   },
   "367": {
     "nationalDex": 316,
@@ -3237,7 +5965,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/316.png",
-    "internalIndex": 367
+    "internalIndex": 367,
+    "baseStats": {
+      "hp": 70,
+      "atk": 43,
+      "def": 53,
+      "spa": 43,
+      "spd": 53,
+      "spe": 40
+    }
   },
   "368": {
     "nationalDex": 317,
@@ -3246,7 +5982,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/317.png",
-    "internalIndex": 368
+    "internalIndex": 368,
+    "baseStats": {
+      "hp": 100,
+      "atk": 73,
+      "def": 83,
+      "spa": 73,
+      "spd": 83,
+      "spe": 55
+    }
   },
   "369": {
     "nationalDex": 357,
@@ -3256,7 +6000,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/357.png",
-    "internalIndex": 369
+    "internalIndex": 369,
+    "baseStats": {
+      "hp": 99,
+      "atk": 68,
+      "def": 83,
+      "spa": 72,
+      "spd": 87,
+      "spe": 51
+    }
   },
   "370": {
     "nationalDex": 293,
@@ -3265,7 +6017,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/293.png",
-    "internalIndex": 370
+    "internalIndex": 370,
+    "baseStats": {
+      "hp": 64,
+      "atk": 51,
+      "def": 23,
+      "spa": 51,
+      "spd": 23,
+      "spe": 28
+    }
   },
   "371": {
     "nationalDex": 294,
@@ -3274,7 +6034,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/294.png",
-    "internalIndex": 371
+    "internalIndex": 371,
+    "baseStats": {
+      "hp": 84,
+      "atk": 71,
+      "def": 43,
+      "spa": 71,
+      "spd": 43,
+      "spe": 48
+    }
   },
   "372": {
     "nationalDex": 295,
@@ -3283,7 +6051,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/295.png",
-    "internalIndex": 372
+    "internalIndex": 372,
+    "baseStats": {
+      "hp": 104,
+      "atk": 91,
+      "def": 63,
+      "spa": 91,
+      "spd": 73,
+      "spe": 68
+    }
   },
   "373": {
     "nationalDex": 366,
@@ -3292,7 +6068,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/366.png",
-    "internalIndex": 373
+    "internalIndex": 373,
+    "baseStats": {
+      "hp": 35,
+      "atk": 64,
+      "def": 85,
+      "spa": 74,
+      "spd": 55,
+      "spe": 32
+    }
   },
   "374": {
     "nationalDex": 367,
@@ -3301,7 +6085,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/367.png",
-    "internalIndex": 374
+    "internalIndex": 374,
+    "baseStats": {
+      "hp": 55,
+      "atk": 104,
+      "def": 105,
+      "spa": 94,
+      "spd": 75,
+      "spe": 52
+    }
   },
   "375": {
     "nationalDex": 368,
@@ -3310,7 +6102,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/368.png",
-    "internalIndex": 375
+    "internalIndex": 375,
+    "baseStats": {
+      "hp": 55,
+      "atk": 84,
+      "def": 105,
+      "spa": 114,
+      "spd": 75,
+      "spe": 52
+    }
   },
   "376": {
     "nationalDex": 359,
@@ -3319,7 +6119,15 @@
       "dark"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/359.png",
-    "internalIndex": 376
+    "internalIndex": 376,
+    "baseStats": {
+      "hp": 65,
+      "atk": 130,
+      "def": 60,
+      "spa": 75,
+      "spd": 60,
+      "spe": 75
+    }
   },
   "377": {
     "nationalDex": 353,
@@ -3328,7 +6136,15 @@
       "ghost"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/353.png",
-    "internalIndex": 377
+    "internalIndex": 377,
+    "baseStats": {
+      "hp": 44,
+      "atk": 75,
+      "def": 35,
+      "spa": 63,
+      "spd": 33,
+      "spe": 45
+    }
   },
   "378": {
     "nationalDex": 354,
@@ -3337,7 +6153,15 @@
       "ghost"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/354.png",
-    "internalIndex": 378
+    "internalIndex": 378,
+    "baseStats": {
+      "hp": 64,
+      "atk": 115,
+      "def": 65,
+      "spa": 83,
+      "spd": 63,
+      "spe": 65
+    }
   },
   "379": {
     "nationalDex": 336,
@@ -3346,7 +6170,15 @@
       "poison"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/336.png",
-    "internalIndex": 379
+    "internalIndex": 379,
+    "baseStats": {
+      "hp": 73,
+      "atk": 100,
+      "def": 60,
+      "spa": 100,
+      "spd": 60,
+      "spe": 65
+    }
   },
   "380": {
     "nationalDex": 335,
@@ -3355,7 +6187,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/335.png",
-    "internalIndex": 380
+    "internalIndex": 380,
+    "baseStats": {
+      "hp": 73,
+      "atk": 115,
+      "def": 60,
+      "spa": 60,
+      "spd": 60,
+      "spe": 90
+    }
   },
   "381": {
     "nationalDex": 369,
@@ -3365,7 +6205,15 @@
       "rock"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/369.png",
-    "internalIndex": 381
+    "internalIndex": 381,
+    "baseStats": {
+      "hp": 100,
+      "atk": 90,
+      "def": 130,
+      "spa": 45,
+      "spd": 65,
+      "spe": 55
+    }
   },
   "382": {
     "nationalDex": 304,
@@ -3375,7 +6223,15 @@
       "rock"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/304.png",
-    "internalIndex": 382
+    "internalIndex": 382,
+    "baseStats": {
+      "hp": 50,
+      "atk": 70,
+      "def": 100,
+      "spa": 40,
+      "spd": 40,
+      "spe": 30
+    }
   },
   "383": {
     "nationalDex": 305,
@@ -3385,7 +6241,15 @@
       "rock"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/305.png",
-    "internalIndex": 383
+    "internalIndex": 383,
+    "baseStats": {
+      "hp": 60,
+      "atk": 90,
+      "def": 140,
+      "spa": 50,
+      "spd": 50,
+      "spe": 40
+    }
   },
   "384": {
     "nationalDex": 306,
@@ -3395,7 +6259,15 @@
       "rock"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/306.png",
-    "internalIndex": 384
+    "internalIndex": 384,
+    "baseStats": {
+      "hp": 70,
+      "atk": 110,
+      "def": 180,
+      "spa": 60,
+      "spd": 60,
+      "spe": 50
+    }
   },
   "385": {
     "nationalDex": 351,
@@ -3404,7 +6276,15 @@
       "normal"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/351.png",
-    "internalIndex": 385
+    "internalIndex": 385,
+    "baseStats": {
+      "hp": 70,
+      "atk": 70,
+      "def": 70,
+      "spa": 70,
+      "spd": 70,
+      "spe": 70
+    }
   },
   "386": {
     "nationalDex": 313,
@@ -3413,7 +6293,15 @@
       "bug"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/313.png",
-    "internalIndex": 386
+    "internalIndex": 386,
+    "baseStats": {
+      "hp": 65,
+      "atk": 73,
+      "def": 75,
+      "spa": 47,
+      "spd": 85,
+      "spe": 85
+    }
   },
   "387": {
     "nationalDex": 314,
@@ -3422,7 +6310,15 @@
       "bug"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/314.png",
-    "internalIndex": 387
+    "internalIndex": 387,
+    "baseStats": {
+      "hp": 65,
+      "atk": 47,
+      "def": 75,
+      "spa": 73,
+      "spd": 85,
+      "spe": 85
+    }
   },
   "388": {
     "nationalDex": 345,
@@ -3432,7 +6328,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/345.png",
-    "internalIndex": 388
+    "internalIndex": 388,
+    "baseStats": {
+      "hp": 66,
+      "atk": 41,
+      "def": 77,
+      "spa": 61,
+      "spd": 87,
+      "spe": 23
+    }
   },
   "389": {
     "nationalDex": 346,
@@ -3442,7 +6346,15 @@
       "grass"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/346.png",
-    "internalIndex": 389
+    "internalIndex": 389,
+    "baseStats": {
+      "hp": 86,
+      "atk": 81,
+      "def": 97,
+      "spa": 81,
+      "spd": 107,
+      "spe": 43
+    }
   },
   "390": {
     "nationalDex": 347,
@@ -3452,7 +6364,15 @@
       "bug"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/347.png",
-    "internalIndex": 390
+    "internalIndex": 390,
+    "baseStats": {
+      "hp": 45,
+      "atk": 95,
+      "def": 50,
+      "spa": 40,
+      "spd": 50,
+      "spe": 75
+    }
   },
   "391": {
     "nationalDex": 348,
@@ -3462,7 +6382,15 @@
       "bug"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/348.png",
-    "internalIndex": 391
+    "internalIndex": 391,
+    "baseStats": {
+      "hp": 75,
+      "atk": 125,
+      "def": 100,
+      "spa": 70,
+      "spd": 80,
+      "spe": 45
+    }
   },
   "392": {
     "nationalDex": 280,
@@ -3472,7 +6400,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/280.png",
-    "internalIndex": 392
+    "internalIndex": 392,
+    "baseStats": {
+      "hp": 28,
+      "atk": 25,
+      "def": 25,
+      "spa": 45,
+      "spd": 35,
+      "spe": 40
+    }
   },
   "393": {
     "nationalDex": 281,
@@ -3482,7 +6418,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/281.png",
-    "internalIndex": 393
+    "internalIndex": 393,
+    "baseStats": {
+      "hp": 38,
+      "atk": 35,
+      "def": 35,
+      "spa": 65,
+      "spd": 55,
+      "spe": 50
+    }
   },
   "394": {
     "nationalDex": 282,
@@ -3492,7 +6436,15 @@
       "fairy"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/282.png",
-    "internalIndex": 394
+    "internalIndex": 394,
+    "baseStats": {
+      "hp": 68,
+      "atk": 65,
+      "def": 65,
+      "spa": 125,
+      "spd": 115,
+      "spe": 80
+    }
   },
   "395": {
     "nationalDex": 371,
@@ -3501,7 +6453,15 @@
       "dragon"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/371.png",
-    "internalIndex": 395
+    "internalIndex": 395,
+    "baseStats": {
+      "hp": 45,
+      "atk": 75,
+      "def": 60,
+      "spa": 40,
+      "spd": 30,
+      "spe": 50
+    }
   },
   "396": {
     "nationalDex": 372,
@@ -3510,7 +6470,15 @@
       "dragon"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/372.png",
-    "internalIndex": 396
+    "internalIndex": 396,
+    "baseStats": {
+      "hp": 65,
+      "atk": 95,
+      "def": 100,
+      "spa": 60,
+      "spd": 50,
+      "spe": 50
+    }
   },
   "397": {
     "nationalDex": 373,
@@ -3520,7 +6488,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/373.png",
-    "internalIndex": 397
+    "internalIndex": 397,
+    "baseStats": {
+      "hp": 95,
+      "atk": 135,
+      "def": 80,
+      "spa": 110,
+      "spd": 80,
+      "spe": 100
+    }
   },
   "398": {
     "nationalDex": 374,
@@ -3530,7 +6506,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/374.png",
-    "internalIndex": 398
+    "internalIndex": 398,
+    "baseStats": {
+      "hp": 40,
+      "atk": 55,
+      "def": 80,
+      "spa": 35,
+      "spd": 60,
+      "spe": 30
+    }
   },
   "399": {
     "nationalDex": 375,
@@ -3540,7 +6524,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/375.png",
-    "internalIndex": 399
+    "internalIndex": 399,
+    "baseStats": {
+      "hp": 60,
+      "atk": 75,
+      "def": 100,
+      "spa": 55,
+      "spd": 80,
+      "spe": 50
+    }
   },
   "400": {
     "nationalDex": 376,
@@ -3550,7 +6542,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/376.png",
-    "internalIndex": 400
+    "internalIndex": 400,
+    "baseStats": {
+      "hp": 80,
+      "atk": 135,
+      "def": 130,
+      "spa": 95,
+      "spd": 90,
+      "spe": 70
+    }
   },
   "401": {
     "nationalDex": 377,
@@ -3559,7 +6559,15 @@
       "rock"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/377.png",
-    "internalIndex": 401
+    "internalIndex": 401,
+    "baseStats": {
+      "hp": 80,
+      "atk": 100,
+      "def": 200,
+      "spa": 50,
+      "spd": 100,
+      "spe": 50
+    }
   },
   "402": {
     "nationalDex": 378,
@@ -3568,7 +6576,15 @@
       "ice"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/378.png",
-    "internalIndex": 402
+    "internalIndex": 402,
+    "baseStats": {
+      "hp": 80,
+      "atk": 50,
+      "def": 100,
+      "spa": 100,
+      "spd": 200,
+      "spe": 50
+    }
   },
   "403": {
     "nationalDex": 379,
@@ -3577,7 +6593,15 @@
       "steel"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/379.png",
-    "internalIndex": 403
+    "internalIndex": 403,
+    "baseStats": {
+      "hp": 80,
+      "atk": 75,
+      "def": 150,
+      "spa": 75,
+      "spd": 150,
+      "spe": 50
+    }
   },
   "404": {
     "nationalDex": 382,
@@ -3586,7 +6610,15 @@
       "water"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/382.png",
-    "internalIndex": 404
+    "internalIndex": 404,
+    "baseStats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 90,
+      "spa": 150,
+      "spd": 140,
+      "spe": 90
+    }
   },
   "405": {
     "nationalDex": 383,
@@ -3595,7 +6627,15 @@
       "ground"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/383.png",
-    "internalIndex": 405
+    "internalIndex": 405,
+    "baseStats": {
+      "hp": 100,
+      "atk": 150,
+      "def": 140,
+      "spa": 100,
+      "spd": 90,
+      "spe": 90
+    }
   },
   "406": {
     "nationalDex": 384,
@@ -3605,7 +6645,15 @@
       "flying"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/384.png",
-    "internalIndex": 406
+    "internalIndex": 406,
+    "baseStats": {
+      "hp": 105,
+      "atk": 150,
+      "def": 90,
+      "spa": 150,
+      "spd": 90,
+      "spe": 95
+    }
   },
   "407": {
     "nationalDex": 380,
@@ -3615,7 +6663,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/380.png",
-    "internalIndex": 407
+    "internalIndex": 407,
+    "baseStats": {
+      "hp": 80,
+      "atk": 80,
+      "def": 90,
+      "spa": 110,
+      "spd": 130,
+      "spe": 110
+    }
   },
   "408": {
     "nationalDex": 381,
@@ -3625,7 +6681,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/381.png",
-    "internalIndex": 408
+    "internalIndex": 408,
+    "baseStats": {
+      "hp": 80,
+      "atk": 90,
+      "def": 80,
+      "spa": 130,
+      "spd": 110,
+      "spe": 110
+    }
   },
   "409": {
     "nationalDex": 385,
@@ -3635,7 +6699,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/385.png",
-    "internalIndex": 409
+    "internalIndex": 409,
+    "baseStats": {
+      "hp": 100,
+      "atk": 100,
+      "def": 100,
+      "spa": 100,
+      "spd": 100,
+      "spe": 100
+    }
   },
   "410": {
     "nationalDex": 386,
@@ -3644,7 +6716,15 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/386.png",
-    "internalIndex": 410
+    "internalIndex": 410,
+    "baseStats": {
+      "hp": 50,
+      "atk": 150,
+      "def": 50,
+      "spa": 150,
+      "spd": 50,
+      "spe": 150
+    }
   },
   "411": {
     "nationalDex": 358,
@@ -3653,6 +6733,14 @@
       "psychic"
     ],
     "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/358.png",
-    "internalIndex": 411
+    "internalIndex": 411,
+    "baseStats": {
+      "hp": 75,
+      "atk": 50,
+      "def": 80,
+      "spa": 95,
+      "spd": 90,
+      "spe": 65
+    }
   }
 }
