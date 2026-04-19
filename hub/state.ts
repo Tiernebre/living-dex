@@ -9,6 +9,7 @@ class StateStore {
     party: Array(6).fill(null),
     enemyParty: Array(6).fill(null),
     inBattle: false,
+    location: null,
     currentBox: null,
     source: null,
     lastUpdateAt: null,
@@ -66,6 +67,16 @@ class StateStore {
       this.state.enemyParty = Array(6).fill(null);
     }
     this.broadcast({ type: "battle", inBattle });
+  }
+
+  setLocation(location: { mapGroup: number; mapNum: number } | null) {
+    const cur = this.state.location;
+    if (
+      (cur === null && location === null) ||
+      (cur && location && cur.mapGroup === location.mapGroup && cur.mapNum === location.mapNum)
+    ) return;
+    this.state.location = location;
+    this.broadcast({ type: "location", location });
   }
 
   setBoxSlot(index: number, slot: number, pokemon: DecodedPokemon | null, source: Source) {

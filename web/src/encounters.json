@@ -1,0 +1,8178 @@
+{
+  "0:0": {
+    "name": "MAP_PETALBURG_CITY",
+    "label": "Petalburg City",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 1,
+        "encounters": [
+          {
+            "species": 183,
+            "nationalDex": 183,
+            "name": "marill",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 100
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 326,
+            "nationalDex": 341,
+            "name": "corphish",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 326,
+            "nationalDex": 341,
+            "name": "corphish",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:1": {
+    "name": "MAP_SLATEPORT_CITY",
+    "label": "Slateport City",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:5": {
+    "name": "MAP_LILYCOVE_CITY",
+    "label": "Lilycove City",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 25,
+            "maxLevel": 45,
+            "chance": 85
+          },
+          {
+            "species": 120,
+            "nationalDex": 120,
+            "name": "staryu",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 15
+          }
+        ]
+      }
+    ]
+  },
+  "0:6": {
+    "name": "MAP_MOSSDEEP_CITY",
+    "label": "Mossdeep City",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 25,
+            "maxLevel": 45,
+            "chance": 60
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          }
+        ]
+      }
+    ]
+  },
+  "0:7": {
+    "name": "MAP_SOOTOPOLIS_CITY",
+    "label": "Sootopolis City",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 1,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 100
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 15,
+            "chance": 100
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 100
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 80
+          },
+          {
+            "species": 130,
+            "nationalDex": 130,
+            "name": "gyarados",
+            "minLevel": 5,
+            "maxLevel": 45,
+            "chance": 20
+          }
+        ]
+      }
+    ]
+  },
+  "0:8": {
+    "name": "MAP_EVER_GRANDE_CITY",
+    "label": "Ever Grande City",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 325,
+            "nationalDex": 370,
+            "name": "luvdisc",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 30,
+            "maxLevel": 45,
+            "chance": 45
+          },
+          {
+            "species": 325,
+            "nationalDex": 370,
+            "name": "luvdisc",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          },
+          {
+            "species": 222,
+            "nationalDex": 222,
+            "name": "corsola",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 15
+          }
+        ]
+      }
+    ]
+  },
+  "24:0": {
+    "name": "MAP_METEOR_FALLS_1F_1R",
+    "label": "Meteor Falls 1F 1R",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 14,
+            "maxLevel": 20,
+            "chance": 80
+          },
+          {
+            "species": 349,
+            "nationalDex": 338,
+            "name": "solrock",
+            "minLevel": 14,
+            "maxLevel": 18,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 90
+          },
+          {
+            "species": 349,
+            "nationalDex": 338,
+            "name": "solrock",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 10
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "24:1": {
+    "name": "MAP_METEOR_FALLS_1F_2R",
+    "label": "Meteor Falls 1F 2R",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 40,
+            "chance": 65
+          },
+          {
+            "species": 349,
+            "nationalDex": 338,
+            "name": "solrock",
+            "minLevel": 33,
+            "maxLevel": 39,
+            "chance": 35
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 90
+          },
+          {
+            "species": 349,
+            "nationalDex": 338,
+            "name": "solrock",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 10
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 25,
+            "maxLevel": 35,
+            "chance": 80
+          },
+          {
+            "species": 324,
+            "nationalDex": 340,
+            "name": "whiscash",
+            "minLevel": 30,
+            "maxLevel": 45,
+            "chance": 20
+          }
+        ]
+      }
+    ]
+  },
+  "24:2": {
+    "name": "MAP_METEOR_FALLS_B1F_1R",
+    "label": "Meteor Falls B1F 1R",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 40,
+            "chance": 65
+          },
+          {
+            "species": 349,
+            "nationalDex": 338,
+            "name": "solrock",
+            "minLevel": 33,
+            "maxLevel": 39,
+            "chance": 35
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 90
+          },
+          {
+            "species": 349,
+            "nationalDex": 338,
+            "name": "solrock",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 10
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 25,
+            "maxLevel": 35,
+            "chance": 80
+          },
+          {
+            "species": 324,
+            "nationalDex": 340,
+            "name": "whiscash",
+            "minLevel": 30,
+            "maxLevel": 45,
+            "chance": 20
+          }
+        ]
+      }
+    ]
+  },
+  "24:3": {
+    "name": "MAP_METEOR_FALLS_B1F_2R",
+    "label": "Meteor Falls B1F 2R",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 40,
+            "chance": 50
+          },
+          {
+            "species": 395,
+            "nationalDex": 371,
+            "name": "bagon",
+            "minLevel": 25,
+            "maxLevel": 35,
+            "chance": 25
+          },
+          {
+            "species": 349,
+            "nationalDex": 338,
+            "name": "solrock",
+            "minLevel": 35,
+            "maxLevel": 39,
+            "chance": 25
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 90
+          },
+          {
+            "species": 349,
+            "nationalDex": 338,
+            "name": "solrock",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 10
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 25,
+            "maxLevel": 35,
+            "chance": 80
+          },
+          {
+            "species": 324,
+            "nationalDex": 340,
+            "name": "whiscash",
+            "minLevel": 30,
+            "maxLevel": 45,
+            "chance": 20
+          }
+        ]
+      }
+    ]
+  },
+  "24:4": {
+    "name": "MAP_RUSTURF_TUNNEL",
+    "label": "Rusturf Tunnel",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 370,
+            "nationalDex": 293,
+            "name": "whismur",
+            "minLevel": 5,
+            "maxLevel": 8,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "24:7": {
+    "name": "MAP_GRANITE_CAVE_1F",
+    "label": "Granite Cave 1F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 335,
+            "nationalDex": 296,
+            "name": "makuhita",
+            "minLevel": 6,
+            "maxLevel": 10,
+            "chance": 50
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 7,
+            "maxLevel": 8,
+            "chance": 30
+          },
+          {
+            "species": 63,
+            "nationalDex": 63,
+            "name": "abra",
+            "minLevel": 8,
+            "maxLevel": 8,
+            "chance": 10
+          },
+          {
+            "species": 74,
+            "nationalDex": 74,
+            "name": "geodude",
+            "minLevel": 6,
+            "maxLevel": 9,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:8": {
+    "name": "MAP_GRANITE_CAVE_B1F",
+    "label": "Granite Cave B1F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 382,
+            "nationalDex": 304,
+            "name": "aron",
+            "minLevel": 9,
+            "maxLevel": 11,
+            "chance": 40
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 9,
+            "maxLevel": 10,
+            "chance": 30
+          },
+          {
+            "species": 63,
+            "nationalDex": 63,
+            "name": "abra",
+            "minLevel": 9,
+            "maxLevel": 9,
+            "chance": 10
+          },
+          {
+            "species": 335,
+            "nationalDex": 296,
+            "name": "makuhita",
+            "minLevel": 10,
+            "maxLevel": 11,
+            "chance": 10
+          },
+          {
+            "species": 355,
+            "nationalDex": 303,
+            "name": "mawile",
+            "minLevel": 9,
+            "maxLevel": 11,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:9": {
+    "name": "MAP_GRANITE_CAVE_B2F",
+    "label": "Granite Cave B2F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 382,
+            "nationalDex": 304,
+            "name": "aron",
+            "minLevel": 10,
+            "maxLevel": 12,
+            "chance": 40
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 10,
+            "maxLevel": 11,
+            "chance": 30
+          },
+          {
+            "species": 355,
+            "nationalDex": 303,
+            "name": "mawile",
+            "minLevel": 10,
+            "maxLevel": 12,
+            "chance": 20
+          },
+          {
+            "species": 63,
+            "nationalDex": 63,
+            "name": "abra",
+            "minLevel": 10,
+            "maxLevel": 10,
+            "chance": 10
+          }
+        ]
+      },
+      {
+        "method": "rock-smash",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 74,
+            "nationalDex": 74,
+            "name": "geodude",
+            "minLevel": 5,
+            "maxLevel": 20,
+            "chance": 70
+          },
+          {
+            "species": 320,
+            "nationalDex": 299,
+            "name": "nosepass",
+            "minLevel": 10,
+            "maxLevel": 20,
+            "chance": 30
+          }
+        ]
+      }
+    ]
+  },
+  "24:10": {
+    "name": "MAP_GRANITE_CAVE_STEVENS_ROOM",
+    "label": "Granite Cave Stevens Room",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 335,
+            "nationalDex": 296,
+            "name": "makuhita",
+            "minLevel": 6,
+            "maxLevel": 10,
+            "chance": 50
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 7,
+            "maxLevel": 8,
+            "chance": 30
+          },
+          {
+            "species": 63,
+            "nationalDex": 63,
+            "name": "abra",
+            "minLevel": 8,
+            "maxLevel": 8,
+            "chance": 10
+          },
+          {
+            "species": 382,
+            "nationalDex": 304,
+            "name": "aron",
+            "minLevel": 7,
+            "maxLevel": 8,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:11": {
+    "name": "MAP_PETALBURG_WOODS",
+    "label": "Petalburg Woods",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 288,
+            "nationalDex": 263,
+            "name": "zigzagoon",
+            "minLevel": 5,
+            "maxLevel": 6,
+            "chance": 30
+          },
+          {
+            "species": 290,
+            "nationalDex": 265,
+            "name": "wurmple",
+            "minLevel": 5,
+            "maxLevel": 6,
+            "chance": 25
+          },
+          {
+            "species": 306,
+            "nationalDex": 285,
+            "name": "shroomish",
+            "minLevel": 5,
+            "maxLevel": 6,
+            "chance": 15
+          },
+          {
+            "species": 291,
+            "nationalDex": 266,
+            "name": "silcoon",
+            "minLevel": 5,
+            "maxLevel": 5,
+            "chance": 10
+          },
+          {
+            "species": 293,
+            "nationalDex": 268,
+            "name": "cascoon",
+            "minLevel": 5,
+            "maxLevel": 5,
+            "chance": 10
+          },
+          {
+            "species": 304,
+            "nationalDex": 276,
+            "name": "taillow",
+            "minLevel": 5,
+            "maxLevel": 6,
+            "chance": 5
+          },
+          {
+            "species": 364,
+            "nationalDex": 287,
+            "name": "slakoth",
+            "minLevel": 5,
+            "maxLevel": 6,
+            "chance": 5
+          }
+        ]
+      }
+    ]
+  },
+  "24:13": {
+    "name": "MAP_JAGGED_PASS",
+    "label": "Jagged Pass",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 339,
+            "nationalDex": 322,
+            "name": "numel",
+            "minLevel": 18,
+            "maxLevel": 20,
+            "chance": 55
+          },
+          {
+            "species": 66,
+            "nationalDex": 66,
+            "name": "machop",
+            "minLevel": 18,
+            "maxLevel": 20,
+            "chance": 25
+          },
+          {
+            "species": 351,
+            "nationalDex": 325,
+            "name": "spoink",
+            "minLevel": 18,
+            "maxLevel": 20,
+            "chance": 20
+          }
+        ]
+      }
+    ]
+  },
+  "24:14": {
+    "name": "MAP_FIERY_PATH",
+    "label": "Fiery Path",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 339,
+            "nationalDex": 322,
+            "name": "numel",
+            "minLevel": 15,
+            "maxLevel": 16,
+            "chance": 30
+          },
+          {
+            "species": 109,
+            "nationalDex": 109,
+            "name": "koffing",
+            "minLevel": 15,
+            "maxLevel": 16,
+            "chance": 25
+          },
+          {
+            "species": 321,
+            "nationalDex": 324,
+            "name": "torkoal",
+            "minLevel": 14,
+            "maxLevel": 16,
+            "chance": 18
+          },
+          {
+            "species": 66,
+            "nationalDex": 66,
+            "name": "machop",
+            "minLevel": 15,
+            "maxLevel": 16,
+            "chance": 15
+          },
+          {
+            "species": 218,
+            "nationalDex": 218,
+            "name": "slugma",
+            "minLevel": 15,
+            "maxLevel": 15,
+            "chance": 10
+          },
+          {
+            "species": 88,
+            "nationalDex": 88,
+            "name": "grimer",
+            "minLevel": 14,
+            "maxLevel": 14,
+            "chance": 2
+          }
+        ]
+      }
+    ]
+  },
+  "24:15": {
+    "name": "MAP_MT_PYRE_1F",
+    "label": "Mt Pyre 1F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 361,
+            "nationalDex": 355,
+            "name": "duskull",
+            "minLevel": 22,
+            "maxLevel": 29,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "24:16": {
+    "name": "MAP_MT_PYRE_2F",
+    "label": "Mt Pyre 2F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 361,
+            "nationalDex": 355,
+            "name": "duskull",
+            "minLevel": 22,
+            "maxLevel": 29,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "24:17": {
+    "name": "MAP_MT_PYRE_3F",
+    "label": "Mt Pyre 3F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 361,
+            "nationalDex": 355,
+            "name": "duskull",
+            "minLevel": 22,
+            "maxLevel": 29,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "24:18": {
+    "name": "MAP_MT_PYRE_4F",
+    "label": "Mt Pyre 4F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 361,
+            "nationalDex": 355,
+            "name": "duskull",
+            "minLevel": 22,
+            "maxLevel": 29,
+            "chance": 90
+          },
+          {
+            "species": 377,
+            "nationalDex": 353,
+            "name": "shuppet",
+            "minLevel": 25,
+            "maxLevel": 29,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:19": {
+    "name": "MAP_MT_PYRE_5F",
+    "label": "Mt Pyre 5F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 361,
+            "nationalDex": 355,
+            "name": "duskull",
+            "minLevel": 22,
+            "maxLevel": 29,
+            "chance": 90
+          },
+          {
+            "species": 377,
+            "nationalDex": 353,
+            "name": "shuppet",
+            "minLevel": 25,
+            "maxLevel": 29,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:20": {
+    "name": "MAP_MT_PYRE_6F",
+    "label": "Mt Pyre 6F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 361,
+            "nationalDex": 355,
+            "name": "duskull",
+            "minLevel": 22,
+            "maxLevel": 29,
+            "chance": 90
+          },
+          {
+            "species": 377,
+            "nationalDex": 353,
+            "name": "shuppet",
+            "minLevel": 25,
+            "maxLevel": 29,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:21": {
+    "name": "MAP_MT_PYRE_EXTERIOR",
+    "label": "Mt Pyre Exterior",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 361,
+            "nationalDex": 355,
+            "name": "duskull",
+            "minLevel": 27,
+            "maxLevel": 29,
+            "chance": 40
+          },
+          {
+            "species": 356,
+            "nationalDex": 307,
+            "name": "meditite",
+            "minLevel": 27,
+            "maxLevel": 29,
+            "chance": 30
+          },
+          {
+            "species": 37,
+            "nationalDex": 37,
+            "name": "vulpix",
+            "minLevel": 25,
+            "maxLevel": 29,
+            "chance": 20
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 26,
+            "maxLevel": 28,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:22": {
+    "name": "MAP_MT_PYRE_SUMMIT",
+    "label": "Mt Pyre Summit",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 361,
+            "nationalDex": 355,
+            "name": "duskull",
+            "minLevel": 24,
+            "maxLevel": 30,
+            "chance": 85
+          },
+          {
+            "species": 377,
+            "nationalDex": 353,
+            "name": "shuppet",
+            "minLevel": 26,
+            "maxLevel": 30,
+            "chance": 13
+          },
+          {
+            "species": 411,
+            "nationalDex": 358,
+            "name": "chimecho",
+            "minLevel": 28,
+            "maxLevel": 28,
+            "chance": 2
+          }
+        ]
+      }
+    ]
+  },
+  "24:27": {
+    "name": "MAP_SEAFLOOR_CAVERN_ENTRANCE",
+    "label": "Seafloor Cavern Entrance",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 35
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "24:28": {
+    "name": "MAP_SEAFLOOR_CAVERN_ROOM1",
+    "label": "Seafloor Cavern Room1",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 28,
+            "maxLevel": 35,
+            "chance": 90
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 36,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:29": {
+    "name": "MAP_SEAFLOOR_CAVERN_ROOM2",
+    "label": "Seafloor Cavern Room2",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 28,
+            "maxLevel": 35,
+            "chance": 90
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 36,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:30": {
+    "name": "MAP_SEAFLOOR_CAVERN_ROOM3",
+    "label": "Seafloor Cavern Room3",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 28,
+            "maxLevel": 35,
+            "chance": 90
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 36,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:31": {
+    "name": "MAP_SEAFLOOR_CAVERN_ROOM4",
+    "label": "Seafloor Cavern Room4",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 28,
+            "maxLevel": 35,
+            "chance": 90
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 36,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:32": {
+    "name": "MAP_SEAFLOOR_CAVERN_ROOM5",
+    "label": "Seafloor Cavern Room5",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 28,
+            "maxLevel": 35,
+            "chance": 90
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 36,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:33": {
+    "name": "MAP_SEAFLOOR_CAVERN_ROOM6",
+    "label": "Seafloor Cavern Room6",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 28,
+            "maxLevel": 35,
+            "chance": 90
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 36,
+            "chance": 10
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 35
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "24:34": {
+    "name": "MAP_SEAFLOOR_CAVERN_ROOM7",
+    "label": "Seafloor Cavern Room7",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 28,
+            "maxLevel": 35,
+            "chance": 90
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 36,
+            "chance": 10
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 35
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "24:35": {
+    "name": "MAP_SEAFLOOR_CAVERN_ROOM8",
+    "label": "Seafloor Cavern Room8",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 28,
+            "maxLevel": 35,
+            "chance": 90
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 36,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:37": {
+    "name": "MAP_CAVE_OF_ORIGIN_ENTRANCE",
+    "label": "Cave Of Origin Entrance",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 28,
+            "maxLevel": 35,
+            "chance": 90
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 36,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:38": {
+    "name": "MAP_CAVE_OF_ORIGIN_1F",
+    "label": "Cave Of Origin 1F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 30,
+            "maxLevel": 34,
+            "chance": 60
+          },
+          {
+            "species": 355,
+            "nationalDex": 303,
+            "name": "mawile",
+            "minLevel": 30,
+            "maxLevel": 34,
+            "chance": 30
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 36,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:39": {
+    "name": "MAP_CAVE_OF_ORIGIN_B1F",
+    "label": "Cave Of Origin B1F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 30,
+            "maxLevel": 34,
+            "chance": 60
+          },
+          {
+            "species": 355,
+            "nationalDex": 303,
+            "name": "mawile",
+            "minLevel": 30,
+            "maxLevel": 34,
+            "chance": 30
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 36,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:40": {
+    "name": "MAP_CAVE_OF_ORIGIN_B2F",
+    "label": "Cave Of Origin B2F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 30,
+            "maxLevel": 34,
+            "chance": 60
+          },
+          {
+            "species": 355,
+            "nationalDex": 303,
+            "name": "mawile",
+            "minLevel": 30,
+            "maxLevel": 34,
+            "chance": 30
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 36,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:41": {
+    "name": "MAP_CAVE_OF_ORIGIN_B3F",
+    "label": "Cave Of Origin B3F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 30,
+            "maxLevel": 34,
+            "chance": 60
+          },
+          {
+            "species": 355,
+            "nationalDex": 303,
+            "name": "mawile",
+            "minLevel": 30,
+            "maxLevel": 34,
+            "chance": 30
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 33,
+            "maxLevel": 36,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "24:43": {
+    "name": "MAP_VICTORY_ROAD_1F",
+    "label": "Victory Road 1F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 38,
+            "maxLevel": 40,
+            "chance": 25
+          },
+          {
+            "species": 336,
+            "nationalDex": 297,
+            "name": "hariyama",
+            "minLevel": 38,
+            "maxLevel": 40,
+            "chance": 25
+          },
+          {
+            "species": 383,
+            "nationalDex": 305,
+            "name": "lairon",
+            "minLevel": 40,
+            "maxLevel": 40,
+            "chance": 10
+          },
+          {
+            "species": 371,
+            "nationalDex": 294,
+            "name": "loudred",
+            "minLevel": 40,
+            "maxLevel": 40,
+            "chance": 10
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 36,
+            "maxLevel": 36,
+            "chance": 10
+          },
+          {
+            "species": 335,
+            "nationalDex": 296,
+            "name": "makuhita",
+            "minLevel": 36,
+            "maxLevel": 36,
+            "chance": 10
+          },
+          {
+            "species": 382,
+            "nationalDex": 304,
+            "name": "aron",
+            "minLevel": 36,
+            "maxLevel": 36,
+            "chance": 5
+          },
+          {
+            "species": 370,
+            "nationalDex": 293,
+            "name": "whismur",
+            "minLevel": 36,
+            "maxLevel": 36,
+            "chance": 5
+          }
+        ]
+      }
+    ]
+  },
+  "24:44": {
+    "name": "MAP_VICTORY_ROAD_B1F",
+    "label": "Victory Road B1F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 38,
+            "maxLevel": 42,
+            "chance": 35
+          },
+          {
+            "species": 336,
+            "nationalDex": 297,
+            "name": "hariyama",
+            "minLevel": 38,
+            "maxLevel": 42,
+            "chance": 35
+          },
+          {
+            "species": 383,
+            "nationalDex": 305,
+            "name": "lairon",
+            "minLevel": 40,
+            "maxLevel": 42,
+            "chance": 15
+          },
+          {
+            "species": 357,
+            "nationalDex": 308,
+            "name": "medicham",
+            "minLevel": 40,
+            "maxLevel": 40,
+            "chance": 10
+          },
+          {
+            "species": 356,
+            "nationalDex": 307,
+            "name": "meditite",
+            "minLevel": 38,
+            "maxLevel": 38,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "rock-smash",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 75,
+            "nationalDex": 75,
+            "name": "graveler",
+            "minLevel": 30,
+            "maxLevel": 40,
+            "chance": 70
+          },
+          {
+            "species": 74,
+            "nationalDex": 74,
+            "name": "geodude",
+            "minLevel": 30,
+            "maxLevel": 40,
+            "chance": 30
+          }
+        ]
+      }
+    ]
+  },
+  "24:45": {
+    "name": "MAP_VICTORY_ROAD_B2F",
+    "label": "Victory Road B2F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 40,
+            "maxLevel": 44,
+            "chance": 35
+          },
+          {
+            "species": 355,
+            "nationalDex": 303,
+            "name": "mawile",
+            "minLevel": 40,
+            "maxLevel": 44,
+            "chance": 35
+          },
+          {
+            "species": 383,
+            "nationalDex": 305,
+            "name": "lairon",
+            "minLevel": 40,
+            "maxLevel": 44,
+            "chance": 15
+          },
+          {
+            "species": 357,
+            "nationalDex": 308,
+            "name": "medicham",
+            "minLevel": 40,
+            "maxLevel": 44,
+            "chance": 15
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 25,
+            "maxLevel": 40,
+            "chance": 100
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 25,
+            "maxLevel": 35,
+            "chance": 80
+          },
+          {
+            "species": 324,
+            "nationalDex": 340,
+            "name": "whiscash",
+            "minLevel": 30,
+            "maxLevel": 45,
+            "chance": 20
+          }
+        ]
+      }
+    ]
+  },
+  "24:46": {
+    "name": "MAP_SHOAL_CAVE_LOW_TIDE_ENTRANCE_ROOM",
+    "label": "Shoal Cave Low Tide Entrance Room",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 341,
+            "nationalDex": 363,
+            "name": "spheal",
+            "minLevel": 26,
+            "maxLevel": 32,
+            "chance": 50
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 26,
+            "maxLevel": 32,
+            "chance": 45
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 32,
+            "maxLevel": 32,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 30
+          },
+          {
+            "species": 341,
+            "nationalDex": 363,
+            "name": "spheal",
+            "minLevel": 25,
+            "maxLevel": 35,
+            "chance": 10
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "24:47": {
+    "name": "MAP_SHOAL_CAVE_LOW_TIDE_INNER_ROOM",
+    "label": "Shoal Cave Low Tide Inner Room",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 341,
+            "nationalDex": 363,
+            "name": "spheal",
+            "minLevel": 26,
+            "maxLevel": 32,
+            "chance": 50
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 26,
+            "maxLevel": 32,
+            "chance": 45
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 32,
+            "maxLevel": 32,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 30
+          },
+          {
+            "species": 341,
+            "nationalDex": 363,
+            "name": "spheal",
+            "minLevel": 25,
+            "maxLevel": 35,
+            "chance": 10
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "24:48": {
+    "name": "MAP_SHOAL_CAVE_LOW_TIDE_STAIRS_ROOM",
+    "label": "Shoal Cave Low Tide Stairs Room",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 341,
+            "nationalDex": 363,
+            "name": "spheal",
+            "minLevel": 26,
+            "maxLevel": 32,
+            "chance": 50
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 26,
+            "maxLevel": 32,
+            "chance": 45
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 32,
+            "maxLevel": 32,
+            "chance": 5
+          }
+        ]
+      }
+    ]
+  },
+  "24:49": {
+    "name": "MAP_SHOAL_CAVE_LOW_TIDE_LOWER_ROOM",
+    "label": "Shoal Cave Low Tide Lower Room",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 341,
+            "nationalDex": 363,
+            "name": "spheal",
+            "minLevel": 26,
+            "maxLevel": 32,
+            "chance": 50
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 26,
+            "maxLevel": 32,
+            "chance": 45
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 32,
+            "maxLevel": 32,
+            "chance": 5
+          }
+        ]
+      }
+    ]
+  },
+  "24:83": {
+    "name": "MAP_SHOAL_CAVE_LOW_TIDE_ICE_ROOM",
+    "label": "Shoal Cave Low Tide Ice Room",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 341,
+            "nationalDex": 363,
+            "name": "spheal",
+            "minLevel": 26,
+            "maxLevel": 32,
+            "chance": 45
+          },
+          {
+            "species": 41,
+            "nationalDex": 41,
+            "name": "zubat",
+            "minLevel": 26,
+            "maxLevel": 30,
+            "chance": 40
+          },
+          {
+            "species": 346,
+            "nationalDex": 361,
+            "name": "snorunt",
+            "minLevel": 26,
+            "maxLevel": 30,
+            "chance": 10
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 30,
+            "maxLevel": 32,
+            "chance": 5
+          }
+        ]
+      }
+    ]
+  },
+  "24:52": {
+    "name": "MAP_NEW_MAUVILLE_ENTRANCE",
+    "label": "New Mauville Entrance",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 100,
+            "nationalDex": 100,
+            "name": "voltorb",
+            "minLevel": 22,
+            "maxLevel": 26,
+            "chance": 50
+          },
+          {
+            "species": 81,
+            "nationalDex": 81,
+            "name": "magnemite",
+            "minLevel": 22,
+            "maxLevel": 26,
+            "chance": 50
+          }
+        ]
+      }
+    ]
+  },
+  "24:53": {
+    "name": "MAP_NEW_MAUVILLE_INSIDE",
+    "label": "New Mauville Inside",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 100,
+            "nationalDex": 100,
+            "name": "voltorb",
+            "minLevel": 22,
+            "maxLevel": 26,
+            "chance": 49
+          },
+          {
+            "species": 81,
+            "nationalDex": 81,
+            "name": "magnemite",
+            "minLevel": 22,
+            "maxLevel": 26,
+            "chance": 49
+          },
+          {
+            "species": 101,
+            "nationalDex": 101,
+            "name": "electrode",
+            "minLevel": 26,
+            "maxLevel": 26,
+            "chance": 1
+          },
+          {
+            "species": 82,
+            "nationalDex": 82,
+            "name": "magneton",
+            "minLevel": 26,
+            "maxLevel": 26,
+            "chance": 1
+          }
+        ]
+      }
+    ]
+  },
+  "24:58": {
+    "name": "MAP_ABANDONED_SHIP_ROOMS_B1F",
+    "label": "Abandoned Ship Rooms B1F",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 99
+          },
+          {
+            "species": 73,
+            "nationalDex": 73,
+            "name": "tentacruel",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 40
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 25,
+            "maxLevel": 35,
+            "chance": 80
+          },
+          {
+            "species": 73,
+            "nationalDex": 73,
+            "name": "tentacruel",
+            "minLevel": 20,
+            "maxLevel": 35,
+            "chance": 20
+          }
+        ]
+      }
+    ]
+  },
+  "24:65": {
+    "name": "MAP_ABANDONED_SHIP_HIDDEN_FLOOR_CORRIDORS",
+    "label": "Abandoned Ship Hidden Floor Corridors",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 99
+          },
+          {
+            "species": 73,
+            "nationalDex": 73,
+            "name": "tentacruel",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 40
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 25,
+            "maxLevel": 35,
+            "chance": 80
+          },
+          {
+            "species": 73,
+            "nationalDex": 73,
+            "name": "tentacruel",
+            "minLevel": 20,
+            "maxLevel": 35,
+            "chance": 20
+          }
+        ]
+      }
+    ]
+  },
+  "24:79": {
+    "name": "MAP_SKY_PILLAR_1F",
+    "label": "Sky Pillar 1F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 355,
+            "nationalDex": 303,
+            "name": "mawile",
+            "minLevel": 48,
+            "maxLevel": 50,
+            "chance": 30
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 48,
+            "maxLevel": 50,
+            "chance": 30
+          },
+          {
+            "species": 319,
+            "nationalDex": 344,
+            "name": "claydol",
+            "minLevel": 47,
+            "maxLevel": 50,
+            "chance": 25
+          },
+          {
+            "species": 362,
+            "nationalDex": 356,
+            "name": "dusclops",
+            "minLevel": 48,
+            "maxLevel": 50,
+            "chance": 15
+          }
+        ]
+      }
+    ]
+  },
+  "24:81": {
+    "name": "MAP_SKY_PILLAR_3F",
+    "label": "Sky Pillar 3F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 355,
+            "nationalDex": 303,
+            "name": "mawile",
+            "minLevel": 51,
+            "maxLevel": 53,
+            "chance": 30
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 51,
+            "maxLevel": 53,
+            "chance": 30
+          },
+          {
+            "species": 319,
+            "nationalDex": 344,
+            "name": "claydol",
+            "minLevel": 50,
+            "maxLevel": 53,
+            "chance": 25
+          },
+          {
+            "species": 362,
+            "nationalDex": 356,
+            "name": "dusclops",
+            "minLevel": 51,
+            "maxLevel": 53,
+            "chance": 15
+          }
+        ]
+      }
+    ]
+  },
+  "24:84": {
+    "name": "MAP_SKY_PILLAR_5F",
+    "label": "Sky Pillar 5F",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 355,
+            "nationalDex": 303,
+            "name": "mawile",
+            "minLevel": 54,
+            "maxLevel": 56,
+            "chance": 30
+          },
+          {
+            "species": 42,
+            "nationalDex": 42,
+            "name": "golbat",
+            "minLevel": 54,
+            "maxLevel": 56,
+            "chance": 30
+          },
+          {
+            "species": 319,
+            "nationalDex": 344,
+            "name": "claydol",
+            "minLevel": 54,
+            "maxLevel": 56,
+            "chance": 19
+          },
+          {
+            "species": 362,
+            "nationalDex": 356,
+            "name": "dusclops",
+            "minLevel": 54,
+            "maxLevel": 56,
+            "chance": 15
+          },
+          {
+            "species": 359,
+            "nationalDex": 334,
+            "name": "altaria",
+            "minLevel": 54,
+            "maxLevel": 60,
+            "chance": 6
+          }
+        ]
+      }
+    ]
+  },
+  "0:16": {
+    "name": "MAP_ROUTE101",
+    "label": "Route101",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 290,
+            "nationalDex": 265,
+            "name": "wurmple",
+            "minLevel": 2,
+            "maxLevel": 3,
+            "chance": 45
+          },
+          {
+            "species": 288,
+            "nationalDex": 263,
+            "name": "zigzagoon",
+            "minLevel": 2,
+            "maxLevel": 3,
+            "chance": 45
+          },
+          {
+            "species": 286,
+            "nationalDex": 261,
+            "name": "poochyena",
+            "minLevel": 2,
+            "maxLevel": 3,
+            "chance": 10
+          }
+        ]
+      }
+    ]
+  },
+  "0:17": {
+    "name": "MAP_ROUTE102",
+    "label": "Route102",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 288,
+            "nationalDex": 263,
+            "name": "zigzagoon",
+            "minLevel": 3,
+            "maxLevel": 4,
+            "chance": 30
+          },
+          {
+            "species": 290,
+            "nationalDex": 265,
+            "name": "wurmple",
+            "minLevel": 3,
+            "maxLevel": 4,
+            "chance": 30
+          },
+          {
+            "species": 298,
+            "nationalDex": 273,
+            "name": "seedot",
+            "minLevel": 3,
+            "maxLevel": 4,
+            "chance": 20
+          },
+          {
+            "species": 286,
+            "nationalDex": 261,
+            "name": "poochyena",
+            "minLevel": 3,
+            "maxLevel": 4,
+            "chance": 15
+          },
+          {
+            "species": 392,
+            "nationalDex": 280,
+            "name": "ralts",
+            "minLevel": 4,
+            "maxLevel": 4,
+            "chance": 4
+          },
+          {
+            "species": 311,
+            "nationalDex": 283,
+            "name": "surskit",
+            "minLevel": 3,
+            "maxLevel": 3,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 183,
+            "nationalDex": 183,
+            "name": "marill",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 99
+          },
+          {
+            "species": 311,
+            "nationalDex": 283,
+            "name": "surskit",
+            "minLevel": 20,
+            "maxLevel": 30,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 326,
+            "nationalDex": 341,
+            "name": "corphish",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 326,
+            "nationalDex": 341,
+            "name": "corphish",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:18": {
+    "name": "MAP_ROUTE103",
+    "label": "Route103",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 288,
+            "nationalDex": 263,
+            "name": "zigzagoon",
+            "minLevel": 2,
+            "maxLevel": 4,
+            "chance": 60
+          },
+          {
+            "species": 286,
+            "nationalDex": 261,
+            "name": "poochyena",
+            "minLevel": 2,
+            "maxLevel": 4,
+            "chance": 30
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 2,
+            "maxLevel": 4,
+            "chance": 10
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 25,
+            "maxLevel": 45,
+            "chance": 60
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          }
+        ]
+      }
+    ]
+  },
+  "0:19": {
+    "name": "MAP_ROUTE104",
+    "label": "Route104",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 288,
+            "nationalDex": 263,
+            "name": "zigzagoon",
+            "minLevel": 4,
+            "maxLevel": 5,
+            "chance": 50
+          },
+          {
+            "species": 290,
+            "nationalDex": 265,
+            "name": "wurmple",
+            "minLevel": 4,
+            "maxLevel": 5,
+            "chance": 30
+          },
+          {
+            "species": 304,
+            "nationalDex": 276,
+            "name": "taillow",
+            "minLevel": 4,
+            "maxLevel": 5,
+            "chance": 10
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 3,
+            "maxLevel": 5,
+            "chance": 10
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 95
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 100
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 100
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:20": {
+    "name": "MAP_ROUTE105",
+    "label": "Route105",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:21": {
+    "name": "MAP_ROUTE106",
+    "label": "Route106",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:22": {
+    "name": "MAP_ROUTE107",
+    "label": "Route107",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:23": {
+    "name": "MAP_ROUTE108",
+    "label": "Route108",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:24": {
+    "name": "MAP_ROUTE109",
+    "label": "Route109",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:25": {
+    "name": "MAP_ROUTE110",
+    "label": "Route110",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 337,
+            "nationalDex": 309,
+            "name": "electrike",
+            "minLevel": 12,
+            "maxLevel": 13,
+            "chance": 30
+          },
+          {
+            "species": 288,
+            "nationalDex": 263,
+            "name": "zigzagoon",
+            "minLevel": 12,
+            "maxLevel": 12,
+            "chance": 20
+          },
+          {
+            "species": 367,
+            "nationalDex": 316,
+            "name": "gulpin",
+            "minLevel": 12,
+            "maxLevel": 13,
+            "chance": 15
+          },
+          {
+            "species": 354,
+            "nationalDex": 312,
+            "name": "minun",
+            "minLevel": 13,
+            "maxLevel": 13,
+            "chance": 15
+          },
+          {
+            "species": 43,
+            "nationalDex": 43,
+            "name": "oddish",
+            "minLevel": 13,
+            "maxLevel": 13,
+            "chance": 10
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 12,
+            "maxLevel": 12,
+            "chance": 8
+          },
+          {
+            "species": 353,
+            "nationalDex": 311,
+            "name": "plusle",
+            "minLevel": 12,
+            "maxLevel": 13,
+            "chance": 2
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:26": {
+    "name": "MAP_ROUTE111",
+    "label": "Route111",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 27,
+            "nationalDex": 27,
+            "name": "sandshrew",
+            "minLevel": 19,
+            "maxLevel": 21,
+            "chance": 35
+          },
+          {
+            "species": 332,
+            "nationalDex": 328,
+            "name": "trapinch",
+            "minLevel": 19,
+            "maxLevel": 21,
+            "chance": 35
+          },
+          {
+            "species": 344,
+            "nationalDex": 331,
+            "name": "cacnea",
+            "minLevel": 19,
+            "maxLevel": 21,
+            "chance": 20
+          },
+          {
+            "species": 318,
+            "nationalDex": 343,
+            "name": "baltoy",
+            "minLevel": 20,
+            "maxLevel": 22,
+            "chance": 10
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 183,
+            "nationalDex": 183,
+            "name": "marill",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 99
+          },
+          {
+            "species": 311,
+            "nationalDex": 283,
+            "name": "surskit",
+            "minLevel": 20,
+            "maxLevel": 30,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "rock-smash",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 74,
+            "nationalDex": 74,
+            "name": "geodude",
+            "minLevel": 5,
+            "maxLevel": 20,
+            "chance": 100
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:27": {
+    "name": "MAP_ROUTE112",
+    "label": "Route112",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 339,
+            "nationalDex": 322,
+            "name": "numel",
+            "minLevel": 14,
+            "maxLevel": 16,
+            "chance": 75
+          },
+          {
+            "species": 66,
+            "nationalDex": 66,
+            "name": "machop",
+            "minLevel": 14,
+            "maxLevel": 16,
+            "chance": 25
+          }
+        ]
+      }
+    ]
+  },
+  "0:28": {
+    "name": "MAP_ROUTE113",
+    "label": "Route113",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 308,
+            "nationalDex": 327,
+            "name": "spinda",
+            "minLevel": 14,
+            "maxLevel": 16,
+            "chance": 70
+          },
+          {
+            "species": 27,
+            "nationalDex": 27,
+            "name": "sandshrew",
+            "minLevel": 14,
+            "maxLevel": 16,
+            "chance": 25
+          },
+          {
+            "species": 227,
+            "nationalDex": 227,
+            "name": "skarmory",
+            "minLevel": 16,
+            "maxLevel": 16,
+            "chance": 5
+          }
+        ]
+      }
+    ]
+  },
+  "0:29": {
+    "name": "MAP_ROUTE114",
+    "label": "Route114",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 358,
+            "nationalDex": 333,
+            "name": "swablu",
+            "minLevel": 15,
+            "maxLevel": 17,
+            "chance": 40
+          },
+          {
+            "species": 298,
+            "nationalDex": 273,
+            "name": "seedot",
+            "minLevel": 15,
+            "maxLevel": 16,
+            "chance": 30
+          },
+          {
+            "species": 380,
+            "nationalDex": 335,
+            "name": "zangoose",
+            "minLevel": 15,
+            "maxLevel": 17,
+            "chance": 19
+          },
+          {
+            "species": 299,
+            "nationalDex": 274,
+            "name": "nuzleaf",
+            "minLevel": 16,
+            "maxLevel": 18,
+            "chance": 10
+          },
+          {
+            "species": 311,
+            "nationalDex": 283,
+            "name": "surskit",
+            "minLevel": 15,
+            "maxLevel": 15,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 183,
+            "nationalDex": 183,
+            "name": "marill",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 99
+          },
+          {
+            "species": 311,
+            "nationalDex": 283,
+            "name": "surskit",
+            "minLevel": 20,
+            "maxLevel": 30,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "rock-smash",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 74,
+            "nationalDex": 74,
+            "name": "geodude",
+            "minLevel": 5,
+            "maxLevel": 20,
+            "chance": 100
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:30": {
+    "name": "MAP_ROUTE115",
+    "label": "Route115",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 304,
+            "nationalDex": 276,
+            "name": "taillow",
+            "minLevel": 23,
+            "maxLevel": 25,
+            "chance": 40
+          },
+          {
+            "species": 358,
+            "nationalDex": 333,
+            "name": "swablu",
+            "minLevel": 23,
+            "maxLevel": 25,
+            "chance": 30
+          },
+          {
+            "species": 305,
+            "nationalDex": 277,
+            "name": "swellow",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 10
+          },
+          {
+            "species": 39,
+            "nationalDex": 39,
+            "name": "jigglypuff",
+            "minLevel": 24,
+            "maxLevel": 25,
+            "chance": 10
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 24,
+            "maxLevel": 26,
+            "chance": 10
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:31": {
+    "name": "MAP_ROUTE116",
+    "label": "Route116",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 370,
+            "nationalDex": 293,
+            "name": "whismur",
+            "minLevel": 6,
+            "maxLevel": 7,
+            "chance": 30
+          },
+          {
+            "species": 288,
+            "nationalDex": 263,
+            "name": "zigzagoon",
+            "minLevel": 6,
+            "maxLevel": 8,
+            "chance": 28
+          },
+          {
+            "species": 301,
+            "nationalDex": 290,
+            "name": "nincada",
+            "minLevel": 6,
+            "maxLevel": 7,
+            "chance": 20
+          },
+          {
+            "species": 304,
+            "nationalDex": 276,
+            "name": "taillow",
+            "minLevel": 6,
+            "maxLevel": 8,
+            "chance": 20
+          },
+          {
+            "species": 315,
+            "nationalDex": 300,
+            "name": "skitty",
+            "minLevel": 7,
+            "maxLevel": 8,
+            "chance": 2
+          }
+        ]
+      }
+    ]
+  },
+  "0:32": {
+    "name": "MAP_ROUTE117",
+    "label": "Route117",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 288,
+            "nationalDex": 263,
+            "name": "zigzagoon",
+            "minLevel": 13,
+            "maxLevel": 14,
+            "chance": 30
+          },
+          {
+            "species": 363,
+            "nationalDex": 315,
+            "name": "roselia",
+            "minLevel": 13,
+            "maxLevel": 14,
+            "chance": 30
+          },
+          {
+            "species": 387,
+            "nationalDex": 314,
+            "name": "illumise",
+            "minLevel": 13,
+            "maxLevel": 14,
+            "chance": 18
+          },
+          {
+            "species": 183,
+            "nationalDex": 183,
+            "name": "marill",
+            "minLevel": 13,
+            "maxLevel": 13,
+            "chance": 10
+          },
+          {
+            "species": 43,
+            "nationalDex": 43,
+            "name": "oddish",
+            "minLevel": 13,
+            "maxLevel": 13,
+            "chance": 10
+          },
+          {
+            "species": 386,
+            "nationalDex": 313,
+            "name": "volbeat",
+            "minLevel": 13,
+            "maxLevel": 13,
+            "chance": 1
+          },
+          {
+            "species": 311,
+            "nationalDex": 283,
+            "name": "surskit",
+            "minLevel": 13,
+            "maxLevel": 13,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 183,
+            "nationalDex": 183,
+            "name": "marill",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 99
+          },
+          {
+            "species": 311,
+            "nationalDex": 283,
+            "name": "surskit",
+            "minLevel": 20,
+            "maxLevel": 30,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 326,
+            "nationalDex": 341,
+            "name": "corphish",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 326,
+            "nationalDex": 341,
+            "name": "corphish",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:33": {
+    "name": "MAP_ROUTE118",
+    "label": "Route118",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 288,
+            "nationalDex": 263,
+            "name": "zigzagoon",
+            "minLevel": 24,
+            "maxLevel": 26,
+            "chance": 30
+          },
+          {
+            "species": 337,
+            "nationalDex": 309,
+            "name": "electrike",
+            "minLevel": 24,
+            "maxLevel": 26,
+            "chance": 30
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 19
+          },
+          {
+            "species": 289,
+            "nationalDex": 264,
+            "name": "linoone",
+            "minLevel": 26,
+            "maxLevel": 26,
+            "chance": 10
+          },
+          {
+            "species": 338,
+            "nationalDex": 310,
+            "name": "manectric",
+            "minLevel": 26,
+            "maxLevel": 26,
+            "chance": 10
+          },
+          {
+            "species": 317,
+            "nationalDex": 352,
+            "name": "kecleon",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 330,
+            "nationalDex": 318,
+            "name": "carvanha",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 330,
+            "nationalDex": 318,
+            "name": "carvanha",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 60
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          }
+        ]
+      }
+    ]
+  },
+  "0:34": {
+    "name": "MAP_ROUTE119",
+    "label": "Route119",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 15,
+        "encounters": [
+          {
+            "species": 288,
+            "nationalDex": 263,
+            "name": "zigzagoon",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 30
+          },
+          {
+            "species": 289,
+            "nationalDex": 264,
+            "name": "linoone",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 30
+          },
+          {
+            "species": 43,
+            "nationalDex": 43,
+            "name": "oddish",
+            "minLevel": 24,
+            "maxLevel": 27,
+            "chance": 30
+          },
+          {
+            "species": 369,
+            "nationalDex": 357,
+            "name": "tropius",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 9
+          },
+          {
+            "species": 317,
+            "nationalDex": 352,
+            "name": "kecleon",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 330,
+            "nationalDex": 318,
+            "name": "carvanha",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 330,
+            "nationalDex": 318,
+            "name": "carvanha",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:35": {
+    "name": "MAP_ROUTE120",
+    "label": "Route120",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 289,
+            "nationalDex": 264,
+            "name": "linoone",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 30
+          },
+          {
+            "species": 43,
+            "nationalDex": 43,
+            "name": "oddish",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 25
+          },
+          {
+            "species": 288,
+            "nationalDex": 263,
+            "name": "zigzagoon",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 20
+          },
+          {
+            "species": 183,
+            "nationalDex": 183,
+            "name": "marill",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 15
+          },
+          {
+            "species": 376,
+            "nationalDex": 359,
+            "name": "absol",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 8
+          },
+          {
+            "species": 317,
+            "nationalDex": 352,
+            "name": "kecleon",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 1
+          },
+          {
+            "species": 311,
+            "nationalDex": 283,
+            "name": "surskit",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 183,
+            "nationalDex": 183,
+            "name": "marill",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 99
+          },
+          {
+            "species": 311,
+            "nationalDex": 283,
+            "name": "surskit",
+            "minLevel": 20,
+            "maxLevel": 30,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 323,
+            "nationalDex": 339,
+            "name": "barboach",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:36": {
+    "name": "MAP_ROUTE121",
+    "label": "Route121",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 361,
+            "nationalDex": 355,
+            "name": "duskull",
+            "minLevel": 26,
+            "maxLevel": 28,
+            "chance": 30
+          },
+          {
+            "species": 288,
+            "nationalDex": 263,
+            "name": "zigzagoon",
+            "minLevel": 26,
+            "maxLevel": 26,
+            "chance": 20
+          },
+          {
+            "species": 289,
+            "nationalDex": 264,
+            "name": "linoone",
+            "minLevel": 26,
+            "maxLevel": 28,
+            "chance": 20
+          },
+          {
+            "species": 43,
+            "nationalDex": 43,
+            "name": "oddish",
+            "minLevel": 26,
+            "maxLevel": 28,
+            "chance": 15
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 26,
+            "maxLevel": 28,
+            "chance": 9
+          },
+          {
+            "species": 44,
+            "nationalDex": 44,
+            "name": "gloom",
+            "minLevel": 28,
+            "maxLevel": 28,
+            "chance": 5
+          },
+          {
+            "species": 317,
+            "nationalDex": 352,
+            "name": "kecleon",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:37": {
+    "name": "MAP_ROUTE122",
+    "label": "Route122",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 25,
+            "maxLevel": 45,
+            "chance": 60
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          }
+        ]
+      }
+    ]
+  },
+  "0:38": {
+    "name": "MAP_ROUTE123",
+    "label": "Route123",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 361,
+            "nationalDex": 355,
+            "name": "duskull",
+            "minLevel": 26,
+            "maxLevel": 28,
+            "chance": 30
+          },
+          {
+            "species": 288,
+            "nationalDex": 263,
+            "name": "zigzagoon",
+            "minLevel": 26,
+            "maxLevel": 26,
+            "chance": 20
+          },
+          {
+            "species": 289,
+            "nationalDex": 264,
+            "name": "linoone",
+            "minLevel": 26,
+            "maxLevel": 28,
+            "chance": 20
+          },
+          {
+            "species": 43,
+            "nationalDex": 43,
+            "name": "oddish",
+            "minLevel": 26,
+            "maxLevel": 28,
+            "chance": 15
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 26,
+            "maxLevel": 28,
+            "chance": 9
+          },
+          {
+            "species": 44,
+            "nationalDex": 44,
+            "name": "gloom",
+            "minLevel": 28,
+            "maxLevel": 28,
+            "chance": 5
+          },
+          {
+            "species": 317,
+            "nationalDex": 352,
+            "name": "kecleon",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:39": {
+    "name": "MAP_ROUTE124",
+    "label": "Route124",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 25,
+            "maxLevel": 45,
+            "chance": 60
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          }
+        ]
+      }
+    ]
+  },
+  "0:40": {
+    "name": "MAP_ROUTE125",
+    "label": "Route125",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 25,
+            "maxLevel": 45,
+            "chance": 60
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          }
+        ]
+      }
+    ]
+  },
+  "0:41": {
+    "name": "MAP_ROUTE126",
+    "label": "Route126",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 25,
+            "maxLevel": 45,
+            "chance": 60
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          }
+        ]
+      }
+    ]
+  },
+  "0:42": {
+    "name": "MAP_ROUTE127",
+    "label": "Route127",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 25,
+            "maxLevel": 45,
+            "chance": 60
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          }
+        ]
+      }
+    ]
+  },
+  "0:43": {
+    "name": "MAP_ROUTE128",
+    "label": "Route128",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 325,
+            "nationalDex": 370,
+            "name": "luvdisc",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 30,
+            "maxLevel": 45,
+            "chance": 45
+          },
+          {
+            "species": 325,
+            "nationalDex": 370,
+            "name": "luvdisc",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          },
+          {
+            "species": 222,
+            "nationalDex": 222,
+            "name": "corsola",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 15
+          }
+        ]
+      }
+    ]
+  },
+  "0:44": {
+    "name": "MAP_ROUTE129",
+    "label": "Route129",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 4
+          },
+          {
+            "species": 314,
+            "nationalDex": 321,
+            "name": "wailord",
+            "minLevel": 35,
+            "maxLevel": 40,
+            "chance": 1
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 25,
+            "maxLevel": 45,
+            "chance": 60
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          }
+        ]
+      }
+    ]
+  },
+  "0:45": {
+    "name": "MAP_ROUTE130",
+    "label": "Route130",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 20,
+        "encounters": [
+          {
+            "species": 360,
+            "nationalDex": 360,
+            "name": "wynaut",
+            "minLevel": 5,
+            "maxLevel": 50,
+            "chance": 100
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 25,
+            "maxLevel": 45,
+            "chance": 60
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          }
+        ]
+      }
+    ]
+  },
+  "0:46": {
+    "name": "MAP_ROUTE131",
+    "label": "Route131",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 25,
+            "maxLevel": 45,
+            "chance": 60
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          }
+        ]
+      }
+    ]
+  },
+  "0:47": {
+    "name": "MAP_ROUTE132",
+    "label": "Route132",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 30,
+            "maxLevel": 45,
+            "chance": 45
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          },
+          {
+            "species": 116,
+            "nationalDex": 116,
+            "name": "horsea",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 15
+          }
+        ]
+      }
+    ]
+  },
+  "0:48": {
+    "name": "MAP_ROUTE133",
+    "label": "Route133",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 30,
+            "maxLevel": 45,
+            "chance": 45
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          },
+          {
+            "species": 116,
+            "nationalDex": 116,
+            "name": "horsea",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 15
+          }
+        ]
+      }
+    ]
+  },
+  "0:49": {
+    "name": "MAP_ROUTE134",
+    "label": "Route134",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 30,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 30,
+            "maxLevel": 45,
+            "chance": 45
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          },
+          {
+            "species": 116,
+            "nationalDex": 116,
+            "name": "horsea",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 15
+          }
+        ]
+      }
+    ]
+  },
+  "26:0": {
+    "name": "MAP_SAFARI_ZONE_NORTHWEST",
+    "label": "Safari Zone Northwest",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 25,
+        "encounters": [
+          {
+            "species": 111,
+            "nationalDex": 111,
+            "name": "rhyhorn",
+            "minLevel": 27,
+            "maxLevel": 29,
+            "chance": 30
+          },
+          {
+            "species": 43,
+            "nationalDex": 43,
+            "name": "oddish",
+            "minLevel": 27,
+            "maxLevel": 29,
+            "chance": 30
+          },
+          {
+            "species": 84,
+            "nationalDex": 84,
+            "name": "doduo",
+            "minLevel": 27,
+            "maxLevel": 29,
+            "chance": 15
+          },
+          {
+            "species": 44,
+            "nationalDex": 44,
+            "name": "gloom",
+            "minLevel": 29,
+            "maxLevel": 31,
+            "chance": 15
+          },
+          {
+            "species": 85,
+            "nationalDex": 85,
+            "name": "dodrio",
+            "minLevel": 29,
+            "maxLevel": 31,
+            "chance": 5
+          },
+          {
+            "species": 127,
+            "nationalDex": 127,
+            "name": "pinsir",
+            "minLevel": 27,
+            "maxLevel": 29,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 9,
+        "encounters": [
+          {
+            "species": 54,
+            "nationalDex": 54,
+            "name": "psyduck",
+            "minLevel": 20,
+            "maxLevel": 35,
+            "chance": 95
+          },
+          {
+            "species": 55,
+            "nationalDex": 55,
+            "name": "golduck",
+            "minLevel": 25,
+            "maxLevel": 40,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 35,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 35,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 40
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 35,
+        "encounters": [
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 25,
+            "maxLevel": 35,
+            "chance": 80
+          },
+          {
+            "species": 119,
+            "nationalDex": 119,
+            "name": "seaking",
+            "minLevel": 25,
+            "maxLevel": 40,
+            "chance": 20
+          }
+        ]
+      }
+    ]
+  },
+  "26:1": {
+    "name": "MAP_SAFARI_ZONE_NORTHEAST",
+    "label": "Safari Zone Northeast",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 25,
+        "encounters": [
+          {
+            "species": 231,
+            "nationalDex": 231,
+            "name": "phanpy",
+            "minLevel": 27,
+            "maxLevel": 29,
+            "chance": 30
+          },
+          {
+            "species": 43,
+            "nationalDex": 43,
+            "name": "oddish",
+            "minLevel": 27,
+            "maxLevel": 29,
+            "chance": 30
+          },
+          {
+            "species": 177,
+            "nationalDex": 177,
+            "name": "natu",
+            "minLevel": 27,
+            "maxLevel": 29,
+            "chance": 15
+          },
+          {
+            "species": 44,
+            "nationalDex": 44,
+            "name": "gloom",
+            "minLevel": 29,
+            "maxLevel": 31,
+            "chance": 15
+          },
+          {
+            "species": 178,
+            "nationalDex": 178,
+            "name": "xatu",
+            "minLevel": 29,
+            "maxLevel": 31,
+            "chance": 5
+          },
+          {
+            "species": 214,
+            "nationalDex": 214,
+            "name": "heracross",
+            "minLevel": 27,
+            "maxLevel": 29,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "rock-smash",
+        "rate": 25,
+        "encounters": [
+          {
+            "species": 74,
+            "nationalDex": 74,
+            "name": "geodude",
+            "minLevel": 5,
+            "maxLevel": 30,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "26:2": {
+    "name": "MAP_SAFARI_ZONE_SOUTHWEST",
+    "label": "Safari Zone Southwest",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 25,
+        "encounters": [
+          {
+            "species": 43,
+            "nationalDex": 43,
+            "name": "oddish",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 40
+          },
+          {
+            "species": 203,
+            "nationalDex": 203,
+            "name": "girafarig",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 20
+          },
+          {
+            "species": 177,
+            "nationalDex": 177,
+            "name": "natu",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 10
+          },
+          {
+            "species": 84,
+            "nationalDex": 84,
+            "name": "doduo",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 10
+          },
+          {
+            "species": 202,
+            "nationalDex": 202,
+            "name": "wobbuffet",
+            "minLevel": 27,
+            "maxLevel": 29,
+            "chance": 10
+          },
+          {
+            "species": 44,
+            "nationalDex": 44,
+            "name": "gloom",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 5
+          },
+          {
+            "species": 25,
+            "nationalDex": 25,
+            "name": "pikachu",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "surf",
+        "rate": 9,
+        "encounters": [
+          {
+            "species": 54,
+            "nationalDex": 54,
+            "name": "psyduck",
+            "minLevel": 20,
+            "maxLevel": 35,
+            "chance": 100
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 35,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 35,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 40
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 35,
+        "encounters": [
+          {
+            "species": 118,
+            "nationalDex": 118,
+            "name": "goldeen",
+            "minLevel": 25,
+            "maxLevel": 35,
+            "chance": 80
+          },
+          {
+            "species": 119,
+            "nationalDex": 119,
+            "name": "seaking",
+            "minLevel": 25,
+            "maxLevel": 40,
+            "chance": 20
+          }
+        ]
+      }
+    ]
+  },
+  "26:3": {
+    "name": "MAP_SAFARI_ZONE_SOUTHEAST",
+    "label": "Safari Zone Southeast",
+    "methods": [
+      {
+        "method": "walk",
+        "rate": 25,
+        "encounters": [
+          {
+            "species": 43,
+            "nationalDex": 43,
+            "name": "oddish",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 40
+          },
+          {
+            "species": 203,
+            "nationalDex": 203,
+            "name": "girafarig",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 20
+          },
+          {
+            "species": 177,
+            "nationalDex": 177,
+            "name": "natu",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 10
+          },
+          {
+            "species": 84,
+            "nationalDex": 84,
+            "name": "doduo",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 10
+          },
+          {
+            "species": 202,
+            "nationalDex": 202,
+            "name": "wobbuffet",
+            "minLevel": 27,
+            "maxLevel": 29,
+            "chance": 10
+          },
+          {
+            "species": 44,
+            "nationalDex": 44,
+            "name": "gloom",
+            "minLevel": 25,
+            "maxLevel": 25,
+            "chance": 5
+          },
+          {
+            "species": 25,
+            "nationalDex": 25,
+            "name": "pikachu",
+            "minLevel": 25,
+            "maxLevel": 27,
+            "chance": 5
+          }
+        ]
+      }
+    ]
+  },
+  "0:11": {
+    "name": "MAP_DEWFORD_TOWN",
+    "label": "Dewford Town",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 20,
+            "maxLevel": 45,
+            "chance": 100
+          }
+        ]
+      }
+    ]
+  },
+  "0:15": {
+    "name": "MAP_PACIFIDLOG_TOWN",
+    "label": "Pacifidlog Town",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 35,
+            "chance": 60
+          },
+          {
+            "species": 309,
+            "nationalDex": 278,
+            "name": "wingull",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 35
+          },
+          {
+            "species": 310,
+            "nationalDex": 279,
+            "name": "pelipper",
+            "minLevel": 25,
+            "maxLevel": 30,
+            "chance": 5
+          }
+        ]
+      },
+      {
+        "method": "old-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 70
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 5,
+            "maxLevel": 10,
+            "chance": 30
+          }
+        ]
+      },
+      {
+        "method": "good-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 129,
+            "nationalDex": 129,
+            "name": "magikarp",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 60
+          },
+          {
+            "species": 72,
+            "nationalDex": 72,
+            "name": "tentacool",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          },
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 10,
+            "maxLevel": 30,
+            "chance": 20
+          }
+        ]
+      },
+      {
+        "method": "super-rod",
+        "rate": 10,
+        "encounters": [
+          {
+            "species": 313,
+            "nationalDex": 320,
+            "name": "wailmer",
+            "minLevel": 25,
+            "maxLevel": 45,
+            "chance": 60
+          },
+          {
+            "species": 331,
+            "nationalDex": 319,
+            "name": "sharpedo",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 40
+          }
+        ]
+      }
+    ]
+  },
+  "0:50": {
+    "name": "MAP_UNDERWATER1",
+    "label": "Underwater1",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 373,
+            "nationalDex": 366,
+            "name": "clamperl",
+            "minLevel": 20,
+            "maxLevel": 35,
+            "chance": 65
+          },
+          {
+            "species": 170,
+            "nationalDex": 170,
+            "name": "chinchou",
+            "minLevel": 20,
+            "maxLevel": 30,
+            "chance": 30
+          },
+          {
+            "species": 381,
+            "nationalDex": 369,
+            "name": "relicanth",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 5
+          }
+        ]
+      }
+    ]
+  },
+  "0:51": {
+    "name": "MAP_UNDERWATER2",
+    "label": "Underwater2",
+    "methods": [
+      {
+        "method": "surf",
+        "rate": 4,
+        "encounters": [
+          {
+            "species": 373,
+            "nationalDex": 366,
+            "name": "clamperl",
+            "minLevel": 20,
+            "maxLevel": 35,
+            "chance": 65
+          },
+          {
+            "species": 170,
+            "nationalDex": 170,
+            "name": "chinchou",
+            "minLevel": 20,
+            "maxLevel": 30,
+            "chance": 30
+          },
+          {
+            "species": 381,
+            "nationalDex": 369,
+            "name": "relicanth",
+            "minLevel": 30,
+            "maxLevel": 35,
+            "chance": 5
+          }
+        ]
+      }
+    ]
+  }
+}

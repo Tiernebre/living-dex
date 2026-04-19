@@ -31,6 +31,7 @@ M.REGION = {
   TRAINER = 0x07,
   DEX = 0x08,
   BATTLE = 0x09, -- 4 bytes, u32 LE = gBattleTypeFlags (nonzero = in battle)
+  LOCATION = 0x0A, -- 2 bytes: mapGroup (s8), mapNum (s8)
 }
 
 local function u16_be(n)

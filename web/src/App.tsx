@@ -1,7 +1,21 @@
+import { useState } from "react";
 import { useLivingDex } from "./store";
 import speciesData from "./species.json";
 import movesData from "./moves.json";
+import encountersData from "./encounters.json";
 import type { DecodedPokemon } from "../../hub/protocol.ts";
+
+type EncounterPokemon = {
+  species: number;
+  nationalDex: number;
+  name: string;
+  minLevel: number;
+  maxLevel: number;
+  chance: number;
+};
+type MethodTable = { method: string; rate: number; encounters: EncounterPokemon[] };
+type LocationEntry = { name: string; label: string; methods: MethodTable[] };
+const encounters = encountersData as Record<string, LocationEntry>;
 
 type Species = {
   nationalDex: number;
@@ -403,8 +417,284 @@ function PokemonCard({ mon, movesRight = false }: { mon: DecodedPokemon; movesRi
   );
 }
 
+function methodLabel(method: string): string {
+  return method
+    .split("-")
+    .map((p) => p.charAt(0).toUpperCase() + p.slice(1))
+    .join(" ");
+}
+
+const METHOD_STYLE: Record<string, { bg: string; fg: string; icon: string }> = {
+  walk: { bg: "#dcfce7", fg: "#14532d", icon: "🌿" },
+  surf: { bg: "#dbeafe", fg: "#1e3a8a", icon: "🌊" },
+  "rock-smash": { bg: "#fef3c7", fg: "#78350f", icon: "⛏" },
+  "old-rod": { bg: "#f3e8ff", fg: "#581c87", icon: "🎣" },
+  "good-rod": { bg: "#ede9fe", fg: "#4c1d95", icon: "🎣" },
+  "super-rod": { bg: "#e0e7ff", fg: "#3730a3", icon: "🎣" },
+};
+
+function MethodChip({ method }: { method: string }) {
+  const s = METHOD_STYLE[method] ?? { bg: "#f1f5f9", fg: "#475569", icon: "" };
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 4,
+        background: s.bg,
+        color: s.fg,
+        padding: "2px 8px",
+        borderRadius: 999,
+        fontSize: 11,
+        fontWeight: 600,
+        whiteSpace: "nowrap",
+      }}
+    >
+      {s.icon && <span aria-hidden>{s.icon}</span>}
+      {methodLabel(method)}
+    </span>
+  );
+}
+
+function ChanceBar({ chance }: { chance: number }) {
+  const pct = Math.min(100, Math.max(0, chance));
+  const hue = 120 - (100 - pct) * 0.6; // red (rare) → green (common)
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: 8, minWidth: 100 }}>
+      <div
+        style={{
+          flex: 1,
+          height: 6,
+          borderRadius: 999,
+          background: "#f1f5f9",
+          overflow: "hidden",
+          minWidth: 48,
+        }}
+      >
+        <div
+          style={{
+            width: `${pct}%`,
+            height: "100%",
+            background: `hsl(${hue}, 65%, 45%)`,
+            borderRadius: 999,
+          }}
+        />
+      </div>
+      <span style={{ fontVariantNumeric: "tabular-nums", fontWeight: 700, minWidth: 28, textAlign: "right" }}>
+        {chance}%
+      </span>
+    </div>
+  );
+}
+
+type Row = {
+  method: string;
+  methodRate: number;
+  enc: EncounterPokemon;
+};
+
+function Encounters({ location }: { location: { mapGroup: number; mapNum: number } | null }) {
+  if (!location) {
+    return <p style={{ opacity: 0.6, fontStyle: "italic" }}>No location yet.</p>;
+  }
+  const entry = encounters[`${location.mapGroup}:${location.mapNum}`];
+  if (!entry) {
+    return (
+      <p style={{ opacity: 0.6, fontStyle: "italic" }}>
+        No wild encounters for map {location.mapGroup}:{location.mapNum}.
+      </p>
+    );
+  }
+
+  const rows: Row[] = [];
+  for (const m of entry.methods) {
+    for (const enc of m.encounters) {
+      rows.push({ method: m.method, methodRate: m.rate, enc });
+    }
+  }
+
+  const methodOrder = ["walk", "surf", "rock-smash", "old-rod", "good-rod", "super-rod"];
+  const methodIdx = (m: string) => {
+    const i = methodOrder.indexOf(m);
+    return i < 0 ? methodOrder.length : i;
+  };
+
+  const th: React.CSSProperties = {
+    textAlign: "left",
+    fontWeight: 500,
+    fontSize: 11,
+    textTransform: "uppercase",
+    letterSpacing: 0.6,
+    color: "#64748b",
+    padding: "10px 12px",
+    borderBottom: "1px solid #e2e8f0",
+    background: "#f8fafc",
+    position: "sticky",
+    top: 0,
+  };
+  const td: React.CSSProperties = {
+    padding: "8px 12px",
+    borderBottom: "1px solid #f1f5f9",
+    verticalAlign: "middle",
+    fontSize: 13,
+  };
+
+  let lastMethod: string | null = null;
+
+  return (
+    <div>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 10, flexWrap: "wrap" }}>
+        <strong style={{ fontSize: 15 }}>{entry.label.replace(/([A-Za-z])(\d)/g, "$1 $2")}</strong>
+        <span style={{ marginLeft: "auto", fontSize: 12, opacity: 0.6 }}>
+          {rows.length} encounter{rows.length === 1 ? "" : "s"} · {entry.methods.length} method
+          {entry.methods.length === 1 ? "" : "s"}
+        </span>
+      </div>
+      <div
+        style={{
+          border: "1px solid #e2e8f0",
+          borderRadius: 10,
+          overflow: "hidden",
+          background: "#fff",
+          boxShadow: "0 1px 2px rgba(15, 23, 42, 0.04)",
+        }}
+      >
+        <table style={{ width: "100%", borderCollapse: "collapse" }}>
+          <thead>
+            <tr>
+              <th style={{ ...th, width: 140 }}>Method</th>
+              <th style={{ ...th, width: 56 }}></th>
+              <th style={th}>Species</th>
+              <th style={{ ...th, width: 100 }}>Types</th>
+              <th style={{ ...th, width: 80, textAlign: "right" }}>Level</th>
+              <th style={{ ...th, width: 160, textAlign: "right" }}>Chance</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows
+              .sort(
+                (a, b) =>
+                  methodIdx(a.method) - methodIdx(b.method) || b.enc.chance - a.enc.chance,
+              )
+              .map((r, i) => {
+                const info = lookup(r.enc.species);
+                const firstOfMethod = r.method !== lastMethod;
+                lastMethod = r.method;
+                return (
+                  <tr key={i} style={{ borderTop: firstOfMethod && i > 0 ? "2px solid #e2e8f0" : undefined }}>
+                    <td style={td}>
+                      {firstOfMethod ? (
+                        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                          <MethodChip method={r.method} />
+                          <span style={{ fontSize: 10, opacity: 0.55 }}>rate {r.methodRate}</span>
+                        </div>
+                      ) : null}
+                    </td>
+                    <td style={{ ...td, padding: "4px 12px" }}>
+                      {info?.sprite && (
+                        <img
+                          src={info.sprite}
+                          alt=""
+                          width={40}
+                          height={40}
+                          style={{ imageRendering: "pixelated", display: "block" }}
+                        />
+                      )}
+                    </td>
+                    <td style={td}>
+                      {info ? (
+                        <a
+                          href={serebiiGen3DexUrl(info.nationalDex)}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{ color: "inherit", fontWeight: 600, textDecoration: "none" }}
+                        >
+                          {formatSpeciesName(info.name)}
+                        </a>
+                      ) : (
+                        <span style={{ fontWeight: 600 }}>{formatSpeciesName(r.enc.name)}</span>
+                      )}
+                    </td>
+                    <td style={td}>
+                      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", minHeight: 44, alignContent: "center" }}>
+                        {info?.types.map((t) => <TypeBadge key={t} type={t} />)}
+                      </div>
+                    </td>
+                    <td style={{ ...td, textAlign: "right", fontVariantNumeric: "tabular-nums", fontWeight: 600 }}>
+                      {r.enc.minLevel === r.enc.maxLevel
+                        ? r.enc.minLevel
+                        : `${r.enc.minLevel}–${r.enc.maxLevel}`}
+                    </td>
+                    <td style={{ ...td, textAlign: "right" }}>
+                      <ChanceBar chance={r.enc.chance} />
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+type Tab = { id: string; label: string; content: React.ReactNode };
+
+function Tabs({ tabs, initial, storageKey }: { tabs: Tab[]; initial: string; storageKey?: string }) {
+  const [active, setActive] = useState(() => {
+    if (!storageKey) return initial;
+    const saved = localStorage.getItem(storageKey);
+    if (saved && tabs.some((t) => t.id === saved)) return saved;
+    return initial;
+  });
+  const select = (id: string) => {
+    setActive(id);
+    if (storageKey) localStorage.setItem(storageKey, id);
+  };
+  return (
+    <div style={{ marginTop: 24 }}>
+      <div
+        role="tablist"
+        style={{
+          display: "flex",
+          gap: 4,
+          borderBottom: "1px solid #e2e8f0",
+          marginBottom: 16,
+        }}
+      >
+        {tabs.map((t) => {
+          const selected = t.id === active;
+          return (
+            <button
+              key={t.id}
+              role="tab"
+              aria-selected={selected}
+              onClick={() => select(t.id)}
+              style={{
+                background: "transparent",
+                border: "none",
+                borderBottom: selected ? "2px solid #2563eb" : "2px solid transparent",
+                padding: "8px 14px",
+                marginBottom: -1,
+                fontSize: 14,
+                fontWeight: selected ? 600 : 500,
+                color: selected ? "#1e3a8a" : "#64748b",
+                cursor: "pointer",
+                fontFamily: "inherit",
+              }}
+            >
+              {t.label}
+            </button>
+          );
+        })}
+      </div>
+      {tabs.find((t) => t.id === active)?.content}
+    </div>
+  );
+}
+
 export function App() {
-  const { connected, game, party, enemyParty, inBattle, source, lastUpdateAt } = useLivingDex();
+  const { connected, game, party, enemyParty, inBattle, location, source, lastUpdateAt } = useLivingDex();
   const activeMon = party.find((p) => p !== null) ?? null;
   const activeEnemy = enemyParty.find((p) => p !== null) ?? null;
   return (
@@ -424,26 +714,6 @@ export function App() {
           detail={lastUpdateAt ? new Date(lastUpdateAt).toLocaleTimeString() : undefined}
         />
       </header>
-      <h2>Current Matchup</h2>
-      {inBattle && activeEnemy ? (
-        <div className="matchup">
-          <div className="matchup-card">
-            <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: 0.5 }}>
-              You
-            </div>
-            {activeMon ? <PokemonCard mon={activeMon} /> : <div style={{ opacity: 0.5 }}>—</div>}
-          </div>
-          <div className="matchup-vs">vs</div>
-          <div className="matchup-card">
-            <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: 0.5 }}>
-              Opponent
-            </div>
-            <PokemonCard mon={activeEnemy!} />
-          </div>
-        </div>
-      ) : (
-        <p style={{ opacity: 0.6, fontStyle: "italic" }}>Not in a battle.</p>
-      )}
       <h2>Party</h2>
       <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
         {party.map((mon, i) => (
@@ -452,6 +722,41 @@ export function App() {
           </li>
         ))}
       </ol>
+      <Tabs
+        tabs={[
+          {
+            id: "matchup",
+            label: "Current Matchup",
+            content:
+              inBattle && activeEnemy ? (
+                <div className="matchup">
+                  <div className="matchup-card">
+                    <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: 0.5 }}>
+                      You
+                    </div>
+                    {activeMon ? <PokemonCard mon={activeMon} /> : <div style={{ opacity: 0.5 }}>—</div>}
+                  </div>
+                  <div className="matchup-vs">vs</div>
+                  <div className="matchup-card">
+                    <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: 0.5 }}>
+                      Opponent
+                    </div>
+                    <PokemonCard mon={activeEnemy!} />
+                  </div>
+                </div>
+              ) : (
+                <p style={{ opacity: 0.6, fontStyle: "italic" }}>Not in a battle.</p>
+              ),
+          },
+          {
+            id: "encounters",
+            label: "Wild Encounters",
+            content: <Encounters location={location} />,
+          },
+        ]}
+        initial={inBattle ? "matchup" : "encounters"}
+        storageKey="living-dex:active-tab"
+      />
     </main>
   );
 }

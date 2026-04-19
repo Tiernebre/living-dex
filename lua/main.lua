@@ -62,6 +62,9 @@ local function on_frame()
   -- enemy party (wild encounter / trainer battle)
   emit_region(envelope.REGION.ENEMY_PARTY, 0, a.enemy_party, s.pokemon_struct * s.party_slots)
 
+  -- current map location (mapGroup, mapNum)
+  emit_region(envelope.REGION.LOCATION, 0, a.location or 0, 2)
+
   -- daycare slot
   emit_region(envelope.REGION.DAYCARE, 0, a.daycare, 200) -- TODO: real size per adapter
 

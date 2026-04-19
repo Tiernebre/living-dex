@@ -11,6 +11,7 @@ const initial: HubState = {
   party: Array(6).fill(null),
   enemyParty: Array(6).fill(null),
   inBattle: false,
+  location: null,
   currentBox: null,
   source: null,
   lastUpdateAt: null,
@@ -33,6 +34,8 @@ export const useLivingDex = create<HubState & Actions>((set) => ({
           };
         case "game":
           return { ...s, game: msg.game };
+        case "location":
+          return { ...s, location: msg.location };
         case "party": {
           const party = [...s.party];
           party[msg.slot] = msg.pokemon;

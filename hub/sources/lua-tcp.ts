@@ -89,6 +89,12 @@ function handleFrame(type: number, region: number, index: number, payload: Uint8
     }
     return;
   }
+  if (region === REGION.LOCATION) {
+    const mapGroup = payload[0];
+    const mapNum = payload[1];
+    store.setLocation({ mapGroup, mapNum });
+    return;
+  }
   if (region === REGION.BATTLE) {
     // gMain.inBattle is bit 1 of a u8 packed with oamLoadDisabled at bit 0.
     store.setInBattle((payload[0] & 0x02) !== 0);
