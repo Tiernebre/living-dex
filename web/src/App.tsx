@@ -1,6 +1,7 @@
 import { useLivingDex } from "./store";
 import speciesData from "./species.json";
 import movesData from "./moves.json";
+import type { DecodedPokemon } from "../../hub/protocol.ts";
 
 type Species = {
   nationalDex: number;
@@ -287,8 +288,43 @@ function StatsTable({
   );
 }
 
+function PokemonCard({ mon }: { mon: DecodedPokemon }) {
+  const info = lookup(mon.species);
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 12,
+        padding: 8,
+        border: "1px solid #ddd",
+        borderRadius: 8,
+      }}
+    >
+      {info?.sprite && (
+        <img src={info.sprite} alt={info.name} width={64} height={64} style={{ imageRendering: "pixelated" }} />
+      )}
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ fontWeight: 600 }}>
+          {mon.nickname}
+          {info && <span style={{ fontWeight: 400, opacity: 0.7 }}> — {formatSpeciesName(info.name)}</span>}
+        </div>
+        <div style={{ fontSize: 13, opacity: 0.8, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+          <span>Lv {mon.level} · {mon.nature}</span>
+          {info && info.types.map((t) => <TypeBadge key={t} type={t} />)}
+        </div>
+        <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} />
+        <MovesList moves={mon.moves} />
+      </div>
+    </div>
+  );
+}
+
 export function App() {
-  const { connected, game, party, source, lastUpdateAt } = useLivingDex();
+  const { connected, game, party, enemyParty, source, lastUpdateAt } = useLivingDex();
+  const activeMon = party.find((p) => p !== null) ?? null;
+  const activeEnemy = enemyParty.find((p) => p !== null) ?? null;
+  const inBattle = activeEnemy !== null;
   return (
     <main style={{ fontFamily: "system-ui, sans-serif", padding: 24 }}>
       <h1>Living Dex</h1>
@@ -300,41 +336,33 @@ export function App() {
         <strong>Source:</strong> {source ?? "none"}
         {lastUpdateAt && ` — updated ${new Date(lastUpdateAt).toLocaleTimeString()}`}
       </p>
+      <h2>Current Matchup</h2>
+      {inBattle ? (
+        <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: 12, alignItems: "start" }}>
+          <div>
+            <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: 0.5 }}>
+              You
+            </div>
+            {activeMon ? <PokemonCard mon={activeMon} /> : <div style={{ opacity: 0.5 }}>—</div>}
+          </div>
+          <div style={{ fontSize: 24, fontWeight: 700, opacity: 0.4, alignSelf: "center" }}>vs</div>
+          <div>
+            <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: 0.5 }}>
+              Opponent
+            </div>
+            <PokemonCard mon={activeEnemy} />
+          </div>
+        </div>
+      ) : (
+        <p style={{ opacity: 0.6, fontStyle: "italic" }}>Not in a battle.</p>
+      )}
       <h2>Party</h2>
       <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
-        {party.map((mon, i) => {
-          if (!mon) return <li key={i} style={{ opacity: 0.4 }}>—</li>;
-          const info = lookup(mon.species);
-          return (
-            <li
-              key={i}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                padding: 8,
-                border: "1px solid #ddd",
-                borderRadius: 8,
-              }}
-            >
-              {info?.sprite && (
-                <img src={info.sprite} alt={info.name} width={64} height={64} style={{ imageRendering: "pixelated" }} />
-              )}
-              <div style={{ flex: 1 }}>
-                <div style={{ fontWeight: 600 }}>
-                  {mon.nickname}
-                  {info && <span style={{ fontWeight: 400, opacity: 0.7 }}> — {formatSpeciesName(info.name)}</span>}
-                </div>
-                <div style={{ fontSize: 13, opacity: 0.8, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-                  <span>Lv {mon.level} · {mon.nature}</span>
-                  {info && info.types.map((t) => <TypeBadge key={t} type={t} />)}
-                </div>
-                <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} />
-                <MovesList moves={mon.moves} />
-              </div>
-            </li>
-          );
-        })}
+        {party.map((mon, i) => (
+          <li key={i} style={mon ? undefined : { opacity: 0.4 }}>
+            {mon ? <PokemonCard mon={mon} /> : "—"}
+          </li>
+        ))}
       </ol>
     </main>
   );
