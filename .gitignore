@@ -1,2 +1,5 @@
 roms/*
 !roms/.gitkeep
+
+web/node_modules/
+web/dist/

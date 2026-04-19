@@ -1,5 +1,7 @@
 {
   "tasks": {
-    "verify-roms": "deno run --allow-read scripts/verify-rom.ts"
-  }
+    "verify-roms": "deno run --allow-read scripts/verify-rom.ts",
+    "dev": "deno run --allow-net=127.0.0.1:8889,127.0.0.1:8080 --allow-read=. --watch hub/main.ts"
+  },
+  "imports": {}
 }

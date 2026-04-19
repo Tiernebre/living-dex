@@ -28,3 +28,33 @@ Will be using mgba for the game boy games, and Dolphin for the gamecube ones.
 
 See [`docs/technical-foundation.md`](docs/technical-foundation.md) for the architecture, target ROM revisions, decomp references, prior art, and design decisions.
 
+## Repository Layout
+
+```
+lua/                 mGBA collector (one adapter per supported game)
+  core/              ROM detect, socket, envelope, memory helpers
+  adapters/          ruby / sapphire / emerald / firered / leafgreen
+  main.lua           entry — load from mGBA Tools → Scripting
+hub/                 Deno process: TCP from Lua, save-file watcher, WS to UI
+  decoder/           Gen 3 (and future Gen 4) decoders
+  sources/           lua-tcp, save-watcher
+  protocol.ts        shared types
+  state.ts           in-memory store + subscription
+web/                 React + Vite + Zustand UI
+scripts/             one-off tools (ROM SHA verifier)
+roms/                ROM dumps (gitignored)
+saves/               emulator saves (tracked in VCS)
+```
+
+## Running
+
+```
+# Terminal 1 — hub (TCP for mGBA, HTTP/WS for the browser)
+deno task dev
+
+# Terminal 2 — web UI
+cd web && npm install && npm run dev
+
+# Then in mGBA: Tools → Scripting → Load script → lua/main.lua
+```
+
