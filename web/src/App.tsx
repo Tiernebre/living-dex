@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLivingDex } from "./store";
 import speciesData from "./species.json";
 import movesData from "./moves.json";
@@ -125,7 +125,7 @@ function MovesList({ moves }: { moves: { id: number; pp: number }[] }) {
               alignItems: "center",
               gap: 8,
               padding: "4px 8px",
-              border: "1px solid #e5e7eb",
+              border: "1px solid var(--border)",
               borderRadius: 6,
               fontSize: 12,
               minWidth: 0,
@@ -179,11 +179,11 @@ function TypeBadge({ type }: { type: string }) {
 }
 
 function ivStyle(v: number): { color?: string; weight?: number } {
-  if (v === 31) return { color: "#6b5500", weight: 700 };
-  if (v >= 26) return { color: "#1b5e20", weight: 600 };
+  if (v === 31) return { color: "var(--iv-perfect)", weight: 700 };
+  if (v >= 26) return { color: "var(--iv-great)", weight: 600 };
   if (v >= 16) return {};
-  if (v >= 1) return { color: "#8f3d00" };
-  return { color: "#a30000", weight: 600 };
+  if (v >= 1) return { color: "var(--iv-low)" };
+  return { color: "var(--iv-worst)", weight: 600 };
 }
 
 function ivLabel(v: number): string {
@@ -231,7 +231,7 @@ function StatsTable({
 }) {
   const effect = natureEffect(nature);
   const colorFor = (k: StatKey) =>
-    effect?.plus === k ? "#1b5e20" : effect?.minus === k ? "#a30000" : undefined;
+    effect?.plus === k ? "var(--iv-great)" : effect?.minus === k ? "var(--iv-worst)" : undefined;
   const labelFor = (k: StatKey, label: string) =>
     effect?.plus === k ? `${label}+` : effect?.minus === k ? `${label}−` : label;
   return (
@@ -369,7 +369,7 @@ function PokemonCard({ mon, movesRight = false }: { mon: DecodedPokemon; movesRi
         alignItems: "flex-start",
         gap: 12,
         padding: 8,
-        border: "1px solid #ddd",
+        border: "1px solid var(--accent)",
         borderRadius: 8,
       }}
     >
@@ -466,7 +466,7 @@ function ChanceBar({ chance }: { chance: number }) {
           flex: 1,
           height: 6,
           borderRadius: 999,
-          background: "#f1f5f9",
+          background: "var(--bg-muted)",
           overflow: "hidden",
           minWidth: 48,
         }}
@@ -525,16 +525,16 @@ function Encounters({ location }: { location: { mapGroup: number; mapNum: number
     fontSize: 11,
     textTransform: "uppercase",
     letterSpacing: 0.6,
-    color: "#64748b",
+    color: "var(--accent-strong)",
     padding: "10px 12px",
-    borderBottom: "1px solid #e2e8f0",
-    background: "#f8fafc",
+    borderBottom: "1px solid var(--accent)",
+    background: "color-mix(in srgb, var(--accent) 18%, var(--bg-surface))",
     position: "sticky",
     top: 0,
   };
   const td: React.CSSProperties = {
     padding: "8px 12px",
-    borderBottom: "1px solid #f1f5f9",
+    borderBottom: "1px solid var(--border)",
     verticalAlign: "middle",
     fontSize: 13,
   };
@@ -552,11 +552,11 @@ function Encounters({ location }: { location: { mapGroup: number; mapNum: number
       </div>
       <div
         style={{
-          border: "1px solid #e2e8f0",
+          border: "1px solid var(--accent)",
           borderRadius: 10,
           overflow: "hidden",
-          background: "#fff",
-          boxShadow: "0 1px 2px rgba(15, 23, 42, 0.04)",
+          background: "color-mix(in srgb, var(--accent) 5%, var(--bg-elevated))",
+          boxShadow: "var(--shadow)",
         }}
       >
         <table style={{ width: "100%", borderCollapse: "collapse" }}>
@@ -581,7 +581,13 @@ function Encounters({ location }: { location: { mapGroup: number; mapNum: number
                 const firstOfMethod = r.method !== lastMethod;
                 lastMethod = r.method;
                 return (
-                  <tr key={i} style={{ borderTop: firstOfMethod && i > 0 ? "2px solid #e2e8f0" : undefined }}>
+                  <tr
+                    key={i}
+                    style={{
+                      borderTop: firstOfMethod && i > 0 ? "2px solid var(--accent)" : undefined,
+                      background: `color-mix(in srgb, var(--accent) ${i % 2 === 0 ? 6 : 12}%, var(--bg-elevated))`,
+                    }}
+                  >
                     <td style={td}>
                       {firstOfMethod ? (
                         <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -638,6 +644,47 @@ function Encounters({ location }: { location: { mapGroup: number; mapNum: number
   );
 }
 
+type Theme = "light" | "dark" | "system";
+
+function ThemeToggle() {
+  const [theme, setTheme] = useState<Theme>(() => {
+    return (localStorage.getItem("living-dex:theme") as Theme | null) ?? "system";
+  });
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === "system") root.removeAttribute("data-theme");
+    else root.setAttribute("data-theme", theme);
+    localStorage.setItem("living-dex:theme", theme);
+  }, [theme]);
+  const cycle = () => setTheme((t) => (t === "system" ? "light" : t === "light" ? "dark" : "system"));
+  const label = theme === "system" ? "Auto" : theme === "dark" ? "Dark" : "Light";
+  const icon = theme === "system" ? "🌓" : theme === "dark" ? "🌙" : "☀️";
+  return (
+    <button
+      type="button"
+      onClick={cycle}
+      title={`Theme: ${label} (click to cycle)`}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 6,
+        padding: "4px 10px",
+        borderRadius: 999,
+        background: "var(--bg-surface)",
+        color: "var(--text-muted)",
+        border: "1px solid var(--border)",
+        fontSize: 12,
+        fontWeight: 600,
+        cursor: "pointer",
+        fontFamily: "inherit",
+      }}
+    >
+      <span aria-hidden>{icon}</span>
+      {label}
+    </button>
+  );
+}
+
 type Tab = { id: string; label: string; content: React.ReactNode };
 
 function Tabs({ tabs, initial, storageKey }: { tabs: Tab[]; initial: string; storageKey?: string }) {
@@ -658,7 +705,7 @@ function Tabs({ tabs, initial, storageKey }: { tabs: Tab[]; initial: string; sto
         style={{
           display: "flex",
           gap: 4,
-          borderBottom: "1px solid #e2e8f0",
+          borderBottom: "1px solid var(--border)",
           marginBottom: 16,
         }}
       >
@@ -673,12 +720,12 @@ function Tabs({ tabs, initial, storageKey }: { tabs: Tab[]; initial: string; sto
               style={{
                 background: "transparent",
                 border: "none",
-                borderBottom: selected ? "2px solid #2563eb" : "2px solid transparent",
+                borderBottom: selected ? "2px solid var(--accent)" : "2px solid transparent",
                 padding: "8px 14px",
                 marginBottom: -1,
                 fontSize: 14,
                 fontWeight: selected ? 600 : 500,
-                color: selected ? "#1e3a8a" : "#64748b",
+                color: selected ? "var(--accent-strong)" : "var(--text-muted)",
                 cursor: "pointer",
                 fontFamily: "inherit",
               }}
@@ -693,8 +740,22 @@ function Tabs({ tabs, initial, storageKey }: { tabs: Tab[]; initial: string; sto
   );
 }
 
+const GAME_THEME_KEY: Record<string, string> = {
+  AXVE: "ruby",
+  AXPE: "sapphire",
+  BPEE: "emerald",
+  BPRE: "firered",
+  BPGE: "leafgreen",
+};
+
 export function App() {
   const { connected, game, party, enemyParty, inBattle, location, source, lastUpdateAt } = useLivingDex();
+  useEffect(() => {
+    const root = document.documentElement;
+    const key = game ? GAME_THEME_KEY[game.code] : undefined;
+    if (key) root.setAttribute("data-game", key);
+    else root.removeAttribute("data-game");
+  }, [game]);
   const activeMon = party.find((p) => p !== null) ?? null;
   const activeEnemy = enemyParty.find((p) => p !== null) ?? null;
   return (
@@ -713,6 +774,7 @@ export function App() {
           tone={source ? "info" : "muted"}
           detail={lastUpdateAt ? new Date(lastUpdateAt).toLocaleTimeString() : undefined}
         />
+        <ThemeToggle />
       </header>
       <h2>Party</h2>
       <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>

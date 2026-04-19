@@ -5,6 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Living Dex</title>
     <style>
+      :root {
+        color-scheme: light dark;
+
+        --bg: #ffffff;
+        --bg-surface: #f8fafc;
+        --bg-elevated: #ffffff;
+        --bg-muted: #f1f5f9;
+        --text: #0f172a;
+        --text-muted: #64748b;
+        --text-subtle: #475569;
+        --border: #e2e8f0;
+        --border-strong: #cbd5e1;
+        --accent: #2563eb;
+        --accent-strong: #1e3a8a;
+        --shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+
+        --iv-perfect: #a27a00;
+        --iv-great: #15803d;
+        --iv-low: #b45309;
+        --iv-worst: #b91c1c;
+      }
+      :root[data-theme="dark"] {
+        --bg: #0b1220;
+        --bg-surface: #111a2e;
+        --bg-elevated: #1b2541;
+        --bg-muted: #223154;
+        --text: #e2e8f0;
+        --text-muted: #94a3b8;
+        --text-subtle: #cbd5e1;
+        --border: #2a3656;
+        --border-strong: #3a4a78;
+        --accent: #60a5fa;
+        --accent-strong: #bfdbfe;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+        --iv-perfect: #fcd34d;
+        --iv-great: #86efac;
+        --iv-low: #fdba74;
+        --iv-worst: #fca5a5;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #0b1220;
+          --bg-surface: #111a2e;
+          --bg-elevated: #1b2541;
+          --bg-muted: #223154;
+          --text: #e2e8f0;
+          --text-muted: #94a3b8;
+          --text-subtle: #cbd5e1;
+          --border: #2a3656;
+          --border-strong: #3a4a78;
+          --accent: #60a5fa;
+          --accent-strong: #bfdbfe;
+          --shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+          --iv-perfect: #fcd34d;
+          --iv-great: #86efac;
+          --iv-low: #fdba74;
+          --iv-worst: #fca5a5;
+        }
+      }
+      /* Game-themed accents. Light-mode defaults; dark overrides further down. */
+      :root[data-game="ruby"]        { --accent: #dc2626; --accent-strong: #991b1b; }
+      :root[data-game="sapphire"]    { --accent: #2563eb; --accent-strong: #1e3a8a; }
+      :root[data-game="emerald"]     { --accent: #059669; --accent-strong: #064e3b; }
+      :root[data-game="firered"]     { --accent: #ea580c; --accent-strong: #7c2d12; }
+      :root[data-game="leafgreen"]   { --accent: #16a34a; --accent-strong: #14532d; }
+
+      :root[data-theme="dark"][data-game="ruby"]       { --accent: #fca5a5; --accent-strong: #fee2e2; }
+      :root[data-theme="dark"][data-game="sapphire"]   { --accent: #93c5fd; --accent-strong: #dbeafe; }
+      :root[data-theme="dark"][data-game="emerald"]    { --accent: #6ee7b7; --accent-strong: #d1fae5; }
+      :root[data-theme="dark"][data-game="firered"]    { --accent: #fdba74; --accent-strong: #ffedd5; }
+      :root[data-theme="dark"][data-game="leafgreen"]  { --accent: #86efac; --accent-strong: #dcfce7; }
+
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"])[data-game="ruby"]      { --accent: #fca5a5; --accent-strong: #fee2e2; }
+        :root:not([data-theme="light"])[data-game="sapphire"]  { --accent: #93c5fd; --accent-strong: #dbeafe; }
+        :root:not([data-theme="light"])[data-game="emerald"]   { --accent: #6ee7b7; --accent-strong: #d1fae5; }
+        :root:not([data-theme="light"])[data-game="firered"]   { --accent: #fdba74; --accent-strong: #ffedd5; }
+        :root:not([data-theme="light"])[data-game="leafgreen"] { --accent: #86efac; --accent-strong: #dcfce7; }
+      }
+
+      html, body { background: var(--bg); color: var(--text); }
+      body { margin: 0; }
+      a { color: inherit; }
+
       .matchup { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; }
       .matchup-card { flex: 1 1 320px; min-width: 0; }
       .matchup-vs { font-size: 24px; font-weight: 700; opacity: 0.4; align-self: center; text-align: center; }
