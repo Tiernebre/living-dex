@@ -49,12 +49,14 @@ saves/               emulator saves (tracked in VCS)
 ## Running
 
 ```
-# Terminal 1 — hub (TCP for mGBA, HTTP/WS for the browser)
-deno task dev
+# One-time: install web deps
+cd web && npm install && cd ..
 
-# Terminal 2 — web UI
-cd web && npm install && npm run dev
+# Start hub + web UI together (Ctrl-C stops both)
+deno task dev
 
 # Then in mGBA: Tools → Scripting → Load script → lua/main.lua
 ```
+
+For a full end-to-end bring-up checklist against Pokémon Ruby, see [`docs/booting-ruby.md`](docs/booting-ruby.md).
 
