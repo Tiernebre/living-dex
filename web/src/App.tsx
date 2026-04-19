@@ -39,6 +39,10 @@ function formatSpeciesName(name: string): string {
     .join(" ");
 }
 
+function serebiiGen3DexUrl(nationalDex: number): string {
+  return `https://www.serebii.net/pokedex-rs/${String(nationalDex).padStart(3, "0")}.shtml`;
+}
+
 const STATS = [
   ["hp", "HP"],
   ["atk", "Atk"],
@@ -350,7 +354,19 @@ function PokemonCard({ mon }: { mon: DecodedPokemon }) {
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontWeight: 600 }}>
           {mon.nickname}
-          {info && <span style={{ fontWeight: 400, opacity: 0.7 }}> — {formatSpeciesName(info.name)}</span>}
+          {info && (
+            <span style={{ fontWeight: 400, opacity: 0.7 }}>
+              {" — "}
+              <a
+                href={serebiiGen3DexUrl(info.nationalDex)}
+                target="_blank"
+                rel="noreferrer"
+                style={{ color: "inherit" }}
+              >
+                {formatSpeciesName(info.name)}
+              </a>
+            </span>
+          )}
         </div>
         <div style={{ fontSize: 13, opacity: 0.8, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
           <span>Lv {mon.level} · {mon.nature}</span>
