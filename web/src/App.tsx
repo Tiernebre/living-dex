@@ -17,6 +17,14 @@ type MethodTable = { method: string; rate: number; encounters: EncounterPokemon[
 type LocationEntry = { name: string; label: string; methods: MethodTable[] };
 const encounters = encountersData as Record<string, LocationEntry>;
 
+type GrowthRate =
+  | "slow"
+  | "medium"
+  | "fast"
+  | "medium-slow"
+  | "slow-then-very-fast"
+  | "fast-then-very-slow";
+
 type Species = {
   nationalDex: number;
   name: string;
@@ -24,6 +32,7 @@ type Species = {
   sprite: string | null;
   internalIndex: number;
   baseStats: StatBlock;
+  growthRate: GrowthRate;
 };
 const species = speciesData as Record<string, Species>;
 
@@ -55,6 +64,37 @@ function formatSpeciesName(name: string): string {
 
 function serebiiGen3DexUrl(nationalDex: number): string {
   return `https://www.serebii.net/pokedex-rs/${String(nationalDex).padStart(3, "0")}.shtml`;
+}
+
+// Cumulative EXP to reach a given level for each growth curve.
+// Formulas from Bulbapedia "Experience".
+function expForLevel(level: number, rate: GrowthRate): number {
+  if (level <= 1) return 0;
+  const n = level;
+  const n3 = n * n * n;
+  switch (rate) {
+    case "fast":
+      return Math.floor((4 * n3) / 5);
+    case "medium":
+      return n3;
+    case "slow":
+      return Math.floor((5 * n3) / 4);
+    case "medium-slow":
+      return Math.floor((6 * n3) / 5 - 15 * n * n + 100 * n - 140);
+    case "slow-then-very-fast":
+      if (n < 50) return Math.floor((n3 * (100 - n)) / 50);
+      if (n < 68) return Math.floor((n3 * (150 - n)) / 100);
+      if (n < 98) return Math.floor((n3 * Math.floor((1911 - 10 * n) / 3)) / 500);
+      return Math.floor((n3 * (160 - n)) / 100);
+    case "fast-then-very-slow":
+      if (n < 15) return Math.floor((n3 * (Math.floor((n + 1) / 3) + 24)) / 50);
+      if (n < 36) return Math.floor((n3 * (n + 14)) / 50);
+      return Math.floor((n3 * (Math.floor(n / 2) + 32)) / 50);
+  }
+}
+
+function formatInt(n: number): string {
+  return n.toLocaleString("en-US");
 }
 
 const STATS = [
@@ -385,6 +425,45 @@ function StatusBadge({
   );
 }
 
+function ExpProgress({ level, exp, rate }: { level: number; exp: number; rate: GrowthRate }) {
+  if (level >= 100) {
+    return (
+      <div style={{ fontSize: 12, opacity: 0.7, marginTop: 4 }}>
+        EXP {formatInt(exp)} · <span style={{ fontWeight: 600 }}>Max level</span>
+      </div>
+    );
+  }
+  const curLevelExp = expForLevel(level, rate);
+  const nextLevelExp = expForLevel(level + 1, rate);
+  const span = Math.max(1, nextLevelExp - curLevelExp);
+  const into = Math.max(0, exp - curLevelExp);
+  const toGo = Math.max(0, nextLevelExp - exp);
+  const pct = Math.min(100, Math.max(0, (into / span) * 100));
+  return (
+    <div style={{ fontSize: 12, marginTop: 6, display: "flex", flexDirection: "column", gap: 3 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", gap: 8, opacity: 0.8 }}>
+        <span>
+          EXP <span style={{ fontVariantNumeric: "tabular-nums", fontWeight: 600 }}>{formatInt(exp)}</span>
+        </span>
+        <span style={{ opacity: 0.75 }}>
+          <span style={{ fontVariantNumeric: "tabular-nums", fontWeight: 600 }}>{formatInt(toGo)}</span> to Lv {level + 1}
+        </span>
+      </div>
+      <div
+        style={{
+          height: 5,
+          borderRadius: 999,
+          background: "var(--bg-muted)",
+          overflow: "hidden",
+        }}
+        title={`${formatInt(into)} / ${formatInt(span)} EXP this level · ${rate}`}
+      >
+        <div style={{ width: `${pct}%`, height: "100%", background: "var(--accent)" }} />
+      </div>
+    </div>
+  );
+}
+
 function PokemonCard({ mon, movesRight = false }: { mon: DecodedPokemon; movesRight?: boolean }) {
   const info = lookup(mon.species);
   return (
@@ -422,6 +501,7 @@ function PokemonCard({ mon, movesRight = false }: { mon: DecodedPokemon; movesRi
           <span>Lv {mon.level} · {mon.nature}</span>
           {info && info.types.map((t) => <TypeBadge key={t} type={t} />)}
         </div>
+        {info && <ExpProgress level={mon.level} exp={mon.experience} rate={info.growthRate} />}
         {movesRight ? (
           <div style={{ display: "flex", gap: 12, alignItems: "flex-start", flexWrap: "wrap" }}>
             <div style={{ flex: "1 1 240px", minWidth: 0 }}>
@@ -623,13 +703,23 @@ function Encounters({ location }: { location: { mapGroup: number; mapNum: number
                     </td>
                     <td style={{ ...td, padding: "4px 12px" }}>
                       {info?.sprite && (
-                        <img
-                          src={info.sprite}
-                          alt=""
-                          width={40}
-                          height={40}
-                          style={{ imageRendering: "pixelated", display: "block" }}
-                        />
+                        info ? (
+                          <a
+                            href={serebiiGen3DexUrl(info.nationalDex)}
+                            target="_blank"
+                            rel="noreferrer"
+                            title={`${formatSpeciesName(info.name)} on Serebii (Gen 3)`}
+                            style={{ display: "inline-block" }}
+                          >
+                            <img
+                              src={info.sprite}
+                              alt=""
+                              width={40}
+                              height={40}
+                              style={{ imageRendering: "pixelated", display: "block" }}
+                            />
+                          </a>
+                        ) : null
                       )}
                     </td>
                     <td style={td}>
@@ -638,7 +728,13 @@ function Encounters({ location }: { location: { mapGroup: number; mapNum: number
                           href={serebiiGen3DexUrl(info.nationalDex)}
                           target="_blank"
                           rel="noreferrer"
-                          style={{ color: "inherit", fontWeight: 600, textDecoration: "none" }}
+                          style={{
+                            color: "var(--accent-strong)",
+                            fontWeight: 600,
+                            textDecoration: "underline",
+                            textDecorationColor: "color-mix(in srgb, var(--accent) 60%, transparent)",
+                            textUnderlineOffset: 3,
+                          }}
                         >
                           {formatSpeciesName(info.name)}
                         </a>

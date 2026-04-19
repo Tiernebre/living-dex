@@ -39,6 +39,7 @@ export type DecodedPokemon = {
   species: number;
   nickname: string;
   level: number;
+  experience: number;
   ivs: { hp: number; atk: number; def: number; spa: number; spd: number; spe: number };
   evs: { hp: number; atk: number; def: number; spa: number; spd: number; spe: number };
   nature: string;

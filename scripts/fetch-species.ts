@@ -9,6 +9,8 @@ const OUT = new URL("../web/src/species.json", import.meta.url);
 
 type StatBlock = { hp: number; atk: number; def: number; spa: number; spd: number; spe: number };
 
+type GrowthRate = "slow" | "medium" | "fast" | "medium-slow" | "slow-then-very-fast" | "fast-then-very-slow";
+
 type Species = {
   nationalDex: number;
   name: string;
@@ -16,6 +18,7 @@ type Species = {
   sprite: string;
   internalIndex: number;
   baseStats: StatBlock;
+  growthRate: GrowthRate;
 };
 
 type GameIndex = { game_index: number; version: { name: string } };
@@ -30,6 +33,30 @@ const STAT_NAME_MAP: Record<string, keyof StatBlock> = {
   "speed": "spe",
 };
 
+// PokeAPI exposes 6 growth rates at /growth-rate/1..6. Each lists all species
+// that use it, so six requests are enough to cover every Pokémon.
+const GROWTH_RATE_IDS: GrowthRate[] = [
+  "slow", "medium", "fast", "medium-slow", "slow-then-very-fast", "fast-then-very-slow",
+];
+
+async function loadGrowthRates(): Promise<Record<number, GrowthRate>> {
+  const out: Record<number, GrowthRate> = {};
+  await Promise.all(
+    GROWTH_RATE_IDS.map(async (name) => {
+      const res = await fetch(`https://pokeapi.co/api/v2/growth-rate/${name}`);
+      if (!res.ok) throw new Error(`growth-rate ${name}: ${res.status}`);
+      const data = await res.json() as { pokemon_species: { url: string }[] };
+      for (const ps of data.pokemon_species) {
+        const m = ps.url.match(/\/pokemon-species\/(\d+)\/?$/);
+        if (m) out[Number(m[1])] = name;
+      }
+    }),
+  );
+  return out;
+}
+
+const growthByDex = await loadGrowthRates();
+
 async function fetchOne(id: number): Promise<Species> {
   const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
   if (!res.ok) throw new Error(`dex ${id}: ${res.status}`);
@@ -41,6 +68,8 @@ async function fetchOne(id: number): Promise<Species> {
     const key = STAT_NAME_MAP[s.stat.name];
     if (key) baseStats[key] = s.base_stat;
   }
+  const growthRate = growthByDex[id];
+  if (!growthRate) throw new Error(`dex ${id}: no growth rate`);
   return {
     nationalDex: id,
     name: data.name,
@@ -48,6 +77,7 @@ async function fetchOne(id: number): Promise<Species> {
     sprite: data.sprites.front_default,
     internalIndex: ruby.game_index,
     baseStats,
+    growthRate,
   };
 }
 

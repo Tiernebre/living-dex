@@ -140,6 +140,7 @@ export function decodePokemon(bytes: Uint8Array): DecodedPokemon | null {
 
   const species = readU16LE(G, 0);
   if (species === 0) return null;
+  const experience = readU32LE(G, 4);
 
   const ivsRaw = readU32LE(M, 4);
   const ivs = {
@@ -170,6 +171,7 @@ export function decodePokemon(bytes: Uint8Array): DecodedPokemon | null {
     species,
     nickname: decodeName(bytes.subarray(0x08, 0x12)),
     level,
+    experience,
     ivs,
     evs,
     nature: NATURES[pid % 25],
