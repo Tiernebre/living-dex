@@ -223,11 +223,13 @@ function StatsTable({
   evs,
   nature,
   baseStats,
+  level,
 }: {
   ivs: StatBlock;
   evs: StatBlock;
   nature: string;
   baseStats?: StatBlock;
+  level?: number;
 }) {
   const effect = natureEffect(nature);
   const colorFor = (k: StatKey) =>
@@ -290,6 +292,28 @@ function StatsTable({
             </td>
           ))}
         </tr>
+        {baseStats && level !== undefined && level !== 100 && (() => {
+          const current = computeStats(baseStats, ivs, evs, nature, level);
+          return (
+            <tr>
+              <td style={{ paddingRight: 10, opacity: 0.7 }}>Lv{level}</td>
+              {STATS.map(([k]) => (
+                <td
+                  key={k}
+                  style={{
+                    textAlign: "right",
+                    padding: "0 6px",
+                    fontVariantNumeric: "tabular-nums",
+                    color: colorFor(k),
+                    fontWeight: 600,
+                  }}
+                >
+                  {current[k]}
+                </td>
+              ))}
+            </tr>
+          );
+        })()}
         {baseStats && (() => {
           const lv100 = computeStats(baseStats, ivs, evs, nature, 100);
           return (
@@ -303,7 +327,8 @@ function StatsTable({
                     padding: "0 6px",
                     fontVariantNumeric: "tabular-nums",
                     color: colorFor(k),
-                    fontWeight: 600,
+                    fontWeight: 500,
+                    opacity: 0.75,
                   }}
                 >
                   {lv100[k]}
@@ -400,7 +425,7 @@ function PokemonCard({ mon, movesRight = false }: { mon: DecodedPokemon; movesRi
         {movesRight ? (
           <div style={{ display: "flex", gap: 12, alignItems: "flex-start", flexWrap: "wrap" }}>
             <div style={{ flex: "1 1 240px", minWidth: 0 }}>
-              <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} />
+              <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} level={mon.level} />
             </div>
             <div style={{ flex: "1 1 240px", minWidth: 0 }}>
               <MovesList moves={mon.moves} />
@@ -408,7 +433,7 @@ function PokemonCard({ mon, movesRight = false }: { mon: DecodedPokemon; movesRi
           </div>
         ) : (
           <>
-            <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} />
+            <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} level={mon.level} />
             <MovesList moves={mon.moves} />
           </>
         )}
