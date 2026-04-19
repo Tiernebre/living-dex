@@ -56,6 +56,9 @@ local function on_frame()
   -- whole party (6 slots × 100 bytes)
   emit_region(envelope.REGION.PARTY, 0, a.party, s.pokemon_struct * s.party_slots)
 
+  -- battle state flag (u8 gMain.inBattle; bit 1 set = in battle)
+  emit_region(envelope.REGION.BATTLE, 0, a.battle_flags or 0, 1)
+
   -- enemy party (wild encounter / trainer battle)
   emit_region(envelope.REGION.ENEMY_PARTY, 0, a.enemy_party, s.pokemon_struct * s.party_slots)
 

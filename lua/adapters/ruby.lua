@@ -19,6 +19,7 @@ M.addrs = {
   party = 0x03004360,                          -- gPlayerParty
   party_count = 0x03004350,                    -- gPlayerPartyCount (u8)
   enemy_party = 0x030045C0,                    -- gEnemyParty
+  battle_flags = 0x03001BAD,                   -- gMain.inBattle (u8; bit 1 set = in battle)
   current_box = POKEMON_STORAGE + 0x0000,      -- PokemonStorage.currentBox (u8)
   box_list = POKEMON_STORAGE + 0x0004,         -- PokemonStorage.boxes[14][30]
   daycare = SAVE_BLOCK_1 + 0x2F9C,             -- SaveBlock1.daycare

@@ -11,6 +11,7 @@ export const REGION = {
   DAYCARE: 0x06,
   TRAINER: 0x07,
   DEX: 0x08,
+  BATTLE: 0x09,
 } as const;
 
 export type RegionId = (typeof REGION)[keyof typeof REGION];
@@ -49,6 +50,7 @@ export type HubState = {
   game: GameInfo | null;
   party: (DecodedPokemon | null)[];
   enemyParty: (DecodedPokemon | null)[];
+  inBattle: boolean;
   currentBox: { index: number; slots: (DecodedPokemon | null)[] } | null;
   source: Source | null;
   lastUpdateAt: number | null;
@@ -60,4 +62,5 @@ export type WsMessage =
   | { type: "enemy"; slot: number; pokemon: DecodedPokemon | null; source: Source }
   | { type: "box"; index: number; slot: number; pokemon: DecodedPokemon | null; source: Source }
   | { type: "game"; game: GameInfo | null }
-  | { type: "connection"; live: boolean };
+  | { type: "connection"; live: boolean }
+  | { type: "battle"; inBattle: boolean };

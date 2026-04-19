@@ -30,6 +30,7 @@ M.REGION = {
   DAYCARE = 0x06,
   TRAINER = 0x07,
   DEX = 0x08,
+  BATTLE = 0x09, -- 4 bytes, u32 LE = gBattleTypeFlags (nonzero = in battle)
 }
 
 local function u16_be(n)

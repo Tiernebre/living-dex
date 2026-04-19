@@ -8,6 +8,7 @@ class StateStore {
     game: null,
     party: Array(6).fill(null),
     enemyParty: Array(6).fill(null),
+    inBattle: false,
     currentBox: null,
     source: null,
     lastUpdateAt: null,
@@ -56,6 +57,15 @@ class StateStore {
     this.state.source = source;
     this.state.lastUpdateAt = Date.now();
     this.broadcast({ type: "enemy", slot, pokemon, source });
+  }
+
+  setInBattle(inBattle: boolean) {
+    if (this.state.inBattle === inBattle) return;
+    this.state.inBattle = inBattle;
+    if (!inBattle) {
+      this.state.enemyParty = Array(6).fill(null);
+    }
+    this.broadcast({ type: "battle", inBattle });
   }
 
   setBoxSlot(index: number, slot: number, pokemon: DecodedPokemon | null, source: Source) {

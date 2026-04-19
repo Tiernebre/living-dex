@@ -321,10 +321,9 @@ function PokemonCard({ mon }: { mon: DecodedPokemon }) {
 }
 
 export function App() {
-  const { connected, game, party, enemyParty, source, lastUpdateAt } = useLivingDex();
+  const { connected, game, party, enemyParty, inBattle, source, lastUpdateAt } = useLivingDex();
   const activeMon = party.find((p) => p !== null) ?? null;
   const activeEnemy = enemyParty.find((p) => p !== null) ?? null;
-  const inBattle = activeEnemy !== null;
   return (
     <main style={{ fontFamily: "system-ui, sans-serif", padding: 24 }}>
       <h1>Living Dex</h1>
@@ -337,7 +336,7 @@ export function App() {
         {lastUpdateAt && ` — updated ${new Date(lastUpdateAt).toLocaleTimeString()}`}
       </p>
       <h2>Current Matchup</h2>
-      {inBattle ? (
+      {inBattle && activeEnemy ? (
         <div style={{ display: "grid", gridTemplateColumns: "1fr auto 1fr", gap: 12, alignItems: "start" }}>
           <div>
             <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: 0.5 }}>
@@ -350,7 +349,7 @@ export function App() {
             <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: 0.5 }}>
               Opponent
             </div>
-            <PokemonCard mon={activeEnemy} />
+            <PokemonCard mon={activeEnemy!} />
           </div>
         </div>
       ) : (

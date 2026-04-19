@@ -89,6 +89,11 @@ function handleFrame(type: number, region: number, index: number, payload: Uint8
     }
     return;
   }
+  if (region === REGION.BATTLE) {
+    // gMain.inBattle is bit 1 of a u8 packed with oamLoadDisabled at bit 0.
+    store.setInBattle((payload[0] & 0x02) !== 0);
+    return;
+  }
   // TODO: BOX_SLOT, DAYCARE, TRAINER, DEX.
   void index;
 }

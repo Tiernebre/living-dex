@@ -10,6 +10,7 @@ const initial: HubState = {
   game: null,
   party: Array(6).fill(null),
   enemyParty: Array(6).fill(null),
+  inBattle: false,
   currentBox: null,
   source: null,
   lastUpdateAt: null,
@@ -24,6 +25,12 @@ export const useLivingDex = create<HubState & Actions>((set) => ({
           return { ...s, ...msg.state };
         case "connection":
           return { ...s, connected: msg.live };
+        case "battle":
+          return {
+            ...s,
+            inBattle: msg.inBattle,
+            enemyParty: msg.inBattle ? s.enemyParty : Array(6).fill(null),
+          };
         case "game":
           return { ...s, game: msg.game };
         case "party": {
