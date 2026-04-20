@@ -76,6 +76,10 @@ function serebiiGen3DexUrl(nationalDex: number): string {
   return `https://www.serebii.net/pokedex-rs/${String(nationalDex).padStart(3, "0")}.shtml`;
 }
 
+function thumbnailUrl(nationalDex: number): string {
+  return `https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/thumbnails/${String(nationalDex).padStart(3, "0")}.png`;
+}
+
 // Cumulative EXP to reach a given level for each growth curve.
 // Formulas from Bulbapedia "Experience".
 function expForLevel(level: number, rate: GrowthRate): number {
@@ -717,8 +721,8 @@ function PokemonCard({
           <GradeBadge grade={graded.grade} detail={gradeDetail} />
         </div>
       )}
-      {info?.sprite && (
-        <img src={info.sprite} alt={info.name} width={64} height={64} style={{ imageRendering: "pixelated" }} />
+      {info && (
+        <img src={thumbnailUrl(info.nationalDex)} alt={info.name} width={72} height={72} style={{ flexShrink: 0 }} />
       )}
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ fontWeight: 600, marginBottom: 4 }}>
