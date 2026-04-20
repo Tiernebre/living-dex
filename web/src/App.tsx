@@ -6,6 +6,7 @@ import {
   Navigate,
   Route,
   Routes,
+  useLocation,
   useParams,
 } from "react-router-dom";
 import { useLivingDex } from "./store";
@@ -1579,7 +1580,9 @@ export function App() {
 
 function Layout({ children }: { children: React.ReactNode }) {
   const { connected, game, source, lastUpdateAt } = useLivingDex();
-  const { game: routeStem } = useParams<{ game?: string }>();
+  // Layout sits outside <Routes>, so useParams won't see :game. Parse the URL directly.
+  const location = useLocation();
+  const routeStem = location.pathname.split("/")[1] || undefined;
   useEffect(() => {
     const root = document.documentElement;
     // Route stem wins — user is explicitly viewing that game's page.
@@ -2445,7 +2448,14 @@ function TrainerSaveCard({
         </div>
         <div style={{ fontSize: 12, opacity: 0.7 }}>
           {savedAtMs
-            ? `saved ${new Date(savedAtMs).toLocaleTimeString()}`
+            ? `saved ${new Date(savedAtMs).toLocaleString(undefined, {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+                hour: "numeric",
+                minute: "2-digit",
+                ...(showSeconds ? { second: "2-digit" } : {}),
+              })}`
             : `${speciesCount} / ${hoennDex.length} species`}
         </div>
       </div>
@@ -2476,23 +2486,224 @@ function TrainerSaveCard({
   return <div style={containerStyle}>{body}</div>;
 }
 
+// Mirror of pokeruby/src/trainer_card.c TrainerCard_GetStarCount.
+// Stars: HoF cleared, Hoenn dex completed, Battle Tower 50+ streak, >4 museum paintings.
+type TrainerStar = {
+  label: string;
+  detail: string;
+  earned: boolean;
+  // null when we can't yet read the underlying stat from the save.
+  unknown?: boolean;
+};
+
+function trainerStarsBreakdown(saveInfo: SaveInfo | null): TrainerStar[] {
+  if (!saveInfo) {
+    return [
+      { label: "Hall of Fame", detail: "Beat the Elite Four", earned: false, unknown: true },
+      { label: "Hoenn Dex", detail: "Catch all 200 Hoenn Pokémon", earned: false, unknown: true },
+      { label: "Battle Tower", detail: "50-win streak in the Battle Tower", earned: false, unknown: true },
+      { label: "Contests", detail: "5+ paintings in the Lilycove museum", earned: false, unknown: true },
+    ];
+  }
+  const dexSet = new Set(saveInfo.pokedexOwned);
+  // Mirrors pokeruby's CompletedHoennPokedex: only Hoenn dex #1..200 are required.
+  // Jirachi (#201) and Deoxys (#202) are event-only and don't count toward the star.
+  const hoennDone = hoennDex
+    .filter((e) => e.hoennDex <= 200)
+    .every((e) => dexSet.has(e.nationalDex));
+  return [
+    { label: "Hall of Fame", detail: "Beat the Elite Four", earned: saveInfo.enteredHof },
+    { label: "Hoenn Dex", detail: "Catch all 200 main Hoenn Pokémon (Jirachi/Deoxys not required)", earned: hoennDone },
+    { label: "Battle Tower", detail: "50-win streak in the Battle Tower", earned: false, unknown: true },
+    { label: "Contests", detail: "5+ paintings in the Lilycove museum", earned: false, unknown: true },
+  ];
+}
+
+const STAR_GOLD = "#f5b301";
+const STAR_GOLD_DARK = "#a86a00";
+const STAR_EMPTY = "color-mix(in srgb, #a86a00 30%, var(--border))";
+
+function StarIcon({ filled, size = 24 }: { filled: boolean; size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden style={{ display: "block" }}>
+      <path
+        d="M12 2.5l2.95 5.98 6.6.96-4.78 4.66 1.13 6.57L12 17.6l-5.9 3.07 1.13-6.57L2.45 9.44l6.6-.96L12 2.5z"
+        fill={filled ? STAR_GOLD : "transparent"}
+        stroke={filled ? STAR_GOLD_DARK : STAR_EMPTY}
+        strokeWidth={1.5}
+        strokeLinejoin="round"
+        style={
+          filled
+            ? { filter: "drop-shadow(0 1px 1px rgba(168, 106, 0, 0.45))" }
+            : undefined
+        }
+      />
+    </svg>
+  );
+}
+
+function TrainerStars({
+  breakdown,
+  tint,
+  dim,
+}: {
+  breakdown: TrainerStar[];
+  tint: string;
+  dim: boolean;
+}) {
+  const [pos, setPos] = useState<{ left: number; top: number } | null>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const open = pos !== null;
+  const close = () => setPos(null);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") close(); };
+    const onClick = (e: MouseEvent) => {
+      if (btnRef.current?.contains(e.target as Node)) return;
+      close();
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("mousedown", onClick);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("mousedown", onClick);
+    };
+  }, [open]);
+  const earned = breakdown.filter((s) => s.earned).length;
+  return (
+    <div onClick={(e) => e.preventDefault()}>
+      <button
+        ref={btnRef}
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          if (open) {
+            close();
+          } else {
+            const r = e.currentTarget.getBoundingClientRect();
+            setPos({ left: r.left, top: r.bottom + 6 });
+          }
+        }}
+        title={breakdown
+          .map((s) => `${s.unknown ? "?" : s.earned ? "★" : "☆"} ${s.label}`)
+          .join("\n")}
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 6,
+          padding: "4px 8px",
+          borderRadius: 999,
+          border: `1px solid color-mix(in srgb, ${tint} 35%, var(--border))`,
+          background: `color-mix(in srgb, ${tint} 10%, var(--bg-elevated))`,
+          cursor: "pointer",
+          fontFamily: "inherit",
+          fontSize: 11,
+          color: "inherit",
+          opacity: dim ? 0.55 : 1,
+        }}
+      >
+        <span
+          style={{
+            fontSize: 9,
+            fontWeight: 800,
+            textTransform: "uppercase",
+            letterSpacing: 0.5,
+            opacity: 0.7,
+          }}
+        >
+          Trainer card
+        </span>
+        <span style={{ display: "inline-flex", gap: 4 }}>
+          {breakdown.map((s, i) => (
+            <span key={i} title={`${s.label} — ${s.detail}`}>
+              <StarIcon filled={s.earned} />
+            </span>
+          ))}
+        </span>
+        <span
+          style={{
+            fontVariantNumeric: "tabular-nums",
+            fontWeight: 700,
+            color: `color-mix(in srgb, ${tint} 80%, var(--text))`,
+          }}
+        >
+          {earned}/{breakdown.length}
+        </span>
+      </button>
+      {open && pos && createPortal(
+        <div
+          onMouseDown={(e) => e.stopPropagation()}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+          }}
+          style={{
+            position: "fixed",
+            top: pos.top,
+            left: pos.left,
+            zIndex: 1000,
+            width: 240,
+            padding: 10,
+            borderRadius: 10,
+            background: "var(--bg-surface)",
+            border: `1px solid color-mix(in srgb, ${tint} 35%, var(--border))`,
+            boxShadow: "0 8px 24px rgba(15, 23, 42, 0.18)",
+            fontSize: 12,
+          }}
+        >
+          {breakdown.map((s, i) => (
+            <div
+              key={i}
+              style={{
+                display: "flex",
+                alignItems: "flex-start",
+                gap: 8,
+                padding: "6px 0",
+                borderTop: i === 0 ? "none" : "1px dashed color-mix(in srgb, var(--border) 70%, transparent)",
+                opacity: s.unknown ? 0.55 : 1,
+              }}
+            >
+              <span style={{ marginTop: 1 }}>
+                <StarIcon filled={s.earned} size={20} />
+              </span>
+              <div style={{ minWidth: 0 }}>
+                <div style={{ fontWeight: 700 }}>{s.label}</div>
+                <div style={{ opacity: 0.75 }}>{s.detail}</div>
+                {s.unknown && (
+                  <div style={{ fontSize: 10, opacity: 0.6, marginTop: 2 }}>
+                    Not yet decoded from the save.
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>,
+        document.body,
+      )}
+    </div>
+  );
+}
+
 function PrimaryProgress({
   step,
   loaded,
   owned,
+  saveInfo,
   tint,
 }: {
   step: ChainStep;
   loaded: boolean;
   owned: Set<number> | null;
+  saveInfo: SaveInfo | null;
   tint: string;
 }) {
   const set = owned ?? new Set<number>();
   const regional = step.stem ? regionalDexProgress(step.stem, set) : null;
   const nationalCaught = loaded ? set.size : 0;
-  // Trainer-card stars aren't parsed from the save yet. Show the target
-  // structure so the goal is visible, and leave the progress dimmed.
-  const trainerStars = 0;
+  // Battle Tower (50+ streak) and museum-paintings stars aren't parsed yet,
+  // so this caps at 2 stars (HoF + Hoenn dex). TODO: parse the rest.
+  const trainerStarsCertain = !!saveInfo;
   return (
     <div
       style={{
@@ -2504,7 +2715,7 @@ function PrimaryProgress({
         gap: 10,
       }}
     >
-      {regional && (
+      {regional && step.endOfGen && (
         <ProgressPill
           label="Regional dex"
           caught={regional.caught}
@@ -2522,12 +2733,10 @@ function PrimaryProgress({
           dim={!loaded}
         />
       )}
-      <ProgressPill
-        label="Trainer card"
-        caught={trainerStars}
-        total={TRAINER_CARD_STARS}
+      <TrainerStars
+        breakdown={trainerStarsBreakdown(saveInfo)}
         tint={tint}
-        dim
+        dim={!trainerStarsCertain}
       />
     </div>
   );
@@ -2538,6 +2747,7 @@ function ChainCard({
   loaded,
   caught,
   owned,
+  saveInfo,
   unsupported,
   isLive,
   locked,
@@ -2546,6 +2756,7 @@ function ChainCard({
   loaded: boolean;
   caught: number;
   owned: Set<number> | null;
+  saveInfo: SaveInfo | null;
   unsupported: boolean;
   isLive: boolean;
   locked: boolean;
@@ -2556,7 +2767,11 @@ function ChainCard({
     : unsupported
     ? "Roadmap"
     : loaded
-    ? `${caught} species owned`
+    ? step.endOfGen
+      ? `${caught} species owned`
+      : step.primary
+      ? "4★ trainer card · no dex goal"
+      : "Champion required · no dex goal"
     : "No save loaded";
   const inner = (
     <div
@@ -2722,7 +2937,7 @@ function ChainCard({
           <span>{statusLine}</span>
         </div>
         {step.primary && !locked && (
-          <PrimaryProgress step={step} loaded={loaded} owned={owned} tint={tint} />
+          <PrimaryProgress step={step} loaded={loaded} owned={owned} saveInfo={saveInfo} tint={tint} />
         )}
       </div>
       {loaded && (
@@ -2759,7 +2974,6 @@ function ChainCard({
 
 const GEN3_NATIONAL_TOTAL = 386;
 const KANTO_DEX_TOTAL = 151;
-const TRAINER_CARD_STARS = 4;
 
 // Regional-dex completion target for a primary game's 4★ trainer card.
 // Only Gen 3 games have parsers right now — later-gen primaries fall through.
@@ -3070,7 +3284,8 @@ function Dashboard() {
                     }}
                   >
                     {steps.map((step) => {
-                      const loaded = step.stem ? !!saves[step.stem] : false;
+                      const saveInfo = step.stem ? saves[step.stem] ?? null : null;
+                      const loaded = !!saveInfo;
                       const owned = step.stem ? perGame[step.stem] ?? null : null;
                       const caught = owned?.size ?? 0;
                       const unsupported = !step.stem;
@@ -3082,6 +3297,7 @@ function Dashboard() {
                           loaded={loaded}
                           caught={caught}
                           owned={owned}
+                          saveInfo={saveInfo}
                           unsupported={unsupported}
                           isLive={isLive}
                           locked={locked}

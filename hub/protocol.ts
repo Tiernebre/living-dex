@@ -88,6 +88,9 @@ export type SaveInfo = {
   // Distinct from "owned in storage" — it includes mons evolved/traded away,
   // and excludes mons received but never registered.
   pokedexOwned: number[];
+  // gameStats[GAME_STAT_ENTERED_HOF] > 0 — has the player ever beaten the Elite Four.
+  // Worth one star on the in-game trainer card.
+  enteredHof: boolean;
 };
 
 export type HubState = {

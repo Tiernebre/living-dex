@@ -69,14 +69,24 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
   const activeSlot = slotB > slotA ? 1 : 0;
 
   let sb2Base: number | null = null;
-  let sb1Chunk0Base: number | null = null;
+  // gSaveBlock1 spans section IDs 1..4 (4 chunks). Concatenate them so we can
+  // read fields past chunk 0, like gameStats at struct offset 0x1540.
+  const sb1Chunks: (Uint8Array | null)[] = [null, null, null, null];
   for (let i = 0; i < NUM_SECTORS_PER_SLOT; i++) {
     const s = readSector(activeSlot * NUM_SECTORS_PER_SLOT + i);
     if (!s) continue;
     if (s.id === 0) sb2Base = s.base;
-    else if (s.id === 1) sb1Chunk0Base = s.base;
+    else if (s.id >= 1 && s.id <= 4) {
+      sb1Chunks[s.id - 1] = buf.subarray(s.base, s.base + SECTOR_DATA_SIZE);
+    }
   }
   if (sb2Base === null) return null;
+  let sb1: Uint8Array | null = null;
+  if (sb1Chunks.every((c) => c !== null)) {
+    sb1 = new Uint8Array(4 * SECTOR_DATA_SIZE);
+    for (let i = 0; i < 4; i++) sb1.set(sb1Chunks[i]!, i * SECTOR_DATA_SIZE);
+  }
+  const sb1View = sb1 ? new DataView(sb1.buffer, sb1.byteOffset, sb1.byteLength) : null;
 
   // gSaveBlock2.pokedex lives at offset 0x18; pokedex.owned is a 52-byte bitfield
   // at +0x10 (i.e. SB2+0x28), indexed by (nationalDex - 1).
@@ -105,14 +115,19 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
   const frames = view.getUint8(sb2Base + 0x12);
 
   const party: (DecodedPokemon | null)[] = Array(6).fill(null);
-  if (sb1Chunk0Base !== null) {
-    const partyCount = Math.min(6, view.getUint8(sb1Chunk0Base + 0x234));
+  if (sb1) {
+    const partyCount = Math.min(6, sb1[0x234]);
     const PARTY_ENTRY_SIZE = 100;
     for (let i = 0; i < partyCount; i++) {
-      const offset = sb1Chunk0Base + 0x238 + i * PARTY_ENTRY_SIZE;
-      party[i] = decodePokemon(buf.subarray(offset, offset + PARTY_ENTRY_SIZE));
+      const offset = 0x238 + i * PARTY_ENTRY_SIZE;
+      party[i] = decodePokemon(sb1.subarray(offset, offset + PARTY_ENTRY_SIZE));
     }
   }
+
+  // gSaveBlock1.gameStats[NUM_GAME_STATS] @ struct offset 0x1540, 50 × u32 LE.
+  // GAME_STAT_ENTERED_HOF = 10. Ruby/Sapphire don't XOR-encrypt this (Emerald does).
+  // pokeruby/include/constants/game_stat.h
+  const enteredHof = sb1View ? sb1View.getUint32(0x1540 + 10 * 4, true) > 0 : false;
 
   // gPokemonStorage spans section IDs 5..13 (9 chunks), each holding up to 3968
   // bytes of the struct. Concatenate them in order so we can read BoxPokemon
@@ -163,5 +178,6 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
     boxes,
     currentBox,
     pokedexOwned,
+    enteredHof,
   };
 }
