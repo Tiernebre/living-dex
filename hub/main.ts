@@ -1,3 +1,4 @@
+import { loadCatchLog } from "./catch-log.ts";
 import { startLuaListener } from "./sources/lua-tcp.ts";
 import { startSaveWatcher } from "./sources/save-watcher.ts";
 import { store } from "./state.ts";
@@ -36,6 +37,8 @@ function handleHttp(req: Request): Response | Promise<Response> {
   return new Response("Living Dex hub. UI served by vite dev server.", { status: 200 });
 }
 
+await loadCatchLog();
+store.hydrateCatchLog();
 startLuaListener(TCP_PORT);
 startSaveWatcher();
 

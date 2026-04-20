@@ -1,7 +1,7 @@
 {
   "tasks": {
     "verify-roms": "deno run --allow-read scripts/verify-rom.ts",
-    "dev:hub": "deno run --allow-net=127.0.0.1:8889,127.0.0.1:8080 --allow-read=. --watch hub/main.ts",
+    "dev:hub": "deno run --allow-net=127.0.0.1:8889,127.0.0.1:8080 --allow-read=. --allow-write=data --watch hub/main.ts",
     "dev": "deno run --allow-run --allow-read scripts/dev.ts",
     "dev:web": "deno run --allow-run --allow-read scripts/dev.ts --no-mgba",
     "species": "deno run --allow-net=pokeapi.co --allow-write=web/src/species.json scripts/fetch-species.ts",

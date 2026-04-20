@@ -1344,6 +1344,16 @@ function collectOwned(saveInfo: HubState["saveInfo"]): Map<number, OwnedMon[]> {
   return byNational;
 }
 
+const FIRST_SEEN_FMT = new Intl.DateTimeFormat(undefined, {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+
+function formatFirstSeen(ms: number): string {
+  return FIRST_SEEN_FMT.format(new Date(ms));
+}
+
 function locationLabel(loc: OwnedLocation): string {
   if (loc.kind === "party") return `Party · slot ${loc.slot + 1}`;
   return `${loc.boxName} · slot ${loc.slotIndex + 1}`;
@@ -1598,6 +1608,7 @@ function OwnedMonRow({ owned }: { owned: OwnedMon }) {
   const metLoc = mapsecLabel(mon.metLocation);
   const origin = ORIGIN_GAME_LABEL[mon.originGame] ?? `Game ${mon.originGame}`;
   const isTraded = info && mon.originGame !== 2; // Ruby's origin = 2
+  const firstSeenAt = useLivingDex((s) => s.catchLog[`${mon.pid}:${mon.otId}`]);
   return (
     <div
       style={{
@@ -1625,6 +1636,7 @@ function OwnedMonRow({ owned }: { owned: OwnedMon }) {
             value={`${mon.otName || "?"} (${mon.otGender === "male" ? "♂" : "♀"}) · ID ${String(mon.otId & 0xFFFF).padStart(5, "0")}`}
           />
           <Detail label="Origin" value={origin + (isTraded ? " · traded" : "")} />
+          <Detail label="First seen" value={firstSeenAt ? formatFirstSeen(firstSeenAt) : "—"} />
           <Detail label="PID" value={mon.pid.toString(16).toUpperCase().padStart(8, "0")} mono />
         </div>
       </div>

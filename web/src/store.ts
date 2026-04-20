@@ -16,6 +16,7 @@ const initial: HubState = {
   source: null,
   lastUpdateAt: null,
   saveInfo: null,
+  catchLog: {},
 };
 
 export const useLivingDex = create<HubState & Actions>((set) => ({
@@ -54,6 +55,8 @@ export const useLivingDex = create<HubState & Actions>((set) => ({
           enemyParty[msg.slot] = msg.pokemon;
           return { ...s, enemyParty, source: msg.source, lastUpdateAt: Date.now() };
         }
+        case "catch-log":
+          return { ...s, catchLog: msg.entries };
         case "box": {
           const currentBox =
             s.currentBox && s.currentBox.index === msg.index

@@ -1,3 +1,4 @@
+import { getCatchLog, recordPokemon } from "./catch-log.ts";
 import type { DecodedPokemon, GameInfo, HubState, SaveInfo, Source, WsMessage } from "./protocol.ts";
 
 type Subscriber = (msg: WsMessage) => void;
@@ -14,8 +15,20 @@ class StateStore {
     source: null,
     lastUpdateAt: null,
     saveInfo: null,
+    catchLog: {},
   };
   private subscribers = new Set<Subscriber>();
+
+  private observe(mons: Iterable<DecodedPokemon | null>) {
+    const added = recordPokemon(mons);
+    if (!added.length) return;
+    this.state.catchLog = getCatchLog();
+    this.broadcast({ type: "catch-log", entries: this.state.catchLog });
+  }
+
+  hydrateCatchLog() {
+    this.state.catchLog = getCatchLog();
+  }
 
   snapshot(): HubState {
     return structuredClone(this.state);
@@ -52,6 +65,7 @@ class StateStore {
     this.state.source = source;
     this.state.lastUpdateAt = Date.now();
     this.broadcast({ type: "party", slot, pokemon, source });
+    this.observe([pokemon]);
   }
 
   setEnemySlot(slot: number, pokemon: DecodedPokemon | null, source: Source) {
@@ -87,6 +101,11 @@ class StateStore {
       this.state.lastUpdateAt = saveInfo.savedAtMs;
     }
     this.broadcast({ type: "save", saveInfo });
+    if (saveInfo) {
+      const all: (DecodedPokemon | null)[] = [...saveInfo.party];
+      for (const box of saveInfo.boxes) all.push(...box.slots);
+      this.observe(all);
+    }
   }
 
   setBoxSlot(index: number, slot: number, pokemon: DecodedPokemon | null, source: Source) {
@@ -97,6 +116,7 @@ class StateStore {
     this.state.source = source;
     this.state.lastUpdateAt = Date.now();
     this.broadcast({ type: "box", index, slot, pokemon, source });
+    this.observe([pokemon]);
   }
 }
 

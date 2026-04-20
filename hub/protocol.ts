@@ -91,6 +91,9 @@ export type HubState = {
   source: Source | null;
   lastUpdateAt: number | null;
   saveInfo: SaveInfo | null;
+  // First-seen-by-the-app timestamps keyed by `${pid}:${otId}`.
+  // Gen 3 saves don't carry a real catch date, so this stands in.
+  catchLog: Record<string, number>;
 };
 
 export type WsMessage =
@@ -102,4 +105,5 @@ export type WsMessage =
   | { type: "connection"; live: boolean }
   | { type: "battle"; inBattle: boolean }
   | { type: "location"; location: { mapGroup: number; mapNum: number } | null }
-  | { type: "save"; saveInfo: SaveInfo | null };
+  | { type: "save"; saveInfo: SaveInfo | null }
+  | { type: "catch-log"; entries: Record<string, number> };
