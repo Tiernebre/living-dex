@@ -3,7 +3,7 @@ import { useLivingDex } from "./store";
 import speciesData from "./species.json";
 import movesData from "./moves.json";
 import encountersData from "./encounters.json";
-import type { DecodedPokemon } from "../../hub/protocol.ts";
+import type { DecodedPokemon, HubState } from "../../hub/protocol.ts";
 
 type EncounterPokemon = {
   species: number;
@@ -1101,6 +1101,71 @@ function Tabs({ tabs, initial, storageKey }: { tabs: Tab[]; initial: string; sto
   );
 }
 
+type Mode = "live" | "saved";
+
+function ModeToggle({ mode, setMode, connected }: { mode: Mode; setMode: (m: Mode) => void; connected: boolean }) {
+  const opts: { id: Mode; label: string; icon: string }[] = [
+    { id: "saved", label: "Saved", icon: "💾" },
+    { id: "live", label: "Live", icon: "⚡" },
+  ];
+  return (
+    <div
+      role="tablist"
+      style={{
+        display: "inline-flex",
+        padding: 3,
+        borderRadius: 999,
+        background: "var(--bg-muted)",
+        border: "1px solid var(--border)",
+        gap: 2,
+      }}
+    >
+      {opts.map((o) => {
+        const selected = o.id === mode;
+        const liveDot = o.id === "live" && connected;
+        return (
+          <button
+            key={o.id}
+            role="tab"
+            aria-selected={selected}
+            onClick={() => setMode(o.id)}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              padding: "5px 14px",
+              borderRadius: 999,
+              border: "none",
+              background: selected ? "var(--bg-surface)" : "transparent",
+              color: selected ? "var(--accent-strong)" : "var(--text-muted)",
+              fontSize: 13,
+              fontWeight: 600,
+              cursor: "pointer",
+              fontFamily: "inherit",
+              boxShadow: selected ? "0 1px 2px rgba(0,0,0,0.08)" : undefined,
+            }}
+          >
+            <span aria-hidden>{o.icon}</span>
+            {o.label}
+            {liveDot && (
+              <span
+                aria-hidden
+                style={{
+                  width: 7,
+                  height: 7,
+                  borderRadius: 999,
+                  background: "#16a34a",
+                  boxShadow: "0 0 0 2px color-mix(in srgb, #16a34a 30%, transparent)",
+                }}
+              />
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 const GAME_THEME_KEY: Record<string, string> = {
   AXVE: "ruby",
   AXPE: "sapphire",
@@ -1117,6 +1182,12 @@ export function App() {
     if (key) root.setAttribute("data-game", key);
     else root.removeAttribute("data-game");
   }, [game]);
+  const [mode, setMode] = useState<Mode>("saved");
+  const prevConnected = useRef(connected);
+  useEffect(() => {
+    if (!prevConnected.current && connected) setMode("live");
+    prevConnected.current = connected;
+  }, [connected]);
   const activeMon = party.find((p) => p !== null) ?? null;
   const activeEnemy = enemyParty.find((p) => p !== null) ?? null;
   return (
@@ -1137,39 +1208,97 @@ export function App() {
         />
         <ThemeToggle />
       </header>
-      {saveInfo && (
-        <section
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 16,
-            flexWrap: "wrap",
-            padding: "12px 16px",
-            marginBottom: 16,
-            border: "1px solid var(--border)",
-            borderRadius: 10,
-            background: "var(--bg-elevated)",
-          }}
-        >
-          <div>
-            <div style={{ fontSize: 11, opacity: 0.6, textTransform: "uppercase", letterSpacing: 0.5 }}>Trainer</div>
-            <div style={{ fontSize: 18, fontWeight: 600 }}>{saveInfo.playerName || "(unnamed)"}</div>
-            <div style={{ fontSize: 12, opacity: 0.7 }}>
-              {saveInfo.playerGender} · ID {String(saveInfo.trainerId & 0xFFFF).padStart(5, "0")}
-            </div>
-          </div>
-          <div style={{ marginLeft: "auto", textAlign: "right" }}>
-            <div style={{ fontSize: 11, opacity: 0.6, textTransform: "uppercase", letterSpacing: 0.5 }}>Play time</div>
-            <div style={{ fontSize: 22, fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>
-              {saveInfo.playTime.hours}:{String(saveInfo.playTime.minutes).padStart(2, "0")}
-              :{String(saveInfo.playTime.seconds).padStart(2, "0")}
-            </div>
-            <div style={{ fontSize: 11, opacity: 0.55 }}>
-              saved {new Date(saveInfo.savedAtMs).toLocaleTimeString()}
-            </div>
-          </div>
-        </section>
+      <div style={{ marginBottom: 20 }}>
+        <ModeToggle mode={mode} setMode={setMode} connected={connected} />
+      </div>
+      {mode === "saved" ? (
+        <SavedView saveInfo={saveInfo} />
+      ) : (
+        <LiveView
+          connected={connected}
+          party={party}
+          inBattle={inBattle}
+          activeMon={activeMon}
+          activeEnemy={activeEnemy}
+          location={location}
+        />
       )}
+    </main>
+  );
+}
+
+function SavedView({ saveInfo }: { saveInfo: HubState["saveInfo"] }) {
+  if (!saveInfo) {
+    return (
+      <section style={{ padding: 32, textAlign: "center", opacity: 0.6, fontStyle: "italic" }}>
+        No save file loaded.
+      </section>
+    );
+  }
+  return (
+    <>
+      <section
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 16,
+          flexWrap: "wrap",
+          padding: "12px 16px",
+          marginBottom: 16,
+          border: "1px solid var(--border)",
+          borderRadius: 10,
+          background: "var(--bg-elevated)",
+        }}
+      >
+        <div>
+          <div style={{ fontSize: 11, opacity: 0.6, textTransform: "uppercase", letterSpacing: 0.5 }}>Trainer</div>
+          <div style={{ fontSize: 18, fontWeight: 600 }}>{saveInfo.playerName || "(unnamed)"}</div>
+          <div style={{ fontSize: 12, opacity: 0.7 }}>
+            {saveInfo.playerGender} · ID {String(saveInfo.trainerId & 0xFFFF).padStart(5, "0")}
+          </div>
+        </div>
+        <div style={{ marginLeft: "auto", textAlign: "right" }}>
+          <div style={{ fontSize: 11, opacity: 0.6, textTransform: "uppercase", letterSpacing: 0.5 }}>Play time</div>
+          <div style={{ fontSize: 22, fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>
+            {saveInfo.playTime.hours}:{String(saveInfo.playTime.minutes).padStart(2, "0")}
+            :{String(saveInfo.playTime.seconds).padStart(2, "0")}
+          </div>
+          <div style={{ fontSize: 11, opacity: 0.55 }}>
+            saved {new Date(saveInfo.savedAtMs).toLocaleTimeString()}
+          </div>
+        </div>
+      </section>
+      <section style={{ padding: 32, textAlign: "center", opacity: 0.55, fontStyle: "italic", border: "1px dashed var(--border)", borderRadius: 10 }}>
+        Living Dex progress grid — coming soon.
+      </section>
+    </>
+  );
+}
+
+function LiveView({
+  connected,
+  party,
+  inBattle,
+  activeMon,
+  activeEnemy,
+  location,
+}: {
+  connected: boolean;
+  party: HubState["party"];
+  inBattle: boolean;
+  activeMon: DecodedPokemon | null;
+  activeEnemy: DecodedPokemon | null;
+  location: HubState["location"];
+}) {
+  if (!connected) {
+    return (
+      <section style={{ padding: 32, textAlign: "center", opacity: 0.6, fontStyle: "italic" }}>
+        Waiting for mGBA connection…
+      </section>
+    );
+  }
+  return (
+    <>
       <h2>Party</h2>
       <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
         {party.map((mon, i) => (
@@ -1213,6 +1342,6 @@ export function App() {
         initial={inBattle ? "matchup" : "encounters"}
         storageKey="living-dex:active-tab"
       />
-    </main>
+    </>
   );
 }
