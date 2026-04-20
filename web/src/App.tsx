@@ -3163,16 +3163,24 @@ function Dashboard() {
 
   const loaded = GAME_STEMS.filter((s) => saves[s]);
 
-  // State machine: a stage is unlocked when every `primary` game in the prior
-  // stage has a save loaded (proxy for 4★ completion). Stage 1 always unlocks.
+  // State machine: a stage is unlocked when every game in the prior stage has
+  // met its completion bar — primaries need a 4★ trainer card, secondaries need
+  // to have cleared the Elite Four. Stage 1 always unlocks.
   const stageUnlocked = useMemo(() => {
     const stages = Array.from(new Set(CHALLENGE_CHAIN.map((s) => s.stage))).sort((a, b) => a - b);
     const unlocked = new Set<number>();
     let prevComplete = true;
     for (const stage of stages) {
       if (prevComplete) unlocked.add(stage);
-      const primaries = CHALLENGE_CHAIN.filter((s) => s.stage === stage && s.primary);
-      prevComplete = primaries.length > 0 && primaries.every((s) => !!(s.stem && saves[s.stem]));
+      const games = CHALLENGE_CHAIN.filter((s) => s.stage === stage);
+      prevComplete = games.length > 0 && games.every((s) => {
+        const save = s.stem ? saves[s.stem] : null;
+        if (!save) return false;
+        if (s.primary) {
+          return trainerStarsBreakdown(save).every((t) => t.earned);
+        }
+        return save.enteredHof;
+      });
     }
     return unlocked;
   }, [saves]);
