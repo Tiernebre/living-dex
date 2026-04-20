@@ -3485,10 +3485,41 @@ function Dashboard() {
 
       {latestCatch && <LatestCatchCard {...latestCatch} />}
 
+      {(() => {
+        const boxStep = CHALLENGE_CHAIN.find((s) => s.stem === "box");
+        if (!boxStep) return null;
+        const saveInfo = boxStep.stem ? saves[boxStep.stem] ?? null : null;
+        const owned = boxStep.stem ? perGame[boxStep.stem] ?? null : null;
+        const isLive = !!(boxStep.stem && runningStem === boxStep.stem && connected);
+        return (
+          <section style={{ marginBottom: 24 }}>
+            <h2 style={{ margin: "0 0 10px" }}>Pokémon Box</h2>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                gap: 12,
+              }}
+            >
+              <ChainCard
+                step={boxStep}
+                loaded={!!saveInfo}
+                caught={owned?.size ?? 0}
+                owned={owned}
+                saveInfo={saveInfo}
+                unsupported={false}
+                isLive={isLive}
+                locked={false}
+              />
+            </div>
+          </section>
+        );
+      })()}
+
       <section style={{ marginBottom: 24 }}>
         <h2 style={{ margin: "0 0 10px" }}>Challenge chain</h2>
         {([3, 4, 5] as const).map((gen) => {
-          const genSteps = CHALLENGE_CHAIN.filter((s) => s.gen === gen);
+          const genSteps = CHALLENGE_CHAIN.filter((s) => s.gen === gen && s.stem !== "box");
           if (genSteps.length === 0) return null;
           const stages = Array.from(new Set(genSteps.map((s) => s.stage))).sort((a, b) => a - b);
           return (
