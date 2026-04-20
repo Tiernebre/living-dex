@@ -330,11 +330,23 @@ function natureFitScore(nature: string, base: StatBlock): {
   return { factor, plusRank, minusRank, neutral: false };
 }
 
+const GRADE_THRESHOLDS: { grade: Grade; min: number }[] = [
+  { grade: "S+", min: 108 },
+  { grade: "S", min: 96 },
+  { grade: "A", min: 82 },
+  { grade: "B", min: 60 },
+  { grade: "C", min: 45 },
+  { grade: "D", min: 30 },
+  { grade: "F", min: 0 },
+];
+
 function gradePokemon(ivs: StatBlock, nature: string, base: StatBlock): {
   grade: Grade;
   ivSum: number;
   greenCount: number;
   perfectCount: number;
+  ivScore: number;
+  total: number;
   nature: ReturnType<typeof natureFitScore>;
 } {
   const ivVals = (["hp", "atk", "def", "spa", "spd", "spe"] as StatKey[]).map((k) => ivs[k]);
@@ -358,8 +370,9 @@ function gradePokemon(ivs: StatBlock, nature: string, base: StatBlock): {
   else if (total >= 30) grade = "D";
   else grade = "F";
 
-  return { grade, ivSum, greenCount, perfectCount, nature: nat };
+  return { grade, ivSum, greenCount, perfectCount, ivScore, total, nature: nat };
 }
+
 
 const GRADE_CARD_CLASS: Partial<Record<Grade, string>> = {
   "S+": "grade-card grade-card-SPLUS",
@@ -422,18 +435,225 @@ const GRADE_STYLE: Record<Grade, { bg: string; fg: string; ring: string }> = {
   F: { bg: "linear-gradient(135deg,#fecaca,#ef4444)", fg: "#450a0a", ring: "#ef4444" },
 };
 
+function GradeBreakdown({
+  graded,
+  nature,
+}: {
+  graded: ReturnType<typeof gradePokemon>;
+  nature: string;
+}) {
+  const s = GRADE_STYLE[graded.grade];
+  const rankLabel = (r: number | null) =>
+    r == null ? "?" : r === 1 ? "#1 (highest)" : r === 5 ? "#5 (lowest)" : `#${r}`;
+  const nextUp = [...GRADE_THRESHOLDS].reverse().find((t) => t.min > graded.total);
+  const autoSPlus = graded.perfectCount === 6 && graded.nature.factor >= 0.88;
+
+  const base = (graded.ivSum / 186) * 100;
+  const Row = ({ label, value, accent }: { label: string; value: React.ReactNode; accent?: string }) => (
+    <div style={{ display: "flex", justifyContent: "space-between", gap: 12, fontSize: 12, padding: "2px 0" }}>
+      <span style={{ opacity: 0.7 }}>{label}</span>
+      <span style={{ fontWeight: 600, color: accent, fontVariantNumeric: "tabular-nums" }}>{value}</span>
+    </div>
+  );
+
+  return (
+    <div style={{ minWidth: 240, fontSize: 13 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8 }}>
+        <span
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minWidth: 34,
+            height: 34,
+            padding: "0 8px",
+            borderRadius: 8,
+            background: s.bg,
+            color: s.fg,
+            fontWeight: 800,
+            fontSize: 16,
+            boxShadow: `0 0 0 1px ${s.ring}`,
+          }}
+        >
+          {graded.grade}
+        </span>
+        <div>
+          <div style={{ fontWeight: 700 }}>Grade {graded.grade}</div>
+          <div style={{ fontSize: 11, opacity: 0.7 }}>
+            score <span style={{ fontWeight: 700 }}>{graded.total.toFixed(1)}</span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        style={{
+          paddingTop: 8,
+          borderTop: "1px dashed color-mix(in srgb, var(--border) 60%, transparent)",
+        }}
+      >
+        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, opacity: 0.65, marginBottom: 4 }}>
+          IVs
+        </div>
+        <Row label="Total" value={`${graded.ivSum} / 186 (${(graded.ivSum / 186 * 100).toFixed(0)}%)`} />
+        <Row
+          label="Perfect (31)"
+          value={`${graded.perfectCount} ×`}
+          accent={graded.perfectCount > 0 ? "var(--iv-perfect, #059669)" : undefined}
+        />
+        <Row
+          label="Green+ (≥26)"
+          value={`${graded.greenCount} ×`}
+          accent={graded.greenCount > 0 ? "var(--iv-great, #16a34a)" : undefined}
+        />
+        <Row
+          label="IV score"
+          value={
+            <>
+              {base.toFixed(1)}
+              {graded.perfectCount > 0 && <span style={{ opacity: 0.7 }}> +{graded.perfectCount * 2}</span>}
+              {graded.greenCount > 0 && <span style={{ opacity: 0.7 }}> +{graded.greenCount}</span>}
+              {" = "}
+              <strong>{graded.ivScore.toFixed(1)}</strong>
+            </>
+          }
+        />
+      </div>
+
+      <div
+        style={{
+          marginTop: 10,
+          paddingTop: 8,
+          borderTop: "1px dashed color-mix(in srgb, var(--border) 60%, transparent)",
+        }}
+      >
+        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, opacity: 0.65, marginBottom: 4 }}>
+          Nature
+        </div>
+        <Row label={graded.nature.neutral ? "Kind" : nature} value={graded.nature.neutral ? "Neutral" : nature} />
+        {!graded.nature.neutral && (
+          <>
+            <Row label="Boosts" value={rankLabel(graded.nature.plusRank)} />
+            <Row label="Lowers" value={rankLabel(graded.nature.minusRank)} />
+          </>
+        )}
+        <Row
+          label="Multiplier"
+          value={`×${graded.nature.factor.toFixed(2)}`}
+          accent={graded.nature.factor >= 0.88 ? "#16a34a" : graded.nature.factor < 0.6 ? "#ef4444" : undefined}
+        />
+      </div>
+
+      <div
+        style={{
+          marginTop: 10,
+          paddingTop: 8,
+          borderTop: "1px dashed color-mix(in srgb, var(--border) 60%, transparent)",
+          fontSize: 12,
+          opacity: 0.85,
+        }}
+      >
+        <div style={{ fontSize: 11, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, opacity: 0.75, marginBottom: 4 }}>
+          Final
+        </div>
+        <div>
+          {graded.ivScore.toFixed(1)} × {graded.nature.factor.toFixed(2)} ={" "}
+          <strong style={{ color: s.ring }}>{graded.total.toFixed(1)}</strong>
+        </div>
+        {autoSPlus && (
+          <div style={{ marginTop: 6, color: "#f59e0b", fontWeight: 600 }}>
+            ✨ Auto-S+: 6× perfect IVs with a well-fit nature.
+          </div>
+        )}
+        {nextUp && (
+          <div style={{ marginTop: 6 }}>
+            Needs <strong>≥{nextUp.min}</strong> for <strong>{nextUp.grade}</strong> (short by{" "}
+            <strong>{(nextUp.min - graded.total).toFixed(1)}</strong>).
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function GradeChip({
+  graded,
+  nature,
+  fancy,
+}: {
+  graded: ReturnType<typeof gradePokemon>;
+  nature: string;
+  fancy: boolean;
+}) {
+  const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
+  const close = () => setAnchor(null);
+
+  useEffect(() => {
+    if (!anchor) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [anchor]);
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={(e) => {
+          if (anchor) close();
+          else setAnchor(e.currentTarget);
+        }}
+        aria-label={`Grade ${graded.grade} — show breakdown`}
+        style={{
+          background: "none",
+          border: "none",
+          padding: 0,
+          margin: 0,
+          cursor: "pointer",
+          display: "inline-flex",
+          alignItems: "center",
+        }}
+      >
+        {fancy ? <GradeBadge grade={graded.grade} /> : <GradeLetter grade={graded.grade} />}
+      </button>
+      {anchor && (
+        <DexPopover anchor={anchor} onClose={close}>
+          <GradeBreakdown graded={graded} nature={nature} />
+        </DexPopover>
+      )}
+    </>
+  );
+}
+
+function GradeLetter({ grade }: { grade: Grade }) {
+  const s = GRADE_STYLE[grade];
+  return (
+    <span
+      style={{
+        fontWeight: 800,
+        fontSize: 18,
+        lineHeight: 1,
+        color: s.ring,
+        letterSpacing: 0.5,
+        fontVariantNumeric: "tabular-nums",
+        textShadow: "0 1px 0 rgba(0,0,0,0.15)",
+      }}
+    >
+      {grade}
+    </span>
+  );
+}
+
 function GradeBadge({
   grade,
-  detail,
 }: {
   grade: Grade;
-  detail: string;
 }) {
   const s = GRADE_STYLE[grade];
   const glow = grade === "A" || grade === "S" || grade === "S+";
   return (
     <span
-      title={detail}
       className={glow ? "grade-badge-glow" : undefined}
       style={{
         display: "inline-flex",
@@ -746,26 +966,17 @@ function ExpProgress({ level, exp, rate }: { level: number; exp: number; rate: G
 function PokemonCard({
   mon,
   movesRight = false,
-  showGrade = false,
+  fancyGrade = false,
 }: {
   mon: DecodedPokemon;
   movesRight?: boolean;
-  showGrade?: boolean;
+  // Wild encounters opt into the glow/confetti badge. Party/PC get a plain
+  // colored letter — the grade is still useful but the card shouldn't scream.
+  fancyGrade?: boolean;
 }) {
   const info = lookup(mon.species);
-  const graded = showGrade && info ? gradePokemon(mon.ivs, mon.nature, info.baseStats) : null;
-  const rankLabel = (r: number | null) =>
-    r == null ? "?" : r === 1 ? "#1" : r === 5 ? "#5 (worst)" : `#${r}`;
-  const gradeDetail = graded
-    ? [
-        `Grade ${graded.grade}`,
-        `IV total ${graded.ivSum}/186 · ${graded.perfectCount} perfect, ${graded.greenCount} green+`,
-        graded.nature.neutral
-          ? "Neutral nature (no stat effect)"
-          : `Nature boosts stat ${rankLabel(graded.nature.plusRank)}, lowers stat ${rankLabel(graded.nature.minusRank)} (fit ${(graded.nature.factor * 100).toFixed(0)}%)`,
-      ].join("\n")
-    : "";
-  const gradeClass = graded ? GRADE_CARD_CLASS[graded.grade] ?? "" : "";
+  const graded = info ? gradePokemon(mon.ivs, mon.nature, info.baseStats) : null;
+  const gradeClass = fancyGrade && graded ? GRADE_CARD_CLASS[graded.grade] ?? "" : "";
   return (
     <div
       className={gradeClass}
@@ -779,31 +990,29 @@ function PokemonCard({
         position: "relative",
       }}
     >
-      {graded?.grade === "S+" && <Confetti />}
-      {graded && (
-        <div style={{ position: "absolute", top: 8, right: 8, zIndex: 1 }}>
-          <GradeBadge grade={graded.grade} detail={gradeDetail} />
-        </div>
-      )}
+      {fancyGrade && graded?.grade === "S+" && <Confetti />}
       {info && (
         <img src={thumbnailUrl(info.nationalDex)} alt={info.name} width={72} height={72} style={{ flexShrink: 0 }} />
       )}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontWeight: 600, marginBottom: 4 }}>
-          {mon.nickname}
-          {info && (
-            <span style={{ fontWeight: 400, opacity: 0.7 }}>
-              {" — "}
-              <a
-                href={serebiiGen3DexUrl(info.nationalDex)}
-                target="_blank"
-                rel="noreferrer"
-                style={{ color: "inherit" }}
-              >
-                {formatSpeciesName(info.name)}
-              </a>
-            </span>
-          )}
+        <div style={{ fontWeight: 600, marginBottom: 4, display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+          <span>
+            {mon.nickname}
+            {info && (
+              <span style={{ fontWeight: 400, opacity: 0.7 }}>
+                {" — "}
+                <a
+                  href={serebiiGen3DexUrl(info.nationalDex)}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{ color: "inherit" }}
+                >
+                  {formatSpeciesName(info.name)}
+                </a>
+              </span>
+            )}
+          </span>
+          {graded && <GradeChip graded={graded} nature={mon.nature} fancy={fancyGrade} />}
         </div>
         <div style={{ fontSize: 13, opacity: 0.8, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
           <span>Lv {mon.level} · {mon.nature}</span>
@@ -1630,6 +1839,7 @@ function DexPopover({
     width: number;
     arrowLeft: number;
     placement: "top" | "bottom";
+    maxHeight: number;
   } | null>(null);
 
   useLayoutEffect(() => {
@@ -1640,18 +1850,23 @@ function DexPopover({
       const vw = window.innerWidth;
       const vh = window.innerHeight;
       const width = Math.min(POPOVER_WIDTH, vw - POPOVER_MARGIN * 2);
-      const height = el.offsetHeight;
+
+      const spaceAbove = Math.max(0, anchorRect.top - POPOVER_MARGIN - POPOVER_GAP);
+      const spaceBelow = Math.max(0, vh - anchorRect.bottom - POPOVER_MARGIN - POPOVER_GAP);
+      // Pick the side with more room; clamp measured height to that side so a
+      // very tall popover stays anchored and scrolls internally instead of
+      // running off-screen.
+      const placement: "top" | "bottom" = spaceAbove >= spaceBelow ? "top" : "bottom";
+      const sideSpace = Math.max(120, placement === "top" ? spaceAbove : spaceBelow);
+      const maxHeight = Math.max(120, Math.min(el.scrollHeight, sideSpace));
+      const height = Math.min(el.offsetHeight, maxHeight);
 
       const anchorCenter = anchorRect.left + anchorRect.width / 2;
       const left = Math.min(
         Math.max(POPOVER_MARGIN, anchorCenter - width / 2),
-        vw - width - POPOVER_MARGIN,
+        Math.max(POPOVER_MARGIN, vw - width - POPOVER_MARGIN),
       );
 
-      const spaceAbove = anchorRect.top;
-      const spaceBelow = vh - anchorRect.bottom;
-      const placement: "top" | "bottom" =
-        spaceAbove >= height + POPOVER_GAP || spaceAbove >= spaceBelow ? "top" : "bottom";
       const top =
         placement === "top"
           ? Math.max(POPOVER_MARGIN, anchorRect.top - height - POPOVER_GAP)
@@ -1662,7 +1877,7 @@ function DexPopover({
         width - 14,
       );
 
-      setPos({ left, top, width, arrowLeft, placement });
+      setPos({ left, top, width, arrowLeft, placement, maxHeight });
     };
 
     place();
@@ -1697,6 +1912,9 @@ function DexPopover({
         left: pos?.left ?? -9999,
         top: pos?.top ?? -9999,
         width: pos?.width ?? POPOVER_WIDTH,
+        maxHeight: pos?.maxHeight,
+        overflowY: "auto",
+        overscrollBehavior: "contain",
         visibility: pos ? "visible" : "hidden",
         ["--arrow-left" as string]: pos ? `${pos.arrowLeft}px` : "50%",
       }}
@@ -1893,7 +2111,7 @@ function LiveView({
                     <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: 0.5 }}>
                       Opponent
                     </div>
-                    <PokemonCard mon={activeEnemy!} showGrade />
+                    <PokemonCard mon={activeEnemy!} fancyGrade />
                   </div>
                 </div>
               ) : (
@@ -2800,7 +3018,7 @@ function PokemonDetail() {
           {mon.nickname || (info ? formatSpeciesName(info.name) : key)}
         </span>
       </div>
-      <PokemonCard mon={mon} movesRight showGrade />
+      <PokemonCard mon={mon} movesRight />
       <section
         style={{
           marginTop: 16,
