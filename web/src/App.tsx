@@ -108,6 +108,24 @@ function thumbnailUrl(nationalDex: number): string {
   return `https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/thumbnails/${String(nationalDex).padStart(4, "0")}.png`;
 }
 
+function trainerArtUrl(stem: GameStem, gender: "male" | "female"): string {
+  const base = "https://play.pokemonshowdown.com/sprites/trainers";
+  if (stem === "ruby" || stem === "sapphire") {
+    return `${base}/${gender === "female" ? "may-gen3rs" : "brendan-gen3rs"}.png`;
+  }
+  if (stem === "emerald") {
+    return `${base}/${gender === "female" ? "may-gen3" : "brendan-gen3"}.png`;
+  }
+  return `${base}/${gender === "female" ? "leaf-gen3" : "red-gen3"}.png`;
+}
+
+function trainerCharacterName(stem: GameStem, gender: "male" | "female"): string {
+  if (stem === "firered" || stem === "leafgreen") {
+    return gender === "female" ? "Leaf" : "Red";
+  }
+  return gender === "female" ? "May" : "Brendan";
+}
+
 // Cumulative EXP to reach a given level for each growth curve.
 // Formulas from Bulbapedia "Experience".
 function expForLevel(level: number, rate: GrowthRate): number {
@@ -1388,37 +1406,15 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
   }
   return (
     <>
-      <section
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 16,
-          flexWrap: "wrap",
-          padding: "12px 16px",
-          marginBottom: 16,
-          border: "1px solid var(--border)",
-          borderRadius: 10,
-          background: "var(--bg-elevated)",
-        }}
-      >
-        <div>
-          <div style={{ fontSize: 11, opacity: 0.6, textTransform: "uppercase", letterSpacing: 0.5 }}>Trainer</div>
-          <div style={{ fontSize: 18, fontWeight: 600 }}>{saveInfo.playerName || "(unnamed)"}</div>
-          <div style={{ fontSize: 12, opacity: 0.7 }}>
-            {saveInfo.playerGender} · ID {String(saveInfo.trainerId & 0xFFFF).padStart(5, "0")}
-          </div>
-        </div>
-        <div style={{ marginLeft: "auto", textAlign: "right" }}>
-          <div style={{ fontSize: 11, opacity: 0.6, textTransform: "uppercase", letterSpacing: 0.5 }}>Play time</div>
-          <div style={{ fontSize: 22, fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>
-            {saveInfo.playTime.hours}:{String(saveInfo.playTime.minutes).padStart(2, "0")}
-            :{String(saveInfo.playTime.seconds).padStart(2, "0")}
-          </div>
-          <div style={{ fontSize: 11, opacity: 0.55 }}>
-            saved {new Date(saveInfo.savedAtMs).toLocaleTimeString()}
-          </div>
-        </div>
-      </section>
+      <div style={{ marginBottom: 16 }}>
+        <TrainerSaveCard
+          stem={stem}
+          saveInfo={saveInfo}
+          speciesCount={countOwnedSpecies(saveInfo).size}
+          showSeconds
+          savedAtMs={saveInfo.savedAtMs}
+        />
+      </div>
       <h2 style={{ marginTop: 0 }}>Party</h2>
       {saveInfo.party.some((p) => p) ? (
         <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
@@ -1881,6 +1877,159 @@ function Pokeball({ size = 18, color = "#ef4444" }: { size?: number; color?: str
   );
 }
 
+function TrainerSaveCard({
+  stem,
+  saveInfo,
+  speciesCount,
+  linkTo,
+  showSeconds,
+  savedAtMs,
+}: {
+  stem: GameStem;
+  saveInfo: SaveInfo;
+  speciesCount: number;
+  linkTo?: string;
+  showSeconds?: boolean;
+  savedAtMs?: number;
+}) {
+  const step = CHALLENGE_CHAIN.find((c) => c.stem === stem);
+  const tint = step?.tint ?? "#6b7280";
+  const mascots = step?.mascots ?? [];
+  const s = saveInfo;
+
+  const containerStyle: React.CSSProperties = {
+    color: "inherit",
+    textDecoration: "none",
+    position: "relative",
+    padding: "14px 16px 14px 20px",
+    border: `1px solid color-mix(in srgb, ${tint} 35%, var(--border))`,
+    borderRadius: 14,
+    background: `linear-gradient(135deg, color-mix(in srgb, ${tint} 12%, var(--bg-elevated)), var(--bg-elevated) 70%)`,
+    display: "flex",
+    gap: 16,
+    alignItems: "center",
+    flexWrap: "wrap",
+    overflow: "hidden",
+  };
+
+  const body = (
+    <>
+      <span
+        aria-hidden
+        style={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: 4,
+          background: tint,
+        }}
+      />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 72,
+          flexShrink: 0,
+        }}
+      >
+        {mascots.map((dex, i) => (
+          <img
+            key={dex}
+            src={thumbnailUrl(dex)}
+            alt=""
+            width={mascots.length > 1 ? 56 : 68}
+            height={mascots.length > 1 ? 56 : 68}
+            loading="lazy"
+            style={{
+              filter: `drop-shadow(0 2px 4px ${tint}66)`,
+              marginLeft: i > 0 ? -18 : 0,
+              zIndex: mascots.length - i,
+              position: "relative",
+            }}
+          />
+        ))}
+      </div>
+      <div style={{ minWidth: 0 }}>
+        <div
+          style={{
+            fontSize: 11,
+            fontWeight: 800,
+            opacity: 0.9,
+            textTransform: "uppercase",
+            letterSpacing: 0.6,
+            color: `color-mix(in srgb, ${tint} 80%, var(--text))`,
+          }}
+        >
+          {GAME_DISPLAY_NAME[stem]}
+        </div>
+        <div style={{ fontSize: 18, fontWeight: 600 }}>{s.playerName || "(unnamed)"}</div>
+        <div style={{ fontSize: 12, opacity: 0.7, display: "flex", alignItems: "center", gap: 8 }}>
+          <img
+            src={trainerArtUrl(stem, s.playerGender)}
+            alt={trainerCharacterName(stem, s.playerGender)}
+            title={trainerCharacterName(stem, s.playerGender)}
+            height={36}
+            loading="lazy"
+            style={{
+              imageRendering: "pixelated",
+              filter: `drop-shadow(0 1px 2px ${tint}55)`,
+            }}
+          />
+          <span>
+            {trainerCharacterName(stem, s.playerGender)} · ID{" "}
+            {String(s.trainerId & 0xFFFF).padStart(5, "0")}
+          </span>
+        </div>
+      </div>
+      <div style={{ marginLeft: "auto", textAlign: "right", position: "relative" }}>
+        <div style={{ fontSize: 11, opacity: 0.6, textTransform: "uppercase", letterSpacing: 0.5 }}>
+          Play time
+        </div>
+        <div
+          style={{
+            fontSize: showSeconds ? 22 : 20,
+            fontWeight: 700,
+            fontVariantNumeric: "tabular-nums",
+          }}
+        >
+          {s.playTime.hours}:{String(s.playTime.minutes).padStart(2, "0")}
+          {showSeconds ? `:${String(s.playTime.seconds).padStart(2, "0")}` : ""}
+        </div>
+        <div style={{ fontSize: 12, opacity: 0.7 }}>
+          {savedAtMs
+            ? `saved ${new Date(savedAtMs).toLocaleTimeString()}`
+            : `${speciesCount} species`}
+        </div>
+      </div>
+      <span
+        aria-hidden
+        style={{
+          position: "absolute",
+          right: -18,
+          bottom: -18,
+          width: 72,
+          height: 72,
+          borderRadius: 999,
+          opacity: 0.08,
+          background: `radial-gradient(circle at 30% 30%, ${tint}, transparent 70%)`,
+          pointerEvents: "none",
+        }}
+      />
+    </>
+  );
+
+  if (linkTo) {
+    return (
+      <Link to={linkTo} style={containerStyle}>
+        {body}
+      </Link>
+    );
+  }
+  return <div style={containerStyle}>{body}</div>;
+}
+
 function ChainCard({
   step,
   loaded,
@@ -2216,48 +2365,15 @@ function Dashboard() {
           </p>
         ) : (
           <div style={{ display: "grid", gap: 10 }}>
-            {loaded.map((stem) => {
-              const s = saves[stem]!;
-              return (
-                <Link
-                  key={stem}
-                  to={`/${stem}`}
-                  style={{
-                    color: "inherit",
-                    textDecoration: "none",
-                    padding: "12px 16px",
-                    border: "1px solid var(--border)",
-                    borderRadius: 10,
-                    background: "var(--bg-elevated)",
-                    display: "flex",
-                    gap: 16,
-                    alignItems: "center",
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <div>
-                    <div style={{ fontSize: 11, opacity: 0.6, textTransform: "uppercase", letterSpacing: 0.5 }}>
-                      {GAME_DISPLAY_NAME[stem]}
-                    </div>
-                    <div style={{ fontSize: 18, fontWeight: 600 }}>{s.playerName || "(unnamed)"}</div>
-                    <div style={{ fontSize: 12, opacity: 0.7 }}>
-                      {s.playerGender} · ID {String(s.trainerId & 0xFFFF).padStart(5, "0")}
-                    </div>
-                  </div>
-                  <div style={{ marginLeft: "auto", textAlign: "right" }}>
-                    <div style={{ fontSize: 11, opacity: 0.6, textTransform: "uppercase", letterSpacing: 0.5 }}>
-                      Play time
-                    </div>
-                    <div style={{ fontSize: 20, fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>
-                      {s.playTime.hours}:{String(s.playTime.minutes).padStart(2, "0")}
-                    </div>
-                    <div style={{ fontSize: 12, opacity: 0.7 }}>
-                      {perGame[stem]?.size ?? 0} species
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
+            {loaded.map((stem) => (
+              <TrainerSaveCard
+                key={stem}
+                stem={stem}
+                saveInfo={saves[stem]!}
+                speciesCount={perGame[stem]?.size ?? 0}
+                linkTo={`/${stem}`}
+              />
+            ))}
           </div>
         )}
       </section>
