@@ -2086,10 +2086,68 @@ function TrainerSaveCard({
   return <div style={containerStyle}>{body}</div>;
 }
 
+function PrimaryProgress({
+  step,
+  loaded,
+  owned,
+  tint,
+}: {
+  step: ChainStep;
+  loaded: boolean;
+  owned: Set<number> | null;
+  tint: string;
+}) {
+  const set = owned ?? new Set<number>();
+  const regional = step.stem ? regionalDexProgress(step.stem, set) : null;
+  const nationalCaught = loaded ? set.size : 0;
+  // Trainer-card stars aren't parsed from the save yet. Show the target
+  // structure so the goal is visible, and leave the progress dimmed.
+  const trainerStars = 0;
+  return (
+    <div
+      style={{
+        marginTop: 8,
+        paddingTop: 8,
+        borderTop: "1px dashed color-mix(in srgb, var(--border) 60%, transparent)",
+        display: "flex",
+        flexWrap: "wrap",
+        gap: 10,
+      }}
+    >
+      {regional && (
+        <ProgressPill
+          label="Regional dex"
+          caught={regional.caught}
+          total={regional.total}
+          tint={tint}
+          dim={!loaded}
+        />
+      )}
+      {step.endOfGen && (
+        <ProgressPill
+          label="National dex"
+          caught={nationalCaught}
+          total={GEN3_NATIONAL_TOTAL}
+          tint={tint}
+          dim={!loaded}
+        />
+      )}
+      <ProgressPill
+        label="Trainer card"
+        caught={trainerStars}
+        total={TRAINER_CARD_STARS}
+        tint={tint}
+        dim
+      />
+    </div>
+  );
+}
+
 function ChainCard({
   step,
   loaded,
   caught,
+  owned,
   unsupported,
   isLive,
   locked,
@@ -2097,6 +2155,7 @@ function ChainCard({
   step: ChainStep;
   loaded: boolean;
   caught: number;
+  owned: Set<number> | null;
   unsupported: boolean;
   isLive: boolean;
   locked: boolean;
@@ -2107,7 +2166,7 @@ function ChainCard({
     : unsupported
     ? "Roadmap"
     : loaded
-    ? `${caught} / ${hoennDex.length} species caught`
+    ? `${caught} species owned`
     : "No save loaded";
   const inner = (
     <div
@@ -2272,6 +2331,9 @@ function ChainCard({
           <Pokeball size={12} color={tint} />
           <span>{statusLine}</span>
         </div>
+        {step.primary && !locked && (
+          <PrimaryProgress step={step} loaded={loaded} owned={owned} tint={tint} />
+        )}
       </div>
       {loaded && (
         <span
@@ -2304,6 +2366,63 @@ function ChainCard({
   return inner;
 }
 
+
+const GEN3_NATIONAL_TOTAL = 386;
+const KANTO_DEX_TOTAL = 151;
+const TRAINER_CARD_STARS = 4;
+
+// Regional-dex completion target for a primary game's 4★ trainer card.
+// Only Gen 3 games have parsers right now — later-gen primaries fall through.
+function regionalDexProgress(stem: GameStem, owned: Set<number>): { caught: number; total: number } | null {
+  if (stem === "firered" || stem === "leafgreen") {
+    let caught = 0;
+    for (let n = 1; n <= KANTO_DEX_TOTAL; n++) if (owned.has(n)) caught++;
+    return { caught, total: KANTO_DEX_TOTAL };
+  }
+  if (stem === "ruby" || stem === "sapphire" || stem === "emerald") {
+    let caught = 0;
+    for (const entry of hoennDex) if (owned.has(entry.nationalDex)) caught++;
+    return { caught, total: hoennDex.length };
+  }
+  return null;
+}
+
+function ProgressPill({
+  label,
+  caught,
+  total,
+  tint,
+  dim,
+}: {
+  label: string;
+  caught: number;
+  total: number;
+  tint: string;
+  dim?: boolean;
+}) {
+  const pct = total === 0 ? 0 : Math.min(100, (caught / total) * 100);
+  const done = caught >= total && total > 0;
+  return (
+    <div style={{ minWidth: 0, flex: "1 1 140px", opacity: dim ? 0.6 : 1 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: 0.5, opacity: 0.75, marginBottom: 2 }}>
+        <span>{label}</span>
+        <span style={{ fontVariantNumeric: "tabular-nums" }}>
+          {caught} / {total}{done ? " ✓" : ""}
+        </span>
+      </div>
+      <div style={{ height: 4, background: "var(--bg-muted)", borderRadius: 999, overflow: "hidden" }}>
+        <div
+          style={{
+            width: `${pct}%`,
+            height: "100%",
+            background: done ? "#16a34a" : tint,
+            transition: "width 200ms ease",
+          }}
+        />
+      </div>
+    </div>
+  );
+}
 
 function countOwnedSpecies(saveInfo: SaveInfo): Set<number> {
   const set = new Set<number>();
@@ -2562,7 +2681,8 @@ function Dashboard() {
                   >
                     {steps.map((step) => {
                       const loaded = step.stem ? !!saves[step.stem] : false;
-                      const caught = step.stem ? perGame[step.stem]?.size ?? 0 : 0;
+                      const owned = step.stem ? perGame[step.stem] ?? null : null;
+                      const caught = owned?.size ?? 0;
                       const unsupported = !step.stem;
                       const isLive = !!(step.stem && runningStem === step.stem && connected);
                       return (
@@ -2571,6 +2691,7 @@ function Dashboard() {
                           step={step}
                           loaded={loaded}
                           caught={caught}
+                          owned={owned}
                           unsupported={unsupported}
                           isLive={isLive}
                           locked={locked}
