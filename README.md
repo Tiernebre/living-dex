@@ -27,7 +27,7 @@ Will be using mgba for the game boy games, and Dolphin for the gamecube ones.
 #### Challenges
 
 - You must play the games in the order they were originally released — as if you were back living in that year — from Ruby/Sapphire through Black / White 2.
-  - Release order: Ruby/Sapphire → FireRed/LeafGreen → Emerald → Diamond/Pearl → Platinum → HeartGold/SoulSilver → Black/White → Black 2/White 2.
+  - Release order: Ruby/Sapphire → Colosseum → FireRed/LeafGreen → Emerald → XD: Gale of Darkness → Diamond/Pearl → Platinum → HeartGold/SoulSilver → Black/White → Black 2/White 2.
 - You cannot start a game until the **primary** game(s) from the previous release stage are completed. The tooling treats this as a state machine and locks out later games on the dashboard.
 - Each release has a **primary** game and, where a paired version exists, a **secondary** game:
   - The **primary** game is played to full completion — a 4★ trainer card is required.

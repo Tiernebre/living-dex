@@ -1525,6 +1525,9 @@ type ChainStep = {
                  // save loaded (proxy for 4-star completion).
   primary?: boolean;
   endOfGen?: boolean;
+  // GameCube entries — the hub can't decode their saves, so they sit in the
+  // chain for release-order context but don't participate in stage gating.
+  external?: boolean;
 };
 // Ordered by North American release date — the challenge is played as if
 // re-living each release year in sequence. See README.md "Challenges".
@@ -1532,29 +1535,33 @@ const CHALLENGE_CHAIN: ChainStep[] = [
   // Stage 1 — 2003-03 (Gen 3)
   { stem: "ruby",      gen: 3, stage: 1, label: "Ruby",       mascots: [383], tint: "#dc2626" },
   { stem: "sapphire",  gen: 3, stage: 1, label: "Sapphire",   mascots: [382], tint: "#2563eb", primary: true },
-  // Stage 2 — 2004-09 (Gen 3)
-  { stem: "firered",   gen: 3, stage: 2, label: "FireRed",    mascots: [6],   tint: "#ea580c" },
-  { stem: "leafgreen", gen: 3, stage: 2, label: "LeafGreen",  mascots: [3],   tint: "#16a34a", primary: true },
-  // Stage 3 — 2005-05 (Gen 3)
-  { stem: "emerald",   gen: 3, stage: 3, label: "Emerald",    mascots: [384], tint: "#059669", primary: true, endOfGen: true },
-  // Stage 4 — 2007-04 (Gen 4)
-  { stem: null, gen: 4, stage: 4, label: "Diamond",   mascots: [483], tint: "#38bdf8", primary: true },
-  { stem: null, gen: 4, stage: 4, label: "Pearl",     mascots: [484], tint: "#f9a8d4" },
-  // Stage 5 — 2009-03 (Gen 4)
-  { stem: null, gen: 4, stage: 5, label: "Platinum",  mascots: [487], tint: "#a855f7", primary: true },
-  // Stage 6 — 2010-03 (Gen 4)
-  { stem: null, gen: 4, stage: 6, label: "HeartGold", mascots: [250], tint: "#f59e0b", primary: true, endOfGen: true },
-  { stem: null, gen: 4, stage: 6, label: "SoulSilver", mascots: [249], tint: "#cbd5e1" },
-  // Stage 7 — 2011-03 (Gen 5)
-  { stem: null, gen: 5, stage: 7, label: "White",     mascots: [643], tint: "#e5e7eb", primary: true },
-  { stem: null, gen: 5, stage: 7, label: "Black",     mascots: [644], tint: "#1f2937" },
-  // Stage 8 — 2012-10 (Gen 5)
-  { stem: null, gen: 5, stage: 8, label: "Black 2",   mascots: [644], tint: "#0ea5e9", primary: true, endOfGen: true },
-  { stem: null, gen: 5, stage: 8, label: "White 2",   mascots: [643], tint: "#6b7280" },
+  // Stage 2 — 2003-11 (Gen 3 · GameCube)
+  { stem: null, gen: 3, stage: 2, label: "Colosseum", mascots: [197, 196], tint: "#9333ea", primary: true, external: true },
+  // Stage 3 — 2004-09 (Gen 3)
+  { stem: "firered",   gen: 3, stage: 3, label: "FireRed",    mascots: [6],   tint: "#ea580c" },
+  { stem: "leafgreen", gen: 3, stage: 3, label: "LeafGreen",  mascots: [3],   tint: "#16a34a", primary: true },
+  // Stage 4 — 2005-05 (Gen 3)
+  { stem: "emerald",   gen: 3, stage: 4, label: "Emerald",    mascots: [384], tint: "#059669", primary: true, endOfGen: true },
+  // Stage 5 — 2005-10 (Gen 3 · GameCube)
+  { stem: null, gen: 3, stage: 5, label: "XD: Gale of Darkness", short: "XD", mascots: [249], tint: "#4c1d95", primary: true, external: true },
+  // Stage 6 — 2007-04 (Gen 4)
+  { stem: null, gen: 4, stage: 6, label: "Diamond",   mascots: [483], tint: "#38bdf8", primary: true },
+  { stem: null, gen: 4, stage: 6, label: "Pearl",     mascots: [484], tint: "#f9a8d4" },
+  // Stage 7 — 2009-03 (Gen 4)
+  { stem: null, gen: 4, stage: 7, label: "Platinum",  mascots: [487], tint: "#a855f7", primary: true },
+  // Stage 8 — 2010-03 (Gen 4)
+  { stem: null, gen: 4, stage: 8, label: "HeartGold", mascots: [250], tint: "#f59e0b", primary: true, endOfGen: true },
+  { stem: null, gen: 4, stage: 8, label: "SoulSilver", mascots: [249], tint: "#cbd5e1" },
+  // Stage 9 — 2011-03 (Gen 5)
+  { stem: null, gen: 5, stage: 9, label: "White",     mascots: [643], tint: "#e5e7eb", primary: true },
+  { stem: null, gen: 5, stage: 9, label: "Black",     mascots: [644], tint: "#1f2937" },
+  // Stage 10 — 2012-10 (Gen 5)
+  { stem: null, gen: 5, stage: 10, label: "Black 2",  mascots: [644], tint: "#0ea5e9", primary: true, endOfGen: true },
+  { stem: null, gen: 5, stage: 10, label: "White 2",  mascots: [643], tint: "#6b7280" },
 ];
 
 const GEN_LABELS: Record<3 | 4 | 5, string> = {
-  3: "Generation III · Hoenn & Kanto",
+  3: "Generation III · Hoenn, Kanto & Orre",
   4: "Generation IV · Sinnoh & Johto",
   5: "Generation V · Unova",
 };
@@ -3173,7 +3180,11 @@ function Dashboard() {
     for (const stage of stages) {
       if (prevComplete) unlocked.add(stage);
       const games = CHALLENGE_CHAIN.filter((s) => s.stage === stage);
-      prevComplete = games.length > 0 && games.every((s) => {
+      // GameCube games aren't tracked by the hub — they sit in the chain
+      // for release-order context but don't gate progression either way.
+      const trackable = games.filter((s) => !s.external);
+      if (trackable.length === 0) continue;
+      prevComplete = trackable.every((s) => {
         const save = s.stem ? saves[s.stem] : null;
         if (!save) return false;
         if (s.primary) {
