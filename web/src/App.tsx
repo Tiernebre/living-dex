@@ -96,7 +96,7 @@ function serebiiGen3DexUrl(nationalDex: number): string {
 }
 
 function thumbnailUrl(nationalDex: number): string {
-  return `https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/thumbnails/${String(nationalDex).padStart(3, "0")}.png`;
+  return `https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/thumbnails/${String(nationalDex).padStart(4, "0")}.png`;
 }
 
 // Cumulative EXP to reach a given level for each growth curve.
