@@ -19,6 +19,9 @@ type Species = {
   internalIndex: number;
   baseStats: StatBlock;
   growthRate: GrowthRate;
+  // abilities[0] = slot 1 (abilityBit 0), abilities[1] = slot 2 (abilityBit 1).
+  // Gen 3 has no hidden abilities; if a species only has one, both slots map to it.
+  abilities: [string, string];
 };
 
 type GameIndex = { game_index: number; version: { name: string } };
@@ -70,6 +73,11 @@ async function fetchOne(id: number): Promise<Species> {
   }
   const growthRate = growthByDex[id];
   if (!growthRate) throw new Error(`dex ${id}: no growth rate`);
+  type AbilityEntry = { ability: { name: string }; slot: number; is_hidden: boolean };
+  const visible = (data.abilities as AbilityEntry[]).filter((a) => !a.is_hidden);
+  const slot1 = visible.find((a) => a.slot === 1)?.ability.name ?? visible[0]?.ability.name ?? "";
+  const slot2 = visible.find((a) => a.slot === 2)?.ability.name ?? slot1;
+  const abilities: [string, string] = [slot1, slot2];
   return {
     nationalDex: id,
     name: data.name,
@@ -78,6 +86,7 @@ async function fetchOne(id: number): Promise<Species> {
     internalIndex: ruby.game_index,
     baseStats,
     growthRate,
+    abilities,
   };
 }
 

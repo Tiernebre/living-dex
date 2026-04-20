@@ -91,6 +91,106 @@
       body { margin: 0; }
       a { color: inherit; }
 
+      /* Grade-based card emphasis. Higher grade = louder. */
+      .grade-card { position: relative; transition: transform 200ms ease; }
+      .grade-card-B { box-shadow: 0 0 0 1px #3b82f6, 0 2px 8px rgba(59,130,246,0.15); }
+      .grade-card-A {
+        border-color: transparent !important;
+        background:
+          linear-gradient(135deg,
+            color-mix(in srgb, #fbbf24 18%, var(--bg-elevated)),
+            color-mix(in srgb, #f59e0b 8%, var(--bg-elevated)) 50%,
+            color-mix(in srgb, #fde68a 14%, var(--bg-elevated)))
+          padding-box,
+          linear-gradient(135deg, #fbbf24, #f59e0b, #fde68a) border-box;
+        border: 2px solid transparent !important;
+        box-shadow: 0 0 18px rgba(245,158,11,0.35), 0 4px 16px rgba(245,158,11,0.25);
+        animation: grade-pulse-a 2.4s ease-in-out infinite;
+      }
+      .grade-card-S {
+        box-shadow: 0 0 0 2px #eab308, 0 0 20px rgba(234,179,8,0.45), 0 4px 20px rgba(234,179,8,0.35);
+        animation: grade-pulse-s 1.8s ease-in-out infinite;
+      }
+      .grade-card-SPLUS {
+        border-color: transparent !important;
+        background:
+          linear-gradient(var(--bg-elevated, #fff), var(--bg-elevated, #fff)) padding-box,
+          conic-gradient(from 0deg, #f59e0b, #fde68a, #f59e0b, #fbbf24, #fde68a, #f59e0b) border-box;
+        border: 2px solid transparent !important;
+        box-shadow:
+          0 0 24px rgba(245,158,11,0.55),
+          0 0 48px rgba(245,158,11,0.35),
+          0 8px 32px rgba(245,158,11,0.4);
+        animation: grade-spin 4s linear infinite, grade-pulse-splus 1.3s ease-in-out infinite;
+      }
+      :root[data-theme="dark"] .grade-card-SPLUS,
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) .grade-card-SPLUS {
+          background:
+            linear-gradient(var(--bg-elevated), var(--bg-elevated)) padding-box,
+            conic-gradient(from 0deg, #f59e0b, #fde68a, #f59e0b, #fbbf24, #fde68a, #f59e0b) border-box;
+        }
+      }
+      @keyframes grade-pulse-a {
+        0%, 100% { box-shadow: 0 0 18px rgba(245,158,11,0.35), 0 4px 16px rgba(245,158,11,0.25); }
+        50%      { box-shadow: 0 0 28px rgba(245,158,11,0.55), 0 6px 22px rgba(245,158,11,0.4); }
+      }
+      .grade-badge-glow { animation: grade-badge-glow 1.8s ease-in-out infinite; }
+      @keyframes grade-badge-glow {
+        0%, 100% { filter: drop-shadow(0 0 3px rgba(245,158,11,0.55)); }
+        50%      { filter: drop-shadow(0 0 10px rgba(245,158,11,0.95)); }
+      }
+      @keyframes grade-pulse-s {
+        0%, 100% { box-shadow: 0 0 0 2px #eab308, 0 0 20px rgba(234,179,8,0.45), 0 4px 20px rgba(234,179,8,0.35); }
+        50%      { box-shadow: 0 0 0 2px #facc15, 0 0 32px rgba(234,179,8,0.7), 0 6px 28px rgba(234,179,8,0.55); }
+      }
+      @keyframes grade-pulse-splus {
+        0%, 100% { transform: scale(1); }
+        50%      { transform: scale(1.015); }
+      }
+      @keyframes grade-spin {
+        to { --angle: 360deg; }
+      }
+
+      .confetti-layer {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        border-radius: inherit;
+      }
+      .confetti-piece {
+        position: absolute;
+        top: -10%;
+        width: 8px;
+        height: 12px;
+        opacity: 0.95;
+        animation: confetti-fall linear infinite;
+        will-change: transform;
+      }
+      @keyframes confetti-fall {
+        0%   { transform: translate3d(0, -20%, 0) rotate(0deg); opacity: 0; }
+        10%  { opacity: 1; }
+        100% { transform: translate3d(var(--drift, 20px), 140%, 0) rotate(720deg); opacity: 0.9; }
+      }
+      .sparkle {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: radial-gradient(circle, #fff 0%, #fde68a 40%, transparent 70%);
+        border-radius: 50%;
+        animation: sparkle-pop 1.6s ease-in-out infinite;
+        pointer-events: none;
+      }
+      @keyframes sparkle-pop {
+        0%, 100% { transform: scale(0); opacity: 0; }
+        50%      { transform: scale(1.4); opacity: 1; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .grade-card-A, .grade-card-S, .grade-card-SPLUS { animation: none; }
+        .confetti-piece, .sparkle { animation: none; display: none; }
+      }
+
       .matchup { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; }
       .matchup-card { flex: 1 1 320px; min-width: 0; }
       .matchup-vs { font-size: 24px; font-weight: 700; opacity: 0.4; align-self: center; text-align: center; }

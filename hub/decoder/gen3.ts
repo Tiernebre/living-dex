@@ -151,6 +151,7 @@ export function decodePokemon(bytes: Uint8Array): DecodedPokemon | null {
     spa: (ivsRaw >>> 20) & 0x1F,
     spd: (ivsRaw >>> 25) & 0x1F,
   };
+  const abilityBit: 0 | 1 = ((ivsRaw >>> 31) & 1) as 0 | 1;
   const evs = {
     hp: E[0], atk: E[1], def: E[2], spe: E[3], spa: E[4], spd: E[5],
   };
@@ -172,6 +173,7 @@ export function decodePokemon(bytes: Uint8Array): DecodedPokemon | null {
     nickname: decodeName(bytes.subarray(0x08, 0x12)),
     level,
     experience,
+    abilityBit,
     ivs,
     evs,
     nature: NATURES[pid % 25],

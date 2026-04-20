@@ -40,6 +40,7 @@ export type DecodedPokemon = {
   nickname: string;
   level: number;
   experience: number;
+  abilityBit: 0 | 1;
   ivs: { hp: number; atk: number; def: number; spa: number; spd: number; spe: number };
   evs: { hp: number; atk: number; def: number; spa: number; spd: number; spe: number };
   nature: string;

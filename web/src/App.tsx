@@ -33,6 +33,7 @@ type Species = {
   internalIndex: number;
   baseStats: StatBlock;
   growthRate: GrowthRate;
+  abilities: string[];
 };
 const species = speciesData as Record<string, Species>;
 
@@ -214,6 +215,167 @@ function TypeBadge({ type }: { type: string }) {
       }}
     >
       {type}
+    </span>
+  );
+}
+
+// Grade a Pokemon as a "keeper" signal for the opponent card.
+// Combines IV quality (sum of IVs) and how well the nature fits the species'
+// base stat distribution (boosting a top stat / lowering a weak one).
+type Grade = "S+" | "S" | "A" | "B" | "C" | "D" | "F";
+
+// Weight of a nature's +stat by its rank among non-HP base stats (1 = highest).
+// Ties share the rank of the topmost tied value.
+const PLUS_RANK_WEIGHT = [1.0, 0.88, 0.75, 0.55, 0.4];
+// For the -stat, being lowest is best.
+const MINUS_RANK_WEIGHT = [0.4, 0.55, 0.75, 0.88, 1.0];
+
+function statRank(stat: StatKey, base: StatBlock): number {
+  const v = base[stat];
+  let better = 0;
+  for (const k of ["atk", "def", "spa", "spd", "spe"] as StatKey[]) {
+    if (base[k] > v) better++;
+  }
+  return better + 1; // 1..5
+}
+
+function natureFitScore(nature: string, base: StatBlock): {
+  factor: number;
+  plusRank: number | null;
+  minusRank: number | null;
+  neutral: boolean;
+} {
+  const effect = natureEffect(nature);
+  if (!effect) return { factor: 0.85, plusRank: null, minusRank: null, neutral: true };
+  const plusRank = statRank(effect.plus, base);
+  const minusRank = statRank(effect.minus, base);
+  const factor = (PLUS_RANK_WEIGHT[plusRank - 1] + MINUS_RANK_WEIGHT[minusRank - 1]) / 2;
+  return { factor, plusRank, minusRank, neutral: false };
+}
+
+function gradePokemon(ivs: StatBlock, nature: string, base: StatBlock): {
+  grade: Grade;
+  ivSum: number;
+  greenCount: number;
+  perfectCount: number;
+  nature: ReturnType<typeof natureFitScore>;
+} {
+  const ivVals = (["hp", "atk", "def", "spa", "spd", "spe"] as StatKey[]).map((k) => ivs[k]);
+  const ivSum = ivVals.reduce((a, b) => a + b, 0);
+  const greenCount = ivVals.filter((v) => v >= 26).length;
+  const perfectCount = ivVals.filter((v) => v === 31).length;
+  const nat = natureFitScore(nature, base);
+
+  // Raw IV score (0..118): sum%-of-max plus concentration bonus for perfects/greens.
+  const ivScore = (ivSum / 186) * 100 + perfectCount * 2 + greenCount * 1;
+  // Nature is a multiplier: great fit preserves the IV score, poor fit slashes it.
+  const total = ivScore * nat.factor;
+
+  let grade: Grade;
+  if (perfectCount === 6 && nat.factor >= 0.88) grade = "S+";
+  else if (total >= 108) grade = "S+";
+  else if (total >= 96) grade = "S";
+  else if (total >= 82) grade = "A";
+  else if (total >= 60) grade = "B";
+  else if (total >= 45) grade = "C";
+  else if (total >= 30) grade = "D";
+  else grade = "F";
+
+  return { grade, ivSum, greenCount, perfectCount, nature: nat };
+}
+
+const GRADE_CARD_CLASS: Partial<Record<Grade, string>> = {
+  "S+": "grade-card grade-card-SPLUS",
+  S: "grade-card grade-card-S",
+  A: "grade-card grade-card-A",
+  B: "grade-card grade-card-B",
+};
+
+const CONFETTI_COLORS = ["#f59e0b", "#fde68a", "#fbbf24", "#ef4444", "#3b82f6", "#22c55e", "#ec4899", "#a855f7"];
+
+function Confetti({ count = 28 }: { count?: number }) {
+  const pieces = Array.from({ length: count }, (_, i) => {
+    const left = (i * 97) % 100;
+    const delay = ((i * 53) % 100) / 50; // 0..2s
+    const dur = 2 + ((i * 31) % 100) / 40; // 2..4.5s
+    const drift = ((i % 7) - 3) * 18; // -54..54px
+    const color = CONFETTI_COLORS[i % CONFETTI_COLORS.length];
+    const shape = i % 3 === 0 ? "50%" : i % 3 === 1 ? "2px" : "0";
+    return (
+      <span
+        key={i}
+        className="confetti-piece"
+        style={{
+          left: `${left}%`,
+          background: color,
+          borderRadius: shape,
+          animationDelay: `${delay}s`,
+          animationDuration: `${dur}s`,
+          ["--drift" as string]: `${drift}px`,
+        }}
+      />
+    );
+  });
+  const sparkles = Array.from({ length: 6 }, (_, i) => (
+    <span
+      key={`s${i}`}
+      className="sparkle"
+      style={{
+        left: `${(i * 73) % 90 + 5}%`,
+        top: `${(i * 41) % 70 + 10}%`,
+        animationDelay: `${(i * 0.27) % 1.6}s`,
+      }}
+    />
+  ));
+  return (
+    <div className="confetti-layer" aria-hidden>
+      {pieces}
+      {sparkles}
+    </div>
+  );
+}
+
+const GRADE_STYLE: Record<Grade, { bg: string; fg: string; ring: string }> = {
+  "S+": { bg: "linear-gradient(135deg,#fde68a,#f59e0b)", fg: "#3f2d04", ring: "#f59e0b" },
+  S: { bg: "linear-gradient(135deg,#fef3c7,#eab308)", fg: "#422c05", ring: "#eab308" },
+  A: { bg: "linear-gradient(135deg,#fde68a,#fbbf24)", fg: "#3f2d04", ring: "#f59e0b" },
+  B: { bg: "linear-gradient(135deg,#bfdbfe,#3b82f6)", fg: "#0b1f44", ring: "#3b82f6" },
+  C: { bg: "linear-gradient(135deg,#e5e7eb,#9ca3af)", fg: "#1f2937", ring: "#9ca3af" },
+  D: { bg: "linear-gradient(135deg,#fed7aa,#f97316)", fg: "#3b1d05", ring: "#f97316" },
+  F: { bg: "linear-gradient(135deg,#fecaca,#ef4444)", fg: "#450a0a", ring: "#ef4444" },
+};
+
+function GradeBadge({
+  grade,
+  detail,
+}: {
+  grade: Grade;
+  detail: string;
+}) {
+  const s = GRADE_STYLE[grade];
+  const glow = grade === "A" || grade === "S" || grade === "S+";
+  return (
+    <span
+      title={detail}
+      className={glow ? "grade-badge-glow" : undefined}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minWidth: 34,
+        height: 34,
+        padding: "0 8px",
+        borderRadius: 8,
+        background: s.bg,
+        color: s.fg,
+        fontWeight: 800,
+        fontSize: 15,
+        letterSpacing: 0.3,
+        boxShadow: `0 0 0 1px ${s.ring}, 0 1px 2px rgba(0,0,0,0.15)`,
+        fontVariantNumeric: "tabular-nums",
+      }}
+    >
+      {grade}
     </span>
   );
 }
@@ -473,7 +635,7 @@ function ExpProgress({ level, exp, rate }: { level: number; exp: number; rate: G
   }
 
   return (
-    <div style={{ fontSize: 12, marginTop: 6, display: "flex", flexDirection: "column", gap: 3 }}>
+    <div style={{ fontSize: 12, marginTop: 6, display: "flex", flexDirection: "column", gap: 3, maxWidth: 260 }}>
       <div style={{ display: "flex", justifyContent: "space-between", gap: 8, opacity: 0.8 }}>
         <span>
           EXP <span style={{ fontVariantNumeric: "tabular-nums", fontWeight: 600 }}>{formatInt(exp)}</span>
@@ -504,10 +666,32 @@ function ExpProgress({ level, exp, rate }: { level: number; exp: number; rate: G
   );
 }
 
-function PokemonCard({ mon, movesRight = false }: { mon: DecodedPokemon; movesRight?: boolean }) {
+function PokemonCard({
+  mon,
+  movesRight = false,
+  showGrade = false,
+}: {
+  mon: DecodedPokemon;
+  movesRight?: boolean;
+  showGrade?: boolean;
+}) {
   const info = lookup(mon.species);
+  const graded = showGrade && info ? gradePokemon(mon.ivs, mon.nature, info.baseStats) : null;
+  const rankLabel = (r: number | null) =>
+    r == null ? "?" : r === 1 ? "#1" : r === 5 ? "#5 (worst)" : `#${r}`;
+  const gradeDetail = graded
+    ? [
+        `Grade ${graded.grade}`,
+        `IV total ${graded.ivSum}/186 · ${graded.perfectCount} perfect, ${graded.greenCount} green+`,
+        graded.nature.neutral
+          ? "Neutral nature (no stat effect)"
+          : `Nature boosts stat ${rankLabel(graded.nature.plusRank)}, lowers stat ${rankLabel(graded.nature.minusRank)} (fit ${(graded.nature.factor * 100).toFixed(0)}%)`,
+      ].join("\n")
+    : "";
+  const gradeClass = graded ? GRADE_CARD_CLASS[graded.grade] ?? "" : "";
   return (
     <div
+      className={gradeClass}
       style={{
         display: "flex",
         alignItems: "flex-start",
@@ -515,8 +699,15 @@ function PokemonCard({ mon, movesRight = false }: { mon: DecodedPokemon; movesRi
         padding: 8,
         border: "1px solid var(--accent)",
         borderRadius: 8,
+        position: "relative",
       }}
     >
+      {graded?.grade === "S+" && <Confetti />}
+      {graded && (
+        <div style={{ position: "absolute", top: 8, right: 8, zIndex: 1 }}>
+          <GradeBadge grade={graded.grade} detail={gradeDetail} />
+        </div>
+      )}
       {info?.sprite && (
         <img src={info.sprite} alt={info.name} width={64} height={64} style={{ imageRendering: "pixelated" }} />
       )}
@@ -539,6 +730,15 @@ function PokemonCard({ mon, movesRight = false }: { mon: DecodedPokemon; movesRi
         </div>
         <div style={{ fontSize: 13, opacity: 0.8, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
           <span>Lv {mon.level} · {mon.nature}</span>
+          {info && <span style={{ opacity: 0.6 }}>·</span>}
+          {info && (
+            <span>
+              <span style={{ opacity: 0.6 }}>Ability </span>
+              <span style={{ fontWeight: 600 }}>
+                {formatSpeciesName(info.abilities[mon.abilityBit] ?? info.abilities[0] ?? "?")}
+              </span>
+            </span>
+          )}
           {info && info.types.map((t) => <TypeBadge key={t} type={t} />)}
         </div>
         {info && <ExpProgress level={mon.level} exp={mon.experience} rate={info.growthRate} />}
@@ -964,7 +1164,7 @@ export function App() {
                     <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4, textTransform: "uppercase", letterSpacing: 0.5 }}>
                       Opponent
                     </div>
-                    <PokemonCard mon={activeEnemy!} />
+                    <PokemonCard mon={activeEnemy!} showGrade />
                   </div>
                 </div>
               ) : (
