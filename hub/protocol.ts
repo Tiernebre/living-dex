@@ -27,6 +27,11 @@ export type Source = "live" | `save@${number}`;
 
 export type GameCode = "AXVE" | "AXPE" | "BPEE" | "BPRE" | "BPGE";
 
+// Filename stem of each .sav/.gba we care about. Each game is unique in this project —
+// there is only ever one Ruby, one Emerald, etc. — so the stem also identifies the save.
+export const GAME_STEMS = ["ruby", "sapphire", "emerald", "firered", "leafgreen"] as const;
+export type GameStem = (typeof GAME_STEMS)[number];
+
 export type GameInfo = {
   code: GameCode;
   revision: number;
@@ -70,6 +75,7 @@ export type BoxInfo = {
 };
 
 export type SaveInfo = {
+  game: GameStem;
   playerName: string;
   playerGender: "male" | "female";
   trainerId: number;
@@ -90,7 +96,7 @@ export type HubState = {
   currentBox: { index: number; slots: (DecodedPokemon | null)[] } | null;
   source: Source | null;
   lastUpdateAt: number | null;
-  saveInfo: SaveInfo | null;
+  saves: Partial<Record<GameStem, SaveInfo>>;
   // First-seen-by-the-app timestamps keyed by `${pid}:${otId}`.
   // Gen 3 saves don't carry a real catch date, so this stands in.
   catchLog: Record<string, number>;
@@ -105,5 +111,5 @@ export type WsMessage =
   | { type: "connection"; live: boolean }
   | { type: "battle"; inBattle: boolean }
   | { type: "location"; location: { mapGroup: number; mapNum: number } | null }
-  | { type: "save"; saveInfo: SaveInfo | null }
+  | { type: "save"; game: GameStem; saveInfo: SaveInfo | null }
   | { type: "catch-log"; entries: Record<string, number> };

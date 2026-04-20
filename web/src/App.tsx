@@ -1,12 +1,21 @@
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import {
+  BrowserRouter,
+  Link,
+  Navigate,
+  Route,
+  Routes,
+  useParams,
+} from "react-router-dom";
 import { useLivingDex } from "./store";
 import speciesData from "./species.json";
 import movesData from "./moves.json";
 import encountersData from "./encounters.json";
 import hoennDexData from "./hoenn-dex.json";
 import mapsecData from "./mapsec.json";
-import type { DecodedPokemon, HubState } from "../../hub/protocol.ts";
+import type { DecodedPokemon, GameStem, HubState, SaveInfo } from "../../hub/protocol.ts";
+import { GAME_STEMS } from "../../hub/protocol.ts";
 
 type EncounterPokemon = {
   species: number;
@@ -1198,7 +1207,7 @@ function ModeToggle({ mode, setMode, connected }: { mode: Mode; setMode: (m: Mod
   );
 }
 
-const GAME_THEME_KEY: Record<string, string> = {
+const CODE_TO_STEM: Record<string, GameStem> = {
   AXVE: "ruby",
   AXPE: "sapphire",
   BPEE: "emerald",
@@ -1206,26 +1215,89 @@ const GAME_THEME_KEY: Record<string, string> = {
   BPGE: "leafgreen",
 };
 
+const GAME_DISPLAY_NAME: Record<GameStem, string> = {
+  ruby: "Ruby",
+  sapphire: "Sapphire",
+  emerald: "Emerald",
+  firered: "FireRed",
+  leafgreen: "LeafGreen",
+};
+
+// The challenge (README) progresses Sapphire → ... → B/W2. Gen 3 is what we can decode
+// today; later gens exist here as a roadmap so the dashboard can show the whole chain.
+// Mascots are national dex numbers for the version legendary — uses the existing
+// HybridShivam thumbnail CDN so we don't need game box art.
+type ChainStep = {
+  stem: GameStem | null;
+  label: string;
+  short?: string;
+  mascots: number[];
+  tint: string; // hex; used as subtle gradient + border accent
+  endOfGen?: boolean;
+};
+const CHALLENGE_CHAIN: ChainStep[] = [
+  { stem: "sapphire",  label: "Sapphire",               mascots: [382],       tint: "#2563eb" },
+  { stem: "ruby",      label: "Ruby",                   mascots: [383],       tint: "#dc2626" },
+  { stem: "emerald",   label: "Emerald",                mascots: [384],       tint: "#059669", endOfGen: true },
+  { stem: "firered",   label: "FireRed",                mascots: [6],         tint: "#ea580c" },
+  { stem: "leafgreen", label: "LeafGreen",              mascots: [3],         tint: "#16a34a" },
+  { stem: null,        label: "Diamond / Pearl",        short: "D/P",         mascots: [483, 484], tint: "#7dd3fc" },
+  { stem: null,        label: "Platinum",               mascots: [487],       tint: "#a855f7" },
+  { stem: null,        label: "HeartGold / SoulSilver", short: "HG/SS",       mascots: [250, 249], tint: "#f59e0b", endOfGen: true },
+  { stem: null,        label: "Black / White",          short: "B/W",         mascots: [643, 644], tint: "#4b5563" },
+  { stem: null,        label: "Black 2 / White 2",      short: "B2/W2",       mascots: [646],      tint: "#0ea5e9", endOfGen: true },
+];
+
+function pokemonKey(mon: DecodedPokemon): string {
+  return `${mon.otId.toString(16)}-${mon.pid.toString(16)}`;
+}
+
 export function App() {
-  const { connected, game, party, enemyParty, inBattle, location, source, lastUpdateAt, saveInfo } = useLivingDex();
+  return (
+    <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/:game" element={<GameView />} />
+          <Route path="/:game/pokemon/:key" element={<PokemonDetail />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>
+  );
+}
+
+function Layout({ children }: { children: React.ReactNode }) {
+  const { connected, game, source, lastUpdateAt } = useLivingDex();
+  const { game: routeStem } = useParams<{ game?: string }>();
   useEffect(() => {
     const root = document.documentElement;
-    const key = game ? GAME_THEME_KEY[game.code] : undefined;
-    if (key) root.setAttribute("data-game", key);
+    // Route stem wins — user is explicitly viewing that game's page.
+    // Fall back to the connected cart so the global index still themes to whatever's running.
+    const stem =
+      (routeStem && isGameStem(routeStem) ? routeStem : undefined) ??
+      (game ? CODE_TO_STEM[game.code] : undefined);
+    if (stem) root.setAttribute("data-game", stem);
     else root.removeAttribute("data-game");
-  }, [game]);
-  const [mode, setMode] = useState<Mode>("saved");
-  const prevConnected = useRef(connected);
-  useEffect(() => {
-    if (!prevConnected.current && connected) setMode("live");
-    prevConnected.current = connected;
-  }, [connected]);
-  const activeMon = party.find((p) => p !== null) ?? null;
-  const activeEnemy = enemyParty.find((p) => p !== null) ?? null;
+  }, [game, routeStem]);
   return (
     <main style={{ fontFamily: "system-ui, sans-serif", padding: 24 }}>
       <header style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap", marginBottom: 16 }}>
-        <h1 style={{ margin: 0, marginRight: "auto" }}>Living Dex</h1>
+        <h1 style={{ margin: 0, marginRight: "auto" }}>
+          <Link
+            to="/"
+            style={{
+              color: "inherit",
+              textDecoration: "none",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 10,
+            }}
+          >
+            <Pokeball size={26} />
+            <span>Living Dex</span>
+          </Link>
+        </h1>
         <StatusBadge
           label="mGBA"
           value={connected ? "connected" : "disconnected"}
@@ -1240,11 +1312,57 @@ export function App() {
         />
         <ThemeToggle />
       </header>
-      <div style={{ marginBottom: 20 }}>
+      {children}
+    </main>
+  );
+}
+
+function isGameStem(s: string): s is GameStem {
+  return (GAME_STEMS as readonly string[]).includes(s);
+}
+
+function GameView() {
+  const params = useParams<{ game: string }>();
+  const { connected, game, party, enemyParty, inBattle, location, saves } = useLivingDex();
+  const stem = params.game && isGameStem(params.game) ? params.game : null;
+  const saveInfo = stem ? saves[stem] ?? null : null;
+  const runningStem = game ? CODE_TO_STEM[game.code] : null;
+  const canShowLive = connected && runningStem === stem;
+
+  const [mode, setMode] = useState<Mode>("saved");
+  const prevCanShowLive = useRef(canShowLive);
+  useEffect(() => {
+    if (!prevCanShowLive.current && canShowLive) setMode("live");
+    prevCanShowLive.current = canShowLive;
+  }, [canShowLive]);
+
+  if (!stem) return <Navigate to="/" replace />;
+
+  const activeMon = party.find((p) => p !== null) ?? null;
+  const activeEnemy = enemyParty.find((p) => p !== null) ?? null;
+
+  return (
+    <>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
+          marginBottom: 20,
+          flexWrap: "wrap",
+        }}
+      >
+        <h2 style={{ margin: 0, fontSize: 20 }}>{GAME_DISPLAY_NAME[stem]}</h2>
         <ModeToggle mode={mode} setMode={setMode} connected={connected} />
       </div>
       {mode === "saved" ? (
-        <SavedView saveInfo={saveInfo} />
+        <SavedView stem={stem} saveInfo={saveInfo} />
+      ) : !canShowLive ? (
+        <section style={{ padding: 32, textAlign: "center", opacity: 0.6, fontStyle: "italic" }}>
+          {connected
+            ? `mGBA is running ${runningStem ? GAME_DISPLAY_NAME[runningStem] : "a different game"}, not ${GAME_DISPLAY_NAME[stem]}.`
+            : "Waiting for mGBA connection…"}
+        </section>
       ) : (
         <LiveView
           connected={connected}
@@ -1255,15 +1373,16 @@ export function App() {
           location={location}
         />
       )}
-    </main>
+    </>
   );
 }
 
-function SavedView({ saveInfo }: { saveInfo: HubState["saveInfo"] }) {
+function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | null }) {
   if (!saveInfo) {
     return (
       <section style={{ padding: 32, textAlign: "center", opacity: 0.6, fontStyle: "italic" }}>
-        No save file loaded.
+        No save file loaded for {GAME_DISPLAY_NAME[stem]}. Drop{" "}
+        <code>saves/{stem}.sav</code> in place and it'll pick up automatically.
       </section>
     );
   }
@@ -1312,7 +1431,7 @@ function SavedView({ saveInfo }: { saveInfo: HubState["saveInfo"] }) {
       ) : (
         <p style={{ opacity: 0.6, fontStyle: "italic" }}>No party Pokémon in this save.</p>
       )}
-      <LivingDexGrid saveInfo={saveInfo} />
+      <LivingDexGrid stem={stem} saveInfo={saveInfo} />
     </>
   );
 }
@@ -1323,7 +1442,7 @@ type OwnedLocation =
 
 type OwnedMon = { mon: DecodedPokemon; location: OwnedLocation };
 
-function collectOwned(saveInfo: HubState["saveInfo"]): Map<number, OwnedMon[]> {
+function collectOwned(saveInfo: SaveInfo | null): Map<number, OwnedMon[]> {
   const byNational = new Map<number, OwnedMon[]>();
   const push = (mon: DecodedPokemon, location: OwnedLocation) => {
     const info = lookup(mon.species);
@@ -1359,7 +1478,7 @@ function locationLabel(loc: OwnedLocation): string {
   return `${loc.boxName} · slot ${loc.slotIndex + 1}`;
 }
 
-function LivingDexGrid({ saveInfo }: { saveInfo: NonNullable<HubState["saveInfo"]> }) {
+function LivingDexGrid({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo }) {
   const owned = collectOwned(saveInfo);
   const [selected, setSelected] = useState<number | null>(null);
   const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
@@ -1432,7 +1551,7 @@ function LivingDexGrid({ saveInfo }: { saveInfo: NonNullable<HubState["saveInfo"
       </div>
       {selectedEntry && anchor && (
         <DexPopover anchor={anchor} onClose={close}>
-          <DexDetail entry={selectedEntry} owned={selectedOwned} onClose={close} />
+          <DexDetail stem={stem} entry={selectedEntry} owned={selectedOwned} onClose={close} />
         </DexPopover>
       )}
     </section>
@@ -1537,10 +1656,12 @@ function DexPopover({
 }
 
 function DexDetail({
+  stem,
   entry,
   owned,
   onClose,
 }: {
+  stem: GameStem;
   entry: HoennDexEntry;
   owned: OwnedMon[];
   onClose: () => void;
@@ -1592,7 +1713,7 @@ function DexDetail({
       ) : (
         <div style={{ display: "grid", gap: 10 }}>
           {owned.map((o, i) => (
-            <OwnedMonRow key={i} owned={o} />
+            <OwnedMonRow key={i} stem={stem} owned={o} />
           ))}
         </div>
       )}
@@ -1600,7 +1721,7 @@ function DexDetail({
   );
 }
 
-function OwnedMonRow({ owned }: { owned: OwnedMon }) {
+function OwnedMonRow({ stem, owned }: { stem: GameStem; owned: OwnedMon }) {
   const { mon, location } = owned;
   const info = lookup(mon.species);
   const locLabel = locationLabel(location);
@@ -1609,6 +1730,7 @@ function OwnedMonRow({ owned }: { owned: OwnedMon }) {
   const origin = ORIGIN_GAME_LABEL[mon.originGame] ?? `Game ${mon.originGame}`;
   const isTraded = info && mon.originGame !== 2; // Ruby's origin = 2
   const firstSeenAt = useLivingDex((s) => s.catchLog[`${mon.pid}:${mon.otId}`]);
+  const label = mon.isEgg ? "Egg" : mon.nickname || (info ? formatSpeciesName(info.name) : "?");
   return (
     <div
       style={{
@@ -1623,9 +1745,12 @@ function OwnedMonRow({ owned }: { owned: OwnedMon }) {
     >
       <div style={{ flex: 1, minWidth: 0 }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap", marginBottom: 6 }}>
-          <span style={{ fontSize: 15, fontWeight: 700 }}>
-            {mon.isEgg ? "Egg" : mon.nickname || (info ? formatSpeciesName(info.name) : "?")}
-          </span>
+          <Link
+            to={`/${stem}/pokemon/${pokemonKey(mon)}`}
+            style={{ fontSize: 15, fontWeight: 700, color: "inherit" }}
+          >
+            {label}
+          </Link>
           <span style={{ fontSize: 12, opacity: 0.7 }}>Lv {mon.level} · {mon.nature}</span>
           <StatusBadge label="Where" value={locLabel} tone={locTone} />
         </div>
@@ -1732,6 +1857,517 @@ function LiveView({
         initial={inBattle ? "matchup" : "encounters"}
         storageKey="living-dex:active-tab"
       />
+    </>
+  );
+}
+
+// ---------- Dashboard (index route) ----------
+
+function Pokeball({ size = 18, color = "#ef4444" }: { size?: number; color?: string }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      aria-hidden
+      style={{ display: "inline-block", flexShrink: 0 }}
+    >
+      <circle cx="12" cy="12" r="11" fill="#fff" stroke="#0f172a" strokeWidth="1.5" />
+      <path d="M1 12 A11 11 0 0 1 23 12" fill={color} stroke="#0f172a" strokeWidth="1.5" />
+      <line x1="1" y1="12" x2="23" y2="12" stroke="#0f172a" strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="3.2" fill="#fff" stroke="#0f172a" strokeWidth="1.5" />
+      <circle cx="12" cy="12" r="1.3" fill="#fff" stroke="#0f172a" strokeWidth="1" />
+    </svg>
+  );
+}
+
+function ChainCard({
+  step,
+  loaded,
+  caught,
+  unsupported,
+  isLive,
+}: {
+  step: ChainStep;
+  loaded: boolean;
+  caught: number;
+  unsupported: boolean;
+  isLive: boolean;
+}) {
+  const tint = step.tint;
+  const statusLine = unsupported
+    ? "Roadmap"
+    : loaded
+    ? `${caught} species caught`
+    : "No save loaded";
+  const inner = (
+    <div
+      className="chain-card"
+      style={{
+        position: "relative",
+        padding: "14px 14px 14px 16px",
+        borderRadius: 14,
+        border: `1px solid color-mix(in srgb, ${tint} 35%, var(--border))`,
+        background: `linear-gradient(135deg, color-mix(in srgb, ${tint} 12%, var(--bg-elevated)), var(--bg-elevated) 70%)`,
+        overflow: "hidden",
+        opacity: unsupported ? 0.6 : 1,
+        display: "flex",
+        gap: 12,
+        alignItems: "center",
+        minHeight: 88,
+      }}
+    >
+      <span
+        aria-hidden
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: 4,
+          background: tint,
+          borderTopLeftRadius: 14,
+          borderBottomLeftRadius: 14,
+        }}
+      />
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: 68,
+          flexShrink: 0,
+        }}
+      >
+        {step.mascots.map((dex, i) => {
+          const filters: string[] = [];
+          if (unsupported) filters.push("grayscale(0.4)");
+          filters.push(`drop-shadow(0 2px 4px ${tint}66)`);
+          return (
+            <img
+              key={dex}
+              src={thumbnailUrl(dex)}
+              alt=""
+              width={step.mascots.length > 1 ? 52 : 64}
+              height={step.mascots.length > 1 ? 52 : 64}
+              loading="lazy"
+              style={{
+                filter: filters.join(" "),
+                marginLeft: i > 0 ? -18 : 0,
+                zIndex: step.mascots.length - i,
+                position: "relative",
+              }}
+            />
+          );
+        })}
+      </div>
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            flexWrap: "wrap",
+            minWidth: 0,
+          }}
+        >
+          <span
+            style={{
+              fontWeight: 800,
+              fontSize: 15,
+              letterSpacing: 0.2,
+              color: `color-mix(in srgb, ${tint} 80%, var(--text))`,
+              textTransform: "uppercase",
+              minWidth: 0,
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+            }}
+          >
+            {step.label}
+          </span>
+          {step.endOfGen && (
+            <span
+              title="Completion target: national dex"
+              style={{
+                fontSize: 9,
+                fontWeight: 800,
+                textTransform: "uppercase",
+                letterSpacing: 0.7,
+                padding: "2px 6px",
+                borderRadius: 4,
+                background: tint,
+                color: "#fff",
+                border: "1px solid rgba(0,0,0,0.15)",
+              }}
+            >
+              ★ Dex goal
+            </span>
+          )}
+          {isLive && (
+            <span
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 4,
+                fontSize: 9,
+                fontWeight: 800,
+                textTransform: "uppercase",
+                letterSpacing: 0.7,
+                padding: "2px 6px",
+                borderRadius: 4,
+                background: "#16a34a",
+                color: "#fff",
+              }}
+            >
+              <span
+                style={{
+                  width: 6,
+                  height: 6,
+                  borderRadius: 999,
+                  background: "#fff",
+                  boxShadow: "0 0 4px #fff",
+                }}
+              />
+              Live
+            </span>
+          )}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 6,
+            fontSize: 12,
+            opacity: 0.8,
+            marginTop: 4,
+          }}
+        >
+          <Pokeball size={12} color={tint} />
+          <span>{statusLine}</span>
+        </div>
+      </div>
+      {loaded && (
+        <span
+          aria-hidden
+          style={{
+            position: "absolute",
+            right: -18,
+            bottom: -18,
+            width: 72,
+            height: 72,
+            borderRadius: 999,
+            opacity: 0.08,
+            background: `radial-gradient(circle at 30% 30%, ${tint}, transparent 70%)`,
+          }}
+        />
+      )}
+    </div>
+  );
+
+  if (step.stem && loaded) {
+    return (
+      <Link
+        to={`/${step.stem}`}
+        style={{ color: "inherit", textDecoration: "none", display: "block" }}
+      >
+        {inner}
+      </Link>
+    );
+  }
+  return inner;
+}
+
+
+function countOwnedSpecies(saveInfo: SaveInfo): Set<number> {
+  const set = new Set<number>();
+  const push = (mon: DecodedPokemon | null) => {
+    if (!mon) return;
+    const info = lookup(mon.species);
+    if (info) set.add(info.nationalDex);
+  };
+  saveInfo.party.forEach(push);
+  saveInfo.boxes.forEach((b) => b.slots.forEach(push));
+  return set;
+}
+
+function Dashboard() {
+  const { saves, connected, game } = useLivingDex();
+  const runningStem = game ? CODE_TO_STEM[game.code] : null;
+
+  const { totalSpecies, perGame } = useMemo(() => {
+    const combined = new Set<number>();
+    const perGame: Partial<Record<GameStem, Set<number>>> = {};
+    for (const stem of GAME_STEMS) {
+      const s = saves[stem];
+      if (!s) continue;
+      const set = countOwnedSpecies(s);
+      perGame[stem] = set;
+      for (const n of set) combined.add(n);
+    }
+    return { totalSpecies: combined.size, perGame };
+  }, [saves]);
+
+  const loaded = GAME_STEMS.filter((s) => saves[s]);
+
+  return (
+    <>
+      <section
+        className="trainer-hero"
+        style={{
+          position: "relative",
+          padding: "18px 22px",
+          marginBottom: 22,
+          border: "1px solid color-mix(in srgb, #ef4444 25%, var(--border))",
+          borderRadius: 14,
+          background:
+            "linear-gradient(135deg, color-mix(in srgb, #ef4444 14%, var(--bg-elevated)) 0%, var(--bg-elevated) 55%, color-mix(in srgb, #2563eb 10%, var(--bg-elevated)) 100%)",
+          overflow: "hidden",
+        }}
+      >
+        <span
+          aria-hidden
+          style={{
+            position: "absolute",
+            right: -40,
+            top: -40,
+            opacity: 0.15,
+          }}
+        >
+          <Pokeball size={180} />
+        </span>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            fontSize: 11,
+            opacity: 0.75,
+            textTransform: "uppercase",
+            letterSpacing: 0.8,
+            fontWeight: 700,
+          }}
+        >
+          <Pokeball size={14} />
+          Living Dex — across all saves
+        </div>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "baseline",
+            gap: 16,
+            flexWrap: "wrap",
+            marginTop: 6,
+            position: "relative",
+          }}
+        >
+          <div
+            style={{
+              fontSize: 44,
+              fontWeight: 800,
+              fontVariantNumeric: "tabular-nums",
+              lineHeight: 1,
+              background: "linear-gradient(135deg, #ef4444, #f59e0b)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              textShadow: "0 1px 0 rgba(0,0,0,0.05)",
+            }}
+          >
+            {totalSpecies}
+          </div>
+          <div style={{ opacity: 0.8, fontWeight: 600 }}>unique species caught</div>
+          <div style={{ marginLeft: "auto", fontSize: 12, opacity: 0.75, fontWeight: 600 }}>
+            {loaded.length} of {GAME_STEMS.length} Gen 3 saves loaded
+          </div>
+        </div>
+      </section>
+
+      <section style={{ marginBottom: 24 }}>
+        <h2 style={{ margin: "0 0 10px" }}>Challenge chain</h2>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+            gap: 12,
+          }}
+        >
+          {CHALLENGE_CHAIN.map((step) => {
+            const loaded = step.stem ? !!saves[step.stem] : false;
+            const caught = step.stem ? perGame[step.stem]?.size ?? 0 : 0;
+            const unsupported = !step.stem;
+            const isLive = !!(step.stem && runningStem === step.stem && connected);
+            return (
+              <ChainCard
+                key={step.label}
+                step={step}
+                loaded={loaded}
+                caught={caught}
+                unsupported={unsupported}
+                isLive={isLive}
+              />
+            );
+          })}
+        </div>
+      </section>
+
+      <section>
+        <h2 style={{ margin: "0 0 10px" }}>Loaded saves</h2>
+        {loaded.length === 0 ? (
+          <p style={{ opacity: 0.6, fontStyle: "italic" }}>
+            No saves loaded yet. Drop one into the <code>saves/</code> directory.
+          </p>
+        ) : (
+          <div style={{ display: "grid", gap: 10 }}>
+            {loaded.map((stem) => {
+              const s = saves[stem]!;
+              return (
+                <Link
+                  key={stem}
+                  to={`/${stem}`}
+                  style={{
+                    color: "inherit",
+                    textDecoration: "none",
+                    padding: "12px 16px",
+                    border: "1px solid var(--border)",
+                    borderRadius: 10,
+                    background: "var(--bg-elevated)",
+                    display: "flex",
+                    gap: 16,
+                    alignItems: "center",
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <div>
+                    <div style={{ fontSize: 11, opacity: 0.6, textTransform: "uppercase", letterSpacing: 0.5 }}>
+                      {GAME_DISPLAY_NAME[stem]}
+                    </div>
+                    <div style={{ fontSize: 18, fontWeight: 600 }}>{s.playerName || "(unnamed)"}</div>
+                    <div style={{ fontSize: 12, opacity: 0.7 }}>
+                      {s.playerGender} · ID {String(s.trainerId & 0xFFFF).padStart(5, "0")}
+                    </div>
+                  </div>
+                  <div style={{ marginLeft: "auto", textAlign: "right" }}>
+                    <div style={{ fontSize: 11, opacity: 0.6, textTransform: "uppercase", letterSpacing: 0.5 }}>
+                      Play time
+                    </div>
+                    <div style={{ fontSize: 20, fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>
+                      {s.playTime.hours}:{String(s.playTime.minutes).padStart(2, "0")}
+                    </div>
+                    <div style={{ fontSize: 12, opacity: 0.7 }}>
+                      {perGame[stem]?.size ?? 0} species
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        )}
+      </section>
+    </>
+  );
+}
+
+// ---------- Pokemon detail route ----------
+
+function findOwnedByKey(saveInfo: SaveInfo, key: string): OwnedMon | null {
+  const scan = (
+    mon: DecodedPokemon | null,
+    location: OwnedLocation,
+  ): OwnedMon | null => (mon && pokemonKey(mon) === key ? { mon, location } : null);
+
+  for (let i = 0; i < saveInfo.party.length; i++) {
+    const hit = scan(saveInfo.party[i], { kind: "party", slot: i });
+    if (hit) return hit;
+  }
+  for (let b = 0; b < saveInfo.boxes.length; b++) {
+    const box = saveInfo.boxes[b];
+    for (let i = 0; i < box.slots.length; i++) {
+      const hit = scan(box.slots[i], {
+        kind: "box",
+        boxIndex: b,
+        boxName: box.name,
+        slotIndex: i,
+      });
+      if (hit) return hit;
+    }
+  }
+  return null;
+}
+
+function PokemonDetail() {
+  const { game: gameParam, key } = useParams<{ game: string; key: string }>();
+  const { saves, catchLog } = useLivingDex();
+  const stem = gameParam && isGameStem(gameParam) ? gameParam : null;
+  const saveInfo = stem ? saves[stem] ?? null : null;
+  const found = stem && saveInfo && key ? findOwnedByKey(saveInfo, key) : null;
+
+  if (!stem) return <Navigate to="/" replace />;
+  if (!saveInfo) {
+    return (
+      <section style={{ padding: 32, textAlign: "center", opacity: 0.6, fontStyle: "italic" }}>
+        No save loaded for {GAME_DISPLAY_NAME[stem]}.{" "}
+        <Link to="/">Back to dashboard</Link>.
+      </section>
+    );
+  }
+  if (!found) {
+    return (
+      <section style={{ padding: 32, textAlign: "center", opacity: 0.6, fontStyle: "italic" }}>
+        No Pokémon with key <code>{key}</code> in {GAME_DISPLAY_NAME[stem]}.{" "}
+        <Link to={`/${stem}`}>Back to {GAME_DISPLAY_NAME[stem]}</Link>.
+      </section>
+    );
+  }
+  const { mon, location } = found;
+  const info = lookup(mon.species);
+  const metLoc = mapsecLabel(mon.metLocation);
+  const origin = ORIGIN_GAME_LABEL[mon.originGame] ?? `Game ${mon.originGame}`;
+  const firstSeenAt = catchLog[`${mon.pid}:${mon.otId}`];
+
+  return (
+    <>
+      <div style={{ marginBottom: 16, fontSize: 13 }}>
+        <Link to="/" style={{ color: "var(--accent-strong)" }}>Dashboard</Link>
+        <span style={{ opacity: 0.4, padding: "0 6px" }}>/</span>
+        <Link to={`/${stem}`} style={{ color: "var(--accent-strong)" }}>
+          {GAME_DISPLAY_NAME[stem]}
+        </Link>
+        <span style={{ opacity: 0.4, padding: "0 6px" }}>/</span>
+        <span style={{ opacity: 0.7 }}>
+          {mon.nickname || (info ? formatSpeciesName(info.name) : key)}
+        </span>
+      </div>
+      <PokemonCard mon={mon} movesRight showGrade />
+      <section
+        style={{
+          marginTop: 16,
+          padding: 16,
+          border: "1px solid var(--border)",
+          borderRadius: 10,
+          background: "var(--bg-elevated)",
+        }}
+      >
+        <h3 style={{ margin: "0 0 10px", fontSize: 14, textTransform: "uppercase", letterSpacing: 0.5, opacity: 0.7 }}>
+          Identity
+        </h3>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+            gap: "6px 16px",
+            fontSize: 13,
+          }}
+        >
+          <Detail label="Where" value={locationLabel(location)} />
+          <Detail label="Met at" value={mon.metLevel ? `Lv ${mon.metLevel} · ${metLoc}` : "Hatched"} />
+          <Detail
+            label="OT"
+            value={`${mon.otName || "?"} (${mon.otGender === "male" ? "♂" : "♀"}) · ID ${String(mon.otId & 0xFFFF).padStart(5, "0")}`}
+          />
+          <Detail label="Origin" value={origin} />
+          <Detail label="First seen" value={firstSeenAt ? formatFirstSeen(firstSeenAt) : "—"} />
+          <Detail label="PID" value={mon.pid.toString(16).toUpperCase().padStart(8, "0")} mono />
+          <Detail label="OT ID (full)" value={mon.otId.toString(16).toUpperCase().padStart(8, "0")} mono />
+        </div>
+      </section>
     </>
   );
 }

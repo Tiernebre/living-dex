@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import type { HubState, WsMessage } from "../../hub/protocol.ts";
+import type { GameStem, HubState, WsMessage } from "../../hub/protocol.ts";
 
 type Actions = {
   apply: (msg: WsMessage) => void;
@@ -15,7 +15,7 @@ const initial: HubState = {
   currentBox: null,
   source: null,
   lastUpdateAt: null,
-  saveInfo: null,
+  saves: {},
   catchLog: {},
 };
 
@@ -38,13 +38,17 @@ export const useLivingDex = create<HubState & Actions>((set) => ({
           return { ...s, game: msg.game };
         case "location":
           return { ...s, location: msg.location };
-        case "save":
+        case "save": {
+          const saves = { ...s.saves };
+          if (msg.saveInfo) saves[msg.game as GameStem] = msg.saveInfo;
+          else delete saves[msg.game as GameStem];
           return {
             ...s,
-            saveInfo: msg.saveInfo,
+            saves,
             source: msg.saveInfo ? `save@${msg.saveInfo.savedAtMs}` : s.source,
             lastUpdateAt: msg.saveInfo ? msg.saveInfo.savedAtMs : s.lastUpdateAt,
           };
+        }
         case "party": {
           const party = [...s.party];
           party[msg.slot] = msg.pokemon;

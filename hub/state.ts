@@ -1,5 +1,5 @@
 import { getCatchLog, recordPokemon } from "./catch-log.ts";
-import type { DecodedPokemon, GameInfo, HubState, SaveInfo, Source, WsMessage } from "./protocol.ts";
+import type { DecodedPokemon, GameInfo, GameStem, HubState, SaveInfo, Source, WsMessage } from "./protocol.ts";
 
 type Subscriber = (msg: WsMessage) => void;
 
@@ -14,7 +14,7 @@ class StateStore {
     currentBox: null,
     source: null,
     lastUpdateAt: null,
-    saveInfo: null,
+    saves: {},
     catchLog: {},
   };
   private subscribers = new Set<Subscriber>();
@@ -94,13 +94,15 @@ class StateStore {
     this.broadcast({ type: "location", location });
   }
 
-  setSaveInfo(saveInfo: SaveInfo | null) {
-    this.state.saveInfo = saveInfo;
+  setSave(game: GameStem, saveInfo: SaveInfo | null) {
     if (saveInfo) {
+      this.state.saves[game] = saveInfo;
       this.state.source = `save@${saveInfo.savedAtMs}`;
       this.state.lastUpdateAt = saveInfo.savedAtMs;
+    } else {
+      delete this.state.saves[game];
     }
-    this.broadcast({ type: "save", saveInfo });
+    this.broadcast({ type: "save", game, saveInfo });
     if (saveInfo) {
       const all: (DecodedPokemon | null)[] = [...saveInfo.party];
       for (const box of saveInfo.boxes) all.push(...box.slots);

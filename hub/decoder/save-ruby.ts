@@ -7,7 +7,7 @@
 // which includes playerPartyCount (u8 @ 0x234) and playerParty[6] (struct Pokemon @ 0x238).
 
 import { decodePokemon } from "./gen3.ts";
-import type { BoxInfo, DecodedPokemon, SaveInfo } from "../protocol.ts";
+import type { BoxInfo, DecodedPokemon, GameStem, SaveInfo } from "../protocol.ts";
 export type { SaveInfo };
 
 const SECTOR_SIZE = 0x1000;
@@ -33,7 +33,9 @@ function decodeGen3String(bytes: Uint8Array): string {
   return out;
 }
 
-export function parseRubySave(buf: Uint8Array): SaveInfo | null {
+// Ruby and Sapphire share the Gen 3 RS save format (same sector layout, same offsets).
+// FireRed/LeafGreen and Emerald have different offsets and aren't handled here yet.
+export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInfo | null {
   if (buf.length < 0x20000) return null;
   const view = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
 
@@ -134,6 +136,7 @@ export function parseRubySave(buf: Uint8Array): SaveInfo | null {
   }
 
   return {
+    game,
     playerName,
     playerGender,
     trainerId: trainerId >>> 0,
