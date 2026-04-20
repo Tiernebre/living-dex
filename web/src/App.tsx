@@ -1,9 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useLivingDex } from "./store";
 import speciesData from "./species.json";
 import movesData from "./moves.json";
 import encountersData from "./encounters.json";
 import hoennDexData from "./hoenn-dex.json";
+import mapsecData from "./mapsec.json";
 import type { DecodedPokemon, HubState } from "../../hub/protocol.ts";
 
 type EncounterPokemon = {
@@ -40,6 +42,23 @@ const species = speciesData as Record<string, Species>;
 
 type HoennDexEntry = { hoennDex: number; nationalDex: number; name: string };
 const hoennDex = hoennDexData as HoennDexEntry[];
+
+const mapsecNames = mapsecData as string[];
+const METLOC_SPECIAL_EGG = 0xFD;
+const METLOC_IN_GAME_TRADE = 0xFE;
+const METLOC_FATEFUL_ENCOUNTER = 0xFF;
+function mapsecLabel(id: number | null): string {
+  if (id == null) return "Unknown";
+  if (id === METLOC_SPECIAL_EGG) return "Egg";
+  if (id === METLOC_IN_GAME_TRADE) return "In-game trade";
+  if (id === METLOC_FATEFUL_ENCOUNTER) return "Fateful encounter";
+  return mapsecNames[id] ?? `Map #${id}`;
+}
+
+const ORIGIN_GAME_LABEL: Record<number, string> = {
+  1: "Sapphire", 2: "Ruby", 3: "Emerald", 4: "FireRed", 5: "LeafGreen", 15: "Colosseum/XD",
+};
+
 const speciesByNationalDex: Record<number, Species> = (() => {
   const map: Record<number, Species> = {};
   for (const s of Object.values(species)) map[s.nationalDex] = s;
@@ -1293,24 +1312,71 @@ function SavedView({ saveInfo }: { saveInfo: HubState["saveInfo"] }) {
       ) : (
         <p style={{ opacity: 0.6, fontStyle: "italic" }}>No party Pokémon in this save.</p>
       )}
-      <LivingDexGrid party={saveInfo.party} />
+      <LivingDexGrid saveInfo={saveInfo} />
     </>
   );
 }
 
-function LivingDexGrid({ party }: { party: (DecodedPokemon | null)[] }) {
-  const caught = new Set<number>();
-  for (const mon of party) {
-    if (!mon) continue;
+type OwnedLocation =
+  | { kind: "party"; slot: number }
+  | { kind: "box"; boxIndex: number; boxName: string; slotIndex: number };
+
+type OwnedMon = { mon: DecodedPokemon; location: OwnedLocation };
+
+function collectOwned(saveInfo: HubState["saveInfo"]): Map<number, OwnedMon[]> {
+  const byNational = new Map<number, OwnedMon[]>();
+  const push = (mon: DecodedPokemon, location: OwnedLocation) => {
     const info = lookup(mon.species);
-    if (info) caught.add(info.nationalDex);
-  }
+    if (!info) return;
+    const list = byNational.get(info.nationalDex) ?? [];
+    list.push({ mon, location });
+    byNational.set(info.nationalDex, list);
+  };
+  if (!saveInfo) return byNational;
+  saveInfo.party.forEach((mon, slot) => {
+    if (mon) push(mon, { kind: "party", slot });
+  });
+  saveInfo.boxes.forEach((box, boxIndex) => {
+    box.slots.forEach((mon, slotIndex) => {
+      if (mon) push(mon, { kind: "box", boxIndex, boxName: box.name, slotIndex });
+    });
+  });
+  return byNational;
+}
+
+function locationLabel(loc: OwnedLocation): string {
+  if (loc.kind === "party") return `Party · slot ${loc.slot + 1}`;
+  return `${loc.boxName} · slot ${loc.slotIndex + 1}`;
+}
+
+function LivingDexGrid({ saveInfo }: { saveInfo: NonNullable<HubState["saveInfo"]> }) {
+  const owned = collectOwned(saveInfo);
+  const [selected, setSelected] = useState<number | null>(null);
+  const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
+
+  const close = () => {
+    setSelected(null);
+    setAnchor(null);
+  };
+
+  useEffect(() => {
+    if (selected == null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [selected]);
+
+  const selectedEntry = selected != null ? hoennDex.find((e) => e.hoennDex === selected) ?? null : null;
+  const selectedOwned = selectedEntry ? owned.get(selectedEntry.nationalDex) ?? [] : [];
+
   return (
     <section style={{ marginTop: 24 }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 10, flexWrap: "wrap" }}>
         <h2 style={{ margin: 0 }}>Hoenn Dex</h2>
         <span style={{ fontSize: 13, opacity: 0.7 }}>
-          <span style={{ fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>{caught.size}</span>
+          <span style={{ fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>{owned.size}</span>
           {" / "}
           <span style={{ fontVariantNumeric: "tabular-nums" }}>{hoennDex.length}</span> caught
         </span>
@@ -1318,18 +1384,27 @@ function LivingDexGrid({ party }: { party: (DecodedPokemon | null)[] }) {
       <div className="dex-grid">
         {hoennDex.map((entry) => {
           const info = speciesByNationalDex[entry.nationalDex];
-          const isCaught = caught.has(entry.nationalDex);
-          const cls = `dex-cell ${isCaught ? "dex-cell-caught" : "dex-cell-missing"}`;
-          const title = `#${entry.hoennDex} ${formatSpeciesName(entry.name)}${isCaught ? " — caught" : ""}`;
+          const entries = owned.get(entry.nationalDex);
+          const isCaught = !!entries?.length;
+          const isSelected = selected === entry.hoennDex;
+          const cls = `dex-cell ${isCaught ? "dex-cell-caught" : "dex-cell-missing"}${isSelected ? " dex-cell-selected" : ""}`;
+          const title = `#${entry.hoennDex} ${formatSpeciesName(entry.name)}${
+            isCaught ? ` — ${locationLabel(entries![0].location)}` : ""
+          }`;
           return (
-            <a
+            <button
+              type="button"
               key={entry.hoennDex}
               className={cls}
-              href={info ? serebiiGen3DexUrl(info.nationalDex) : "#"}
-              target="_blank"
-              rel="noreferrer"
               title={title}
-              style={{ textDecoration: "none", color: "inherit" }}
+              onClick={(e) => {
+                if (isSelected) {
+                  close();
+                } else {
+                  setSelected(entry.hoennDex);
+                  setAnchor(e.currentTarget);
+                }
+              }}
             >
               <span className="dex-cell-num">{String(entry.hoennDex).padStart(3, "0")}</span>
               {info?.sprite ? (
@@ -1338,11 +1413,243 @@ function LivingDexGrid({ party }: { party: (DecodedPokemon | null)[] }) {
                 <div style={{ width: 56, height: 56 }} />
               )}
               <span className="dex-cell-name">{formatSpeciesName(entry.name)}</span>
-            </a>
+              {entries && entries.length > 1 && (
+                <span className="dex-cell-badge" title={`${entries.length} owned`}>×{entries.length}</span>
+              )}
+            </button>
           );
         })}
       </div>
+      {selectedEntry && anchor && (
+        <DexPopover anchor={anchor} onClose={close}>
+          <DexDetail entry={selectedEntry} owned={selectedOwned} onClose={close} />
+        </DexPopover>
+      )}
     </section>
+  );
+}
+
+const POPOVER_WIDTH = 420;
+const POPOVER_MARGIN = 8;
+const POPOVER_GAP = 12; // distance between anchor and popover
+
+function DexPopover({
+  anchor,
+  onClose,
+  children,
+}: {
+  anchor: HTMLElement;
+  onClose: () => void;
+  children: React.ReactNode;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [pos, setPos] = useState<{
+    left: number;
+    top: number;
+    width: number;
+    arrowLeft: number;
+    placement: "top" | "bottom";
+  } | null>(null);
+
+  useLayoutEffect(() => {
+    const place = () => {
+      const el = ref.current;
+      if (!el) return;
+      const anchorRect = anchor.getBoundingClientRect();
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const width = Math.min(POPOVER_WIDTH, vw - POPOVER_MARGIN * 2);
+      const height = el.offsetHeight;
+
+      const anchorCenter = anchorRect.left + anchorRect.width / 2;
+      const left = Math.min(
+        Math.max(POPOVER_MARGIN, anchorCenter - width / 2),
+        vw - width - POPOVER_MARGIN,
+      );
+
+      const spaceAbove = anchorRect.top;
+      const spaceBelow = vh - anchorRect.bottom;
+      const placement: "top" | "bottom" =
+        spaceAbove >= height + POPOVER_GAP || spaceAbove >= spaceBelow ? "top" : "bottom";
+      const top =
+        placement === "top"
+          ? Math.max(POPOVER_MARGIN, anchorRect.top - height - POPOVER_GAP)
+          : Math.min(vh - height - POPOVER_MARGIN, anchorRect.bottom + POPOVER_GAP);
+
+      const arrowLeft = Math.min(
+        Math.max(14, anchorCenter - left),
+        width - 14,
+      );
+
+      setPos({ left, top, width, arrowLeft, placement });
+    };
+
+    place();
+    // Re-place after layout settles (e.g. images loading inside the popover).
+    const ro = new ResizeObserver(place);
+    if (ref.current) ro.observe(ref.current);
+    window.addEventListener("scroll", place, true);
+    window.addEventListener("resize", place);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("scroll", place, true);
+      window.removeEventListener("resize", place);
+    };
+  }, [anchor]);
+
+  useEffect(() => {
+    const onDown = (e: MouseEvent) => {
+      const t = e.target as Node;
+      if (ref.current?.contains(t) || anchor.contains(t)) return;
+      onClose();
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [anchor, onClose]);
+
+  return createPortal(
+    <div
+      ref={ref}
+      className={`dex-popover dex-popover-${pos?.placement ?? "top"}`}
+      role="dialog"
+      style={{
+        left: pos?.left ?? -9999,
+        top: pos?.top ?? -9999,
+        width: pos?.width ?? POPOVER_WIDTH,
+        visibility: pos ? "visible" : "hidden",
+        ["--arrow-left" as string]: pos ? `${pos.arrowLeft}px` : "50%",
+      }}
+    >
+      {children}
+    </div>,
+    document.body,
+  );
+}
+
+function DexDetail({
+  entry,
+  owned,
+  onClose,
+}: {
+  entry: HoennDexEntry;
+  owned: OwnedMon[];
+  onClose: () => void;
+}) {
+  const info = speciesByNationalDex[entry.nationalDex];
+  return (
+    <div aria-label={`${formatSpeciesName(entry.name)} details`}>
+      <div style={{ display: "flex", alignItems: "flex-start", gap: 12, marginBottom: owned.length ? 12 : 0 }}>
+        {info?.sprite && (
+          <img src={info.sprite} alt="" width={72} height={72} style={{ imageRendering: "pixelated" }} />
+        )}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: 18, fontWeight: 700 }}>
+            <a
+              href={info ? serebiiGen3DexUrl(info.nationalDex) : "#"}
+              target="_blank"
+              rel="noreferrer"
+              style={{ color: "inherit" }}
+            >
+              #{String(entry.hoennDex).padStart(3, "0")} {formatSpeciesName(entry.name)}
+            </a>
+          </div>
+          <div style={{ fontSize: 12, opacity: 0.7, marginTop: 4, display: "flex", gap: 6, flexWrap: "wrap" }}>
+            <span>National #{entry.nationalDex}</span>
+            {info && <span style={{ opacity: 0.5 }}>·</span>}
+            {info?.types.map((t) => <TypeBadge key={t} type={t} />)}
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          style={{
+            background: "transparent",
+            border: "none",
+            fontSize: 20,
+            lineHeight: 1,
+            padding: 4,
+            cursor: "pointer",
+            color: "var(--text-muted)",
+            fontFamily: "inherit",
+          }}
+        >
+          ×
+        </button>
+      </div>
+      {owned.length === 0 ? (
+        <p style={{ opacity: 0.6, fontStyle: "italic", margin: 0 }}>Not yet caught.</p>
+      ) : (
+        <div style={{ display: "grid", gap: 10 }}>
+          {owned.map((o, i) => (
+            <OwnedMonRow key={i} owned={o} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function OwnedMonRow({ owned }: { owned: OwnedMon }) {
+  const { mon, location } = owned;
+  const info = lookup(mon.species);
+  const locLabel = locationLabel(location);
+  const locTone = location.kind === "party" ? "success" : "info";
+  const metLoc = mapsecLabel(mon.metLocation);
+  const origin = ORIGIN_GAME_LABEL[mon.originGame] ?? `Game ${mon.originGame}`;
+  const isTraded = info && mon.originGame !== 2; // Ruby's origin = 2
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 12,
+        padding: 10,
+        border: "1px solid var(--border)",
+        borderRadius: 8,
+        background: "var(--bg-surface)",
+      }}
+    >
+      <div style={{ flex: 1, minWidth: 0 }}>
+        <div style={{ display: "flex", alignItems: "baseline", gap: 8, flexWrap: "wrap", marginBottom: 6 }}>
+          <span style={{ fontSize: 15, fontWeight: 700 }}>
+            {mon.isEgg ? "Egg" : mon.nickname || (info ? formatSpeciesName(info.name) : "?")}
+          </span>
+          <span style={{ fontSize: 12, opacity: 0.7 }}>Lv {mon.level} · {mon.nature}</span>
+          <StatusBadge label="Where" value={locLabel} tone={locTone} />
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "4px 16px", fontSize: 12 }}>
+          <Detail label="Met at" value={mon.metLevel ? `Lv ${mon.metLevel} · ${metLoc}` : "Hatched"} />
+          <Detail
+            label="OT"
+            value={`${mon.otName || "?"} (${mon.otGender === "male" ? "♂" : "♀"}) · ID ${String(mon.otId & 0xFFFF).padStart(5, "0")}`}
+          />
+          <Detail label="Origin" value={origin + (isTraded ? " · traded" : "")} />
+          <Detail label="PID" value={mon.pid.toString(16).toUpperCase().padStart(8, "0")} mono />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Detail({ label, value, mono }: { label: string; value: string; mono?: boolean }) {
+  return (
+    <div style={{ display: "flex", gap: 6, minWidth: 0 }}>
+      <span style={{ opacity: 0.55, textTransform: "uppercase", letterSpacing: 0.5, fontSize: 10, flexShrink: 0, alignSelf: "center" }}>
+        {label}
+      </span>
+      <span
+        style={{
+          fontWeight: 600,
+          fontFamily: mono ? "ui-monospace, SFMono-Regular, monospace" : undefined,
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {value}
+      </span>
+    </div>
   );
 }
 

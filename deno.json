@@ -7,7 +7,8 @@
     "species": "deno run --allow-net=pokeapi.co --allow-write=web/src/species.json scripts/fetch-species.ts",
     "moves": "deno run --allow-net=pokeapi.co --allow-write=web/src/moves.json scripts/fetch-moves.ts",
     "encounters": "deno run --allow-net=raw.githubusercontent.com --allow-read=web/src/species.json --allow-write=web/src/encounters.json scripts/fetch-encounters.ts",
-    "hoenn-dex": "deno run --allow-read --allow-write=web/src/hoenn-dex.json scripts/build-hoenn-dex.ts"
+    "hoenn-dex": "deno run --allow-read --allow-write=web/src/hoenn-dex.json scripts/build-hoenn-dex.ts",
+    "mapsec": "deno run --allow-read --allow-write=web/src/mapsec.json scripts/build-mapsec.ts"
   },
   "imports": {}
 }

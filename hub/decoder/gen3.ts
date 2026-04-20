@@ -142,6 +142,15 @@ export function decodePokemon(bytes: Uint8Array): DecodedPokemon | null {
   if (species === 0) return null;
   const experience = readU32LE(G, 4);
 
+  // Misc substruct: 0x00 pokerus, 0x01 metLocation, 0x02-0x03 origins word,
+  // 0x04-0x07 IVs/egg/ability bitfield, 0x08-0x0B ribbons.
+  const metLocation = M[1];
+  const originsWord = readU16LE(M, 2);
+  const metLevel = originsWord & 0x7F;
+  const originGame = (originsWord >>> 7) & 0x0F;
+  const otGender: "male" | "female" = ((originsWord >>> 15) & 1) === 0 ? "male" : "female";
+  const isEgg = ((bytes[0x13] >>> 2) & 1) === 1;
+
   const ivsRaw = readU32LE(M, 4);
   const ivs = {
     hp:  ivsRaw        & 0x1F,
@@ -178,5 +187,12 @@ export function decodePokemon(bytes: Uint8Array): DecodedPokemon | null {
     evs,
     nature: NATURES[pid % 25],
     moves,
+    otName: decodeName(bytes.subarray(0x14, 0x1B)),
+    otId: otid,
+    otGender,
+    metLevel,
+    metLocation: metLevel === 0 ? null : metLocation,
+    originGame,
+    isEgg,
   };
 }

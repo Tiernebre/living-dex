@@ -7,7 +7,7 @@
 // which includes playerPartyCount (u8 @ 0x234) and playerParty[6] (struct Pokemon @ 0x238).
 
 import { decodePokemon } from "./gen3.ts";
-import type { DecodedPokemon, SaveInfo } from "../protocol.ts";
+import type { BoxInfo, DecodedPokemon, SaveInfo } from "../protocol.ts";
 export type { SaveInfo };
 
 const SECTOR_SIZE = 0x1000;
@@ -95,6 +95,44 @@ export function parseRubySave(buf: Uint8Array): SaveInfo | null {
     }
   }
 
+  // gPokemonStorage spans section IDs 5..13 (9 chunks), each holding up to 3968
+  // bytes of the struct. Concatenate them in order so we can read BoxPokemon
+  // entries without worrying about chunk boundaries.
+  const storageChunks: (Uint8Array | null)[] = Array(9).fill(null);
+  for (let i = 0; i < NUM_SECTORS_PER_SLOT; i++) {
+    const s = readSector(activeSlot * NUM_SECTORS_PER_SLOT + i);
+    if (!s) continue;
+    const chunkIdx = s.id - 5;
+    if (chunkIdx >= 0 && chunkIdx < 9) {
+      storageChunks[chunkIdx] = buf.subarray(s.base, s.base + SECTOR_DATA_SIZE);
+    }
+  }
+  let boxes: BoxInfo[] = [];
+  let currentBox = 0;
+  if (storageChunks.every((c) => c !== null)) {
+    const storage = new Uint8Array(9 * SECTOR_DATA_SIZE);
+    for (let i = 0; i < 9; i++) storage.set(storageChunks[i]!, i * SECTOR_DATA_SIZE);
+    currentBox = storage[0];
+    const BOXES_COUNT = 14;
+    const SLOTS_PER_BOX = 30;
+    const BOX_MON_SIZE = 0x50; // 80-byte BoxPokemon
+    const BOXES_BASE = 0x0004;
+    const NAMES_BASE = 0x8344;
+    const NAME_LEN = 9;
+    boxes = Array.from({ length: BOXES_COUNT }, (_, b) => {
+      const nameBytes = storage.subarray(
+        NAMES_BASE + b * NAME_LEN,
+        NAMES_BASE + (b + 1) * NAME_LEN,
+      );
+      const slots: (DecodedPokemon | null)[] = Array(SLOTS_PER_BOX).fill(null);
+      for (let i = 0; i < SLOTS_PER_BOX; i++) {
+        const off = BOXES_BASE + (b * SLOTS_PER_BOX + i) * BOX_MON_SIZE;
+        slots[i] = decodePokemon(storage.subarray(off, off + BOX_MON_SIZE));
+      }
+      return { name: decodeGen3String(nameBytes) || `Box ${b + 1}`, slots };
+    });
+  }
+
   return {
     playerName,
     playerGender,
@@ -102,5 +140,7 @@ export function parseRubySave(buf: Uint8Array): SaveInfo | null {
     playTime: { hours, minutes, seconds, frames },
     savedAtMs: Date.now(),
     party,
+    boxes,
+    currentBox,
   };
 }

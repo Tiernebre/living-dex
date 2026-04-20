@@ -45,7 +45,28 @@ export type DecodedPokemon = {
   evs: { hp: number; atk: number; def: number; spa: number; spd: number; spe: number };
   nature: string;
   moves: { id: number; pp: number }[];
-  // TODO: ability, hidden power, ribbons, OT info, etc.
+  otName: string;
+  otId: number;
+  otGender: "male" | "female";
+  metLevel: number;
+  // Gen 3 map-section id. 0xFD/0xFE/0xFF are special (egg/trade/fateful).
+  // Null if metLevel is 0 (hatched via egg before this save) or corrupt.
+  metLocation: number | null;
+  // Bits 7-10 of origins word. 1=Sapphire, 2=Ruby, 3=Emerald, 4=FireRed, 5=LeafGreen.
+  originGame: number;
+  isEgg: boolean;
+  // TODO: ability, hidden power, ribbons, etc.
+};
+
+export type BoxEntry = {
+  pokemon: DecodedPokemon;
+  boxIndex: number; // 0..13
+  slotIndex: number; // 0..29
+};
+
+export type BoxInfo = {
+  name: string;
+  slots: (DecodedPokemon | null)[];
 };
 
 export type SaveInfo = {
@@ -55,6 +76,8 @@ export type SaveInfo = {
   playTime: { hours: number; minutes: number; seconds: number; frames: number };
   savedAtMs: number;
   party: (DecodedPokemon | null)[];
+  boxes: BoxInfo[];
+  currentBox: number;
 };
 
 export type HubState = {

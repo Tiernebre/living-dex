@@ -196,6 +196,43 @@
         grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
         gap: 8px;
       }
+      .dex-popover {
+        position: fixed;
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--bg-elevated);
+        color: var(--text);
+        box-shadow: 0 10px 32px rgba(15, 23, 42, 0.18), 0 2px 6px rgba(15, 23, 42, 0.08);
+        text-align: left;
+        z-index: 50;
+        animation: dex-popover-in 140ms ease-out;
+      }
+      .dex-popover::after {
+        content: "";
+        position: absolute;
+        left: var(--arrow-left, 50%);
+        transform: translateX(-50%);
+        border: 7px solid transparent;
+      }
+      .dex-popover-top::after {
+        top: 100%;
+        border-top-color: var(--bg-elevated);
+        filter: drop-shadow(0 1px 0 var(--border));
+      }
+      .dex-popover-bottom::after {
+        bottom: 100%;
+        border-bottom-color: var(--bg-elevated);
+        filter: drop-shadow(0 -1px 0 var(--border));
+      }
+      @keyframes dex-popover-in {
+        from { opacity: 0; transform: translateY(2px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .dex-popover { animation: none; }
+      }
+
       .dex-cell {
         position: relative;
         display: flex;
@@ -211,6 +248,25 @@
         text-align: center;
         overflow: hidden;
         transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+        cursor: pointer;
+        font-family: inherit;
+        color: inherit;
+      }
+      .dex-cell-selected {
+        border-color: var(--accent) !important;
+        box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 40%, transparent), 0 4px 12px rgba(15, 23, 42, 0.1);
+      }
+      .dex-cell-badge {
+        position: absolute;
+        top: 4px;
+        right: 6px;
+        background: var(--accent);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 700;
+        padding: 1px 5px;
+        border-radius: 999px;
+        line-height: 1.2;
       }
       .dex-cell:hover {
         transform: translateY(-1px);
