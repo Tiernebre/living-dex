@@ -32,12 +32,13 @@ async function parseAndPush(path: string) {
     return;
   }
   try {
-    const buf = await Deno.readFile(path);
+    const [buf, stat] = await Promise.all([Deno.readFile(path), Deno.stat(path)]);
     const info = parse(buf, game);
     if (!info) {
       console.warn(`[save-watcher] ${path}: no valid save data found`);
       return;
     }
+    if (stat.mtime) info.savedAtMs = stat.mtime.getTime();
     const { playerName, playTime } = info;
     console.log(
       `[save-watcher] ${game}: ${playerName || "(no name)"} — ` +

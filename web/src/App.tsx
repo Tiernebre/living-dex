@@ -255,6 +255,24 @@ function MovesList({ moves }: { moves: { id: number; pp: number }[] }) {
   );
 }
 
+const HIDDEN_POWER_TYPES = [
+  "fighting", "flying", "poison", "ground", "rock", "bug", "ghost", "steel",
+  "fire", "water", "grass", "electric", "psychic", "ice", "dragon", "dark",
+] as const;
+
+function hiddenPower(ivs: { hp: number; atk: number; def: number; spa: number; spd: number; spe: number }): {
+  type: string;
+  power: number;
+} {
+  const a = ivs.hp & 1, b = ivs.atk & 1, c = ivs.def & 1;
+  const d = ivs.spe & 1, e = ivs.spa & 1, f = ivs.spd & 1;
+  const u = (ivs.hp >> 1) & 1, v = (ivs.atk >> 1) & 1, w = (ivs.def >> 1) & 1;
+  const x = (ivs.spe >> 1) & 1, y = (ivs.spa >> 1) & 1, z = (ivs.spd >> 1) & 1;
+  const typeIdx = Math.floor(((a + 2 * b + 4 * c + 8 * d + 16 * e + 32 * f) * 15) / 63);
+  const power = Math.floor(((u + 2 * v + 4 * w + 8 * x + 16 * y + 32 * z) * 40) / 63) + 30;
+  return { type: HIDDEN_POWER_TYPES[typeIdx], power };
+}
+
 function TypeBadge({ type }: { type: string }) {
   const bg = TYPE_COLORS[type] ?? "#6b7280";
   return (
@@ -799,6 +817,19 @@ function PokemonCard({
             </span>
           )}
           {info && info.types.map((t) => <TypeBadge key={t} type={t} />)}
+          {(() => {
+            const hp = hiddenPower(mon.ivs);
+            return (
+              <span
+                style={{ display: "inline-flex", alignItems: "center", gap: 4 }}
+                title={`Hidden Power ${hp.type} · base power ${hp.power}`}
+              >
+                <span style={{ opacity: 0.6 }}>HP</span>
+                <TypeBadge type={hp.type} />
+                <span style={{ fontVariantNumeric: "tabular-nums", fontWeight: 600 }}>{hp.power}</span>
+              </span>
+            );
+          })()}
         </div>
         {info && <ExpProgress level={mon.level} exp={mon.experience} rate={info.growthRate} />}
         {movesRight ? (
@@ -1251,20 +1282,45 @@ type ChainStep = {
   short?: string;
   mascots: number[];
   tint: string; // hex; used as subtle gradient + border accent
+  gen: 3 | 4 | 5;
+  stage: number; // ordered release-stage within the chain; later stages stay
+                 // locked until every `primary` game of the prior stage has a
+                 // save loaded (proxy for 4-star completion).
+  primary?: boolean;
   endOfGen?: boolean;
 };
+// Ordered by North American release date — the challenge is played as if
+// re-living each release year in sequence. See README.md "Challenges".
 const CHALLENGE_CHAIN: ChainStep[] = [
-  { stem: "sapphire",  label: "Sapphire",               mascots: [382],       tint: "#2563eb" },
-  { stem: "ruby",      label: "Ruby",                   mascots: [383],       tint: "#dc2626" },
-  { stem: "emerald",   label: "Emerald",                mascots: [384],       tint: "#059669", endOfGen: true },
-  { stem: "firered",   label: "FireRed",                mascots: [6],         tint: "#ea580c" },
-  { stem: "leafgreen", label: "LeafGreen",              mascots: [3],         tint: "#16a34a" },
-  { stem: null,        label: "Diamond / Pearl",        short: "D/P",         mascots: [483, 484], tint: "#7dd3fc" },
-  { stem: null,        label: "Platinum",               mascots: [487],       tint: "#a855f7" },
-  { stem: null,        label: "HeartGold / SoulSilver", short: "HG/SS",       mascots: [250, 249], tint: "#f59e0b", endOfGen: true },
-  { stem: null,        label: "Black / White",          short: "B/W",         mascots: [643, 644], tint: "#4b5563" },
-  { stem: null,        label: "Black 2 / White 2",      short: "B2/W2",       mascots: [646],      tint: "#0ea5e9", endOfGen: true },
+  // Stage 1 — 2003-03 (Gen 3)
+  { stem: "ruby",      gen: 3, stage: 1, label: "Ruby",       mascots: [383], tint: "#dc2626" },
+  { stem: "sapphire",  gen: 3, stage: 1, label: "Sapphire",   mascots: [382], tint: "#2563eb", primary: true },
+  // Stage 2 — 2004-09 (Gen 3)
+  { stem: "firered",   gen: 3, stage: 2, label: "FireRed",    mascots: [6],   tint: "#ea580c" },
+  { stem: "leafgreen", gen: 3, stage: 2, label: "LeafGreen",  mascots: [3],   tint: "#16a34a", primary: true },
+  // Stage 3 — 2005-05 (Gen 3)
+  { stem: "emerald",   gen: 3, stage: 3, label: "Emerald",    mascots: [384], tint: "#059669", primary: true, endOfGen: true },
+  // Stage 4 — 2007-04 (Gen 4)
+  { stem: null, gen: 4, stage: 4, label: "Diamond",   mascots: [483], tint: "#38bdf8", primary: true },
+  { stem: null, gen: 4, stage: 4, label: "Pearl",     mascots: [484], tint: "#f9a8d4" },
+  // Stage 5 — 2009-03 (Gen 4)
+  { stem: null, gen: 4, stage: 5, label: "Platinum",  mascots: [487], tint: "#a855f7", primary: true },
+  // Stage 6 — 2010-03 (Gen 4)
+  { stem: null, gen: 4, stage: 6, label: "HeartGold", mascots: [250], tint: "#f59e0b", primary: true, endOfGen: true },
+  { stem: null, gen: 4, stage: 6, label: "SoulSilver", mascots: [249], tint: "#cbd5e1" },
+  // Stage 7 — 2011-03 (Gen 5)
+  { stem: null, gen: 5, stage: 7, label: "White",     mascots: [643], tint: "#e5e7eb", primary: true },
+  { stem: null, gen: 5, stage: 7, label: "Black",     mascots: [644], tint: "#1f2937" },
+  // Stage 8 — 2012-10 (Gen 5)
+  { stem: null, gen: 5, stage: 8, label: "Black 2",   mascots: [644], tint: "#0ea5e9", primary: true, endOfGen: true },
+  { stem: null, gen: 5, stage: 8, label: "White 2",   mascots: [643], tint: "#6b7280" },
 ];
+
+const GEN_LABELS: Record<3 | 4 | 5, string> = {
+  3: "Generation III · Hoenn & Kanto",
+  4: "Generation IV · Sinnoh & Johto",
+  5: "Generation V · Unova",
+};
 
 function pokemonKey(mon: DecodedPokemon): string {
   return `${mon.otId.toString(16)}-${mon.pid.toString(16)}`;
@@ -2000,7 +2056,7 @@ function TrainerSaveCard({
         <div style={{ fontSize: 12, opacity: 0.7 }}>
           {savedAtMs
             ? `saved ${new Date(savedAtMs).toLocaleTimeString()}`
-            : `${speciesCount} species`}
+            : `${speciesCount} / ${hoennDex.length} species`}
         </div>
       </div>
       <span
@@ -2036,18 +2092,22 @@ function ChainCard({
   caught,
   unsupported,
   isLive,
+  locked,
 }: {
   step: ChainStep;
   loaded: boolean;
   caught: number;
   unsupported: boolean;
   isLive: boolean;
+  locked: boolean;
 }) {
   const tint = step.tint;
-  const statusLine = unsupported
+  const statusLine = locked
+    ? "Locked — complete prior stage"
+    : unsupported
     ? "Roadmap"
     : loaded
-    ? `${caught} species caught`
+    ? `${caught} / ${hoennDex.length} species caught`
     : "No save loaded";
   const inner = (
     <div
@@ -2059,7 +2119,8 @@ function ChainCard({
         border: `1px solid color-mix(in srgb, ${tint} 35%, var(--border))`,
         background: `linear-gradient(135deg, color-mix(in srgb, ${tint} 12%, var(--bg-elevated)), var(--bg-elevated) 70%)`,
         overflow: "hidden",
-        opacity: unsupported ? 0.6 : 1,
+        opacity: locked ? 0.35 : unsupported ? 0.6 : 1,
+        filter: locked ? "grayscale(0.7)" : undefined,
         display: "flex",
         gap: 12,
         alignItems: "center",
@@ -2088,7 +2149,8 @@ function ChainCard({
       >
         {step.mascots.map((dex, i) => {
           const filters: string[] = [];
-          if (unsupported) filters.push("grayscale(0.4)");
+          if (locked) filters.push("grayscale(0.9)");
+          else if (unsupported) filters.push("grayscale(0.4)");
           filters.push(`drop-shadow(0 2px 4px ${tint}66)`);
           return (
             <img
@@ -2132,6 +2194,24 @@ function ChainCard({
           >
             {step.label}
           </span>
+          {step.primary && (
+            <span
+              title="Primary — aim for a 4★ trainer card"
+              style={{
+                fontSize: 9,
+                fontWeight: 800,
+                textTransform: "uppercase",
+                letterSpacing: 0.7,
+                padding: "2px 6px",
+                borderRadius: 4,
+                background: `color-mix(in srgb, ${tint} 18%, transparent)`,
+                color: `color-mix(in srgb, ${tint} 85%, var(--text))`,
+                border: `1px solid color-mix(in srgb, ${tint} 45%, var(--border))`,
+              }}
+            >
+              ★ Primary
+            </span>
+          )}
           {step.endOfGen && (
             <span
               title="Completion target: national dex"
@@ -2211,7 +2291,7 @@ function ChainCard({
     </div>
   );
 
-  if (step.stem && loaded) {
+  if (step.stem && loaded && !locked) {
     return (
       <Link
         to={`/${step.stem}`}
@@ -2237,24 +2317,142 @@ function countOwnedSpecies(saveInfo: SaveInfo): Set<number> {
   return set;
 }
 
+function LatestCatchCard({ stem, mon, at }: { stem: GameStem; mon: DecodedPokemon; at: number }) {
+  const info = lookup(mon.species);
+  const step = CHALLENGE_CHAIN.find((c) => c.stem === stem);
+  const tint = step?.tint ?? "var(--accent)";
+  const label = mon.isEgg ? "Egg" : mon.nickname || (info ? formatSpeciesName(info.name) : "?");
+  return (
+    <section style={{ marginBottom: 22 }}>
+      <h2 style={{ margin: "0 0 10px" }}>Latest catch</h2>
+      <Link
+        to={`/${stem}/pokemon/${pokemonKey(mon)}`}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 14,
+          padding: "12px 14px 12px 16px",
+          borderRadius: 14,
+          border: `1px solid color-mix(in srgb, ${tint} 35%, var(--border))`,
+          background: `linear-gradient(135deg, color-mix(in srgb, ${tint} 12%, var(--bg-elevated)), var(--bg-elevated) 70%)`,
+          color: "inherit",
+          textDecoration: "none",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <span
+          aria-hidden
+          style={{
+            position: "absolute",
+            inset: 0,
+            width: 4,
+            background: tint,
+            borderTopLeftRadius: 14,
+            borderBottomLeftRadius: 14,
+          }}
+        />
+        {info && (
+          <img
+            src={thumbnailUrl(info.nationalDex)}
+            alt={info.name}
+            width={72}
+            height={72}
+            style={{ flexShrink: 0 }}
+          />
+        )}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ fontSize: 16, fontWeight: 700 }}>
+            {label}
+            {info && (
+              <span style={{ fontWeight: 400, opacity: 0.7 }}>
+                {" — "}
+                {formatSpeciesName(info.name)}
+              </span>
+            )}
+          </div>
+          <div style={{ fontSize: 13, opacity: 0.8, marginTop: 2, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
+            <span>Lv {mon.level} · {mon.nature}</span>
+            {info && info.types.map((t) => <TypeBadge key={t} type={t} />)}
+            <span style={{ opacity: 0.6 }}>·</span>
+            <span style={{ textTransform: "uppercase", letterSpacing: 0.5, fontSize: 11, fontWeight: 700, color: tint }}>
+              {step?.label ?? stem}
+            </span>
+          </div>
+          <div style={{ fontSize: 12, opacity: 0.7, marginTop: 4 }}>
+            caught {formatFirstSeen(at)}
+          </div>
+        </div>
+      </Link>
+    </section>
+  );
+}
+
 function Dashboard() {
-  const { saves, connected, game } = useLivingDex();
+  const { saves, connected, game, catchLog } = useLivingDex();
   const runningStem = game ? CODE_TO_STEM[game.code] : null;
 
-  const { totalSpecies, perGame } = useMemo(() => {
-    const combined = new Set<number>();
+  const perGame = useMemo(() => {
     const perGame: Partial<Record<GameStem, Set<number>>> = {};
     for (const stem of GAME_STEMS) {
       const s = saves[stem];
       if (!s) continue;
-      const set = countOwnedSpecies(s);
-      perGame[stem] = set;
-      for (const n of set) combined.add(n);
+      perGame[stem] = countOwnedSpecies(s);
     }
-    return { totalSpecies: combined.size, perGame };
+    return perGame;
   }, [saves]);
 
+  const mostRecentlyPlayed = useMemo(() => {
+    let best: { stem: GameStem; at: number } | null = null;
+    for (const stem of GAME_STEMS) {
+      const s = saves[stem];
+      if (!s) continue;
+      if (!best || s.savedAtMs > best.at) best = { stem, at: s.savedAtMs };
+    }
+    if (!best) return null;
+    const step = CHALLENGE_CHAIN.find((c) => c.stem === best!.stem);
+    return {
+      stem: best.stem,
+      at: best.at,
+      label: step?.label ?? best.stem,
+      tint: step?.tint ?? "var(--accent)",
+    };
+  }, [saves]);
+
+  const latestCatch = useMemo<{ stem: GameStem; mon: DecodedPokemon; at: number } | null>(() => {
+    type Best = { stem: GameStem; mon: DecodedPokemon; at: number };
+    let best: Best | null = null;
+    for (const stem of GAME_STEMS) {
+      const s = saves[stem];
+      if (!s) continue;
+      const scan = (mon: DecodedPokemon | null) => {
+        if (!mon) return;
+        const at = catchLog[`${mon.pid}:${mon.otId}`];
+        if (at == null) return;
+        const current: Best | null = best;
+        if (!current || at > current.at) best = { stem, mon, at };
+      };
+      s.party.forEach(scan);
+      s.boxes.forEach((b) => b.slots.forEach(scan));
+    }
+    return best;
+  }, [saves, catchLog]);
+
   const loaded = GAME_STEMS.filter((s) => saves[s]);
+
+  // State machine: a stage is unlocked when every `primary` game in the prior
+  // stage has a save loaded (proxy for 4★ completion). Stage 1 always unlocks.
+  const stageUnlocked = useMemo(() => {
+    const stages = Array.from(new Set(CHALLENGE_CHAIN.map((s) => s.stage))).sort((a, b) => a - b);
+    const unlocked = new Set<number>();
+    let prevComplete = true;
+    for (const stage of stages) {
+      if (prevComplete) unlocked.add(stage);
+      const primaries = CHALLENGE_CHAIN.filter((s) => s.stage === stage && s.primary);
+      prevComplete = primaries.length > 0 && primaries.every((s) => !!(s.stem && saves[s.stem]));
+    }
+    return unlocked;
+  }, [saves]);
 
   return (
     <>
@@ -2286,75 +2484,105 @@ function Dashboard() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: 10,
-            fontSize: 11,
-            opacity: 0.75,
-            textTransform: "uppercase",
-            letterSpacing: 0.8,
-            fontWeight: 700,
-          }}
-        >
-          <Pokeball size={14} />
-          Living Dex — across all saves
-        </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "baseline",
-            gap: 16,
+            gap: 12,
             flexWrap: "wrap",
-            marginTop: 6,
             position: "relative",
           }}
         >
-          <div
-            style={{
-              fontSize: 44,
-              fontWeight: 800,
-              fontVariantNumeric: "tabular-nums",
-              lineHeight: 1,
-              background: "linear-gradient(135deg, #ef4444, #f59e0b)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              textShadow: "0 1px 0 rgba(0,0,0,0.05)",
-            }}
-          >
-            {totalSpecies}
-          </div>
-          <div style={{ opacity: 0.8, fontWeight: 600 }}>unique species caught</div>
+          {mostRecentlyPlayed ? (
+            <Link
+              to={`/${mostRecentlyPlayed.stem}`}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+                fontSize: 12,
+                fontWeight: 700,
+                color: "inherit",
+                textDecoration: "none",
+              }}
+            >
+              <Pokeball size={14} />
+              <span style={{ opacity: 0.7, textTransform: "uppercase", letterSpacing: 0.8 }}>
+                Most recently played
+              </span>
+              <span style={{ color: mostRecentlyPlayed.tint, fontSize: 15 }}>
+                {mostRecentlyPlayed.label}
+              </span>
+              <span style={{ opacity: 0.6, fontWeight: 600 }}>
+                {formatFirstSeen(mostRecentlyPlayed.at)}
+              </span>
+            </Link>
+          ) : (
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 10, fontSize: 12, opacity: 0.7, fontWeight: 700 }}>
+              <Pokeball size={14} />
+              <span style={{ textTransform: "uppercase", letterSpacing: 0.8 }}>No saves loaded yet</span>
+            </div>
+          )}
           <div style={{ marginLeft: "auto", fontSize: 12, opacity: 0.75, fontWeight: 600 }}>
             {loaded.length} of {GAME_STEMS.length} Gen 3 saves loaded
           </div>
         </div>
       </section>
 
+      {latestCatch && <LatestCatchCard {...latestCatch} />}
+
       <section style={{ marginBottom: 24 }}>
         <h2 style={{ margin: "0 0 10px" }}>Challenge chain</h2>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: 12,
-          }}
-        >
-          {CHALLENGE_CHAIN.map((step) => {
-            const loaded = step.stem ? !!saves[step.stem] : false;
-            const caught = step.stem ? perGame[step.stem]?.size ?? 0 : 0;
-            const unsupported = !step.stem;
-            const isLive = !!(step.stem && runningStem === step.stem && connected);
-            return (
-              <ChainCard
-                key={step.label}
-                step={step}
-                loaded={loaded}
-                caught={caught}
-                unsupported={unsupported}
-                isLive={isLive}
-              />
-            );
-          })}
-        </div>
+        {([3, 4, 5] as const).map((gen) => {
+          const genSteps = CHALLENGE_CHAIN.filter((s) => s.gen === gen);
+          if (genSteps.length === 0) return null;
+          const stages = Array.from(new Set(genSteps.map((s) => s.stage))).sort((a, b) => a - b);
+          return (
+            <div key={gen} style={{ marginBottom: 18 }}>
+              <h3
+                style={{
+                  margin: "0 0 8px",
+                  fontSize: 12,
+                  textTransform: "uppercase",
+                  letterSpacing: 1,
+                  opacity: 0.65,
+                  fontWeight: 700,
+                }}
+              >
+                {GEN_LABELS[gen]}
+              </h3>
+              {stages.map((stage) => {
+                const steps = genSteps.filter((s) => s.stage === stage);
+                const locked = !stageUnlocked.has(stage);
+                return (
+                  <div
+                    key={stage}
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                      gap: 12,
+                      marginBottom: 10,
+                    }}
+                  >
+                    {steps.map((step) => {
+                      const loaded = step.stem ? !!saves[step.stem] : false;
+                      const caught = step.stem ? perGame[step.stem]?.size ?? 0 : 0;
+                      const unsupported = !step.stem;
+                      const isLive = !!(step.stem && runningStem === step.stem && connected);
+                      return (
+                        <ChainCard
+                          key={step.label}
+                          step={step}
+                          loaded={loaded}
+                          caught={caught}
+                          unsupported={unsupported}
+                          isLive={isLive}
+                          locked={locked}
+                        />
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </div>
+          );
+        })}
       </section>
 
       <section>

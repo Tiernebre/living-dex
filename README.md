@@ -26,10 +26,23 @@ Will be using mgba for the game boy games, and Dolphin for the gamecube ones.
 
 #### Challenges
 
-- You must start off and play games to "completion" from Sapphire -> Black / White 2.
-- "Completion criteria" is a 4 star trainer card in each game.
+- You must play the games in the order they were originally released — as if you were back living in that year — from Ruby/Sapphire through Black / White 2.
+  - Release order: Ruby/Sapphire → FireRed/LeafGreen → Emerald → Diamond/Pearl → Platinum → HeartGold/SoulSilver → Black/White → Black 2/White 2.
+- You cannot start a game until the **primary** game(s) from the previous release stage are completed. The tooling treats this as a state machine and locks out later games on the dashboard.
+- Each release has a **primary** game and, where a paired version exists, a **secondary** game:
+  - The **primary** game is played to full completion — a 4★ trainer card is required.
+  - The **secondary** (paired) game only needs to be completed through the Elite Four / championship. No 4★ card required.
+- Primary games:
+  - **Sapphire** (secondary: Ruby)
+  - **LeafGreen** (secondary: FireRed)
+  - **Emerald** (no pair)
+  - **Diamond** (secondary: Pearl)
+  - **Platinum** (no pair)
+  - **HeartGold** (secondary: SoulSilver)
+  - **White** (secondary: Black)
+  - **Black 2** (secondary: White 2)
 - Each "end of gen" game must have a completed national dex to represent the final tally of that gen.
-  - i.e. Emerald, HG/SS, Black / White 2.
+  - i.e. Emerald, HG/SS, Black 2 / White 2.
 
 ## Architecture & References
 
