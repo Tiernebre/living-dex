@@ -191,6 +191,59 @@
         .confetti-piece, .sparkle { animation: none; display: none; }
       }
 
+      .dex-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+        gap: 8px;
+      }
+      .dex-cell {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        padding: 8px 4px 6px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: var(--bg-elevated);
+        font-size: 10px;
+        line-height: 1.2;
+        text-align: center;
+        overflow: hidden;
+        transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+      }
+      .dex-cell:hover {
+        transform: translateY(-1px);
+        border-color: var(--accent);
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      }
+      .dex-cell-caught {
+        border-color: color-mix(in srgb, var(--accent) 60%, var(--border));
+        background: color-mix(in srgb, var(--accent) 8%, var(--bg-elevated));
+      }
+      .dex-cell-missing img {
+        filter: grayscale(1) brightness(0) opacity(0.35);
+      }
+      .dex-cell-num {
+        position: absolute;
+        top: 4px;
+        left: 6px;
+        font-variant-numeric: tabular-nums;
+        font-weight: 700;
+        font-size: 10px;
+        opacity: 0.55;
+      }
+      .dex-cell-name {
+        font-weight: 600;
+        color: var(--text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100%;
+      }
+      .dex-cell-missing .dex-cell-name { color: var(--text-muted); }
+      .dex-cell img { image-rendering: pixelated; width: 56px; height: 56px; }
+
       .matchup { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; }
       .matchup-card { flex: 1 1 320px; min-width: 0; }
       .matchup-vs { font-size: 24px; font-weight: 700; opacity: 0.4; align-self: center; text-align: center; }

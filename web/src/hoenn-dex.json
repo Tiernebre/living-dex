@@ -1,0 +1,1012 @@
+[
+  {
+    "hoennDex": 1,
+    "nationalDex": 252,
+    "name": "treecko"
+  },
+  {
+    "hoennDex": 2,
+    "nationalDex": 253,
+    "name": "grovyle"
+  },
+  {
+    "hoennDex": 3,
+    "nationalDex": 254,
+    "name": "sceptile"
+  },
+  {
+    "hoennDex": 4,
+    "nationalDex": 255,
+    "name": "torchic"
+  },
+  {
+    "hoennDex": 5,
+    "nationalDex": 256,
+    "name": "combusken"
+  },
+  {
+    "hoennDex": 6,
+    "nationalDex": 257,
+    "name": "blaziken"
+  },
+  {
+    "hoennDex": 7,
+    "nationalDex": 258,
+    "name": "mudkip"
+  },
+  {
+    "hoennDex": 8,
+    "nationalDex": 259,
+    "name": "marshtomp"
+  },
+  {
+    "hoennDex": 9,
+    "nationalDex": 260,
+    "name": "swampert"
+  },
+  {
+    "hoennDex": 10,
+    "nationalDex": 261,
+    "name": "poochyena"
+  },
+  {
+    "hoennDex": 11,
+    "nationalDex": 262,
+    "name": "mightyena"
+  },
+  {
+    "hoennDex": 12,
+    "nationalDex": 263,
+    "name": "zigzagoon"
+  },
+  {
+    "hoennDex": 13,
+    "nationalDex": 264,
+    "name": "linoone"
+  },
+  {
+    "hoennDex": 14,
+    "nationalDex": 265,
+    "name": "wurmple"
+  },
+  {
+    "hoennDex": 15,
+    "nationalDex": 266,
+    "name": "silcoon"
+  },
+  {
+    "hoennDex": 16,
+    "nationalDex": 267,
+    "name": "beautifly"
+  },
+  {
+    "hoennDex": 17,
+    "nationalDex": 268,
+    "name": "cascoon"
+  },
+  {
+    "hoennDex": 18,
+    "nationalDex": 269,
+    "name": "dustox"
+  },
+  {
+    "hoennDex": 19,
+    "nationalDex": 270,
+    "name": "lotad"
+  },
+  {
+    "hoennDex": 20,
+    "nationalDex": 271,
+    "name": "lombre"
+  },
+  {
+    "hoennDex": 21,
+    "nationalDex": 272,
+    "name": "ludicolo"
+  },
+  {
+    "hoennDex": 22,
+    "nationalDex": 273,
+    "name": "seedot"
+  },
+  {
+    "hoennDex": 23,
+    "nationalDex": 274,
+    "name": "nuzleaf"
+  },
+  {
+    "hoennDex": 24,
+    "nationalDex": 275,
+    "name": "shiftry"
+  },
+  {
+    "hoennDex": 25,
+    "nationalDex": 276,
+    "name": "taillow"
+  },
+  {
+    "hoennDex": 26,
+    "nationalDex": 277,
+    "name": "swellow"
+  },
+  {
+    "hoennDex": 27,
+    "nationalDex": 278,
+    "name": "wingull"
+  },
+  {
+    "hoennDex": 28,
+    "nationalDex": 279,
+    "name": "pelipper"
+  },
+  {
+    "hoennDex": 29,
+    "nationalDex": 280,
+    "name": "ralts"
+  },
+  {
+    "hoennDex": 30,
+    "nationalDex": 281,
+    "name": "kirlia"
+  },
+  {
+    "hoennDex": 31,
+    "nationalDex": 282,
+    "name": "gardevoir"
+  },
+  {
+    "hoennDex": 32,
+    "nationalDex": 283,
+    "name": "surskit"
+  },
+  {
+    "hoennDex": 33,
+    "nationalDex": 284,
+    "name": "masquerain"
+  },
+  {
+    "hoennDex": 34,
+    "nationalDex": 285,
+    "name": "shroomish"
+  },
+  {
+    "hoennDex": 35,
+    "nationalDex": 286,
+    "name": "breloom"
+  },
+  {
+    "hoennDex": 36,
+    "nationalDex": 287,
+    "name": "slakoth"
+  },
+  {
+    "hoennDex": 37,
+    "nationalDex": 288,
+    "name": "vigoroth"
+  },
+  {
+    "hoennDex": 38,
+    "nationalDex": 289,
+    "name": "slaking"
+  },
+  {
+    "hoennDex": 39,
+    "nationalDex": 63,
+    "name": "abra"
+  },
+  {
+    "hoennDex": 40,
+    "nationalDex": 64,
+    "name": "kadabra"
+  },
+  {
+    "hoennDex": 41,
+    "nationalDex": 65,
+    "name": "alakazam"
+  },
+  {
+    "hoennDex": 42,
+    "nationalDex": 290,
+    "name": "nincada"
+  },
+  {
+    "hoennDex": 43,
+    "nationalDex": 291,
+    "name": "ninjask"
+  },
+  {
+    "hoennDex": 44,
+    "nationalDex": 292,
+    "name": "shedinja"
+  },
+  {
+    "hoennDex": 45,
+    "nationalDex": 293,
+    "name": "whismur"
+  },
+  {
+    "hoennDex": 46,
+    "nationalDex": 294,
+    "name": "loudred"
+  },
+  {
+    "hoennDex": 47,
+    "nationalDex": 295,
+    "name": "exploud"
+  },
+  {
+    "hoennDex": 48,
+    "nationalDex": 296,
+    "name": "makuhita"
+  },
+  {
+    "hoennDex": 49,
+    "nationalDex": 297,
+    "name": "hariyama"
+  },
+  {
+    "hoennDex": 50,
+    "nationalDex": 118,
+    "name": "goldeen"
+  },
+  {
+    "hoennDex": 51,
+    "nationalDex": 119,
+    "name": "seaking"
+  },
+  {
+    "hoennDex": 52,
+    "nationalDex": 129,
+    "name": "magikarp"
+  },
+  {
+    "hoennDex": 53,
+    "nationalDex": 130,
+    "name": "gyarados"
+  },
+  {
+    "hoennDex": 54,
+    "nationalDex": 298,
+    "name": "azurill"
+  },
+  {
+    "hoennDex": 55,
+    "nationalDex": 183,
+    "name": "marill"
+  },
+  {
+    "hoennDex": 56,
+    "nationalDex": 184,
+    "name": "azumarill"
+  },
+  {
+    "hoennDex": 57,
+    "nationalDex": 74,
+    "name": "geodude"
+  },
+  {
+    "hoennDex": 58,
+    "nationalDex": 75,
+    "name": "graveler"
+  },
+  {
+    "hoennDex": 59,
+    "nationalDex": 76,
+    "name": "golem"
+  },
+  {
+    "hoennDex": 60,
+    "nationalDex": 299,
+    "name": "nosepass"
+  },
+  {
+    "hoennDex": 61,
+    "nationalDex": 300,
+    "name": "skitty"
+  },
+  {
+    "hoennDex": 62,
+    "nationalDex": 301,
+    "name": "delcatty"
+  },
+  {
+    "hoennDex": 63,
+    "nationalDex": 41,
+    "name": "zubat"
+  },
+  {
+    "hoennDex": 64,
+    "nationalDex": 42,
+    "name": "golbat"
+  },
+  {
+    "hoennDex": 65,
+    "nationalDex": 169,
+    "name": "crobat"
+  },
+  {
+    "hoennDex": 66,
+    "nationalDex": 72,
+    "name": "tentacool"
+  },
+  {
+    "hoennDex": 67,
+    "nationalDex": 73,
+    "name": "tentacruel"
+  },
+  {
+    "hoennDex": 68,
+    "nationalDex": 302,
+    "name": "sableye"
+  },
+  {
+    "hoennDex": 69,
+    "nationalDex": 303,
+    "name": "mawile"
+  },
+  {
+    "hoennDex": 70,
+    "nationalDex": 304,
+    "name": "aron"
+  },
+  {
+    "hoennDex": 71,
+    "nationalDex": 305,
+    "name": "lairon"
+  },
+  {
+    "hoennDex": 72,
+    "nationalDex": 306,
+    "name": "aggron"
+  },
+  {
+    "hoennDex": 73,
+    "nationalDex": 66,
+    "name": "machop"
+  },
+  {
+    "hoennDex": 74,
+    "nationalDex": 67,
+    "name": "machoke"
+  },
+  {
+    "hoennDex": 75,
+    "nationalDex": 68,
+    "name": "machamp"
+  },
+  {
+    "hoennDex": 76,
+    "nationalDex": 307,
+    "name": "meditite"
+  },
+  {
+    "hoennDex": 77,
+    "nationalDex": 308,
+    "name": "medicham"
+  },
+  {
+    "hoennDex": 78,
+    "nationalDex": 309,
+    "name": "electrike"
+  },
+  {
+    "hoennDex": 79,
+    "nationalDex": 310,
+    "name": "manectric"
+  },
+  {
+    "hoennDex": 80,
+    "nationalDex": 311,
+    "name": "plusle"
+  },
+  {
+    "hoennDex": 81,
+    "nationalDex": 312,
+    "name": "minun"
+  },
+  {
+    "hoennDex": 82,
+    "nationalDex": 81,
+    "name": "magnemite"
+  },
+  {
+    "hoennDex": 83,
+    "nationalDex": 82,
+    "name": "magneton"
+  },
+  {
+    "hoennDex": 84,
+    "nationalDex": 100,
+    "name": "voltorb"
+  },
+  {
+    "hoennDex": 85,
+    "nationalDex": 101,
+    "name": "electrode"
+  },
+  {
+    "hoennDex": 86,
+    "nationalDex": 313,
+    "name": "volbeat"
+  },
+  {
+    "hoennDex": 87,
+    "nationalDex": 314,
+    "name": "illumise"
+  },
+  {
+    "hoennDex": 88,
+    "nationalDex": 43,
+    "name": "oddish"
+  },
+  {
+    "hoennDex": 89,
+    "nationalDex": 44,
+    "name": "gloom"
+  },
+  {
+    "hoennDex": 90,
+    "nationalDex": 45,
+    "name": "vileplume"
+  },
+  {
+    "hoennDex": 91,
+    "nationalDex": 182,
+    "name": "bellossom"
+  },
+  {
+    "hoennDex": 92,
+    "nationalDex": 84,
+    "name": "doduo"
+  },
+  {
+    "hoennDex": 93,
+    "nationalDex": 85,
+    "name": "dodrio"
+  },
+  {
+    "hoennDex": 94,
+    "nationalDex": 315,
+    "name": "roselia"
+  },
+  {
+    "hoennDex": 95,
+    "nationalDex": 316,
+    "name": "gulpin"
+  },
+  {
+    "hoennDex": 96,
+    "nationalDex": 317,
+    "name": "swalot"
+  },
+  {
+    "hoennDex": 97,
+    "nationalDex": 318,
+    "name": "carvanha"
+  },
+  {
+    "hoennDex": 98,
+    "nationalDex": 319,
+    "name": "sharpedo"
+  },
+  {
+    "hoennDex": 99,
+    "nationalDex": 320,
+    "name": "wailmer"
+  },
+  {
+    "hoennDex": 100,
+    "nationalDex": 321,
+    "name": "wailord"
+  },
+  {
+    "hoennDex": 101,
+    "nationalDex": 322,
+    "name": "numel"
+  },
+  {
+    "hoennDex": 102,
+    "nationalDex": 323,
+    "name": "camerupt"
+  },
+  {
+    "hoennDex": 103,
+    "nationalDex": 218,
+    "name": "slugma"
+  },
+  {
+    "hoennDex": 104,
+    "nationalDex": 219,
+    "name": "magcargo"
+  },
+  {
+    "hoennDex": 105,
+    "nationalDex": 324,
+    "name": "torkoal"
+  },
+  {
+    "hoennDex": 106,
+    "nationalDex": 88,
+    "name": "grimer"
+  },
+  {
+    "hoennDex": 107,
+    "nationalDex": 89,
+    "name": "muk"
+  },
+  {
+    "hoennDex": 108,
+    "nationalDex": 109,
+    "name": "koffing"
+  },
+  {
+    "hoennDex": 109,
+    "nationalDex": 110,
+    "name": "weezing"
+  },
+  {
+    "hoennDex": 110,
+    "nationalDex": 325,
+    "name": "spoink"
+  },
+  {
+    "hoennDex": 111,
+    "nationalDex": 326,
+    "name": "grumpig"
+  },
+  {
+    "hoennDex": 112,
+    "nationalDex": 27,
+    "name": "sandshrew"
+  },
+  {
+    "hoennDex": 113,
+    "nationalDex": 28,
+    "name": "sandslash"
+  },
+  {
+    "hoennDex": 114,
+    "nationalDex": 327,
+    "name": "spinda"
+  },
+  {
+    "hoennDex": 115,
+    "nationalDex": 227,
+    "name": "skarmory"
+  },
+  {
+    "hoennDex": 116,
+    "nationalDex": 328,
+    "name": "trapinch"
+  },
+  {
+    "hoennDex": 117,
+    "nationalDex": 329,
+    "name": "vibrava"
+  },
+  {
+    "hoennDex": 118,
+    "nationalDex": 330,
+    "name": "flygon"
+  },
+  {
+    "hoennDex": 119,
+    "nationalDex": 331,
+    "name": "cacnea"
+  },
+  {
+    "hoennDex": 120,
+    "nationalDex": 332,
+    "name": "cacturne"
+  },
+  {
+    "hoennDex": 121,
+    "nationalDex": 333,
+    "name": "swablu"
+  },
+  {
+    "hoennDex": 122,
+    "nationalDex": 334,
+    "name": "altaria"
+  },
+  {
+    "hoennDex": 123,
+    "nationalDex": 335,
+    "name": "zangoose"
+  },
+  {
+    "hoennDex": 124,
+    "nationalDex": 336,
+    "name": "seviper"
+  },
+  {
+    "hoennDex": 125,
+    "nationalDex": 337,
+    "name": "lunatone"
+  },
+  {
+    "hoennDex": 126,
+    "nationalDex": 338,
+    "name": "solrock"
+  },
+  {
+    "hoennDex": 127,
+    "nationalDex": 339,
+    "name": "barboach"
+  },
+  {
+    "hoennDex": 128,
+    "nationalDex": 340,
+    "name": "whiscash"
+  },
+  {
+    "hoennDex": 129,
+    "nationalDex": 341,
+    "name": "corphish"
+  },
+  {
+    "hoennDex": 130,
+    "nationalDex": 342,
+    "name": "crawdaunt"
+  },
+  {
+    "hoennDex": 131,
+    "nationalDex": 343,
+    "name": "baltoy"
+  },
+  {
+    "hoennDex": 132,
+    "nationalDex": 344,
+    "name": "claydol"
+  },
+  {
+    "hoennDex": 133,
+    "nationalDex": 345,
+    "name": "lileep"
+  },
+  {
+    "hoennDex": 134,
+    "nationalDex": 346,
+    "name": "cradily"
+  },
+  {
+    "hoennDex": 135,
+    "nationalDex": 347,
+    "name": "anorith"
+  },
+  {
+    "hoennDex": 136,
+    "nationalDex": 348,
+    "name": "armaldo"
+  },
+  {
+    "hoennDex": 137,
+    "nationalDex": 174,
+    "name": "igglybuff"
+  },
+  {
+    "hoennDex": 138,
+    "nationalDex": 39,
+    "name": "jigglypuff"
+  },
+  {
+    "hoennDex": 139,
+    "nationalDex": 40,
+    "name": "wigglytuff"
+  },
+  {
+    "hoennDex": 140,
+    "nationalDex": 349,
+    "name": "feebas"
+  },
+  {
+    "hoennDex": 141,
+    "nationalDex": 350,
+    "name": "milotic"
+  },
+  {
+    "hoennDex": 142,
+    "nationalDex": 351,
+    "name": "castform"
+  },
+  {
+    "hoennDex": 143,
+    "nationalDex": 120,
+    "name": "staryu"
+  },
+  {
+    "hoennDex": 144,
+    "nationalDex": 121,
+    "name": "starmie"
+  },
+  {
+    "hoennDex": 145,
+    "nationalDex": 352,
+    "name": "kecleon"
+  },
+  {
+    "hoennDex": 146,
+    "nationalDex": 353,
+    "name": "shuppet"
+  },
+  {
+    "hoennDex": 147,
+    "nationalDex": 354,
+    "name": "banette"
+  },
+  {
+    "hoennDex": 148,
+    "nationalDex": 355,
+    "name": "duskull"
+  },
+  {
+    "hoennDex": 149,
+    "nationalDex": 356,
+    "name": "dusclops"
+  },
+  {
+    "hoennDex": 150,
+    "nationalDex": 357,
+    "name": "tropius"
+  },
+  {
+    "hoennDex": 151,
+    "nationalDex": 358,
+    "name": "chimecho"
+  },
+  {
+    "hoennDex": 152,
+    "nationalDex": 359,
+    "name": "absol"
+  },
+  {
+    "hoennDex": 153,
+    "nationalDex": 37,
+    "name": "vulpix"
+  },
+  {
+    "hoennDex": 154,
+    "nationalDex": 38,
+    "name": "ninetales"
+  },
+  {
+    "hoennDex": 155,
+    "nationalDex": 172,
+    "name": "pichu"
+  },
+  {
+    "hoennDex": 156,
+    "nationalDex": 25,
+    "name": "pikachu"
+  },
+  {
+    "hoennDex": 157,
+    "nationalDex": 26,
+    "name": "raichu"
+  },
+  {
+    "hoennDex": 158,
+    "nationalDex": 54,
+    "name": "psyduck"
+  },
+  {
+    "hoennDex": 159,
+    "nationalDex": 55,
+    "name": "golduck"
+  },
+  {
+    "hoennDex": 160,
+    "nationalDex": 360,
+    "name": "wynaut"
+  },
+  {
+    "hoennDex": 161,
+    "nationalDex": 202,
+    "name": "wobbuffet"
+  },
+  {
+    "hoennDex": 162,
+    "nationalDex": 177,
+    "name": "natu"
+  },
+  {
+    "hoennDex": 163,
+    "nationalDex": 178,
+    "name": "xatu"
+  },
+  {
+    "hoennDex": 164,
+    "nationalDex": 203,
+    "name": "girafarig"
+  },
+  {
+    "hoennDex": 165,
+    "nationalDex": 231,
+    "name": "phanpy"
+  },
+  {
+    "hoennDex": 166,
+    "nationalDex": 232,
+    "name": "donphan"
+  },
+  {
+    "hoennDex": 167,
+    "nationalDex": 127,
+    "name": "pinsir"
+  },
+  {
+    "hoennDex": 168,
+    "nationalDex": 214,
+    "name": "heracross"
+  },
+  {
+    "hoennDex": 169,
+    "nationalDex": 111,
+    "name": "rhyhorn"
+  },
+  {
+    "hoennDex": 170,
+    "nationalDex": 112,
+    "name": "rhydon"
+  },
+  {
+    "hoennDex": 171,
+    "nationalDex": 361,
+    "name": "snorunt"
+  },
+  {
+    "hoennDex": 172,
+    "nationalDex": 362,
+    "name": "glalie"
+  },
+  {
+    "hoennDex": 173,
+    "nationalDex": 363,
+    "name": "spheal"
+  },
+  {
+    "hoennDex": 174,
+    "nationalDex": 364,
+    "name": "sealeo"
+  },
+  {
+    "hoennDex": 175,
+    "nationalDex": 365,
+    "name": "walrein"
+  },
+  {
+    "hoennDex": 176,
+    "nationalDex": 366,
+    "name": "clamperl"
+  },
+  {
+    "hoennDex": 177,
+    "nationalDex": 367,
+    "name": "huntail"
+  },
+  {
+    "hoennDex": 178,
+    "nationalDex": 368,
+    "name": "gorebyss"
+  },
+  {
+    "hoennDex": 179,
+    "nationalDex": 369,
+    "name": "relicanth"
+  },
+  {
+    "hoennDex": 180,
+    "nationalDex": 222,
+    "name": "corsola"
+  },
+  {
+    "hoennDex": 181,
+    "nationalDex": 170,
+    "name": "chinchou"
+  },
+  {
+    "hoennDex": 182,
+    "nationalDex": 171,
+    "name": "lanturn"
+  },
+  {
+    "hoennDex": 183,
+    "nationalDex": 370,
+    "name": "luvdisc"
+  },
+  {
+    "hoennDex": 184,
+    "nationalDex": 116,
+    "name": "horsea"
+  },
+  {
+    "hoennDex": 185,
+    "nationalDex": 117,
+    "name": "seadra"
+  },
+  {
+    "hoennDex": 186,
+    "nationalDex": 230,
+    "name": "kingdra"
+  },
+  {
+    "hoennDex": 187,
+    "nationalDex": 371,
+    "name": "bagon"
+  },
+  {
+    "hoennDex": 188,
+    "nationalDex": 372,
+    "name": "shelgon"
+  },
+  {
+    "hoennDex": 189,
+    "nationalDex": 373,
+    "name": "salamence"
+  },
+  {
+    "hoennDex": 190,
+    "nationalDex": 374,
+    "name": "beldum"
+  },
+  {
+    "hoennDex": 191,
+    "nationalDex": 375,
+    "name": "metang"
+  },
+  {
+    "hoennDex": 192,
+    "nationalDex": 376,
+    "name": "metagross"
+  },
+  {
+    "hoennDex": 193,
+    "nationalDex": 377,
+    "name": "regirock"
+  },
+  {
+    "hoennDex": 194,
+    "nationalDex": 378,
+    "name": "regice"
+  },
+  {
+    "hoennDex": 195,
+    "nationalDex": 379,
+    "name": "registeel"
+  },
+  {
+    "hoennDex": 196,
+    "nationalDex": 380,
+    "name": "latias"
+  },
+  {
+    "hoennDex": 197,
+    "nationalDex": 381,
+    "name": "latios"
+  },
+  {
+    "hoennDex": 198,
+    "nationalDex": 382,
+    "name": "kyogre"
+  },
+  {
+    "hoennDex": 199,
+    "nationalDex": 383,
+    "name": "groudon"
+  },
+  {
+    "hoennDex": 200,
+    "nationalDex": 384,
+    "name": "rayquaza"
+  },
+  {
+    "hoennDex": 201,
+    "nationalDex": 385,
+    "name": "jirachi"
+  },
+  {
+    "hoennDex": 202,
+    "nationalDex": 386,
+    "name": "deoxys-normal"
+  }
+]

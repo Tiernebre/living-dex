@@ -3,6 +3,7 @@ import { useLivingDex } from "./store";
 import speciesData from "./species.json";
 import movesData from "./moves.json";
 import encountersData from "./encounters.json";
+import hoennDexData from "./hoenn-dex.json";
 import type { DecodedPokemon, HubState } from "../../hub/protocol.ts";
 
 type EncounterPokemon = {
@@ -36,6 +37,14 @@ type Species = {
   abilities: string[];
 };
 const species = speciesData as Record<string, Species>;
+
+type HoennDexEntry = { hoennDex: number; nationalDex: number; name: string };
+const hoennDex = hoennDexData as HoennDexEntry[];
+const speciesByNationalDex: Record<number, Species> = (() => {
+  const map: Record<number, Species> = {};
+  for (const s of Object.values(species)) map[s.nationalDex] = s;
+  return map;
+})();
 
 type MoveInfo = {
   id: number;
@@ -1280,10 +1289,56 @@ function SavedView({ saveInfo }: { saveInfo: HubState["saveInfo"] }) {
       ) : (
         <p style={{ opacity: 0.6, fontStyle: "italic" }}>No party Pokémon in this save.</p>
       )}
-      <section style={{ marginTop: 16, padding: 32, textAlign: "center", opacity: 0.55, fontStyle: "italic", border: "1px dashed var(--border)", borderRadius: 10 }}>
-        Living Dex progress grid — coming soon.
-      </section>
+      <LivingDexGrid party={saveInfo.party} />
     </>
+  );
+}
+
+function LivingDexGrid({ party }: { party: (DecodedPokemon | null)[] }) {
+  const caught = new Set<number>();
+  for (const mon of party) {
+    if (!mon) continue;
+    const info = lookup(mon.species);
+    if (info) caught.add(info.nationalDex);
+  }
+  return (
+    <section style={{ marginTop: 24 }}>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 10, flexWrap: "wrap" }}>
+        <h2 style={{ margin: 0 }}>Hoenn Dex</h2>
+        <span style={{ fontSize: 13, opacity: 0.7 }}>
+          <span style={{ fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>{caught.size}</span>
+          {" / "}
+          <span style={{ fontVariantNumeric: "tabular-nums" }}>{hoennDex.length}</span> caught
+        </span>
+      </div>
+      <div className="dex-grid">
+        {hoennDex.map((entry) => {
+          const info = speciesByNationalDex[entry.nationalDex];
+          const isCaught = caught.has(entry.nationalDex);
+          const cls = `dex-cell ${isCaught ? "dex-cell-caught" : "dex-cell-missing"}`;
+          const title = `#${entry.hoennDex} ${formatSpeciesName(entry.name)}${isCaught ? " — caught" : ""}`;
+          return (
+            <a
+              key={entry.hoennDex}
+              className={cls}
+              href={info ? serebiiGen3DexUrl(info.nationalDex) : "#"}
+              target="_blank"
+              rel="noreferrer"
+              title={title}
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <span className="dex-cell-num">{String(entry.hoennDex).padStart(3, "0")}</span>
+              {info?.sprite ? (
+                <img src={info.sprite} alt={entry.name} width={56} height={56} loading="lazy" />
+              ) : (
+                <div style={{ width: 56, height: 56 }} />
+              )}
+              <span className="dex-cell-name">{formatSpeciesName(entry.name)}</span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
   );
 }
 
