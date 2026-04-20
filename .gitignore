@@ -3,3 +3,5 @@ roms/*
 
 web/node_modules/
 web/dist/
+
+CLAUDE.local.md

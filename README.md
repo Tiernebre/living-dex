@@ -24,6 +24,13 @@ Will be using mgba for the game boy games, and Dolphin for the gamecube ones.
     - Safari Zone pokemon will need to utilize breeding.
 - Only the vanilla games can be played.
 
+#### Challenges
+
+- You must start off and play games to "completion" from Sapphire -> Black / White 2.
+- "Completion criteria" is a 4 star trainer card in each game.
+- Each "end of gen" game must have a completed national dex to represent the final tally of that gen.
+  - i.e. Emerald, HG/SS, Black / White 2.
+
 ## Architecture & References
 
 See [`docs/technical-foundation.md`](docs/technical-foundation.md) for the architecture, target ROM revisions, decomp references, prior art, and design decisions.
