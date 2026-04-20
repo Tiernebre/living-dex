@@ -2732,10 +2732,17 @@ function trainerStarsBreakdown(saveInfo: SaveInfo | null): TrainerStar[] {
   const hoennDone = hoennDex
     .filter((e) => e.hoennDex <= 200)
     .every((e) => dexSet.has(e.nationalDex));
+  // Mirrors pokeruby/src/trainer_card.c TrainerCard_GetStarCount: star awarded
+  // when bestBattleTowerWinStreak > 49.
+  const battleTowerDone = saveInfo.battleTowerBestStreak > 49;
   return [
     { label: "Hall of Fame", detail: "Beat the Elite Four", earned: saveInfo.enteredHof },
     { label: "Hoenn Dex", detail: "Catch all 200 main Hoenn Pokémon (Jirachi/Deoxys not required)", earned: hoennDone },
-    { label: "Battle Tower", detail: "50-win streak in the Battle Tower", earned: false, unknown: true },
+    {
+      label: "Battle Tower",
+      detail: `50-win streak in the Battle Tower (best: ${saveInfo.battleTowerBestStreak})`,
+      earned: battleTowerDone,
+    },
     { label: "Contests", detail: "5+ paintings in the Lilycove museum", earned: false, unknown: true },
   ];
 }
@@ -2922,8 +2929,8 @@ function PrimaryProgress({
   const set = owned ?? new Set<number>();
   const regional = step.stem ? regionalDexProgress(step.stem, set) : null;
   const nationalCaught = loaded ? set.size : 0;
-  // Battle Tower (50+ streak) and museum-paintings stars aren't parsed yet,
-  // so this caps at 2 stars (HoF + Hoenn dex). TODO: parse the rest.
+  // Museum-paintings star isn't parsed yet, so this caps at 3 stars
+  // (HoF + Hoenn dex + Battle Tower). TODO: parse Lilycove contest paintings.
   const trainerStarsCertain = !!saveInfo;
   return (
     <div

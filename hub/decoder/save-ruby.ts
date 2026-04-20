@@ -129,6 +129,12 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
   // pokeruby/include/constants/game_stat.h
   const enteredHof = sb1View ? sb1View.getUint32(0x1540 + 10 * 4, true) > 0 : false;
 
+  // gSaveBlock2.battleTower lives at SB2+0xA8; bestBattleTowerWinStreak is a
+  // u16 at struct offset 0x4CA (RS layout). Emerald shifts this by 0xA8, so
+  // this offset is RS-only.
+  // pokeruby/include/global.h: struct BattleTowerData.
+  const battleTowerBestStreak = view.getUint16(sb2Base + 0xA8 + 0x4CA, true);
+
   // gPokemonStorage spans section IDs 5..13 (9 chunks), each holding up to 3968
   // bytes of the struct. Concatenate them in order so we can read BoxPokemon
   // entries without worrying about chunk boundaries.
@@ -179,5 +185,6 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
     currentBox,
     pokedexOwned,
     enteredHof,
+    battleTowerBestStreak,
   };
 }
