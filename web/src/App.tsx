@@ -1268,7 +1268,19 @@ function SavedView({ saveInfo }: { saveInfo: HubState["saveInfo"] }) {
           </div>
         </div>
       </section>
-      <section style={{ padding: 32, textAlign: "center", opacity: 0.55, fontStyle: "italic", border: "1px dashed var(--border)", borderRadius: 10 }}>
+      <h2 style={{ marginTop: 0 }}>Party</h2>
+      {saveInfo.party.some((p) => p) ? (
+        <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
+          {saveInfo.party.map((mon, i) => (
+            <li key={i} style={mon ? undefined : { opacity: 0.4 }}>
+              {mon ? <PokemonCard mon={mon} movesRight /> : "—"}
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p style={{ opacity: 0.6, fontStyle: "italic" }}>No party Pokémon in this save.</p>
+      )}
+      <section style={{ marginTop: 16, padding: 32, textAlign: "center", opacity: 0.55, fontStyle: "italic", border: "1px dashed var(--border)", borderRadius: 10 }}>
         Living Dex progress grid — coming soon.
       </section>
     </>

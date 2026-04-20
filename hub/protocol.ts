@@ -54,6 +54,7 @@ export type SaveInfo = {
   trainerId: number;
   playTime: { hours: number; minutes: number; seconds: number; frames: number };
   savedAtMs: number;
+  party: (DecodedPokemon | null)[];
 };
 
 export type HubState = {

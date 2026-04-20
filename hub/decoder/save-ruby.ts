@@ -1,16 +1,14 @@
-// Parse a Gen 3 Ruby .sav file and extract SaveBlock2 fields (player name, play time).
+// Parse a Gen 3 Ruby .sav file and extract SaveBlock2 fields (player name, play time)
+// plus the player's party from SaveBlock1.
 // Reference: pokeruby/src/save.c — 32 flash sectors of 4096 bytes; each sector has a
 // 3968-byte data area + footer {u16 id, u16 checksum, u32 signature=0x08012025, u32 counter}.
 // Sectors 0-13 = save slot A, 14-27 = save slot B; the slot with the highest counter is active.
-// Section id 0 holds gSaveBlock2.
+// Section id 0 holds gSaveBlock2; section id 1 holds the first 4084 bytes of gSaveBlock1,
+// which includes playerPartyCount (u8 @ 0x234) and playerParty[6] (struct Pokemon @ 0x238).
 
-export type SaveInfo = {
-  playerName: string;
-  playerGender: "male" | "female";
-  trainerId: number;
-  playTime: { hours: number; minutes: number; seconds: number; frames: number };
-  savedAtMs: number;
-};
+import { decodePokemon } from "./gen3.ts";
+import type { DecodedPokemon, SaveInfo } from "../protocol.ts";
+export type { SaveInfo };
 
 const SECTOR_SIZE = 0x1000;
 const SECTOR_DATA_SIZE = 0xFF4;
@@ -65,12 +63,12 @@ export function parseRubySave(buf: Uint8Array): SaveInfo | null {
   const activeSlot = slotB > slotA ? 1 : 0;
 
   let sb2Base: number | null = null;
+  let sb1Chunk0Base: number | null = null;
   for (let i = 0; i < NUM_SECTORS_PER_SLOT; i++) {
     const s = readSector(activeSlot * NUM_SECTORS_PER_SLOT + i);
-    if (s && s.id === 0) {
-      sb2Base = s.base;
-      break;
-    }
+    if (!s) continue;
+    if (s.id === 0) sb2Base = s.base;
+    else if (s.id === 1) sb1Chunk0Base = s.base;
   }
   if (sb2Base === null) return null;
 
@@ -87,11 +85,22 @@ export function parseRubySave(buf: Uint8Array): SaveInfo | null {
   const seconds = view.getUint8(sb2Base + 0x11);
   const frames = view.getUint8(sb2Base + 0x12);
 
+  const party: (DecodedPokemon | null)[] = Array(6).fill(null);
+  if (sb1Chunk0Base !== null) {
+    const partyCount = Math.min(6, view.getUint8(sb1Chunk0Base + 0x234));
+    const PARTY_ENTRY_SIZE = 100;
+    for (let i = 0; i < partyCount; i++) {
+      const offset = sb1Chunk0Base + 0x238 + i * PARTY_ENTRY_SIZE;
+      party[i] = decodePokemon(buf.subarray(offset, offset + PARTY_ENTRY_SIZE));
+    }
+  }
+
   return {
     playerName,
     playerGender,
     trainerId: trainerId >>> 0,
     playTime: { hours, minutes, seconds, frames },
     savedAtMs: Date.now(),
+    party,
   };
 }
