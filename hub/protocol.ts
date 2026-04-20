@@ -29,7 +29,9 @@ export type GameCode = "AXVE" | "AXPE" | "BPEE" | "BPRE" | "BPGE";
 
 // Filename stem of each .sav/.gba we care about. Each game is unique in this project —
 // there is only ever one Ruby, one Emerald, etc. — so the stem also identifies the save.
-export const GAME_STEMS = ["ruby", "sapphire", "emerald", "firered", "leafgreen"] as const;
+// "box" = Pokémon Box: Ruby & Sapphire (GameCube). No trainer/party/dex —
+// it's just a 50-box PC extension, stored as a .gci memory card file.
+export const GAME_STEMS = ["ruby", "sapphire", "emerald", "firered", "leafgreen", "box"] as const;
 export type GameStem = (typeof GAME_STEMS)[number];
 
 export type GameInfo = {

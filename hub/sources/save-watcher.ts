@@ -2,6 +2,7 @@
 // Ruby and Sapphire use the same Gen 3 RS format; Emerald and FR/LG need their own parsers.
 
 import { parseRubySave } from "../decoder/save-ruby.ts";
+import { parseRSBoxSave } from "../decoder/save-rs-box.ts";
 import { store } from "../state.ts";
 import type { GameStem, SaveInfo } from "../protocol.ts";
 import { GAME_STEMS } from "../protocol.ts";
@@ -14,13 +15,27 @@ type Parser = (buf: Uint8Array, game: GameStem) => SaveInfo | null;
 const PARSERS: Partial<Record<GameStem, Parser>> = {
   ruby: parseRubySave,
   sapphire: parseRubySave,
+  box: parseRSBoxSave,
+};
+
+// Each stem uses a single file extension: GBA stems are .sav, Pokémon Box is .gci.
+const EXT_BY_STEM: Partial<Record<GameStem, string>> = {
+  ruby: ".sav",
+  sapphire: ".sav",
+  emerald: ".sav",
+  firered: ".sav",
+  leafgreen: ".sav",
+  box: ".gci",
 };
 
 function stemOf(path: string): GameStem | null {
   const name = path.split("/").pop()?.toLowerCase() ?? "";
-  if (!name.endsWith(".sav")) return null;
-  const stem = name.slice(0, -4);
-  return (GAME_STEMS as readonly string[]).includes(stem) ? (stem as GameStem) : null;
+  const dot = name.lastIndexOf(".");
+  if (dot < 0) return null;
+  const stem = name.slice(0, dot);
+  const ext = name.slice(dot);
+  if (!(GAME_STEMS as readonly string[]).includes(stem)) return null;
+  return EXT_BY_STEM[stem as GameStem] === ext ? (stem as GameStem) : null;
 }
 
 async function parseAndPush(path: string) {
@@ -56,7 +71,7 @@ export async function startSaveWatcher() {
 
   try {
     for await (const entry of Deno.readDir(SAVES_DIR)) {
-      if (entry.isFile && entry.name.toLowerCase().endsWith(".sav")) {
+      if (entry.isFile && stemOf(entry.name)) {
         await parseAndPush(`${SAVES_DIR}${entry.name}`);
       }
     }
@@ -69,7 +84,7 @@ export async function startSaveWatcher() {
   for await (const event of watcher) {
     if (event.kind !== "modify" && event.kind !== "create") continue;
     for (const path of event.paths) {
-      if (!path.toLowerCase().endsWith(".sav")) continue;
+      if (!stemOf(path)) continue;
       const existing = pending.get(path);
       if (existing !== undefined) clearTimeout(existing);
       pending.set(
