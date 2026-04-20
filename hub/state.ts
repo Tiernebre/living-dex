@@ -1,4 +1,4 @@
-import type { DecodedPokemon, GameInfo, HubState, Source, WsMessage } from "./protocol.ts";
+import type { DecodedPokemon, GameInfo, HubState, SaveInfo, Source, WsMessage } from "./protocol.ts";
 
 type Subscriber = (msg: WsMessage) => void;
 
@@ -13,6 +13,7 @@ class StateStore {
     currentBox: null,
     source: null,
     lastUpdateAt: null,
+    saveInfo: null,
   };
   private subscribers = new Set<Subscriber>();
 
@@ -77,6 +78,15 @@ class StateStore {
     ) return;
     this.state.location = location;
     this.broadcast({ type: "location", location });
+  }
+
+  setSaveInfo(saveInfo: SaveInfo | null) {
+    this.state.saveInfo = saveInfo;
+    if (saveInfo) {
+      this.state.source = `save@${saveInfo.savedAtMs}`;
+      this.state.lastUpdateAt = saveInfo.savedAtMs;
+    }
+    this.broadcast({ type: "save", saveInfo });
   }
 
   setBoxSlot(index: number, slot: number, pokemon: DecodedPokemon | null, source: Source) {

@@ -1110,7 +1110,7 @@ const GAME_THEME_KEY: Record<string, string> = {
 };
 
 export function App() {
-  const { connected, game, party, enemyParty, inBattle, location, source, lastUpdateAt } = useLivingDex();
+  const { connected, game, party, enemyParty, inBattle, location, source, lastUpdateAt, saveInfo } = useLivingDex();
   useEffect(() => {
     const root = document.documentElement;
     const key = game ? GAME_THEME_KEY[game.code] : undefined;
@@ -1137,6 +1137,39 @@ export function App() {
         />
         <ThemeToggle />
       </header>
+      {saveInfo && (
+        <section
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+            flexWrap: "wrap",
+            padding: "12px 16px",
+            marginBottom: 16,
+            border: "1px solid var(--border)",
+            borderRadius: 10,
+            background: "var(--bg-elevated)",
+          }}
+        >
+          <div>
+            <div style={{ fontSize: 11, opacity: 0.6, textTransform: "uppercase", letterSpacing: 0.5 }}>Trainer</div>
+            <div style={{ fontSize: 18, fontWeight: 600 }}>{saveInfo.playerName || "(unnamed)"}</div>
+            <div style={{ fontSize: 12, opacity: 0.7 }}>
+              {saveInfo.playerGender} · ID {String(saveInfo.trainerId & 0xFFFF).padStart(5, "0")}
+            </div>
+          </div>
+          <div style={{ marginLeft: "auto", textAlign: "right" }}>
+            <div style={{ fontSize: 11, opacity: 0.6, textTransform: "uppercase", letterSpacing: 0.5 }}>Play time</div>
+            <div style={{ fontSize: 22, fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>
+              {saveInfo.playTime.hours}:{String(saveInfo.playTime.minutes).padStart(2, "0")}
+              :{String(saveInfo.playTime.seconds).padStart(2, "0")}
+            </div>
+            <div style={{ fontSize: 11, opacity: 0.55 }}>
+              saved {new Date(saveInfo.savedAtMs).toLocaleTimeString()}
+            </div>
+          </div>
+        </section>
+      )}
       <h2>Party</h2>
       <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
         {party.map((mon, i) => (

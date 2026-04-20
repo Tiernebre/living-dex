@@ -48,6 +48,14 @@ export type DecodedPokemon = {
   // TODO: ability, hidden power, ribbons, OT info, etc.
 };
 
+export type SaveInfo = {
+  playerName: string;
+  playerGender: "male" | "female";
+  trainerId: number;
+  playTime: { hours: number; minutes: number; seconds: number; frames: number };
+  savedAtMs: number;
+};
+
 export type HubState = {
   connected: boolean;
   game: GameInfo | null;
@@ -58,6 +66,7 @@ export type HubState = {
   currentBox: { index: number; slots: (DecodedPokemon | null)[] } | null;
   source: Source | null;
   lastUpdateAt: number | null;
+  saveInfo: SaveInfo | null;
 };
 
 export type WsMessage =
@@ -68,4 +77,5 @@ export type WsMessage =
   | { type: "game"; game: GameInfo | null }
   | { type: "connection"; live: boolean }
   | { type: "battle"; inBattle: boolean }
-  | { type: "location"; location: { mapGroup: number; mapNum: number } | null };
+  | { type: "location"; location: { mapGroup: number; mapNum: number } | null }
+  | { type: "save"; saveInfo: SaveInfo | null };

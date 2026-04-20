@@ -15,6 +15,7 @@ const initial: HubState = {
   currentBox: null,
   source: null,
   lastUpdateAt: null,
+  saveInfo: null,
 };
 
 export const useLivingDex = create<HubState & Actions>((set) => ({
@@ -36,6 +37,13 @@ export const useLivingDex = create<HubState & Actions>((set) => ({
           return { ...s, game: msg.game };
         case "location":
           return { ...s, location: msg.location };
+        case "save":
+          return {
+            ...s,
+            saveInfo: msg.saveInfo,
+            source: msg.saveInfo ? `save@${msg.saveInfo.savedAtMs}` : s.source,
+            lastUpdateAt: msg.saveInfo ? msg.saveInfo.savedAtMs : s.lastUpdateAt,
+          };
         case "party": {
           const party = [...s.party];
           party[msg.slot] = msg.pokemon;

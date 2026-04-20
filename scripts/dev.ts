@@ -39,16 +39,21 @@ async function shutdown() {
 Deno.addSignalListener("SIGINT", shutdown);
 Deno.addSignalListener("SIGTERM", shutdown);
 
+const args = Deno.args.filter((a) => a !== "--no-mgba");
+const noMgba = Deno.args.includes("--no-mgba");
+
 spawn("hub", "36", "deno", ["task", "dev:hub"]);
 spawn("web", "35", "npm", ["run", "dev"], "web");
 
-const ROM = Deno.args[0] ?? "roms/ruby.gba";
-const MGBA = "/Applications/mGBA.app/Contents/MacOS/mGBA";
-try {
-  await Deno.stat(MGBA);
-  spawn("mgba", "33", MGBA, [ROM]);
-} catch {
-  console.log(`\x1b[33m[mgba]\x1b[0m not found at ${MGBA} — skipping`);
+if (!noMgba) {
+  const ROM = args[0] ?? "roms/ruby.gba";
+  const MGBA = "/Applications/mGBA.app/Contents/MacOS/mGBA";
+  try {
+    await Deno.stat(MGBA);
+    spawn("mgba", "33", MGBA, [ROM]);
+  } catch {
+    console.log(`\x1b[33m[mgba]\x1b[0m not found at ${MGBA} — skipping`);
+  }
 }
 
 // If either child exits on its own, tear the whole thing down.
