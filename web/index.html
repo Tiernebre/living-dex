@@ -273,9 +273,38 @@
         border-color: var(--accent);
         box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
       }
+      .dex-cell-static {
+        cursor: default;
+      }
+      .dex-cell-static:hover {
+        transform: none;
+        box-shadow: none;
+      }
+      .dex-cell-static.dex-cell-caught:hover {
+        border-color: color-mix(in srgb, var(--accent) 60%, var(--border));
+      }
+      .dex-cell-static.dex-cell-missing:hover {
+        border-color: var(--border);
+      }
       .dex-cell-caught {
         border-color: color-mix(in srgb, var(--accent) 60%, var(--border));
         background: color-mix(in srgb, var(--accent) 8%, var(--bg-elevated));
+      }
+      .dex-cell-stored {
+        border-color: var(--accent);
+        background: color-mix(in srgb, var(--accent) 16%, var(--bg-elevated));
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 35%, transparent);
+      }
+      .dex-cell-stored::after {
+        content: "";
+        position: absolute;
+        bottom: 4px;
+        right: 4px;
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 0 2px var(--bg-elevated);
       }
       .dex-cell-missing img {
         filter: grayscale(1) brightness(0) opacity(0.35);

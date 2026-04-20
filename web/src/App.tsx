@@ -153,6 +153,24 @@ function expForLevel(level: number, rate: GrowthRate): number {
   }
 }
 
+// BoxPokemon (80-byte struct) has no party tail, so the decoder returns level=0.
+// Derive it from experience using the species growth-rate curve.
+function levelFromExp(exp: number, rate: GrowthRate): number {
+  let lo = 1, hi = 100;
+  while (lo < hi) {
+    const mid = (lo + hi + 1) >>> 1;
+    if (expForLevel(mid, rate) <= exp) lo = mid;
+    else hi = mid - 1;
+  }
+  return lo;
+}
+
+function effectiveLevel(mon: DecodedPokemon, info: Species | null | undefined): number {
+  if (mon.level > 0) return mon.level;
+  if (!info) return 0;
+  return levelFromExp(mon.experience, info.growthRate);
+}
+
 function formatInt(n: number): string {
   return n.toLocaleString("en-US");
 }
@@ -977,6 +995,7 @@ function PokemonCard({
   const info = lookup(mon.species);
   const graded = info ? gradePokemon(mon.ivs, mon.nature, info.baseStats) : null;
   const gradeClass = fancyGrade && graded ? GRADE_CARD_CLASS[graded.grade] ?? "" : "";
+  const level = effectiveLevel(mon, info);
   return (
     <div
       className={gradeClass}
@@ -988,6 +1007,10 @@ function PokemonCard({
         border: "1px solid var(--accent)",
         borderRadius: 8,
         position: "relative",
+        height: "100%",
+        width: "100%",
+        minWidth: 0,
+        boxSizing: "border-box",
       }}
     >
       {fancyGrade && graded?.grade === "S+" && <Confetti />}
@@ -1014,8 +1037,13 @@ function PokemonCard({
           </span>
           {graded && <GradeChip graded={graded} nature={mon.nature} fancy={fancyGrade} />}
         </div>
+        {info && info.types.length > 0 && (
+          <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginBottom: 4 }}>
+            {info.types.map((t) => <TypeBadge key={t} type={t} />)}
+          </div>
+        )}
         <div style={{ fontSize: 13, opacity: 0.8, display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
-          <span>Lv {mon.level} · {mon.nature}</span>
+          <span>Lv {level} · {mon.nature}</span>
           {info && <span style={{ opacity: 0.6 }}>·</span>}
           {info && (
             <span>
@@ -1025,26 +1053,25 @@ function PokemonCard({
               </span>
             </span>
           )}
-          {info && info.types.map((t) => <TypeBadge key={t} type={t} />)}
-          {(() => {
-            const hp = hiddenPower(mon.ivs);
-            return (
-              <span
-                style={{ display: "inline-flex", alignItems: "center", gap: 4 }}
-                title={`Hidden Power ${hp.type} · base power ${hp.power}`}
-              >
-                <span style={{ opacity: 0.6 }}>HP</span>
-                <TypeBadge type={hp.type} />
-                <span style={{ fontVariantNumeric: "tabular-nums", fontWeight: 600 }}>{hp.power}</span>
-              </span>
-            );
-          })()}
         </div>
-        {info && <ExpProgress level={mon.level} exp={mon.experience} rate={info.growthRate} />}
+        {(() => {
+          const hp = hiddenPower(mon.ivs);
+          return (
+            <div
+              style={{ fontSize: 13, opacity: 0.8, display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}
+              title={`Hidden Power ${hp.type} · base power ${hp.power}`}
+            >
+              <span style={{ opacity: 0.6 }}>Hidden Power</span>
+              <TypeBadge type={hp.type} />
+              <span style={{ fontVariantNumeric: "tabular-nums", fontWeight: 600 }}>{hp.power}</span>
+            </div>
+          );
+        })()}
+        {info && <ExpProgress level={level} exp={mon.experience} rate={info.growthRate} />}
         {movesRight ? (
           <div style={{ display: "flex", gap: 12, alignItems: "flex-start", flexWrap: "wrap" }}>
             <div style={{ flex: "1 1 240px", minWidth: 0 }}>
-              <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} level={mon.level} />
+              <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} level={level} />
             </div>
             <div style={{ flex: "1 1 240px", minWidth: 0 }}>
               <MovesList moves={mon.moves} />
@@ -1052,7 +1079,7 @@ function PokemonCard({
           </div>
         ) : (
           <>
-            <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} level={mon.level} />
+            <StatsTable ivs={mon.ivs} evs={mon.evs} nature={mon.nature} baseStats={info?.baseStats} level={level} />
             <MovesList moves={mon.moves} />
           </>
         )}
@@ -1680,22 +1707,148 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
           savedAtMs={saveInfo.savedAtMs}
         />
       </div>
-      <h2 style={{ marginTop: 0 }}>Party</h2>
-      {saveInfo.party.some((p) => p) ? (
-        <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
-          {saveInfo.party.map((mon, i) => (
-            <li key={i} style={mon ? undefined : { opacity: 0.4 }}>
-              {mon ? <PokemonCard mon={mon} movesRight /> : "—"}
-            </li>
-          ))}
-        </ol>
-      ) : (
-        <p style={{ opacity: 0.6, fontStyle: "italic" }}>No party Pokémon in this save.</p>
-      )}
+      <Tabs
+        tabs={[
+          {
+            id: "party",
+            label: "Party",
+            content: saveInfo.party.some((p) => p) ? (
+              <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
+                {saveInfo.party.map((mon, i) => (
+                  <li key={i} style={mon ? undefined : { opacity: 0.4 }}>
+                    {mon ? <PokemonCard mon={mon} movesRight /> : "—"}
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <p style={{ opacity: 0.6, fontStyle: "italic" }}>No party Pokémon in this save.</p>
+            ),
+          },
+          {
+            id: "boxes",
+            label: `PC Boxes (${countBoxMons(saveInfo)})`,
+            content: <PCBoxes saveInfo={saveInfo} />,
+          },
+        ]}
+        initial="party"
+        storageKey={`living-dex:saved-tab:${stem}`}
+      />
       <LivingDexGrid stem={stem} saveInfo={saveInfo} />
     </>
   );
 }
+
+function countBoxMons(saveInfo: SaveInfo): number {
+  let n = 0;
+  for (const box of saveInfo.boxes) for (const m of box.slots) if (m) n++;
+  return n;
+}
+
+function PCBoxes({ saveInfo }: { saveInfo: SaveInfo }) {
+  const boxes = saveInfo.boxes;
+  const [idx, setIdx] = useState(() => Math.min(saveInfo.currentBox ?? 0, boxes.length - 1));
+  const box = boxes[idx];
+  if (!box) return null;
+  const filled = box.slots.filter((m) => m).length;
+  const prev = () => setIdx((i) => (i - 1 + boxes.length) % boxes.length);
+  const next = () => setIdx((i) => (i + 1) % boxes.length);
+  return (
+    <div>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
+          marginBottom: 12,
+          padding: "8px 12px",
+          borderRadius: 8,
+          border: "1px solid var(--border)",
+          background: "var(--bg-surface)",
+          borderLeft: "4px solid var(--accent)",
+        }}
+      >
+        <button onClick={prev} aria-label="Previous box" style={boxNavBtn}>‹</button>
+        <div style={{ flex: 1, textAlign: "center" }}>
+          <div style={{ fontWeight: 700, fontSize: 15 }}>{box.name}</div>
+          <div style={{ fontSize: 11, opacity: 0.65, fontVariantNumeric: "tabular-nums" }}>
+            Box {idx + 1} of {boxes.length} · {filled}/30
+            {idx === (saveInfo.currentBox ?? -1) && " · current"}
+          </div>
+        </div>
+        <button onClick={next} aria-label="Next box" style={boxNavBtn}>›</button>
+      </div>
+      {filled === 0 ? (
+        <p style={{ opacity: 0.6, fontStyle: "italic", padding: "16px 4px" }}>Empty box.</p>
+      ) : (
+        <ol
+          style={{
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(360px, 1fr))",
+            gridAutoRows: "1fr",
+            gap: 12,
+          }}
+        >
+          {box.slots.map((mon, i) =>
+            mon ? (
+              <li key={i} style={{ display: "flex", minWidth: 0 }}>
+                <div style={{ flex: 1, minWidth: 0, display: "flex" }}>
+                  <PokemonCard mon={mon} movesRight />
+                </div>
+              </li>
+            ) : null,
+          )}
+        </ol>
+      )}
+      <div style={{ display: "flex", gap: 4, flexWrap: "wrap", marginTop: 12 }}>
+        {boxes.map((b, i) => {
+          const count = b.slots.filter((m) => m).length;
+          const selected = i === idx;
+          return (
+            <button
+              key={i}
+              onClick={() => setIdx(i)}
+              title={`${b.name} · ${count}/30`}
+              style={{
+                padding: "4px 8px",
+                fontSize: 11,
+                borderRadius: 6,
+                border: selected ? "1px solid var(--accent)" : "1px solid var(--border)",
+                background: selected ? "color-mix(in srgb, var(--accent) 18%, transparent)" : "var(--bg-surface)",
+                color: selected ? "var(--accent-strong)" : "var(--text-muted)",
+                fontWeight: selected ? 700 : 500,
+                cursor: "pointer",
+                fontFamily: "inherit",
+                fontVariantNumeric: "tabular-nums",
+              }}
+            >
+              {i + 1}
+              <span style={{ opacity: 0.55, marginLeft: 4 }}>{count}</span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+const boxNavBtn: React.CSSProperties = {
+  width: 32,
+  height: 32,
+  borderRadius: 999,
+  border: "1px solid var(--border)",
+  background: "var(--bg-surface)",
+  color: "var(--accent-strong)",
+  fontSize: 20,
+  lineHeight: 1,
+  cursor: "pointer",
+  fontFamily: "inherit",
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+};
 
 type OwnedLocation =
   | { kind: "party"; slot: number }
@@ -1741,6 +1894,11 @@ function locationLabel(loc: OwnedLocation): string {
 
 function LivingDexGrid({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo }) {
   const owned = collectOwned(saveInfo);
+  const dexCaught = useMemo(() => new Set(saveInfo.pokedexOwned), [saveInfo.pokedexOwned]);
+  const hoennCaught = hoennDex.reduce(
+    (n, e) => n + (dexCaught.has(e.nationalDex) ? 1 : 0),
+    0,
+  );
   const [selected, setSelected] = useState<number | null>(null);
   const [anchor, setAnchor] = useState<HTMLButtonElement | null>(null);
 
@@ -1766,7 +1924,7 @@ function LivingDexGrid({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo 
       <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 10, flexWrap: "wrap" }}>
         <h2 style={{ margin: 0 }}>Hoenn Dex</h2>
         <span style={{ fontSize: 13, opacity: 0.7 }}>
-          <span style={{ fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>{owned.size}</span>
+          <span style={{ fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>{hoennCaught}</span>
           {" / "}
           <span style={{ fontVariantNumeric: "tabular-nums" }}>{hoennDex.length}</span> caught
         </span>
@@ -1775,12 +1933,35 @@ function LivingDexGrid({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo 
         {hoennDex.map((entry) => {
           const info = speciesByNationalDex[entry.nationalDex];
           const entries = owned.get(entry.nationalDex);
-          const isCaught = !!entries?.length;
+          const isStored = !!entries?.length;
+          const isCaught = isStored || dexCaught.has(entry.nationalDex);
           const isSelected = selected === entry.hoennDex;
-          const cls = `dex-cell ${isCaught ? "dex-cell-caught" : "dex-cell-missing"}${isSelected ? " dex-cell-selected" : ""}`;
+          const stateCls = isStored ? "dex-cell-stored" : isCaught ? "dex-cell-caught" : "dex-cell-missing";
+          const cls = `dex-cell ${stateCls}${isSelected ? " dex-cell-selected" : ""}`;
           const title = `#${entry.hoennDex} ${formatSpeciesName(entry.name)}${
-            isCaught ? ` — ${locationLabel(entries![0].location)}` : ""
+            entries?.length ? ` — ${locationLabel(entries[0].location)}` : isCaught ? " — caught" : ""
           }`;
+          const inner = (
+            <>
+              <span className="dex-cell-num">{String(entry.hoennDex).padStart(3, "0")}</span>
+              {info?.sprite ? (
+                <img src={info.sprite} alt={entry.name} width={56} height={56} loading="lazy" />
+              ) : (
+                <div style={{ width: 56, height: 56 }} />
+              )}
+              <span className="dex-cell-name">{formatSpeciesName(entry.name)}</span>
+              {entries && entries.length > 1 && (
+                <span className="dex-cell-badge" title={`${entries.length} owned`}>×{entries.length}</span>
+              )}
+            </>
+          );
+          if (!isStored) {
+            return (
+              <div key={entry.hoennDex} className={`${cls} dex-cell-static`} title={title}>
+                {inner}
+              </div>
+            );
+          }
           return (
             <button
               type="button"
@@ -1796,16 +1977,7 @@ function LivingDexGrid({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo 
                 }
               }}
             >
-              <span className="dex-cell-num">{String(entry.hoennDex).padStart(3, "0")}</span>
-              {info?.sprite ? (
-                <img src={info.sprite} alt={entry.name} width={56} height={56} loading="lazy" />
-              ) : (
-                <div style={{ width: 56, height: 56 }} />
-              )}
-              <span className="dex-cell-name">{formatSpeciesName(entry.name)}</span>
-              {entries && entries.length > 1 && (
-                <span className="dex-cell-badge" title={`${entries.length} owned`}>×{entries.length}</span>
-              )}
+              {inner}
             </button>
           );
         })}
@@ -2021,7 +2193,7 @@ function OwnedMonRow({ stem, owned }: { stem: GameStem; owned: OwnedMon }) {
           >
             {label}
           </Link>
-          <span style={{ fontSize: 12, opacity: 0.7 }}>Lv {mon.level} · {mon.nature}</span>
+          <span style={{ fontSize: 12, opacity: 0.7 }}>Lv {effectiveLevel(mon, info)} · {mon.nature}</span>
           <StatusBadge label="Where" value={locLabel} tone={locTone} />
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: "4px 16px", fontSize: 12 }}>
@@ -2709,7 +2881,7 @@ function LatestCatchCard({ stem, mon, at }: { stem: GameStem; mon: DecodedPokemo
             )}
           </div>
           <div style={{ fontSize: 13, opacity: 0.8, marginTop: 2, display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" }}>
-            <span>Lv {mon.level} · {mon.nature}</span>
+            <span>Lv {effectiveLevel(mon, info)} · {mon.nature}</span>
             {info && info.types.map((t) => <TypeBadge key={t} type={t} />)}
             <span style={{ opacity: 0.6 }}>·</span>
             <span style={{ textTransform: "uppercase", letterSpacing: 0.5, fontSize: 11, fontWeight: 700, color: tint }}>

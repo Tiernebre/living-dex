@@ -84,6 +84,10 @@ export type SaveInfo = {
   party: (DecodedPokemon | null)[];
   boxes: BoxInfo[];
   currentBox: number;
+  // National-dex IDs the player has registered as caught in their in-game Pokédex.
+  // Distinct from "owned in storage" — it includes mons evolved/traded away,
+  // and excludes mons received but never registered.
+  pokedexOwned: number[];
 };
 
 export type HubState = {

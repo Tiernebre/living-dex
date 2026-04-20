@@ -11,7 +11,11 @@ import type { BoxInfo, DecodedPokemon, GameStem, SaveInfo } from "../protocol.ts
 export type { SaveInfo };
 
 const SECTOR_SIZE = 0x1000;
-const SECTOR_DATA_SIZE = 0xFF4;
+// Each sector is 4096 bytes = 3968 bytes of struct data + 128-byte footer.
+// (The footer fields {id, checksum, signature, counter} live at 0xFF4..0xFFF;
+// bytes 0xF80..0xFF3 are unused padding, NOT part of the saved struct.)
+// pokeruby/src/save.c: #define SECTOR_DATA_SIZE 3968
+const SECTOR_DATA_SIZE = 0xF80;
 const NUM_SECTORS_PER_SLOT = 14;
 const FILE_SIGNATURE = 0x08012025;
 
@@ -73,6 +77,19 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
     else if (s.id === 1) sb1Chunk0Base = s.base;
   }
   if (sb2Base === null) return null;
+
+  // gSaveBlock2.pokedex lives at offset 0x18; pokedex.owned is a 52-byte bitfield
+  // at +0x10 (i.e. SB2+0x28), indexed by (nationalDex - 1).
+  // pokeruby/include/global.h: struct Pokedex { ... u8 owned[DEX_FLAGS_NO]; ... }
+  const pokedexOwned: number[] = [];
+  const DEX_FLAGS_BYTES = 52;
+  for (let i = 0; i < DEX_FLAGS_BYTES; i++) {
+    const b = view.getUint8(sb2Base + 0x28 + i);
+    if (b === 0) continue;
+    for (let bit = 0; bit < 8; bit++) {
+      if (b & (1 << bit)) pokedexOwned.push(i * 8 + bit + 1);
+    }
+  }
 
   const nameBytes = buf.subarray(sb2Base + 0x00, sb2Base + 0x08);
   const playerName = decodeGen3String(nameBytes);
@@ -145,5 +162,6 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
     party,
     boxes,
     currentBox,
+    pokedexOwned,
   };
 }
