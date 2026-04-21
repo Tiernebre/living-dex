@@ -3,10 +3,11 @@
 
 const procs: { name: string; color: string; proc: Deno.ChildProcess }[] = [];
 
-function spawn(name: string, color: string, cmd: string, args: string[], cwd?: string) {
+function spawn(name: string, color: string, cmd: string, args: string[], cwd?: string, env?: Record<string, string>) {
   const proc = new Deno.Command(cmd, {
     args,
     cwd,
+    env,
     stdout: "piped",
     stderr: "piped",
   }).spawn();
@@ -42,8 +43,9 @@ Deno.addSignalListener("SIGTERM", shutdown);
 const args = Deno.args.filter((a) => a !== "--no-mgba");
 const noMgba = Deno.args.includes("--no-mgba");
 
-spawn("hub", "36", "deno", ["task", "dev:hub"]);
+spawn("hub", "36", "deno", ["task", "dev:hub"], undefined, { LIVING_DEX_DEV: "1" });
 spawn("web", "35", "npm", ["run", "dev"], "web");
+console.log("\x1b[36m[hub]\x1b[0m open http://127.0.0.1:8080 (single user-facing URL; vite :5173 is proxied)");
 
 if (!noMgba) {
   const ROM = args[0] ?? "roms/ruby.gba";
