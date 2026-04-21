@@ -95,8 +95,115 @@ export function PokemonDetail() {
           />
         </div>
       </section>
+      <ContestSection contest={mon.contest} />
       <JourneySection history={history} />
     </>
+  );
+}
+
+// Hoenn contest hall colors — match the Pokéblock / condition-ribbon palette.
+const CONTEST_CONDITIONS = [
+  { key: "cool", label: "Cool", color: "#e24b4b" },
+  { key: "beauty", label: "Beauty", color: "#4a7dd4" },
+  { key: "cute", label: "Cute", color: "#e87ab3" },
+  { key: "smart", label: "Smart", color: "#52b26a" },
+  { key: "tough", label: "Tough", color: "#e2a13a" },
+] as const;
+
+function ContestSection({
+  contest,
+}: {
+  contest: { cool: number; beauty: number; cute: number; smart: number; tough: number; sheen: number };
+}) {
+  const allZero = CONTEST_CONDITIONS.every((c) => contest[c.key] === 0) && contest.sheen === 0;
+  return (
+    <section
+      style={{
+        marginTop: 16,
+        padding: 16,
+        border: "1px solid var(--border)",
+        borderRadius: 10,
+        background: "var(--bg-elevated)",
+      }}
+    >
+      <h3
+        style={{
+          margin: "0 0 10px",
+          fontSize: 14,
+          textTransform: "uppercase",
+          letterSpacing: 0.5,
+          opacity: 0.7,
+        }}
+      >
+        Contest Conditions
+      </h3>
+      {allZero ? (
+        <div style={{ fontSize: 13, opacity: 0.6, fontStyle: "italic" }}>
+          No Pokéblocks fed yet.
+        </div>
+      ) : (
+        <div style={{ display: "grid", gap: 6 }}>
+          {CONTEST_CONDITIONS.map((c) => {
+            const v = contest[c.key];
+            const pct = (v / 255) * 100;
+            return (
+              <div
+                key={c.key}
+                style={{ display: "grid", gridTemplateColumns: "70px 1fr 36px", alignItems: "center", gap: 10, fontSize: 12 }}
+              >
+                <span style={{ fontWeight: 600, color: c.color, textTransform: "uppercase", letterSpacing: 0.5, fontSize: 11 }}>
+                  {c.label}
+                </span>
+                <div
+                  style={{
+                    height: 8,
+                    borderRadius: 4,
+                    background: `color-mix(in srgb, ${c.color} 15%, var(--bg-surface))`,
+                    overflow: "hidden",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: `${pct}%`,
+                      height: "100%",
+                      background: `linear-gradient(90deg, color-mix(in srgb, ${c.color} 70%, transparent), ${c.color})`,
+                    }}
+                  />
+                </div>
+                <span style={{ fontVariantNumeric: "tabular-nums", fontWeight: 600, textAlign: "right", opacity: 0.85 }}>
+                  {v}
+                </span>
+              </div>
+            );
+          })}
+          <div style={{ display: "flex", gap: 10, alignItems: "center", marginTop: 6, fontSize: 12 }}>
+            <span style={{ opacity: 0.55, textTransform: "uppercase", letterSpacing: 0.5, fontSize: 10 }}>
+              Sheen
+            </span>
+            <div
+              style={{
+                flex: 1,
+                height: 6,
+                borderRadius: 3,
+                background: "color-mix(in srgb, var(--accent) 15%, var(--bg-surface))",
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{
+                  width: `${(contest.sheen / 255) * 100}%`,
+                  height: "100%",
+                  background: "linear-gradient(90deg, color-mix(in srgb, var(--accent) 60%, transparent), var(--accent-strong))",
+                }}
+              />
+            </div>
+            <span style={{ fontVariantNumeric: "tabular-nums", fontWeight: 600, width: 36, textAlign: "right", opacity: 0.85 }}>
+              {contest.sheen}
+            </span>
+          </div>
+        </div>
+      )}
+    </section>
   );
 }
 

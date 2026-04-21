@@ -164,6 +164,9 @@ export function decodePokemon(bytes: Uint8Array): DecodedPokemon | null {
   const evs = {
     hp: E[0], atk: E[1], def: E[2], spe: E[3], spa: E[4], spd: E[5],
   };
+  const contest = {
+    cool: E[6], beauty: E[7], cute: E[8], smart: E[9], tough: E[10], sheen: E[11],
+  };
 
   // Party tail: if all zero, this is a BoxPokemon (80 bytes effective) — use G's growth level.
   const hasPartyTail = bytes.length >= 0x55 && bytes[0x54] !== 0;
@@ -186,6 +189,7 @@ export function decodePokemon(bytes: Uint8Array): DecodedPokemon | null {
     ivs,
     evs,
     nature: NATURES[pid % 25],
+    contest,
     moves,
     otName: decodeName(bytes.subarray(0x14, 0x1B)),
     otId: otid,

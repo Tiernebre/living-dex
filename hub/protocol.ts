@@ -62,6 +62,10 @@ export type DecodedPokemon = {
   // Bits 7-10 of origins word. 1=Sapphire, 2=Ruby, 3=Emerald, 4=FireRed, 5=LeafGreen.
   originGame: number;
   isEgg: boolean;
+  // Contest conditions (0..255 each) and Sheen (0..255) from the EV/Condition
+  // substructure. Raised via Pokéblocks in R/S/E and Poffins-equivalent data
+  // doesn't exist here — FR/LG store zeros.
+  contest: { cool: number; beauty: number; cute: number; smart: number; tough: number; sheen: number };
   // TODO: ability, hidden power, ribbons, etc.
 };
 
