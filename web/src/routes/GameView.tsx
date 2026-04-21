@@ -102,7 +102,7 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
               <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
                 {saveInfo.party.map((mon, i) => (
                   <li key={i} style={mon ? undefined : { opacity: 0.4 }}>
-                    {mon ? <PokemonCard mon={mon} movesRight /> : "—"}
+                    {mon ? <PokemonCard mon={mon} movesRight linkToDetail /> : "—"}
                   </li>
                 ))}
               </ol>
@@ -119,7 +119,7 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
         initial="party"
         storageKey={`living-dex:saved-tab:${stem}`}
       />
-      <LivingDexGrid stem={stem} saveInfo={saveInfo} />
+      <LivingDexGrid saveInfo={saveInfo} />
     </>
   );
 }
@@ -183,7 +183,7 @@ function LiveView({
       <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
         {party.map((mon, i) => (
           <li key={i} style={mon ? undefined : { opacity: 0.4 }}>
-            {mon ? <PokemonCard mon={mon} movesRight /> : "—"}
+            {mon ? <PokemonCard mon={mon} movesRight linkToDetail /> : "—"}
           </li>
         ))}
       </ol>
@@ -207,7 +207,7 @@ function LiveView({
                     >
                       You
                     </div>
-                    {activeMon ? <PokemonCard mon={activeMon} /> : <div style={{ opacity: 0.5 }}>—</div>}
+                    {activeMon ? <PokemonCard mon={activeMon} linkToDetail /> : <div style={{ opacity: 0.5 }}>—</div>}
                   </div>
                   <div className="matchup-vs">vs</div>
                   <div className="matchup-card">

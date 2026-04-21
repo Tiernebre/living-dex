@@ -1,6 +1,7 @@
+import { Link } from "react-router-dom";
 import type { DecodedPokemon } from "../../../hub/protocol.ts";
 import { lookup } from "../data";
-import { formatSpeciesName, serebiiGen3DexUrl, thumbnailUrl } from "../format";
+import { formatSpeciesName, pokemonKey, serebiiGen3DexUrl, thumbnailUrl } from "../format";
 import { effectiveLevel, hiddenPower } from "../stats";
 import { GRADE_CARD_CLASS, gradePokemon } from "../grade";
 import { Confetti, MovesList, TypeBadge } from "./atoms";
@@ -11,17 +12,24 @@ export function PokemonCard({
   mon,
   movesRight = false,
   fancyGrade = false,
+  linkToDetail = false,
 }: {
   mon: DecodedPokemon;
   movesRight?: boolean;
   // Wild encounters opt into the glow/confetti badge. Party/PC get a plain
   // colored letter — the grade is still useful but the card shouldn't scream.
   fancyGrade?: boolean;
+  // Makes the whole card navigate to /pokemon/:key on click. Opt-in so the
+  // detail page (which renders this card itself) and wild-encounter overlays
+  // (mon isn't saved yet, has no detail page) can keep it static.
+  linkToDetail?: boolean;
 }) {
   const info = lookup(mon.species);
   const graded = info ? gradePokemon(mon.ivs, mon.nature, info.baseStats) : null;
   const gradeClass = fancyGrade && graded ? GRADE_CARD_CLASS[graded.grade] ?? "" : "";
   const level = effectiveLevel(mon, info);
+  const detailHref = linkToDetail ? `/pokemon/${pokemonKey(mon)}` : null;
+  const nameLabel = mon.nickname || (info ? formatSpeciesName(info.name) : "?");
   return (
     <div
       className={gradeClass}
@@ -61,8 +69,23 @@ export function PokemonCard({
           }}
         >
           <span>
-            {mon.nickname}
-            {info && (
+            {detailHref ? (
+              <Link
+                to={detailHref}
+                className="pokemon-card-name"
+                style={{
+                  color: "var(--accent-strong)",
+                  textDecoration: "underline",
+                  textDecorationThickness: "1.5px",
+                  textUnderlineOffset: "3px",
+                }}
+              >
+                {nameLabel}
+              </Link>
+            ) : (
+              nameLabel
+            )}
+            {info && mon.nickname && (
               <span style={{ fontWeight: 400, opacity: 0.7 }}>
                 {" — "}
                 <a

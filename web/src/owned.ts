@@ -1,4 +1,4 @@
-import type { DecodedPokemon, SaveInfo } from "../../hub/protocol.ts";
+import type { DecodedPokemon, GameStem, SaveInfo } from "../../hub/protocol.ts";
 import { hoennDex, lookup } from "./data";
 import { pokemonKey } from "./format";
 
@@ -50,6 +50,31 @@ export function countOwnedSpecies(saveInfo: SaveInfo): Set<number> {
   saveInfo.party.forEach(push);
   saveInfo.boxes.forEach((b) => b.slots.forEach(push));
   return set;
+}
+
+export type OwnedInSave = {
+  stem: GameStem;
+  saveInfo: SaveInfo;
+  mon: DecodedPokemon;
+  location: OwnedLocation;
+};
+
+// Scan every loaded save for this PID+OTID. A Pokémon's PID and OTID are
+// preserved across trades/transfers, so the same pair in two saves means the
+// same mon (or a clone produced via the box trick). Newest `savedAtMs` first —
+// the most recent save is treated as the "current" instance.
+export function findAllOwnedByKey(
+  saves: Partial<Record<GameStem, SaveInfo>>,
+  key: string,
+): OwnedInSave[] {
+  const hits: OwnedInSave[] = [];
+  for (const [stem, saveInfo] of Object.entries(saves) as [GameStem, SaveInfo][]) {
+    if (!saveInfo) continue;
+    const hit = findOwnedByKey(saveInfo, key);
+    if (hit) hits.push({ stem, saveInfo, mon: hit.mon, location: hit.location });
+  }
+  hits.sort((a, b) => b.saveInfo.savedAtMs - a.saveInfo.savedAtMs);
+  return hits;
 }
 
 export function findOwnedByKey(saveInfo: SaveInfo, key: string): OwnedMon | null {

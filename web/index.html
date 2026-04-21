@@ -332,6 +332,15 @@
       .dex-cell-missing .dex-cell-name { color: var(--text-muted); }
       .dex-cell img { image-rendering: pixelated; width: 56px; height: 56px; }
 
+      .pokemon-card-name:hover {
+        text-decoration-thickness: 2.5px;
+      }
+      .pokemon-card-name:focus-visible {
+        outline: 2px solid var(--accent-strong);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+
       .matchup { display: flex; flex-wrap: wrap; gap: 12px; align-items: stretch; }
       .matchup-card { flex: 1 1 320px; min-width: 0; }
       .matchup-vs { font-size: 24px; font-weight: 700; opacity: 0.4; align-self: center; text-align: center; }

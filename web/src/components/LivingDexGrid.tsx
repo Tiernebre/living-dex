@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import type { GameStem, SaveInfo } from "../../../hub/protocol.ts";
+import type { SaveInfo } from "../../../hub/protocol.ts";
 import {
   hoennDex,
   lookup,
@@ -20,7 +20,7 @@ import { useLivingDex } from "../store";
 import { Detail, StatusBadge, TypeBadge } from "./atoms";
 import { DexPopover } from "./DexPopover";
 
-export function LivingDexGrid({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo }) {
+export function LivingDexGrid({ saveInfo }: { saveInfo: SaveInfo }) {
   const owned = collectOwned(saveInfo);
   const dexCaught = useMemo(() => new Set(saveInfo.pokedexOwned), [saveInfo.pokedexOwned]);
   const hoennCaught = hoennDex.reduce(
@@ -131,7 +131,7 @@ export function LivingDexGrid({ stem, saveInfo }: { stem: GameStem; saveInfo: Sa
       </div>
       {selectedEntry && anchor && (
         <DexPopover anchor={anchor} onClose={close}>
-          <DexDetail stem={stem} entry={selectedEntry} owned={selectedOwned} onClose={close} />
+          <DexDetail entry={selectedEntry} owned={selectedOwned} onClose={close} />
         </DexPopover>
       )}
     </section>
@@ -139,12 +139,10 @@ export function LivingDexGrid({ stem, saveInfo }: { stem: GameStem; saveInfo: Sa
 }
 
 function DexDetail({
-  stem,
   entry,
   owned,
   onClose,
 }: {
-  stem: GameStem;
   entry: HoennDexEntry;
   owned: OwnedMon[];
   onClose: () => void;
@@ -220,7 +218,7 @@ function DexDetail({
       ) : (
         <div style={{ display: "grid", gap: 10 }}>
           {owned.map((o, i) => (
-            <OwnedMonRow key={i} stem={stem} owned={o} />
+            <OwnedMonRow key={i} owned={o} />
           ))}
         </div>
       )}
@@ -228,7 +226,7 @@ function DexDetail({
   );
 }
 
-function OwnedMonRow({ stem, owned }: { stem: GameStem; owned: OwnedMon }) {
+function OwnedMonRow({ owned }: { owned: OwnedMon }) {
   const { mon, location } = owned;
   const info = lookup(mon.species);
   const locLabel = locationLabel(location);
@@ -261,7 +259,7 @@ function OwnedMonRow({ stem, owned }: { stem: GameStem; owned: OwnedMon }) {
           }}
         >
           <Link
-            to={`/${stem}/pokemon/${pokemonKey(mon)}`}
+            to={`/pokemon/${pokemonKey(mon)}`}
             style={{ fontSize: 15, fontWeight: 700, color: "inherit" }}
           >
             {label}

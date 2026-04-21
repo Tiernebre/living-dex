@@ -22,7 +22,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/:game" element={<GameView />} />
-          <Route path="/:game/pokemon/:key" element={<PokemonDetail />} />
+          <Route path="/pokemon/:key" element={<PokemonDetail />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Layout>

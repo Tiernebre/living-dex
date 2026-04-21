@@ -23,7 +23,7 @@ export function LatestCatchCard({
     <section style={{ marginBottom: 22 }}>
       <h2 style={{ margin: "0 0 10px" }}>Latest catch</h2>
       <Link
-        to={`/${stem}/pokemon/${pokemonKey(mon)}`}
+        to={`/pokemon/${pokemonKey(mon)}`}
         style={{
           display: "flex",
           alignItems: "center",

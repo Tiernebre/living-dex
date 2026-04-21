@@ -73,7 +73,7 @@ export function PCBoxes({ saveInfo }: { saveInfo: SaveInfo }) {
             mon ? (
               <li key={i} style={{ display: "flex", minWidth: 0 }}>
                 <div style={{ flex: 1, minWidth: 0, display: "flex" }}>
-                  <PokemonCard mon={mon} movesRight />
+                  <PokemonCard mon={mon} movesRight linkToDetail />
                 </div>
               </li>
             ) : null,
