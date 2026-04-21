@@ -34,6 +34,10 @@ export type ChainStep = {
   primary?: boolean;
   endOfGen?: boolean;
   external?: boolean;
+  // Replaces the handheld 4★ trainer-card breakdown for games that don't
+  // have a trainer card (Colosseum, XD). Each entry becomes a row in the
+  // stars popover on the dashboard card.
+  primaryGoals?: { label: string; detail: string }[];
 };
 
 // Ordered by North American release date — the challenge is played as if
@@ -43,7 +47,13 @@ export const CHALLENGE_CHAIN: ChainStep[] = [
   { stem: "ruby",      gen: 3, stage: 1, label: "Ruby",       mascots: [383], tint: "#dc2626" },
   { stem: "sapphire",  gen: 3, stage: 1, label: "Sapphire",   mascots: [382], tint: "#2563eb", primary: true },
   // Stage 2 — 2003-11 (Gen 3 · GameCube)
-  { stem: null, gen: 3, stage: 2, label: "Colosseum", mascots: [197, 196], tint: "#9333ea", primary: true, external: true },
+  { stem: null, gen: 3, stage: 2, label: "Colosseum", mascots: [197, 196], tint: "#9333ea", primary: true, external: true,
+    primaryGoals: [
+      { label: "Story", detail: "Beat the main story (defeat Evice at Realgam Tower)" },
+      { label: "Shadow Pokémon", detail: "Snag and purify all 48 Shadow Pokémon" },
+      { label: "Mt. Battle", detail: "Clear all 100 trainers in Mt. Battle single-battle mode" },
+      { label: "Orre Colosseum", detail: "Win every cup in Orre Colosseum" },
+    ] },
   // Stage 3 — 2004-09 (Gen 3)
   { stem: "firered",   gen: 3, stage: 3, label: "FireRed",    mascots: [6],   tint: "#ea580c" },
   { stem: "leafgreen", gen: 3, stage: 3, label: "LeafGreen",  mascots: [3],   tint: "#16a34a", primary: true },
@@ -51,7 +61,14 @@ export const CHALLENGE_CHAIN: ChainStep[] = [
   // Stage 4 — 2005-05 (Gen 3)
   { stem: "emerald",   gen: 3, stage: 4, label: "Emerald",    mascots: [384], tint: "#059669", primary: true, endOfGen: true },
   // Stage 5 — 2005-10 (Gen 3 · GameCube)
-  { stem: null, gen: 3, stage: 5, label: "XD: Gale of Darkness", short: "XD", mascots: [249], tint: "#4c1d95", primary: true, external: true },
+  { stem: null, gen: 3, stage: 5, label: "XD: Gale of Darkness", short: "XD", mascots: [249], tint: "#4c1d95", primary: true, external: true,
+    primaryGoals: [
+      { label: "Story", detail: "Beat the main story (defeat Greevil at Citadark Isle)" },
+      { label: "Shadow Pokémon", detail: "Snag and purify all 83 Shadow Pokémon" },
+      { label: "Mt. Battle", detail: "Clear all 100 trainers in Mt. Battle" },
+      { label: "Orre Colosseum", detail: "Win every cup in Orre Colosseum" },
+      { label: "Battle CDs", detail: "Clear all 60 Battle CDs" },
+    ] },
   // Stage 6 — 2007-04 (Gen 4)
   { stem: null, gen: 4, stage: 6, label: "Diamond",   mascots: [483], tint: "#38bdf8", primary: true },
   { stem: null, gen: 4, stage: 6, label: "Pearl",     mascots: [484], tint: "#f9a8d4" },

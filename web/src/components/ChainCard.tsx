@@ -24,7 +24,12 @@ function PrimaryProgress({
   const nationalCaught = loaded ? set.size : 0;
   // Museum-paintings star isn't parsed yet, so this caps at 3 stars
   // (HoF + Hoenn dex + Battle Tower). TODO: parse Lilycove contest paintings.
-  const trainerStarsCertain = !!saveInfo;
+  // GC games (Colosseum/XD) use step.primaryGoals instead — no save parser, so
+  // every goal stays `unknown` until manually tracked.
+  const breakdown = step.primaryGoals
+    ? step.primaryGoals.map((g) => ({ ...g, earned: false, unknown: true }))
+    : trainerStarsBreakdown(saveInfo);
+  const trainerStarsCertain = step.primaryGoals ? false : !!saveInfo;
   return (
     <div
       style={{
@@ -55,7 +60,7 @@ function PrimaryProgress({
         />
       )}
       <TrainerStars
-        breakdown={trainerStarsBreakdown(saveInfo)}
+        breakdown={breakdown}
         tint={tint}
         dim={!trainerStarsCertain}
       />
@@ -95,6 +100,8 @@ export function ChainCard({
       : step.primary
       ? "4★ trainer card · no dex goal"
       : "Champion required · no dex goal"
+    : step.primaryGoals
+    ? step.primaryGoals.map((g) => g.label).join(" · ")
     : "No save loaded";
   const inner = (
     <div
@@ -183,7 +190,11 @@ export function ChainCard({
           </span>
           {step.primary && (
             <span
-              title="Primary — aim for a 4★ trainer card"
+              title={
+                step.primaryGoals
+                  ? `Primary — ${step.primaryGoals.map((g) => g.label).join(" · ")}`
+                  : "Primary — aim for a 4★ trainer card"
+              }
               style={{
                 fontSize: 9,
                 fontWeight: 800,

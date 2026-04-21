@@ -40,10 +40,10 @@ function proxyWebSocket(req: Request, targetUrl: string): Response {
     if (client.readyState === WebSocket.OPEN) client.send(e.data);
   };
   upstream.onclose = (e) => {
-    if (client.readyState === WebSocket.OPEN) client.close(e.code <= 1015 ? e.code : 1000, e.reason);
+    if (client.readyState === WebSocket.OPEN) client.close(sanitizeCloseCode(e.code), e.reason);
   };
   upstream.onerror = () => {
-    if (client.readyState === WebSocket.OPEN) client.close(1011, "upstream error");
+    if (client.readyState === WebSocket.OPEN) client.close(1000, "upstream error");
   };
 
   client.onmessage = (e) => {
@@ -55,12 +55,18 @@ function proxyWebSocket(req: Request, targetUrl: string): Response {
   };
   client.onclose = (e) => {
     if (upstream.readyState === WebSocket.OPEN || upstream.readyState === WebSocket.CONNECTING) {
-      upstream.close(e.code <= 1015 ? e.code : 1000, e.reason);
+      upstream.close(sanitizeCloseCode(e.code), e.reason);
     }
   };
   client.onerror = () => {
-    if (upstream.readyState === WebSocket.OPEN) upstream.close(1011, "client error");
+    if (upstream.readyState === WebSocket.OPEN) upstream.close(1000, "client error");
   };
 
   return response;
+}
+
+// The WebSocket API only permits close codes of 1000 or 3000-4999; reserved
+// codes like 1001/1005/1006/1011 surface via onclose but throw if re-sent.
+function sanitizeCloseCode(code: number): number {
+  return code === 1000 || (code >= 3000 && code <= 4999) ? code : 1000;
 }
