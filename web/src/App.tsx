@@ -58,7 +58,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           marginBottom: 16,
         }}
       >
-        <h1 style={{ margin: 0, marginRight: "auto" }}>
+        <h1 style={{ margin: 0 }}>
           <Link
             to="/"
             style={{
@@ -73,12 +73,6 @@ function Layout({ children }: { children: React.ReactNode }) {
             <span>Living Dex</span>
           </Link>
         </h1>
-        <StatusBadge
-          label="mGBA"
-          value={connected ? "connected" : "disconnected"}
-          tone={connected ? "success" : "danger"}
-          detail={game ? `${game.name} (rev ${game.revision})` : undefined}
-        />
         <Link
           to="/grades"
           style={{
@@ -91,10 +85,17 @@ function Layout({ children }: { children: React.ReactNode }) {
             padding: "4px 10px",
             border: "1px solid var(--border)",
             borderRadius: 6,
+            marginRight: "auto",
           }}
         >
           Grades
         </Link>
+        <StatusBadge
+          label="mGBA"
+          value={connected ? "connected" : "disconnected"}
+          tone={connected ? "success" : "danger"}
+          detail={game ? `${game.name} (rev ${game.revision})` : undefined}
+        />
         <StatusBadge
           label="Source"
           value={source ?? "none"}
