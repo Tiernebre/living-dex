@@ -13,7 +13,7 @@ import { Pokeball, StatusBadge } from "./components/atoms";
 import { ThemeToggle } from "./components/controls";
 import { Dashboard } from "./routes/Dashboard";
 import { GameView } from "./routes/GameView";
-import { Grades } from "./routes/Grades";
+import { AllPokemon } from "./routes/AllPokemon";
 import { PokemonDetail } from "./routes/PokemonDetail";
 
 export function App() {
@@ -22,7 +22,7 @@ export function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/grades" element={<Grades />} />
+          <Route path="/pokemon" element={<AllPokemon />} />
           <Route path="/:game" element={<GameView />} />
           <Route path="/pokemon/:key" element={<PokemonDetail />} />
           <Route path="*" element={<Navigate to="/" replace />} />
@@ -74,7 +74,7 @@ function Layout({ children }: { children: React.ReactNode }) {
           </Link>
         </h1>
         <Link
-          to="/grades"
+          to="/pokemon"
           style={{
             fontSize: 12,
             fontWeight: 700,
@@ -88,7 +88,7 @@ function Layout({ children }: { children: React.ReactNode }) {
             marginRight: "auto",
           }}
         >
-          Grades
+          All Pokémon
         </Link>
         <StatusBadge
           label="mGBA"

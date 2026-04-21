@@ -23,7 +23,7 @@ type Row = {
 const GRADE_ORDER: Grade[] = ["S+", "S", "A", "B", "C", "D", "F"];
 type SortKey = "grade" | "score" | "species" | "level" | "game";
 
-export function Grades() {
+export function AllPokemon() {
   const { saves } = useLivingDex();
   const [gradeFilter, setGradeFilter] = useState<Set<Grade>>(new Set(GRADE_ORDER));
   const [gameFilter, setGameFilter] = useState<Set<GameStem>>(new Set(GAME_STEMS));
@@ -124,7 +124,7 @@ export function Grades() {
           Dashboard
         </Link>
         <span style={{ opacity: 0.4, padding: "0 6px" }}>/</span>
-        <span style={{ opacity: 0.7 }}>Grades</span>
+        <span style={{ opacity: 0.7 }}>All Pokémon</span>
       </div>
       <header style={{ marginBottom: 14 }}>
         <h2 style={{ margin: "0 0 4px" }}>All Pokémon — {rows.length}</h2>
