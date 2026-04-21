@@ -12,11 +12,12 @@ import { GAME_STEMS } from "../../hub/protocol.ts";
 import type { GameStem, SaveInfo } from "../../hub/protocol.ts";
 import { CHALLENGE_CHAIN, CODE_TO_STEM, GAME_DISPLAY_NAME, isGameStem } from "./chain";
 import { useLivingDex } from "./store";
-import { Pokeball, StatusBadge } from "./components/atoms";
+import { Pokeball } from "./components/atoms";
 import { ThemeToggle } from "./components/controls";
 import { thumbnailUrl } from "./format";
 import { Dashboard } from "./routes/Dashboard";
 import { GameView } from "./routes/GameView";
+import { GameLive } from "./routes/GameLive";
 import { AllPokemon } from "./routes/AllPokemon";
 import { PokemonDetail } from "./routes/PokemonDetail";
 import { HallOfFame } from "./routes/HallOfFame";
@@ -30,6 +31,7 @@ export function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/pokemon" element={<AllPokemon />} />
           <Route path="/:game" element={<GameView />} />
+          <Route path="/:game/live" element={<GameLive />} />
           <Route path="/:game/hall-of-fame" element={<HallOfFame />} />
           <Route path="/:game/secret-bases" element={<SecretBases />} />
           <Route path="/pokemon/:key" element={<PokemonDetail />} />
@@ -79,7 +81,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 }
 
 function Sidebar({ routeStem }: { routeStem: string | undefined }) {
-  const { connected, game, source, lastUpdateAt, saves } = useLivingDex();
+  const { connected, game, saves } = useLivingDex();
   const runningStem = game ? CODE_TO_STEM[game.code] : null;
   const loadedStems = GAME_STEMS.filter((s) => saves[s]);
   const activeStem = routeStem && isGameStem(routeStem) ? routeStem : null;
@@ -156,26 +158,11 @@ function Sidebar({ routeStem }: { routeStem: string | undefined }) {
         style={{
           padding: "12px 14px 16px",
           borderTop: "1px solid var(--border)",
-          display: "grid",
-          gap: 8,
-          fontSize: 11,
+          display: "flex",
+          justifyContent: "flex-start",
         }}
       >
-        <StatusBadge
-          label="mGBA"
-          value={connected ? "connected" : "disconnected"}
-          tone={connected ? "success" : "danger"}
-          detail={game ? `${game.name} (rev ${game.revision})` : undefined}
-        />
-        <StatusBadge
-          label="Source"
-          value={source ?? "none"}
-          tone={source ? "info" : "muted"}
-          detail={lastUpdateAt ? new Date(lastUpdateAt).toLocaleTimeString() : undefined}
-        />
-        <div style={{ display: "flex", justifyContent: "flex-start" }}>
-          <ThemeToggle />
-        </div>
+        <ThemeToggle />
       </div>
     </aside>
   );
@@ -323,28 +310,29 @@ function GameNavItem({
           />
         )}
       </NavLink>
-      {active && (save.enteredHof || save.secretBases.length > 0) && (
-        <div style={{ display: "grid", gap: 1, margin: "2px 0 6px 32px" }}>
-          {save.enteredHof && (
-            <SubNavLink
-              to={`/${stem}/hall-of-fame`}
-              tint={tint}
-              icon="★"
-              label="Hall of Fame"
-              count={save.hallOfFame.length}
-            />
-          )}
-          {save.secretBases.length > 0 && (
-            <SubNavLink
-              to={`/${stem}/secret-bases`}
-              tint={tint}
-              icon="⌂"
-              label="Secret Bases"
-              count={save.secretBases.length}
-            />
-          )}
-        </div>
-      )}
+      <div style={{ display: "grid", gap: 1, margin: "2px 0 6px 32px" }}>
+        {stem !== "box" && (
+          <SubNavLink to={`/${stem}/live`} tint={tint} icon="⚡" label="Live" live={live} />
+        )}
+        {save.enteredHof && (
+          <SubNavLink
+            to={`/${stem}/hall-of-fame`}
+            tint={tint}
+            icon="★"
+            label="Hall of Fame"
+            count={save.hallOfFame.length}
+          />
+        )}
+        {save.secretBases.length > 0 && (
+          <SubNavLink
+            to={`/${stem}/secret-bases`}
+            tint={tint}
+            icon="⌂"
+            label="Secret Bases"
+            count={save.secretBases.length}
+          />
+        )}
+      </div>
     </div>
   );
 }
@@ -355,12 +343,14 @@ function SubNavLink({
   icon,
   label,
   count,
+  live,
 }: {
   to: string;
   tint: string;
   icon: string;
   label: string;
-  count: number;
+  count?: number;
+  live?: boolean;
 }) {
   return (
     <NavLink
@@ -383,16 +373,30 @@ function SubNavLink({
         {icon}
       </span>
       <span style={{ flex: 1, minWidth: 0 }}>{label}</span>
-      <span
-        style={{
-          fontSize: 10,
-          fontVariantNumeric: "tabular-nums",
-          fontWeight: 700,
-          opacity: 0.65,
-        }}
-      >
-        {count}
-      </span>
+      {live && (
+        <span
+          aria-hidden
+          style={{
+            width: 7,
+            height: 7,
+            borderRadius: 999,
+            background: "#16a34a",
+            boxShadow: "0 0 0 2px color-mix(in srgb, #16a34a 30%, transparent)",
+          }}
+        />
+      )}
+      {count !== undefined && (
+        <span
+          style={{
+            fontSize: 10,
+            fontVariantNumeric: "tabular-nums",
+            fontWeight: 700,
+            opacity: 0.65,
+          }}
+        >
+          {count}
+        </span>
+      )}
     </NavLink>
   );
 }

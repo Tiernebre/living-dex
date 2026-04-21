@@ -1,67 +1,30 @@
-import { useEffect, useRef, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
-import type { DecodedPokemon, GameStem, HubState, SaveInfo } from "../../../hub/protocol.ts";
-import { CHALLENGE_CHAIN, CODE_TO_STEM, GAME_DISPLAY_NAME, isGameStem } from "../chain";
+import type { GameStem, SaveInfo } from "../../../hub/protocol.ts";
+import { CHALLENGE_CHAIN, GAME_DISPLAY_NAME, isGameStem } from "../chain";
 import { countBoxMons, countOwnedSpecies } from "../owned";
 import { useLivingDex } from "../store";
 import { Pokeball } from "../components/atoms";
 import { BoxHeroCard } from "../components/BoxHeroCard";
 import { LivingDexGrid } from "../components/LivingDexGrid";
-import { ModeToggle, type Mode, Tabs } from "../components/controls";
+import { Tabs } from "../components/controls";
 import { PCBoxes } from "../components/PCBoxes";
 import { PokemonCard } from "../components/PokemonCard";
 import { TrainerSaveCard } from "../components/TrainerSaveCard";
-import { Encounters } from "../components/Encounters";
 
 export function GameView() {
   const params = useParams<{ game: string }>();
-  const { connected, game, party, enemyParty, inBattle, location, saves } = useLivingDex();
+  const { saves } = useLivingDex();
   const stem = params.game && isGameStem(params.game) ? params.game : null;
   const saveInfo = stem ? saves[stem] ?? null : null;
-  const runningStem = game ? CODE_TO_STEM[game.code] : null;
-  const canShowLive = connected && runningStem === stem;
 
-  const [mode, setMode] = useState<Mode>("saved");
-  const prevCanShowLive = useRef(canShowLive);
-  useEffect(() => {
-    if (!prevCanShowLive.current && canShowLive) setMode("live");
-    prevCanShowLive.current = canShowLive;
-  }, [canShowLive]);
-
-  // Pokémon Box RS is just a PC-box extension — no trainer, no party, no live mode.
-  // Render its own slim view rather than pretending it has a trainer card.
   if (stem === "box") return <BoxSavedView saveInfo={saveInfo} />;
   if (!stem) return <Navigate to="/" replace />;
-
-  const activeMon = party.find((p) => p !== null) ?? null;
-  const activeEnemy = enemyParty.find((p) => p !== null) ?? null;
 
   const stepTint = CHALLENGE_CHAIN.find((c) => c.stem === stem)?.tint ?? "#6b7280";
   return (
     <>
-      <GameHeader stem={stem} tint={stepTint}>
-        <ModeToggle mode={mode} setMode={setMode} connected={connected} />
-      </GameHeader>
-      {mode === "saved" ? (
-        <SavedView stem={stem} saveInfo={saveInfo} />
-      ) : !canShowLive ? (
-        <section style={{ padding: 32, textAlign: "center", opacity: 0.6, fontStyle: "italic" }}>
-          {connected
-            ? `mGBA is running ${
-                runningStem ? GAME_DISPLAY_NAME[runningStem] : "a different game"
-              }, not ${GAME_DISPLAY_NAME[stem]}.`
-            : "Waiting for mGBA connection…"}
-        </section>
-      ) : (
-        <LiveView
-          connected={connected}
-          party={party}
-          inBattle={inBattle}
-          activeMon={activeMon}
-          activeEnemy={activeEnemy}
-          location={location}
-        />
-      )}
+      <GameHeader stem={stem} tint={stepTint} />
+      <SavedView stem={stem} saveInfo={saveInfo} />
     </>
   );
 }
@@ -117,15 +80,7 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
   );
 }
 
-function GameHeader({
-  stem,
-  tint,
-  children,
-}: {
-  stem: GameStem;
-  tint: string;
-  children?: React.ReactNode;
-}) {
+function GameHeader({ stem, tint }: { stem: GameStem; tint: string }) {
   return (
     <div
       style={{
@@ -150,15 +105,10 @@ function GameHeader({
       >
         {GAME_DISPLAY_NAME[stem]}
       </h2>
-      <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 12 }}>
-        {children}
-      </div>
     </div>
   );
 }
 
-// Pokémon Box: R/S has no trainer card — just the PC extension it is.
-// Hero card + box grid, nothing else.
 function BoxSavedView({ saveInfo }: { saveInfo: SaveInfo | null }) {
   if (!saveInfo) {
     return (
@@ -184,93 +134,6 @@ function BoxSavedView({ saveInfo }: { saveInfo: SaveInfo | null }) {
         />
       </div>
       <PCBoxes saveInfo={saveInfo} />
-    </>
-  );
-}
-
-function LiveView({
-  connected,
-  party,
-  inBattle,
-  activeMon,
-  activeEnemy,
-  location,
-}: {
-  connected: boolean;
-  party: HubState["party"];
-  inBattle: boolean;
-  activeMon: DecodedPokemon | null;
-  activeEnemy: DecodedPokemon | null;
-  location: HubState["location"];
-}) {
-  if (!connected) {
-    return (
-      <section style={{ padding: 32, textAlign: "center", opacity: 0.6, fontStyle: "italic" }}>
-        Waiting for mGBA connection…
-      </section>
-    );
-  }
-  return (
-    <>
-      <h2>Party</h2>
-      <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
-        {party.map((mon, i) => (
-          <li key={i} style={mon ? undefined : { opacity: 0.4 }}>
-            {mon ? <PokemonCard mon={mon} movesRight linkToDetail /> : "—"}
-          </li>
-        ))}
-      </ol>
-      <Tabs
-        tabs={[
-          {
-            id: "matchup",
-            label: "Current Matchup",
-            content:
-              inBattle && activeEnemy ? (
-                <div className="matchup">
-                  <div className="matchup-card">
-                    <div
-                      style={{
-                        fontSize: 12,
-                        opacity: 0.6,
-                        marginBottom: 4,
-                        textTransform: "uppercase",
-                        letterSpacing: 0.5,
-                      }}
-                    >
-                      You
-                    </div>
-                    {activeMon ? <PokemonCard mon={activeMon} linkToDetail /> : <div style={{ opacity: 0.5 }}>—</div>}
-                  </div>
-                  <div className="matchup-vs">vs</div>
-                  <div className="matchup-card">
-                    <div
-                      style={{
-                        fontSize: 12,
-                        opacity: 0.6,
-                        marginBottom: 4,
-                        textTransform: "uppercase",
-                        letterSpacing: 0.5,
-                      }}
-                    >
-                      Opponent
-                    </div>
-                    <PokemonCard mon={activeEnemy!} fancyGrade />
-                  </div>
-                </div>
-              ) : (
-                <p style={{ opacity: 0.6, fontStyle: "italic" }}>Not in a battle.</p>
-              ),
-          },
-          {
-            id: "encounters",
-            label: "Wild Encounters",
-            content: <Encounters location={location} />,
-          },
-        ]}
-        initial={inBattle ? "matchup" : "encounters"}
-        storageKey="living-dex:active-tab"
-      />
     </>
   );
 }

@@ -3,24 +3,33 @@ import type { SecretBase, SecretBaseTeamMember } from "../../../hub/protocol.ts"
 import { CHALLENGE_CHAIN, GAME_DISPLAY_NAME, isGameStem } from "../chain";
 import { lookup, lookupMove } from "../data";
 import { formatSpeciesName, thumbnailUrl } from "../format";
+import { lookupSecretBaseLocation } from "../secret-base-locations";
 import { useLivingDex } from "../store";
 
-// Sprite bucket (sSecretBaseOwnerGfxIds in pokeruby/src/secret_base.c) for the
-// 10 NPC variants a secret-base owner can take. Not the in-battle trainer
-// class — just the overworld sprite flavor. Used here as a short label so the
-// 20 bases don't all read the same.
-const OWNER_LABELS = [
-  "Youngster",
-  "Bug Catcher",
-  "Boy",
-  "Camper",
-  "Man",
-  "Lass",
-  "Girl",
-  "Woman",
-  "Picnicker",
-  "Lady",
+// In-battle trainer class for each ownerType slot — derived from
+// gSecretBaseTrainerClasses in pokeruby/src/pokemon_2.c. ownerType is
+// (trainerId byte 0 % 5) + gender*5, so 0..4 are male classes and 5..9
+// are female. We show the matching VS-sprite + name from this table
+// (rather than the overworld sprite flavor in sSecretBaseOwnerGfxIds)
+// so the placard matches what you'd see when you battle the base owner.
+const OWNER_TRAINERS: { label: string; sprite: string }[] = [
+  // Male
+  { label: "Youngster",      sprite: "youngster-gen3rs" },
+  { label: "Bug Catcher",    sprite: "bugcatcher-gen3rs" },
+  { label: "Rich Boy",       sprite: "richboy-gen3" },
+  { label: "Camper",         sprite: "camper-gen3rs" },
+  { label: "Cool Trainer ♂", sprite: "acetrainer-gen3rs" },
+  // Female
+  { label: "Lass",           sprite: "lass-gen3rs" },
+  { label: "School Kid ♀",   sprite: "schoolkidf-gen3" },
+  { label: "Lady",           sprite: "lady-gen3rs" },
+  { label: "Picnicker",      sprite: "picnicker-gen3rs" },
+  { label: "Cool Trainer ♀", sprite: "acetrainerf-gen3rs" },
 ];
+
+function trainerSpriteUrl(sprite: string): string {
+  return `https://play.pokemonshowdown.com/sprites/trainers/${sprite}.png`;
+}
 
 export function SecretBases() {
   const params = useParams<{ game: string }>();
@@ -122,8 +131,10 @@ export function SecretBases() {
 }
 
 function BasePlacard({ base, tint }: { base: SecretBase; tint: string }) {
-  const ownerLabel = OWNER_LABELS[base.ownerType] ?? "Trainer";
+  const trainerInfo = OWNER_TRAINERS[base.ownerType];
+  const ownerLabel = trainerInfo?.label ?? "Trainer";
   const emphasis = base.isPlayer;
+  const loc = lookupSecretBaseLocation(base.secretBaseId);
   return (
     <article
       style={{
@@ -150,27 +161,43 @@ function BasePlacard({ base, tint }: { base: SecretBase; tint: string }) {
         style={{
           display: "flex",
           alignItems: "center",
-          gap: 10,
+          gap: 12,
           marginBottom: 12,
           flexWrap: "wrap",
         }}
       >
-        <div
-          style={{
-            fontSize: 11,
-            fontWeight: 800,
-            textTransform: "uppercase",
-            letterSpacing: 0.8,
-            color: `color-mix(in srgb, ${tint} 80%, var(--text))`,
-          }}
-        >
-          {ownerLabel}
-          <span style={{ opacity: 0.55, marginLeft: 6 }}>
-            · {base.trainerGender === "female" ? "♀" : "♂"}
-          </span>
-        </div>
-        <div style={{ fontSize: 18, fontWeight: 700 }}>
-          {base.trainerName || "(unnamed)"}
+        {trainerInfo && (
+          <img
+            src={trainerSpriteUrl(trainerInfo.sprite)}
+            alt={ownerLabel}
+            title={ownerLabel}
+            height={56}
+            loading="lazy"
+            style={{
+              imageRendering: "pixelated",
+              filter: `drop-shadow(0 2px 3px ${tint}55)`,
+              flexShrink: 0,
+            }}
+          />
+        )}
+        <div style={{ display: "flex", flexDirection: "column", minWidth: 0 }}>
+          <div
+            style={{
+              fontSize: 11,
+              fontWeight: 800,
+              textTransform: "uppercase",
+              letterSpacing: 0.8,
+              color: `color-mix(in srgb, ${tint} 80%, var(--text))`,
+            }}
+          >
+            {ownerLabel}
+            <span style={{ opacity: 0.55, marginLeft: 6 }}>
+              · {base.trainerGender === "female" ? "♀" : "♂"}
+            </span>
+          </div>
+          <div style={{ fontSize: 18, fontWeight: 700 }}>
+            {base.trainerName || "(unnamed)"}
+          </div>
         </div>
         {emphasis && (
           <span
@@ -225,6 +252,40 @@ function BasePlacard({ base, tint }: { base: SecretBase; tint: string }) {
           </div>
         </div>
       </header>
+      <div
+        style={{
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 8,
+          marginBottom: 12,
+          padding: "5px 10px",
+          fontSize: 11,
+          fontWeight: 600,
+          borderRadius: 999,
+          border: `1px solid color-mix(in srgb, ${tint} 30%, var(--border))`,
+          background: `color-mix(in srgb, ${tint} 10%, var(--bg-elevated))`,
+          color: `color-mix(in srgb, ${tint} 80%, var(--text))`,
+        }}
+        title={
+          loc
+            ? `Spot ${base.secretBaseId} · ${loc.interior} · tile (${loc.x}, ${loc.y})`
+            : `Spot ${base.secretBaseId} · interior id ${Math.floor(base.secretBaseId / 10)}`
+        }
+      >
+        <span aria-hidden>📍</span>
+        {loc ? (
+          <>
+            <span>{loc.route}</span>
+            <span style={{ opacity: 0.55 }}>·</span>
+            <span style={{ opacity: 0.75 }}>{loc.interior}</span>
+            <span style={{ opacity: 0.45, fontVariantNumeric: "tabular-nums" }}>
+              ({loc.x}, {loc.y})
+            </span>
+          </>
+        ) : (
+          <span style={{ opacity: 0.7 }}>Spot #{base.secretBaseId}</span>
+        )}
+      </div>
       {base.team.length === 0 ? (
         <div style={{ fontSize: 12, opacity: 0.55, fontStyle: "italic" }}>
           No party set.
