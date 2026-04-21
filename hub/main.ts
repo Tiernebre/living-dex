@@ -1,3 +1,4 @@
+import { printBanner } from "./banner.ts";
 import { loadCatchLog } from "./catch-log.ts";
 import { proxyToVite } from "./dev-proxy.ts";
 import { startLuaListener } from "./sources/lua-tcp.ts";
@@ -88,7 +89,15 @@ store.hydrateCatchLog();
 startLuaListener(TCP_PORT);
 startSaveWatcher();
 
-Deno.serve({ hostname: "127.0.0.1", port: HTTP_PORT }, handleHttp);
-console.log(
-  `[hub] http+ws on http://127.0.0.1:${HTTP_PORT} (ws at /ws) — ${DEV ? "dev (proxying to vite :5173)" : "serving web/dist"}`,
-);
+Deno.serve({ hostname: "127.0.0.1", port: HTTP_PORT, onListen: () => {} }, handleHttp);
+printBanner({
+  mode: DEV ? "dev" : "prod",
+  rows: [
+    { label: "Local", value: `http://127.0.0.1:${HTTP_PORT}/` },
+    { label: "WebSocket", value: `ws://127.0.0.1:${HTTP_PORT}/ws` },
+    { label: "Lua TCP", value: `127.0.0.1:${TCP_PORT}` },
+    ...(DEV
+      ? [{ label: "vite", value: "proxied from :5173", dim: true }]
+      : [{ label: "static", value: "web/dist", dim: true }]),
+  ],
+});
