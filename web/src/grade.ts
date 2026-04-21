@@ -35,13 +35,16 @@ export function natureFitScore(
   return { factor, plusRank, minusRank, neutral: false };
 }
 
+// S+ is reserved for a flawless mon (6×31 IVs with a nature that fits the
+// species) and is awarded through an auto-rule rather than a score threshold.
+// The thresholds below cover S and down; middle grades are pulled in so a
+// typical wild mon lands around C instead of D/F.
 export const GRADE_THRESHOLDS: { grade: Grade; min: number }[] = [
-  { grade: "S+", min: 108 },
-  { grade: "S", min: 96 },
-  { grade: "A", min: 82 },
-  { grade: "B", min: 60 },
-  { grade: "C", min: 45 },
-  { grade: "D", min: 30 },
+  { grade: "S", min: 95 },
+  { grade: "A", min: 78 },
+  { grade: "B", min: 58 },
+  { grade: "C", min: 38 },
+  { grade: "D", min: 20 },
   { grade: "F", min: 0 },
 ];
 
@@ -69,13 +72,15 @@ export function gradePokemon(
 
   let grade: Grade;
   if (perfectCount === 6 && nat.factor >= 0.88) grade = "S+";
-  else if (total >= 108) grade = "S+";
-  else if (total >= 96) grade = "S";
-  else if (total >= 82) grade = "A";
-  else if (total >= 60) grade = "B";
-  else if (total >= 45) grade = "C";
-  else if (total >= 30) grade = "D";
-  else grade = "F";
+  else {
+    grade = "F";
+    for (const t of GRADE_THRESHOLDS) {
+      if (total >= t.min) {
+        grade = t.grade;
+        break;
+      }
+    }
+  }
 
   return { grade, ivSum, greenCount, perfectCount, ivScore, total, nature: nat };
 }

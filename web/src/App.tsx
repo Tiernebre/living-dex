@@ -13,6 +13,7 @@ import { Pokeball, StatusBadge } from "./components/atoms";
 import { ThemeToggle } from "./components/controls";
 import { Dashboard } from "./routes/Dashboard";
 import { GameView } from "./routes/GameView";
+import { Grades } from "./routes/Grades";
 import { PokemonDetail } from "./routes/PokemonDetail";
 
 export function App() {
@@ -21,6 +22,7 @@ export function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/grades" element={<Grades />} />
           <Route path="/:game" element={<GameView />} />
           <Route path="/pokemon/:key" element={<PokemonDetail />} />
           <Route path="*" element={<Navigate to="/" replace />} />
@@ -77,6 +79,22 @@ function Layout({ children }: { children: React.ReactNode }) {
           tone={connected ? "success" : "danger"}
           detail={game ? `${game.name} (rev ${game.revision})` : undefined}
         />
+        <Link
+          to="/grades"
+          style={{
+            fontSize: 12,
+            fontWeight: 700,
+            textTransform: "uppercase",
+            letterSpacing: 0.8,
+            color: "var(--accent-strong)",
+            textDecoration: "none",
+            padding: "4px 10px",
+            border: "1px solid var(--border)",
+            borderRadius: 6,
+          }}
+        >
+          Grades
+        </Link>
         <StatusBadge
           label="Source"
           value={source ?? "none"}
