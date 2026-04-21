@@ -5,6 +5,7 @@ import { Pokeball, StatusBadge } from "../components/atoms";
 import { PokemonCard } from "../components/PokemonCard";
 import { Tabs } from "../components/controls";
 import { Encounters } from "../components/Encounters";
+import { ownershipIndex } from "../owned";
 
 export function GameLive() {
   const params = useParams<{ game: string }>();
@@ -18,6 +19,7 @@ export function GameLive() {
     location,
     source,
     lastUpdateAt,
+    saves,
   } = useLivingDex();
   if (!stem) return <Navigate to="/" replace />;
 
@@ -26,6 +28,8 @@ export function GameLive() {
   const tint = CHALLENGE_CHAIN.find((c) => c.stem === stem)?.tint ?? "#6b7280";
   const activeMon = party.find((p) => p !== null) ?? null;
   const activeEnemy = enemyParty.find((p) => p !== null) ?? null;
+  const ownership = ownershipIndex(saves, stem);
+  const eggsInParty = party.filter((m) => m?.isEgg).length;
 
   return (
     <>
@@ -86,6 +90,29 @@ export function GameLive() {
         </section>
       ) : (
         <>
+          {eggsInParty > 0 && (
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                padding: "10px 14px",
+                marginBottom: 14,
+                borderRadius: 10,
+                border: `1px solid color-mix(in srgb, ${tint} 45%, var(--border))`,
+                background: `linear-gradient(135deg, color-mix(in srgb, ${tint} 14%, var(--bg-surface)), var(--bg-surface) 75%)`,
+                fontSize: 13,
+              }}
+            >
+              <span style={{ fontSize: 18 }} aria-hidden>🥚</span>
+              <span>
+                <strong style={{ color: tint }}>
+                  {eggsInParty} egg{eggsInParty === 1 ? "" : "s"}
+                </strong>{" "}
+                in party — walk to hatch.
+              </span>
+            </div>
+          )}
           <h2>Party</h2>
           <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
             {party.map((mon, i) => (
@@ -143,7 +170,7 @@ export function GameLive() {
               {
                 id: "encounters",
                 label: "Wild Encounters",
-                content: <Encounters location={location} />,
+                content: <Encounters location={location} ownership={ownership} />,
               },
             ]}
             initial={inBattle ? "matchup" : "encounters"}

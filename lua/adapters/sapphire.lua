@@ -18,6 +18,7 @@ M.addrs = {
   party_count = 0x03004350,
   enemy_party = 0x030045C0,
   battle_flags = 0x03001BAD,
+  location = SAVE_BLOCK_1 + 0x0004,
   current_box = POKEMON_STORAGE + 0x0000,
   box_list = POKEMON_STORAGE + 0x0004,
   daycare = SAVE_BLOCK_1 + 0x2F9C,

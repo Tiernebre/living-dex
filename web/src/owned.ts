@@ -40,6 +40,32 @@ export function countBoxMons(saveInfo: SaveInfo): number {
   return n;
 }
 
+// For encounter-table annotations on the live view: is this species already
+// owned in the running game's save, owned only in an earlier save in the
+// chain, or still missing everywhere. "Elsewhere" matters because mons left
+// behind in Ruby when you've moved on to Emerald still need transferring
+// before they count toward the final living-dex target.
+export type Ownership = "here" | "elsewhere" | "missing";
+
+export function ownershipIndex(
+  saves: Partial<Record<GameStem, SaveInfo>>,
+  currentStem: GameStem,
+): (nationalDex: number) => Ownership {
+  const here = new Set<number>();
+  const elsewhere = new Set<number>();
+  for (const [stem, info] of Object.entries(saves) as [GameStem, SaveInfo | undefined][]) {
+    if (!info) continue;
+    const species = countOwnedSpecies(info);
+    const target = stem === currentStem ? here : elsewhere;
+    for (const n of species) target.add(n);
+  }
+  return (national) => {
+    if (here.has(national)) return "here";
+    if (elsewhere.has(national)) return "elsewhere";
+    return "missing";
+  };
+}
+
 export function countOwnedSpecies(saveInfo: SaveInfo): Set<number> {
   const set = new Set<number>();
   const push = (mon: DecodedPokemon | null) => {
