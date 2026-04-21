@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import type { DecodedPokemon, GameStem, HubState, SaveInfo } from "../../../hub/protocol.ts";
-import { CODE_TO_STEM, GAME_DISPLAY_NAME, isGameStem } from "../chain";
+import { CHALLENGE_CHAIN, CODE_TO_STEM, GAME_DISPLAY_NAME, isGameStem } from "../chain";
 import { countBoxMons, countOwnedSpecies } from "../owned";
 import { useLivingDex } from "../store";
 import { BoxHeroCard } from "../components/BoxHeroCard";
@@ -82,6 +82,7 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
       </section>
     );
   }
+  const tint = CHALLENGE_CHAIN.find((c) => c.stem === stem)?.tint ?? "#6b7280";
   return (
     <>
       <div style={{ marginBottom: 16 }}>
@@ -92,6 +93,40 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
           showSeconds
           savedAtMs={saveInfo.savedAtMs}
         />
+        {saveInfo.enteredHof && (
+          <div style={{ marginTop: 8, display: "flex", justifyContent: "flex-end" }}>
+            <Link
+              to={`/${stem}/hall-of-fame`}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                padding: "6px 12px",
+                fontSize: 11,
+                fontWeight: 800,
+                letterSpacing: 0.8,
+                textTransform: "uppercase",
+                textDecoration: "none",
+                borderRadius: 999,
+                border: `1px solid color-mix(in srgb, ${tint} 40%, var(--border))`,
+                background: `color-mix(in srgb, ${tint} 14%, var(--bg-elevated))`,
+                color: `color-mix(in srgb, ${tint} 80%, var(--text))`,
+              }}
+            >
+              <span aria-hidden>★</span>
+              Hall of Fame
+              <span
+                style={{
+                  fontVariantNumeric: "tabular-nums",
+                  fontWeight: 700,
+                  opacity: 0.8,
+                }}
+              >
+                ({saveInfo.hallOfFame.length})
+              </span>
+            </Link>
+          </div>
+        )}
       </div>
       <Tabs
         tabs={[

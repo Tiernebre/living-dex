@@ -96,6 +96,23 @@ export type SaveInfo = {
   // gSaveBlock2.battleTower.bestBattleTowerWinStreak — best-ever Battle Tower
   // streak across both level modes. Trainer card awards a star at >= 50.
   battleTowerBestStreak: number;
+  // Hall of Fame teams, oldest-first. Lives in flash sectors 28-29 outside
+  // the A/B slot rotation; up to 50 teams of 6 mons. Only the fields the HoF
+  // struct actually stores (tid/personality/species/level/nickname) — no
+  // IVs, moves, or met-location.
+  hallOfFame: HallOfFameTeam[];
+};
+
+export type HallOfFameMon = {
+  species: number;
+  level: number;
+  nickname: string;
+  tid: number;
+  personality: number;
+};
+
+export type HallOfFameTeam = {
+  mons: HallOfFameMon[];
 };
 
 export type HubState = {

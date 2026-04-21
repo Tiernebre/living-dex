@@ -134,5 +134,6 @@ export function parseRSBoxSave(buf: Uint8Array, game: GameStem = "box"): SaveInf
     pokedexOwned: [],
     enteredHof: false,
     battleTowerBestStreak: 0,
+    hallOfFame: [],
   };
 }

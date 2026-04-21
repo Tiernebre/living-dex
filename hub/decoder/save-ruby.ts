@@ -7,6 +7,7 @@
 // which includes playerPartyCount (u8 @ 0x234) and playerParty[6] (struct Pokemon @ 0x238).
 
 import { decodePokemon } from "./gen3.ts";
+import { parseHallOfFame } from "./hall-of-fame.ts";
 import type { BoxInfo, DecodedPokemon, GameStem, SaveInfo } from "../protocol.ts";
 export type { SaveInfo };
 
@@ -186,5 +187,6 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
     pokedexOwned,
     enteredHof,
     battleTowerBestStreak,
+    hallOfFame: parseHallOfFame(buf),
   };
 }
