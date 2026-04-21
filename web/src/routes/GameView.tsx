@@ -93,38 +93,34 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
           showSeconds
           savedAtMs={saveInfo.savedAtMs}
         />
-        {saveInfo.enteredHof && (
-          <div style={{ marginTop: 8, display: "flex", justifyContent: "flex-end" }}>
-            <Link
-              to={`/${stem}/hall-of-fame`}
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 6,
-                padding: "6px 12px",
-                fontSize: 11,
-                fontWeight: 800,
-                letterSpacing: 0.8,
-                textTransform: "uppercase",
-                textDecoration: "none",
-                borderRadius: 999,
-                border: `1px solid color-mix(in srgb, ${tint} 40%, var(--border))`,
-                background: `color-mix(in srgb, ${tint} 14%, var(--bg-elevated))`,
-                color: `color-mix(in srgb, ${tint} 80%, var(--text))`,
-              }}
-            >
-              <span aria-hidden>★</span>
-              Hall of Fame
-              <span
-                style={{
-                  fontVariantNumeric: "tabular-nums",
-                  fontWeight: 700,
-                  opacity: 0.8,
-                }}
-              >
-                ({saveInfo.hallOfFame.length})
-              </span>
-            </Link>
+        {(saveInfo.enteredHof || saveInfo.secretBases.length > 0) && (
+          <div
+            style={{
+              marginTop: 8,
+              display: "flex",
+              justifyContent: "flex-end",
+              gap: 8,
+              flexWrap: "wrap",
+            }}
+          >
+            {saveInfo.enteredHof && (
+              <PillLink
+                to={`/${stem}/hall-of-fame`}
+                tint={tint}
+                icon="★"
+                label="Hall of Fame"
+                count={saveInfo.hallOfFame.length}
+              />
+            )}
+            {saveInfo.secretBases.length > 0 && (
+              <PillLink
+                to={`/${stem}/secret-bases`}
+                tint={tint}
+                icon="⌂"
+                label="Secret Bases"
+                count={saveInfo.secretBases.length}
+              />
+            )}
           </div>
         )}
       </div>
@@ -156,6 +152,47 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
       />
       <LivingDexGrid saveInfo={saveInfo} />
     </>
+  );
+}
+
+function PillLink({
+  to,
+  tint,
+  icon,
+  label,
+  count,
+}: {
+  to: string;
+  tint: string;
+  icon: string;
+  label: string;
+  count: number;
+}) {
+  return (
+    <Link
+      to={to}
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: 6,
+        padding: "6px 12px",
+        fontSize: 11,
+        fontWeight: 800,
+        letterSpacing: 0.8,
+        textTransform: "uppercase",
+        textDecoration: "none",
+        borderRadius: 999,
+        border: `1px solid color-mix(in srgb, ${tint} 40%, var(--border))`,
+        background: `color-mix(in srgb, ${tint} 14%, var(--bg-elevated))`,
+        color: `color-mix(in srgb, ${tint} 80%, var(--text))`,
+      }}
+    >
+      <span aria-hidden>{icon}</span>
+      {label}
+      <span style={{ fontVariantNumeric: "tabular-nums", fontWeight: 700, opacity: 0.8 }}>
+        ({count})
+      </span>
+    </Link>
   );
 }
 

@@ -8,7 +8,14 @@
 
 import { decodePokemon } from "./gen3.ts";
 import { parseHallOfFame } from "./hall-of-fame.ts";
-import type { BoxInfo, DecodedPokemon, GameStem, SaveInfo } from "../protocol.ts";
+import type {
+  BoxInfo,
+  DecodedPokemon,
+  GameStem,
+  SaveInfo,
+  SecretBase,
+  SecretBaseTeamMember,
+} from "../protocol.ts";
 export type { SaveInfo };
 
 const SECTOR_SIZE = 0x1000;
@@ -188,5 +195,76 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
     enteredHof,
     battleTowerBestStreak,
     hallOfFame: parseHallOfFame(buf),
+    secretBases: sb1 ? parseSecretBases(sb1) : [],
   };
+}
+
+// SaveBlock1 @ 0x1A08: struct SecretBaseRecord secretBases[20] (160 bytes each).
+// pokeruby/include/global.h (SecretBaseRecord + SecretBaseParty).
+// Slot 0 = player's own base (empty if player hasn't picked one). Slots 1..19
+// are mix-records from record mixing. secretBaseId == 0 means the slot is empty.
+function parseSecretBases(sb1: Uint8Array): SecretBase[] {
+  const BASE = 0x1A08;
+  const RECORD_SIZE = 160;
+  const COUNT = 20;
+  const NAME_LEN = 7;
+  const view = new DataView(sb1.buffer, sb1.byteOffset, sb1.byteLength);
+  const out: SecretBase[] = [];
+  for (let i = 0; i < COUNT; i++) {
+    const off = BASE + i * RECORD_SIZE;
+    const secretBaseId = sb1[off + 0x00];
+    if (secretBaseId === 0) continue;
+    const packed = sb1[off + 0x01];
+    const gender = ((packed >> 4) & 0x1) === 0 ? "male" : "female";
+    const battledOwnerToday = ((packed >> 5) & 0x1) === 1;
+    const nameBytes = sb1.subarray(off + 0x02, off + 0x02 + NAME_LEN);
+    const trainerName = decodeGen3String(nameBytes);
+    const trainerIdBytes = sb1.subarray(off + 0x09, off + 0x09 + 4);
+    const trainerId =
+      trainerIdBytes[0] |
+      (trainerIdBytes[1] << 8) |
+      (trainerIdBytes[2] << 16) |
+      (trainerIdBytes[3] << 24);
+    // GetSecretBaseOwnerType: (trainerId[0] % 5) + gender*5
+    // (decomp reads playerName[7] which is the byte directly before trainerId
+    // in the struct layout — same as trainerId[0] in RS due to alignment padding.)
+    const ownerType = (trainerIdBytes[0] % 5) + (gender === "female" ? 5 : 0);
+    const numTimesEntered = sb1[off + 0x10];
+    const decorations: { id: number; pos: number }[] = [];
+    for (let d = 0; d < 16; d++) {
+      const id = sb1[off + 0x12 + d];
+      if (id === 0) continue;
+      decorations.push({ id, pos: sb1[off + 0x22 + d] });
+    }
+    // SecretBaseParty, offsets from record start:
+    //   0x34 personality[6] u32 · 0x4C moves[24] u16 · 0x7C species[6] u16
+    //   0x88 heldItems[6] u16   · 0x94 levels[6] u8  · 0x9A EVs[6] u8
+    const team: SecretBaseTeamMember[] = [];
+    for (let s = 0; s < 6; s++) {
+      const species = view.getUint16(off + 0x7C + s * 2, true);
+      if (species === 0) continue;
+      const personality = view.getUint32(off + 0x34 + s * 4, true);
+      const moves: number[] = [];
+      for (let m = 0; m < 4; m++) {
+        moves.push(view.getUint16(off + 0x4C + (s * 4 + m) * 2, true));
+      }
+      const heldItem = view.getUint16(off + 0x88 + s * 2, true);
+      const level = sb1[off + 0x94 + s];
+      const ev = sb1[off + 0x9A + s];
+      team.push({ species, level, heldItem, moves, personality, ev });
+    }
+    out.push({
+      isPlayer: i === 0,
+      secretBaseId,
+      trainerName,
+      trainerGender: gender,
+      trainerId: trainerId >>> 0,
+      ownerType,
+      battledOwnerToday,
+      numTimesEntered,
+      decorations,
+      team,
+    });
+  }
+  return out;
 }

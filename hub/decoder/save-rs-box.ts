@@ -135,5 +135,6 @@ export function parseRSBoxSave(buf: Uint8Array, game: GameStem = "box"): SaveInf
     enteredHof: false,
     battleTowerBestStreak: 0,
     hallOfFame: [],
+    secretBases: [],
   };
 }

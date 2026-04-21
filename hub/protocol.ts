@@ -101,6 +101,10 @@ export type SaveInfo = {
   // struct actually stores (tid/personality/species/level/nickname) — no
   // IVs, moves, or met-location.
   hallOfFame: HallOfFameTeam[];
+  // 20-slot SecretBaseRecord array from SaveBlock1 @ 0x1A08. Slot 0 is the
+  // player's own base; 1..19 are mix-records. Empty slots filtered out.
+  // R/S only — FR/LG/Emerald layouts differ and aren't handled yet.
+  secretBases: SecretBase[];
 };
 
 export type HallOfFameMon = {
@@ -113,6 +117,40 @@ export type HallOfFameMon = {
 
 export type HallOfFameTeam = {
   mons: HallOfFameMon[];
+};
+
+// A single mon on a secret-base opponent party. Unlike DecodedPokemon, the
+// in-save SecretBaseParty struct only stores species/level/moves/heldItem/
+// personality + a shared EV byte applied to every stat at battle-spawn time.
+// No IVs, no nickname, no per-stat EVs.
+export type SecretBaseTeamMember = {
+  species: number;
+  level: number;
+  heldItem: number;
+  moves: number[];
+  personality: number;
+  ev: number;
+};
+
+export type SecretBase = {
+  // Player's own base lives in slot 0; slots 1..19 are mix-records from other
+  // trainers. Slot 0 has secretBaseId == 0 until the player places their own.
+  isPlayer: boolean;
+  // 1..84-ish — indexes a specific in-game secret-base spot on the Hoenn map.
+  // 0 means "unset"; we filter those out before emitting.
+  secretBaseId: number;
+  trainerName: string;
+  trainerGender: "male" | "female";
+  trainerId: number;
+  // (trainerId byte 0 % 5) + gender*5. 0..9 — maps to one of 10 gfx/class slots.
+  ownerType: number;
+  battledOwnerToday: boolean;
+  numTimesEntered: number;
+  // { id, pos } pairs where id != 0. pos is a packed tile coord (x in high
+  // nibble, y in low nibble) but we just store the raw byte.
+  decorations: { id: number; pos: number }[];
+  // Up to 6 mons; entries where species == 0 are dropped.
+  team: SecretBaseTeamMember[];
 };
 
 export type HubState = {

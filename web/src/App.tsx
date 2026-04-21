@@ -16,6 +16,7 @@ import { GameView } from "./routes/GameView";
 import { AllPokemon } from "./routes/AllPokemon";
 import { PokemonDetail } from "./routes/PokemonDetail";
 import { HallOfFame } from "./routes/HallOfFame";
+import { SecretBases } from "./routes/SecretBases";
 
 export function App() {
   return (
@@ -26,6 +27,7 @@ export function App() {
           <Route path="/pokemon" element={<AllPokemon />} />
           <Route path="/:game" element={<GameView />} />
           <Route path="/:game/hall-of-fame" element={<HallOfFame />} />
+          <Route path="/:game/secret-bases" element={<SecretBases />} />
           <Route path="/pokemon/:key" element={<PokemonDetail />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
