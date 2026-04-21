@@ -60,7 +60,7 @@ export function GradeBreakdown({
   const rankLabel = (r: number | null) =>
     r == null ? "?" : r === 1 ? "#1 (highest)" : r === 5 ? "#5 (lowest)" : `#${r}`;
   const nextUp = [...GRADE_THRESHOLDS].reverse().find((t) => t.min > graded.total);
-  const autoSPlus = graded.perfectCount === 6 && graded.nature.factor >= 0.88;
+  const autoSPlus = graded.grade === "S+";
 
   const base = (graded.ivSum / 186) * 100;
   const Row = ({
@@ -234,7 +234,7 @@ export function GradeBreakdown({
         </div>
         {autoSPlus && (
           <div style={{ marginTop: 6, color: "#f59e0b", fontWeight: 600 }}>
-            ✨ Auto-S+: 6× perfect IVs with a well-fit nature.
+            ✨ S+: near-flawless IVs (all ≥25) with a well-fit nature.
           </div>
         )}
         {nextUp && (

@@ -3,11 +3,12 @@ import { natureEffect } from "./stats";
 
 export type Grade = "S+" | "S" | "A" | "B" | "C" | "D" | "F";
 
-// Weight of a nature's +stat by its rank among non-HP base stats (1 = highest).
-// Ties share the rank of the topmost tied value.
-const PLUS_RANK_WEIGHT = [1.0, 0.88, 0.75, 0.55, 0.4];
-// For the -stat, being lowest is best.
-const MINUS_RANK_WEIGHT = [0.4, 0.55, 0.75, 0.88, 1.0];
+// Base weight from the +stat's rank among the mon's non-HP stats (1 = highest).
+// A nature is primarily "good" if it boosts a top stat; the −stat only matters
+// when it's lowering something the mon actually uses (e.g. Adamant on
+// Salamence is great — the dropped SpA is irrelevant).
+const PLUS_RANK_WEIGHT = [1.0, 0.92, 0.75, 0.55, 0.4];
+const MINUS_RANK_PENALTY = [0.2, 0.12, 0.05, 0, 0];
 
 function statRank(stat: StatKey, base: StatBlock): number {
   const v = base[stat];
@@ -31,7 +32,10 @@ export function natureFitScore(
   if (!effect) return { factor: 0.85, plusRank: null, minusRank: null, neutral: true };
   const plusRank = statRank(effect.plus, base);
   const minusRank = statRank(effect.minus, base);
-  const factor = (PLUS_RANK_WEIGHT[plusRank - 1] + MINUS_RANK_WEIGHT[minusRank - 1]) / 2;
+  const factor = Math.max(
+    0.3,
+    PLUS_RANK_WEIGHT[plusRank - 1] - MINUS_RANK_PENALTY[minusRank - 1],
+  );
   return { factor, plusRank, minusRank, neutral: false };
 }
 
@@ -65,13 +69,19 @@ export function gradePokemon(
   const ivSum = ivVals.reduce((a, b) => a + b, 0);
   const greenCount = ivVals.filter((v) => v >= 26).length;
   const perfectCount = ivVals.filter((v) => v === 31).length;
+  const minIv = Math.min(...ivVals);
   const nat = natureFitScore(nature, base);
 
   const ivScore = (ivSum / 186) * 100 + perfectCount * 2 + greenCount * 1;
   const total = ivScore * nat.factor;
 
+  // S+ = near-flawless Pokémon. A 30 IV is effectively perfect (1 point off
+  // at Lv100), so requiring literal 6×31 is too strict — a mon with all IVs
+  // ≥25 and a fit nature deserves the top grade.
+  const nearFlawless = ivSum >= 175 && minIv >= 25 && nat.factor >= 0.85;
+
   let grade: Grade;
-  if (perfectCount === 6 && nat.factor >= 0.88) grade = "S+";
+  if (nearFlawless) grade = "S+";
   else {
     grade = "F";
     for (const t of GRADE_THRESHOLDS) {
