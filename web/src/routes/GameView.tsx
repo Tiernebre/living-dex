@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import type { DecodedPokemon, GameStem, HubState, SaveInfo } from "../../../hub/protocol.ts";
 import { CHALLENGE_CHAIN, CODE_TO_STEM, GAME_DISPLAY_NAME, isGameStem } from "../chain";
 import { countBoxMons, countOwnedSpecies } from "../owned";
 import { useLivingDex } from "../store";
+import { Pokeball } from "../components/atoms";
 import { BoxHeroCard } from "../components/BoxHeroCard";
 import { LivingDexGrid } from "../components/LivingDexGrid";
 import { ModeToggle, type Mode, Tabs } from "../components/controls";
@@ -35,20 +36,12 @@ export function GameView() {
   const activeMon = party.find((p) => p !== null) ?? null;
   const activeEnemy = enemyParty.find((p) => p !== null) ?? null;
 
+  const stepTint = CHALLENGE_CHAIN.find((c) => c.stem === stem)?.tint ?? "#6b7280";
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 12,
-          marginBottom: 20,
-          flexWrap: "wrap",
-        }}
-      >
-        <h2 style={{ margin: 0, fontSize: 20 }}>{GAME_DISPLAY_NAME[stem]}</h2>
+      <GameHeader stem={stem} tint={stepTint}>
         <ModeToggle mode={mode} setMode={setMode} connected={connected} />
-      </div>
+      </GameHeader>
       {mode === "saved" ? (
         <SavedView stem={stem} saveInfo={saveInfo} />
       ) : !canShowLive ? (
@@ -82,7 +75,6 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
       </section>
     );
   }
-  const tint = CHALLENGE_CHAIN.find((c) => c.stem === stem)?.tint ?? "#6b7280";
   return (
     <>
       <div style={{ marginBottom: 16 }}>
@@ -93,36 +85,6 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
           showSeconds
           savedAtMs={saveInfo.savedAtMs}
         />
-        {(saveInfo.enteredHof || saveInfo.secretBases.length > 0) && (
-          <div
-            style={{
-              marginTop: 8,
-              display: "flex",
-              justifyContent: "flex-end",
-              gap: 8,
-              flexWrap: "wrap",
-            }}
-          >
-            {saveInfo.enteredHof && (
-              <PillLink
-                to={`/${stem}/hall-of-fame`}
-                tint={tint}
-                icon="★"
-                label="Hall of Fame"
-                count={saveInfo.hallOfFame.length}
-              />
-            )}
-            {saveInfo.secretBases.length > 0 && (
-              <PillLink
-                to={`/${stem}/secret-bases`}
-                tint={tint}
-                icon="⌂"
-                label="Secret Bases"
-                count={saveInfo.secretBases.length}
-              />
-            )}
-          </div>
-        )}
       </div>
       <Tabs
         tabs={[
@@ -155,44 +117,43 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
   );
 }
 
-function PillLink({
-  to,
+function GameHeader({
+  stem,
   tint,
-  icon,
-  label,
-  count,
+  children,
 }: {
-  to: string;
+  stem: GameStem;
   tint: string;
-  icon: string;
-  label: string;
-  count: number;
+  children?: React.ReactNode;
 }) {
   return (
-    <Link
-      to={to}
+    <div
       style={{
-        display: "inline-flex",
+        display: "flex",
         alignItems: "center",
-        gap: 6,
-        padding: "6px 12px",
-        fontSize: 11,
-        fontWeight: 800,
-        letterSpacing: 0.8,
-        textTransform: "uppercase",
-        textDecoration: "none",
-        borderRadius: 999,
-        border: `1px solid color-mix(in srgb, ${tint} 40%, var(--border))`,
-        background: `color-mix(in srgb, ${tint} 14%, var(--bg-elevated))`,
-        color: `color-mix(in srgb, ${tint} 80%, var(--text))`,
+        gap: 12,
+        marginBottom: 20,
+        flexWrap: "wrap",
+        paddingBottom: 12,
+        borderBottom: `1px solid color-mix(in srgb, ${tint} 25%, var(--border))`,
       }}
     >
-      <span aria-hidden>{icon}</span>
-      {label}
-      <span style={{ fontVariantNumeric: "tabular-nums", fontWeight: 700, opacity: 0.8 }}>
-        ({count})
-      </span>
-    </Link>
+      <Pokeball size={18} color={tint} />
+      <h2
+        style={{
+          margin: 0,
+          fontSize: 22,
+          fontWeight: 800,
+          letterSpacing: 0.3,
+          color: `color-mix(in srgb, ${tint} 75%, var(--text))`,
+        }}
+      >
+        {GAME_DISPLAY_NAME[stem]}
+      </h2>
+      <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: 12 }}>
+        {children}
+      </div>
+    </div>
   );
 }
 
