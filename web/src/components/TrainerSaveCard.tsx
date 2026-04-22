@@ -5,7 +5,7 @@ import type { GameStem } from "../../../hub/protocol.ts";
 import type { SaveInfo } from "../../../hub/protocol.ts";
 import { hoennDex } from "../data";
 import { CHALLENGE_CHAIN, GAME_DISPLAY_NAME } from "../chain";
-import { thumbnailUrl, trainerArtUrl, trainerCharacterName } from "../format";
+import { thumbnailUrl, trainerArtIsPixelated, trainerArtUrl, trainerCharacterName } from "../format";
 import type { TrainerStar } from "../owned";
 import { StarIcon } from "./atoms";
 
@@ -113,7 +113,7 @@ export function TrainerSaveCard({
             height={36}
             loading="lazy"
             style={{
-              imageRendering: "pixelated",
+              imageRendering: trainerArtIsPixelated(stem) ? "pixelated" : "auto",
               filter: `drop-shadow(0 1px 2px ${tint}55)`,
             }}
           />

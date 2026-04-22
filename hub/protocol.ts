@@ -32,7 +32,13 @@ export type GameCode = "AXVE" | "AXPE" | "BPEE" | "BPRE" | "BPGE";
 // there is only ever one Ruby, one Emerald, etc. — so the stem also identifies the save.
 // "box" = Pokémon Box: Ruby & Sapphire (GameCube). No trainer/party/dex —
 // it's just a 50-box PC extension, stored as a .gci memory card file.
-export const GAME_STEMS = ["ruby", "sapphire", "emerald", "firered", "leafgreen", "box"] as const;
+// "colosseum" = Pokémon Colosseum (GameCube). Stored as a .gci; its save format
+// (SHA-1 keystream encryption over 3 × 0x1E000 slots, CK3 mon structs) is
+// unrelated to the GBA Gen 3 .sav layout.
+// "xd" = Pokémon XD: Gale of Darkness (GameCube). Also .gci but with its own
+// format: GeniusCrypto key-schedule encryption over 2 × 0x28000 slots, XK3
+// mon structs, and sub-offset-indexed sections rather than fixed addresses.
+export const GAME_STEMS = ["ruby", "sapphire", "emerald", "firered", "leafgreen", "box", "colosseum", "xd"] as const;
 export type GameStem = (typeof GAME_STEMS)[number];
 
 export type GameInfo = {

@@ -17,6 +17,8 @@ export const GAME_DISPLAY_NAME: Record<GameStem, string> = {
   firered: "FireRed",
   leafgreen: "LeafGreen",
   box: "Pokémon Box",
+  colosseum: "Colosseum",
+  xd: "XD: Gale of Darkness",
 };
 
 // The challenge (README) progresses Sapphire → ... → B/W2. Gen 3 is what we can decode
@@ -47,7 +49,7 @@ export const CHALLENGE_CHAIN: ChainStep[] = [
   { stem: "ruby",      gen: 3, stage: 1, label: "Ruby",       mascots: [383], tint: "#dc2626" },
   { stem: "sapphire",  gen: 3, stage: 1, label: "Sapphire",   mascots: [382], tint: "#2563eb", primary: true },
   // Stage 2 — 2003-11 (Gen 3 · GameCube)
-  { stem: null, gen: 3, stage: 2, label: "Colosseum", mascots: [197, 196], tint: "#9333ea", primary: true, external: true,
+  { stem: "colosseum", gen: 3, stage: 2, label: "Colosseum", mascots: [197, 196], tint: "#9333ea", primary: true, external: true,
     primaryGoals: [
       { label: "Story", detail: "Beat the main story (defeat Evice at Realgam Tower)" },
       { label: "Shadow Pokémon", detail: "Snag and purify all 48 Shadow Pokémon" },
@@ -61,7 +63,7 @@ export const CHALLENGE_CHAIN: ChainStep[] = [
   // Stage 4 — 2005-05 (Gen 3)
   { stem: "emerald",   gen: 3, stage: 4, label: "Emerald",    mascots: [384], tint: "#059669", primary: true, endOfGen: true },
   // Stage 5 — 2005-10 (Gen 3 · GameCube)
-  { stem: null, gen: 3, stage: 5, label: "XD: Gale of Darkness", short: "XD", mascots: [249], tint: "#4c1d95", primary: true, external: true,
+  { stem: "xd", gen: 3, stage: 5, label: "XD: Gale of Darkness", short: "XD", mascots: [249], tint: "#4c1d95", primary: true, external: true,
     primaryGoals: [
       { label: "Story", detail: "Beat the main story (defeat Greevil at Citadark Isle)" },
       { label: "Shadow Pokémon", detail: "Snag and purify all 83 Shadow Pokémon" },

@@ -342,8 +342,11 @@ function GameNavItem({
   const step = CHALLENGE_CHAIN.find((c) => c.stem === stem);
   const tint = step?.tint ?? "#6b7280";
   const mascots = step?.mascots ?? [];
-  const hasSubNav =
-    stem !== "box" || save.enteredHof || save.secretBases.length > 0;
+  // Live sub-link is mGBA-only, so stems that never reach mGBA (GameCube
+  // games) get treated like "box" — only show sub-nav when the save itself
+  // contributes an entry (HoF, secret bases, …).
+  const hasLive = stem !== "box" && stem !== "colosseum" && stem !== "xd";
+  const hasSubNav = hasLive || save.enteredHof || save.secretBases.length > 0;
   // Auto-open when this game becomes the active route; otherwise stay collapsed
   // so the sidebar isn't a wall of links. The user can toggle independently.
   const [expanded, setExpanded] = useState(active);
@@ -479,7 +482,7 @@ function GameNavItem({
       </div>
       {showSubNav && (
         <div style={{ display: "grid", gap: 1, margin: "2px 0 6px 32px" }}>
-          {stem !== "box" && (
+          {hasLive && (
             <SubNavLink to={`/${stem}/live`} tint={tint} icon="⚡" label="Live" live={live} />
           )}
           {save.enteredHof && (

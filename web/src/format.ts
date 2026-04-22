@@ -42,7 +42,17 @@ export function thumbnailUrl(nationalDex: number): string {
   return `https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/thumbnails/${String(nationalDex).padStart(4, "0")}.png`;
 }
 
+// Colosseum and XD each have a single canonical protagonist (no gender pick),
+// so the Bulbagarden Archives character renders stand in for both save
+// variants. These are full-color artwork PNGs rather than GBA pixel sprites —
+// consumers should skip `imageRendering: pixelated` for these stems.
 export function trainerArtUrl(stem: GameStem, gender: "male" | "female"): string {
+  if (stem === "colosseum") {
+    return "https://archives.bulbagarden.net/media/upload/thumb/c/c0/Colosseum_Wes.png/250px-Colosseum_Wes.png";
+  }
+  if (stem === "xd") {
+    return "https://archives.bulbagarden.net/media/upload/thumb/3/35/XD_Michael.png/180px-XD_Michael.png";
+  }
   const base = "https://play.pokemonshowdown.com/sprites/trainers";
   if (stem === "ruby" || stem === "sapphire") {
     return `${base}/${gender === "female" ? "may-gen3rs" : "brendan-gen3rs"}.png`;
@@ -54,10 +64,19 @@ export function trainerArtUrl(stem: GameStem, gender: "male" | "female"): string
 }
 
 export function trainerCharacterName(stem: GameStem, gender: "male" | "female"): string {
+  if (stem === "colosseum") return "Wes";
+  if (stem === "xd") return "Michael";
   if (stem === "firered" || stem === "leafgreen") {
     return gender === "female" ? "Leaf" : "Red";
   }
   return gender === "female" ? "May" : "Brendan";
+}
+
+// Whether the trainer art is a crisp pixel sprite (GBA games — render with
+// `imageRendering: pixelated`) or a smooth character illustration (GameCube
+// games — keep the browser's default smoothing).
+export function trainerArtIsPixelated(stem: GameStem): boolean {
+  return stem !== "colosseum" && stem !== "xd";
 }
 
 export function pokemonKey(mon: DecodedPokemon): string {
