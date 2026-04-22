@@ -143,6 +143,37 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
   // pokeruby/include/global.h: struct BattleTowerData.
   const battleTowerBestStreak = view.getUint16(sb2Base + 0xA8 + 0x4CA, true);
 
+  // gSaveBlock1.vars[256] @ struct offset 0x1340, indexed by (varId - 0x4000).
+  // VAR_MIRAGE_RND_H=0x4024 (idx 0x24), VAR_MIRAGE_RND_L=0x4025 (idx 0x25).
+  // Combined value = (H << 16) | L; the game tests (rnd >> 16) against each
+  // party mon's (PID & 0xFFFF).
+  // pokeruby/src/time_events.c, include/constants/vars.h.
+  const mirageRnd = sb1View
+    ? ((sb1View.getUint16(0x1340 + 0x24 * 2, true) << 16) |
+      sb1View.getUint16(0x1340 + 0x25 * 2, true)) >>> 0
+    : null;
+
+  // VAR_LOTTERY_RND_L=0x404B (idx 0x4B), VAR_LOTTERY_RND_H=0x404C (idx 0x4C).
+  // Only the low 16 bits are the effective "lottery number" — the game
+  // truncates GetLotteryNumber() to u16 before matching against OT IDs.
+  // Re-rolled once per in-game day from Random(), so not predictable from
+  // save state alone — but the currently-stored value IS the number for
+  // today's draw and can be cashed in right now.
+  // pokeruby/src/lottery_corner.c, src/clock.c:UpdatePerDay.
+  const lotteryRnd = sb1View
+    ? ((sb1View.getUint16(0x1340 + 0x4C * 2, true) << 16) |
+      sb1View.getUint16(0x1340 + 0x4B * 2, true)) >>> 0
+    : null;
+
+  // gSaveBlock2.localTimeOffset @ SB2+0x98 — struct Time { s16 days; s8 h; s8 m; s8 s; }.
+  // Set once at InitTimeBasedEvents from the hardware RTC.
+  const localTimeOffset = {
+    days: view.getInt16(sb2Base + 0x98, true),
+    hours: view.getInt8(sb2Base + 0x9A),
+    minutes: view.getInt8(sb2Base + 0x9B),
+    seconds: view.getInt8(sb2Base + 0x9C),
+  };
+
   // gSaveBlock1.easyChatPairs[0].unk2 @ struct offset 0x2DD6 (after the u16
   // bitfield at 0x2DD4). Seeds the Feebas tile PRNG on Route 119.
   // pokeruby/include/global.h: struct EasyChatPair { u16 unk0:7:7:1; u16 unk2; ... }
@@ -202,6 +233,9 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
     hallOfFame: parseHallOfFame(buf),
     secretBases: sb1 ? parseSecretBases(sb1) : [],
     feebasSeed,
+    mirageRnd,
+    lotteryRnd,
+    localTimeOffset,
   };
 }
 

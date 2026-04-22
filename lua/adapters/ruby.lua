@@ -29,6 +29,7 @@ M.addrs = {
   dex_seen = SAVE_BLOCK_2 + 0x005C,            -- SaveBlock2.pokedex (0x18) + seen (0x44)
   save_block_a = SAVE_BLOCK_1,
   save_block_b = SAVE_BLOCK_2,
+  local_time = 0x03004038,                     -- gLocalTime (struct Time, 8 bytes), updated by RtcCalcLocalTime
 }
 
 M.sizes = {

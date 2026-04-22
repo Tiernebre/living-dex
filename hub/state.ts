@@ -11,6 +11,7 @@ class StateStore {
     enemyParty: Array(6).fill(null),
     inBattle: false,
     location: null,
+    localTime: null,
     currentBox: null,
     source: null,
     lastUpdateAt: null,
@@ -82,6 +83,18 @@ class StateStore {
       this.state.enemyParty = Array(6).fill(null);
     }
     this.broadcast({ type: "battle", inBattle });
+  }
+
+  setLocalTime(time: HubState["localTime"]) {
+    const cur = this.state.localTime;
+    if (
+      (cur === null && time === null) ||
+      (cur && time &&
+        cur.days === time.days && cur.hours === time.hours &&
+        cur.minutes === time.minutes && cur.seconds === time.seconds)
+    ) return;
+    this.state.localTime = time;
+    this.broadcast({ type: "local-time", time });
   }
 
   setLocation(location: { mapGroup: number; mapNum: number } | null) {

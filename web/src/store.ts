@@ -12,6 +12,7 @@ const initial: HubState = {
   enemyParty: Array(6).fill(null),
   inBattle: false,
   location: null,
+  localTime: null,
   currentBox: null,
   source: null,
   lastUpdateAt: null,
@@ -38,6 +39,8 @@ export const useLivingDex = create<HubState & Actions>((set) => ({
           return { ...s, game: msg.game };
         case "location":
           return { ...s, location: msg.location };
+        case "local-time":
+          return { ...s, localTime: msg.time };
         case "save": {
           const saves = { ...s.saves };
           if (msg.saveInfo) saves[msg.game as GameStem] = msg.saveInfo;

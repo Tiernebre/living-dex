@@ -137,5 +137,8 @@ export function parseRSBoxSave(buf: Uint8Array, game: GameStem = "box"): SaveInf
     hallOfFame: [],
     secretBases: [],
     feebasSeed: null,
+    mirageRnd: null,
+    lotteryRnd: null,
+    localTimeOffset: null,
   };
 }

@@ -13,6 +13,7 @@ export const REGION = {
   DEX: 0x08,
   BATTLE: 0x09,
   LOCATION: 0x0A,
+  LOCAL_TIME: 0x0B,
 } as const;
 
 export type RegionId = (typeof REGION)[keyof typeof REGION];
@@ -114,6 +115,19 @@ export type SaveInfo = {
   // dewfordTrends[0].rand (same semantics, different SaveBlock1 offset).
   // null for games where the seed isn't parsed yet (FR/LG have no Feebas).
   feebasSeed: number | null;
+  // 32-bit Mirage Island RNG state, stored in two u16 script vars
+  // (VAR_MIRAGE_RND_H << 16 | VAR_MIRAGE_RND_L) at SaveBlock1 offset 0x1388.
+  // Island is visible whenever any party member's (PID & 0xFFFF) == (rnd >> 16);
+  // rnd advances via ISO_RANDOMIZE2 once per in-game day. R/S/E only.
+  mirageRnd: number | null;
+  // 32-bit Lottery RNG state from VAR_LOTTERY_RND_H/L. Only the low 16 bits
+  // are the actual winning number — the game truncates to u16 before
+  // comparing the rightmost digits against each mon's OT ID. Re-rolled daily
+  // from Random(), so the stored value is "today's number". R/S/E.
+  lotteryRnd: number | null;
+  // gSaveBlock2.localTimeOffset @ SB2+0x98. The offset between the hardware
+  // RTC and the game's clock, set once at InitTimeBasedEvents.
+  localTimeOffset: { days: number; hours: number; minutes: number; seconds: number } | null;
 };
 
 export type HallOfFameMon = {
@@ -169,6 +183,10 @@ export type HubState = {
   enemyParty: (DecodedPokemon | null)[];
   inBattle: boolean;
   location: { mapGroup: number; mapNum: number } | null;
+  // In-game clock from gLocalTime, streamed from the live adapter while the
+  // overworld tick runs. null when not connected or on a game without RTC
+  // (FR/LG). Updates roughly once per second while the overworld is active.
+  localTime: { days: number; hours: number; minutes: number; seconds: number } | null;
   currentBox: { index: number; slots: (DecodedPokemon | null)[] } | null;
   source: Source | null;
   lastUpdateAt: number | null;
@@ -187,5 +205,6 @@ export type WsMessage =
   | { type: "connection"; live: boolean }
   | { type: "battle"; inBattle: boolean }
   | { type: "location"; location: { mapGroup: number; mapNum: number } | null }
+  | { type: "local-time"; time: { days: number; hours: number; minutes: number; seconds: number } | null }
   | { type: "save"; game: GameStem; saveInfo: SaveInfo | null }
   | { type: "catch-log"; entries: Record<string, number> };

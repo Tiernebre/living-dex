@@ -32,6 +32,7 @@ M.REGION = {
   DEX = 0x08,
   BATTLE = 0x09, -- 4 bytes, u32 LE = gBattleTypeFlags (nonzero = in battle)
   LOCATION = 0x0A, -- 2 bytes: mapGroup (s8), mapNum (s8)
+  LOCAL_TIME = 0x0B, -- 8 bytes: struct Time { s16 days; s8 h; s8 m; s8 s; } + pad
 }
 
 local function u16_be(n)

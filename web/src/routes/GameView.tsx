@@ -12,6 +12,7 @@ import { PokemonCard, useAnyExpanded } from "../components/PokemonCard";
 import { pokemonKey } from "../format";
 import type { DecodedPokemon } from "../../../hub/protocol.ts";
 import { TrainerSaveCard } from "../components/TrainerSaveCard";
+import { MirageIslandCard } from "../components/MirageIslandCard";
 
 export function GameView() {
   const params = useParams<{ game: string }>();
@@ -51,6 +52,12 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
           savedAtMs={saveInfo.savedAtMs}
         />
       </div>
+      {saveInfo.mirageRnd !== null && (
+        <MirageIslandCard
+          saveInfo={saveInfo}
+          tint={CHALLENGE_CHAIN.find((c) => c.stem === stem)?.tint ?? "#6b7280"}
+        />
+      )}
       <Tabs
         tabs={[
           {

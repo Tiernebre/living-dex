@@ -19,6 +19,7 @@ M.addrs = {
   dex_caught = 0x0,
   save_block_a = 0x0,
   save_block_b = 0x0,
+  local_time = 0x03005CF8,                     -- gLocalTime (struct Time, 8 bytes)
 }
 
 M.sizes = {

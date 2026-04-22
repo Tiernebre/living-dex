@@ -43,6 +43,7 @@ async function handleConnection(conn: Deno.TcpConn) {
   } finally {
     store.setLiveConnected(false);
     store.setGame(null);
+    store.setLocalTime(null);
     console.log("[lua-tcp] collector disconnected");
   }
 }
@@ -93,6 +94,17 @@ function handleFrame(type: number, region: number, index: number, payload: Uint8
     const mapGroup = payload[0];
     const mapNum = payload[1];
     store.setLocation({ mapGroup, mapNum });
+    return;
+  }
+  if (region === REGION.LOCAL_TIME) {
+    // struct Time { s16 days; s8 hours; s8 minutes; s8 seconds; } — 8 bytes
+    // with a trailing pad byte. gLocalTime @ 0x03004038 (R/S) / 0x03005cf8 (E).
+    const view = new DataView(payload.buffer, payload.byteOffset, payload.byteLength);
+    const days = view.getInt16(0, true);
+    const hours = view.getInt8(2);
+    const minutes = view.getInt8(3);
+    const seconds = view.getInt8(4);
+    store.setLocalTime({ days, hours, minutes, seconds });
     return;
   }
   if (region === REGION.BATTLE) {

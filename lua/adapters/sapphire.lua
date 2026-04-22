@@ -27,6 +27,7 @@ M.addrs = {
   dex_seen = SAVE_BLOCK_2 + 0x005C,
   save_block_a = SAVE_BLOCK_1,
   save_block_b = SAVE_BLOCK_2,
+  local_time = 0x03004038,
 }
 
 M.sizes = {

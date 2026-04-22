@@ -7,6 +7,8 @@ import { pokemonKey } from "../format";
 import { Tabs } from "../components/controls";
 import { Encounters } from "../components/Encounters";
 import { FeebasMap } from "../components/FeebasMap";
+import { MirageIslandCard } from "../components/MirageIslandCard";
+import { DailyEventsCard } from "../components/DailyEventsCard";
 import { ownershipIndex, regionalDexStarEarned } from "../owned";
 
 export function GameLive() {
@@ -22,6 +24,7 @@ export function GameLive() {
     source,
     lastUpdateAt,
     saves,
+    localTime,
   } = useLivingDex();
   // Must come before the early-return so hook order stays stable across
   // renders (react-hooks/rules-of-hooks).
@@ -97,6 +100,16 @@ export function GameLive() {
             tone={source ? "info" : "muted"}
             detail={lastUpdateAt ? new Date(lastUpdateAt).toLocaleTimeString() : undefined}
           />
+          {canShowLive && localTime && (stem === "ruby" || stem === "sapphire" || stem === "emerald") && (
+            <StatusBadge
+              label="In-game"
+              value={`Day ${localTime.days}`}
+              tone="info"
+              detail={`${String(localTime.hours).padStart(2, "0")}:${
+                String(localTime.minutes).padStart(2, "0")
+              }:${String(localTime.seconds).padStart(2, "0")}`}
+            />
+          )}
         </div>
       </div>
 
@@ -132,6 +145,12 @@ export function GameLive() {
                 in party — walk to hatch.
               </span>
             </div>
+          )}
+          {save && (stem === "ruby" || stem === "sapphire" || stem === "emerald") && (
+            <DailyEventsCard saveInfo={save} localTime={localTime} tint={tint} />
+          )}
+          {save && save.mirageRnd !== null && (
+            <MirageIslandCard saveInfo={save} party={party} tint={tint} />
           )}
           <h2>Party</h2>
           <ol

@@ -65,6 +65,9 @@ local function on_frame()
   -- current map location (mapGroup, mapNum)
   emit_region(envelope.REGION.LOCATION, 0, a.location or 0, 2)
 
+  -- in-game clock (gLocalTime: s16 days, s8 h, s8 m, s8 s + pad)
+  emit_region(envelope.REGION.LOCAL_TIME, 0, a.local_time or 0, 8)
+
   -- daycare slot
   emit_region(envelope.REGION.DAYCARE, 0, a.daycare, 200) -- TODO: real size per adapter
 
