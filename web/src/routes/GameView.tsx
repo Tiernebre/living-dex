@@ -78,7 +78,7 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
         initial="party"
         storageKey={`living-dex:saved-tab:${stem}`}
       />
-      <LivingDexGrid saveInfo={saveInfo} />
+      <LivingDexGrid stem={stem} saveInfo={saveInfo} />
     </>
   );
 }

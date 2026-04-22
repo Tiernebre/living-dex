@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import type { SaveInfo } from "../../../hub/protocol.ts";
-import { type ChainStep, GEN3_NATIONAL_TOTAL, regionalDexProgress } from "../chain";
+import { type ChainStep, nationalDexTotal, regionalDexProgress } from "../chain";
 import { thumbnailUrl } from "../format";
 import { countBoxMons, trainerStarsBreakdown } from "../owned";
 import { Pokeball, ProgressPill } from "./atoms";
@@ -23,12 +23,12 @@ function PrimaryProgress({
   const regional = step.stem ? regionalDexProgress(step.stem, set) : null;
   const nationalCaught = loaded ? set.size : 0;
   // Museum-paintings star isn't parsed yet, so this caps at 3 stars
-  // (HoF + Hoenn dex + Battle Tower). TODO: parse Lilycove contest paintings.
+  // (HoF + regional/national dex + Battle Tower). TODO: parse Lilycove paintings.
   // GC games (Colosseum/XD) use step.primaryGoals instead — no save parser, so
   // every goal stays `unknown` until manually tracked.
   const breakdown = step.primaryGoals
     ? step.primaryGoals.map((g) => ({ ...g, earned: false, unknown: true }))
-    : trainerStarsBreakdown(saveInfo);
+    : trainerStarsBreakdown(step, saveInfo);
   const trainerStarsCertain = step.primaryGoals ? false : !!saveInfo;
   return (
     <div
@@ -41,7 +41,7 @@ function PrimaryProgress({
         gap: 10,
       }}
     >
-      {regional && step.endOfGen && (
+      {regional && !step.endOfGen && (
         <ProgressPill
           label="Regional dex"
           caught={regional.caught}
@@ -54,7 +54,7 @@ function PrimaryProgress({
         <ProgressPill
           label="National dex"
           caught={nationalCaught}
-          total={GEN3_NATIONAL_TOTAL}
+          total={nationalDexTotal(step.gen)}
           tint={tint}
           dim={!loaded}
         />

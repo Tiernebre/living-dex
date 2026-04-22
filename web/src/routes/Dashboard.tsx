@@ -81,7 +81,7 @@ export function Dashboard() {
         const save = s.stem ? saves[s.stem] : null;
         if (!save) return false;
         if (s.primary) {
-          return trainerStarsBreakdown(save).every((t) => t.earned);
+          return trainerStarsBreakdown(s, save).every((t) => t.earned);
         }
         return save.enteredHof;
       });

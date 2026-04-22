@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import type { SaveInfo } from "../../../hub/protocol.ts";
+import type { GameStem, SaveInfo } from "../../../hub/protocol.ts";
 import {
-  hoennDex,
   lookup,
   mapsecLabel,
   ORIGIN_GAME_LABEL,
+  regionalDexFor,
   speciesByNationalDex,
-  type HoennDexEntry,
+  type RegionalDexEntry,
 } from "../data";
 import { formatFirstSeen, formatSpeciesName, pokemonKey, serebiiGen3DexUrl } from "../format";
 import { effectiveLevel } from "../stats";
@@ -20,10 +20,12 @@ import { useLivingDex } from "../store";
 import { Detail, StatusBadge, TypeBadge } from "./atoms";
 import { DexPopover } from "./DexPopover";
 
-export function LivingDexGrid({ saveInfo }: { saveInfo: SaveInfo }) {
+export function LivingDexGrid({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo }) {
   const owned = collectOwned(saveInfo);
   const dexCaught = useMemo(() => new Set(saveInfo.pokedexOwned), [saveInfo.pokedexOwned]);
-  const hoennCaught = hoennDex.reduce(
+  const view = regionalDexFor(stem);
+  const entries = view?.entries ?? [];
+  const regionalCaught = entries.reduce(
     (n, e) => n + (dexCaught.has(e.nationalDex) ? 1 : 0),
     0,
   );
@@ -44,8 +46,10 @@ export function LivingDexGrid({ saveInfo }: { saveInfo: SaveInfo }) {
     return () => document.removeEventListener("keydown", onKey);
   }, [selected]);
 
+  if (!view) return null;
+
   const selectedEntry =
-    selected != null ? hoennDex.find((e) => e.hoennDex === selected) ?? null : null;
+    selected != null ? entries.find((e) => e.regional === selected) ?? null : null;
   const selectedOwned = selectedEntry ? owned.get(selectedEntry.nationalDex) ?? [] : [];
 
   return (
@@ -59,52 +63,52 @@ export function LivingDexGrid({ saveInfo }: { saveInfo: SaveInfo }) {
           flexWrap: "wrap",
         }}
       >
-        <h2 style={{ margin: 0 }}>Hoenn Dex</h2>
+        <h2 style={{ margin: 0 }}>{view.label}</h2>
         <span style={{ fontSize: 13, opacity: 0.7 }}>
-          <span style={{ fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>{hoennCaught}</span>
+          <span style={{ fontWeight: 700, fontVariantNumeric: "tabular-nums" }}>{regionalCaught}</span>
           {" / "}
-          <span style={{ fontVariantNumeric: "tabular-nums" }}>{hoennDex.length}</span> caught
+          <span style={{ fontVariantNumeric: "tabular-nums" }}>{entries.length}</span> caught
         </span>
       </div>
       <div className="dex-grid">
-        {hoennDex.map((entry) => {
+        {entries.map((entry) => {
           const info = speciesByNationalDex[entry.nationalDex];
-          const entries = owned.get(entry.nationalDex);
-          const isStored = !!entries?.length;
+          const ownedEntries = owned.get(entry.nationalDex);
+          const isStored = !!ownedEntries?.length;
           const isCaught = isStored || dexCaught.has(entry.nationalDex);
-          const isSelected = selected === entry.hoennDex;
+          const isSelected = selected === entry.regional;
           const stateCls = isStored
             ? "dex-cell-stored"
             : isCaught
             ? "dex-cell-caught"
             : "dex-cell-missing";
           const cls = `dex-cell ${stateCls}${isSelected ? " dex-cell-selected" : ""}`;
-          const title = `#${entry.hoennDex} ${formatSpeciesName(entry.name)}${
-            entries?.length
-              ? ` — ${locationLabel(entries[0].location)}`
+          const title = `#${entry.regional} ${formatSpeciesName(entry.name)}${
+            ownedEntries?.length
+              ? ` — ${locationLabel(ownedEntries[0].location)}`
               : isCaught
               ? " — caught"
               : ""
           }`;
           const inner = (
             <>
-              <span className="dex-cell-num">{String(entry.hoennDex).padStart(3, "0")}</span>
+              <span className="dex-cell-num">{String(entry.regional).padStart(3, "0")}</span>
               {info?.sprite ? (
                 <img src={info.sprite} alt={entry.name} width={56} height={56} loading="lazy" />
               ) : (
                 <div style={{ width: 56, height: 56 }} />
               )}
               <span className="dex-cell-name">{formatSpeciesName(entry.name)}</span>
-              {entries && entries.length > 1 && (
-                <span className="dex-cell-badge" title={`${entries.length} owned`}>
-                  ×{entries.length}
+              {ownedEntries && ownedEntries.length > 1 && (
+                <span className="dex-cell-badge" title={`${ownedEntries.length} owned`}>
+                  ×{ownedEntries.length}
                 </span>
               )}
             </>
           );
           if (!isStored) {
             return (
-              <div key={entry.hoennDex} className={`${cls} dex-cell-static`} title={title}>
+              <div key={entry.regional} className={`${cls} dex-cell-static`} title={title}>
                 {inner}
               </div>
             );
@@ -112,14 +116,14 @@ export function LivingDexGrid({ saveInfo }: { saveInfo: SaveInfo }) {
           return (
             <button
               type="button"
-              key={entry.hoennDex}
+              key={entry.regional}
               className={cls}
               title={title}
               onClick={(e) => {
                 if (isSelected) {
                   close();
                 } else {
-                  setSelected(entry.hoennDex);
+                  setSelected(entry.regional);
                   setAnchor(e.currentTarget);
                 }
               }}
@@ -143,7 +147,7 @@ function DexDetail({
   owned,
   onClose,
 }: {
-  entry: HoennDexEntry;
+  entry: RegionalDexEntry;
   owned: OwnedMon[];
   onClose: () => void;
 }) {
@@ -175,7 +179,7 @@ function DexDetail({
               rel="noreferrer"
               style={{ color: "inherit" }}
             >
-              #{String(entry.hoennDex).padStart(3, "0")} {formatSpeciesName(entry.name)}
+              #{String(entry.regional).padStart(3, "0")} {formatSpeciesName(entry.name)}
             </a>
           </div>
           <div

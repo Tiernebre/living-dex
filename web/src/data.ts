@@ -1,7 +1,9 @@
+import type { GameStem } from "../../hub/protocol.ts";
 import speciesData from "./species.json";
 import movesData from "./moves.json";
 import encountersData from "./encounters.json";
 import hoennDexData from "./hoenn-dex.json";
+import sinnohDexData from "./sinnoh-dex.json";
 import mapsecData from "./mapsec.json";
 
 export type GrowthRate =
@@ -37,6 +39,7 @@ export type MoveInfo = {
 };
 
 export type HoennDexEntry = { hoennDex: number; nationalDex: number; name: string };
+export type SinnohDexEntry = { sinnohDex: number; nationalDex: number; name: string };
 
 export type EncounterPokemon = {
   species: number;
@@ -53,6 +56,7 @@ export const species = speciesData as Record<string, Species>;
 export const moves = movesData as Record<string, MoveInfo>;
 export const encounters = encountersData as Record<string, LocationEntry>;
 export const hoennDex = hoennDexData as HoennDexEntry[];
+export const sinnohDex = sinnohDexData as SinnohDexEntry[];
 export const mapsecNames = mapsecData as string[];
 
 export const speciesByNationalDex: Record<number, Species> = (() => {
@@ -60,6 +64,51 @@ export const speciesByNationalDex: Record<number, Species> = (() => {
   for (const s of Object.values(species)) map[s.nationalDex] = s;
   return map;
 })();
+
+// Normalized regional-dex view for game pages. Hoenn and Sinnoh JSONs each
+// use their own field names ("hoennDex" / "sinnohDex"), so map both into a
+// shared {regional, nationalDex, name} shape that the grid UI can render
+// generically. Kanto has no JSON — national #1-151 is already the regional
+// numbering, so we synthesize it from speciesByNationalDex.
+export type RegionalDexEntry = { regional: number; nationalDex: number; name: string };
+export type RegionalDexView = { label: string; entries: RegionalDexEntry[] };
+
+export function regionalDexFor(stem: GameStem): RegionalDexView | null {
+  if (stem === "ruby" || stem === "sapphire" || stem === "emerald") {
+    return {
+      label: "Hoenn Dex",
+      entries: hoennDex.map((e) => ({
+        regional: e.hoennDex,
+        nationalDex: e.nationalDex,
+        name: e.name,
+      })),
+    };
+  }
+  if (stem === "diamond") {
+    return {
+      label: "Sinnoh Dex",
+      entries: sinnohDex.map((e) => ({
+        regional: e.sinnohDex,
+        nationalDex: e.nationalDex,
+        name: e.name,
+      })),
+    };
+  }
+  if (stem === "firered" || stem === "leafgreen") {
+    return {
+      label: "Kanto Dex",
+      entries: Array.from({ length: 151 }, (_, i) => {
+        const nationalDex = i + 1;
+        return {
+          regional: nationalDex,
+          nationalDex,
+          name: speciesByNationalDex[nationalDex]?.name ?? `species-${nationalDex}`,
+        };
+      }),
+    };
+  }
+  return null;
+}
 
 export function lookup(id: number): Species | undefined {
   return species[String(id)];

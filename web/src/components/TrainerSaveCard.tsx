@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
 import type { GameStem } from "../../../hub/protocol.ts";
 import type { SaveInfo } from "../../../hub/protocol.ts";
-import { hoennDex } from "../data";
+import { regionalDexFor } from "../data";
 import { CHALLENGE_CHAIN, GAME_DISPLAY_NAME } from "../chain";
 import { thumbnailUrl, trainerArtIsPixelated, trainerArtUrl, trainerCharacterName } from "../format";
 import type { TrainerStar } from "../owned";
@@ -154,7 +154,12 @@ export function TrainerSaveCard({
                 minute: "2-digit",
                 ...(showSeconds ? { second: "2-digit" } : {}),
               })}`
-            : `${speciesCount} / ${hoennDex.length} species`}
+            : (() => {
+              const total = regionalDexFor(stem)?.entries.length;
+              return total
+                ? `${speciesCount} / ${total} species`
+                : `${speciesCount} species`;
+            })()}
         </div>
       </div>
       <span

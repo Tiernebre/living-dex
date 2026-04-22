@@ -1,5 +1,6 @@
 import type { DecodedPokemon, GameStem, SaveInfo } from "../../hub/protocol.ts";
-import { hoennDex, lookup } from "./data";
+import { type ChainStep, nationalDexTotal } from "./chain";
+import { hoennDex, lookup, sinnohDex } from "./data";
 import { pokemonKey } from "./format";
 
 export type OwnedLocation =
@@ -70,12 +71,16 @@ export function ownershipIndex(
 // personal caught-anywhere set. Sapphire's Hoenn-dex star ignores Jirachi
 // and Deoxys (Hoenn #201/#202) — see trainerStarsBreakdown — so the living-
 // dex tracker on wild encounters should treat those as uncounted when
-// deciding whether to disappear.
+// deciding whether to disappear. Same idea for Diamond: Manaphy (Sinnoh
+// #151) is event-only and excluded from the star.
 export function regionalDexStarEarned(stem: GameStem, saveInfo: SaveInfo | null): boolean {
   if (!saveInfo) return false;
+  const dexSet = new Set(saveInfo.pokedexOwned);
   if (stem === "ruby" || stem === "sapphire" || stem === "emerald") {
-    const dexSet = new Set(saveInfo.pokedexOwned);
     return hoennDex.filter((e) => e.hoennDex <= 200).every((e) => dexSet.has(e.nationalDex));
+  }
+  if (stem === "diamond") {
+    return sinnohDex.filter((e) => e.sinnohDex <= 150).every((e) => dexSet.has(e.nationalDex));
   }
   return false;
 }
@@ -143,7 +148,7 @@ export function findOwnedByKey(saveInfo: SaveInfo, key: string): OwnedMon | null
 }
 
 // Mirror of pokeruby/src/trainer_card.c TrainerCard_GetStarCount.
-// Stars: HoF cleared, Hoenn dex completed, Battle Tower 50+ streak, >4 museum paintings.
+// Stars: HoF cleared, regional dex completed, Battle Tower 50+ streak, >4 museum paintings.
 export type TrainerStar = {
   label: string;
   detail: string;
@@ -152,27 +157,86 @@ export type TrainerStar = {
   unknown?: boolean;
 };
 
-export function trainerStarsBreakdown(saveInfo: SaveInfo | null): TrainerStar[] {
+type DexGoal = {
+  label: string;
+  detail: string;
+  isEarned: (dexSet: Set<number>) => boolean;
+};
+
+// Dex goal per primary game:
+//  - End-of-gen games (Emerald, HG/SS, B2W2) override the in-game regional
+//    star with the full national pokedex — that's the challenge requirement.
+//  - Other primaries keep their own regional dex (Hoenn / Kanto / Sinnoh).
+//  - For primaries without a parser yet (Platinum, White), fall back to a
+//    gen-appropriate label so the tooltip isn't misleading.
+function dexGoal(step: ChainStep): DexGoal {
+  if (step.endOfGen) {
+    const total = nationalDexTotal(step.gen);
+    return {
+      label: "National Dex",
+      detail: `Catch all ${total} Pokémon`,
+      isEarned: (dexSet) => {
+        for (let n = 1; n <= total; n++) if (!dexSet.has(n)) return false;
+        return true;
+      },
+    };
+  }
+  if (step.stem === "diamond") {
+    return {
+      label: "Sinnoh Dex",
+      detail: "Catch all 150 main Sinnoh Pokémon (Manaphy not required)",
+      isEarned: (dexSet) =>
+        sinnohDex.filter((e) => e.sinnohDex <= 150).every((e) => dexSet.has(e.nationalDex)),
+    };
+  }
+  if (step.stem === "firered" || step.stem === "leafgreen") {
+    return {
+      label: "Kanto Dex",
+      detail: "Catch all 151 Kanto Pokémon",
+      isEarned: (dexSet) => {
+        for (let n = 1; n <= 151; n++) if (!dexSet.has(n)) return false;
+        return true;
+      },
+    };
+  }
+  if (step.stem === "ruby" || step.stem === "sapphire") {
+    // Mirrors pokeruby's CompletedHoennPokedex — Jirachi/Deoxys excluded.
+    return {
+      label: "Hoenn Dex",
+      detail: "Catch all 200 main Hoenn Pokémon (Jirachi/Deoxys not required)",
+      isEarned: (dexSet) =>
+        hoennDex.filter((e) => e.hoennDex <= 200).every((e) => dexSet.has(e.nationalDex)),
+    };
+  }
+  // Unparsed primaries (Platinum, White). isEarned is never consulted in
+  // practice — saveInfo is null for these — but we type it as a no-op.
+  if (step.gen === 4) {
+    return { label: "Sinnoh Dex", detail: "Catch all Sinnoh Pokémon", isEarned: () => false };
+  }
+  if (step.gen === 5) {
+    return { label: "Unova Dex", detail: "Catch all Unova Pokémon", isEarned: () => false };
+  }
+  return { label: "Regional Dex", detail: "Catch all regional Pokémon", isEarned: () => false };
+}
+
+export function trainerStarsBreakdown(step: ChainStep, saveInfo: SaveInfo | null): TrainerStar[] {
+  const goal = dexGoal(step);
   if (!saveInfo) {
     return [
       { label: "Hall of Fame", detail: "Beat the Elite Four", earned: false, unknown: true },
-      { label: "Hoenn Dex", detail: "Catch all 200 Hoenn Pokémon", earned: false, unknown: true },
+      { label: goal.label, detail: goal.detail, earned: false, unknown: true },
       { label: "Battle Tower", detail: "50-win streak in the Battle Tower", earned: false, unknown: true },
       { label: "Contests", detail: "5+ paintings in the Lilycove museum", earned: false, unknown: true },
     ];
   }
   const dexSet = new Set(saveInfo.pokedexOwned);
-  // Mirrors pokeruby's CompletedHoennPokedex: only Hoenn dex #1..200 are required.
-  // Jirachi (#201) and Deoxys (#202) are event-only and don't count toward the star.
-  const hoennDone = hoennDex
-    .filter((e) => e.hoennDex <= 200)
-    .every((e) => dexSet.has(e.nationalDex));
+  const dexDone = goal.isEarned(dexSet);
   // Mirrors pokeruby/src/trainer_card.c TrainerCard_GetStarCount: star awarded
   // when bestBattleTowerWinStreak > 49.
   const battleTowerDone = saveInfo.battleTowerBestStreak > 49;
   return [
     { label: "Hall of Fame", detail: "Beat the Elite Four", earned: saveInfo.enteredHof },
-    { label: "Hoenn Dex", detail: "Catch all 200 main Hoenn Pokémon (Jirachi/Deoxys not required)", earned: hoennDone },
+    { label: goal.label, detail: goal.detail, earned: dexDone },
     {
       label: "Battle Tower",
       detail: `50-win streak in the Battle Tower (best: ${saveInfo.battleTowerBestStreak})`,

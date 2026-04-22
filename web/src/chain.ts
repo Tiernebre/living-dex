@@ -1,6 +1,6 @@
 import type { GameStem } from "../../hub/protocol.ts";
 import { GAME_STEMS } from "../../hub/protocol.ts";
-import { hoennDex } from "./data";
+import { hoennDex, sinnohDex } from "./data";
 
 export const CODE_TO_STEM: Record<string, GameStem> = {
   AXVE: "ruby",
@@ -95,14 +95,24 @@ export const GEN_LABELS: Record<3 | 4 | 5, string> = {
 };
 
 export const GEN3_NATIONAL_TOTAL = 386;
+export const GEN4_NATIONAL_TOTAL = 493;
+export const GEN5_NATIONAL_TOTAL = 649;
 const KANTO_DEX_TOTAL = 151;
+
+export function nationalDexTotal(gen: 3 | 4 | 5): number {
+  return gen === 3
+    ? GEN3_NATIONAL_TOTAL
+    : gen === 4
+    ? GEN4_NATIONAL_TOTAL
+    : GEN5_NATIONAL_TOTAL;
+}
 
 export function isGameStem(s: string): s is GameStem {
   return (GAME_STEMS as readonly string[]).includes(s);
 }
 
 // Regional-dex completion target for a primary game's 4★ trainer card.
-// Only Gen 3 games have parsers right now — later-gen primaries fall through.
+// Only Gen 3 + Diamond have parsers right now — later-gen primaries fall through.
 export function regionalDexProgress(
   stem: GameStem,
   owned: Set<number>,
@@ -116,6 +126,11 @@ export function regionalDexProgress(
     let caught = 0;
     for (const entry of hoennDex) if (owned.has(entry.nationalDex)) caught++;
     return { caught, total: hoennDex.length };
+  }
+  if (stem === "diamond") {
+    let caught = 0;
+    for (const entry of sinnohDex) if (owned.has(entry.nationalDex)) caught++;
+    return { caught, total: sinnohDex.length };
   }
   return null;
 }
