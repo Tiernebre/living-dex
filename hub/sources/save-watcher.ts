@@ -1,11 +1,13 @@
 // Watch saves/*.sav; on change, parse and push SaveInfo into the store, keyed by game stem.
 // Ruby and Sapphire use the same Gen 3 RS format; Emerald and FR/LG need their own parsers.
+// Diamond uses the Gen 4 NDS format (shared struct with Pearl, unlike Platinum).
 
 import { parseRubySave } from "../decoder/save-ruby.ts";
 import { parseEmeraldSave } from "../decoder/save-emerald.ts";
 import { parseRSBoxSave } from "../decoder/save-rs-box.ts";
 import { parseColosseumSave } from "../decoder/save-colosseum.ts";
 import { parseXDSave } from "../decoder/save-xd.ts";
+import { parseDiamondSave } from "../decoder/save-diamond.ts";
 import { store } from "../state.ts";
 import type { GameStem, SaveInfo } from "../protocol.ts";
 import { GAME_STEMS } from "../protocol.ts";
@@ -22,6 +24,7 @@ const PARSERS: Partial<Record<GameStem, Parser>> = {
   box: parseRSBoxSave,
   colosseum: parseColosseumSave,
   xd: parseXDSave,
+  diamond: parseDiamondSave,
 };
 
 // Each stem uses a single file extension: GBA stems are .sav, GameCube stems are .gci.
@@ -34,6 +37,7 @@ const EXT_BY_STEM: Partial<Record<GameStem, string>> = {
   box: ".gci",
   colosseum: ".gci",
   xd: ".gci",
+  diamond: ".sav",
 };
 
 function stemOf(path: string): GameStem | null {

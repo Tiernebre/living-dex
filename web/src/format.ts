@@ -60,6 +60,9 @@ export function trainerArtUrl(stem: GameStem, gender: "male" | "female"): string
   if (stem === "emerald") {
     return `${base}/${gender === "female" ? "may-gen3" : "brendan-gen3"}.png`;
   }
+  if (stem === "diamond") {
+    return `${base}/${gender === "female" ? "dawn" : "lucas"}.png`;
+  }
   return `${base}/${gender === "female" ? "leaf-gen3" : "red-gen3"}.png`;
 }
 
@@ -69,14 +72,15 @@ export function trainerCharacterName(stem: GameStem, gender: "male" | "female"):
   if (stem === "firered" || stem === "leafgreen") {
     return gender === "female" ? "Leaf" : "Red";
   }
+  if (stem === "diamond") return gender === "female" ? "Dawn" : "Lucas";
   return gender === "female" ? "May" : "Brendan";
 }
 
 // Whether the trainer art is a crisp pixel sprite (GBA games — render with
 // `imageRendering: pixelated`) or a smooth character illustration (GameCube
-// games — keep the browser's default smoothing).
+// and DS games — keep the browser's default smoothing).
 export function trainerArtIsPixelated(stem: GameStem): boolean {
-  return stem !== "colosseum" && stem !== "xd";
+  return stem !== "colosseum" && stem !== "xd" && stem !== "diamond";
 }
 
 export function pokemonKey(mon: DecodedPokemon): string {

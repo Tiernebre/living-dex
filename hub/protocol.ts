@@ -38,7 +38,7 @@ export type GameCode = "AXVE" | "AXPE" | "BPEE" | "BPRE" | "BPGE";
 // "xd" = Pokémon XD: Gale of Darkness (GameCube). Also .gci but with its own
 // format: GeniusCrypto key-schedule encryption over 2 × 0x28000 slots, XK3
 // mon structs, and sub-offset-indexed sections rather than fixed addresses.
-export const GAME_STEMS = ["ruby", "sapphire", "emerald", "firered", "leafgreen", "box", "colosseum", "xd"] as const;
+export const GAME_STEMS = ["ruby", "sapphire", "emerald", "firered", "leafgreen", "box", "colosseum", "xd", "diamond"] as const;
 export type GameStem = (typeof GAME_STEMS)[number];
 
 export type GameInfo = {

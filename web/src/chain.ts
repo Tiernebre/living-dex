@@ -19,6 +19,7 @@ export const GAME_DISPLAY_NAME: Record<GameStem, string> = {
   box: "Pokémon Box",
   colosseum: "Colosseum",
   xd: "XD: Gale of Darkness",
+  diamond: "Diamond",
 };
 
 // The challenge (README) progresses Sapphire → ... → B/W2. Gen 3 is what we can decode
@@ -72,7 +73,7 @@ export const CHALLENGE_CHAIN: ChainStep[] = [
       { label: "Battle CDs", detail: "Clear all 60 Battle CDs" },
     ] },
   // Stage 6 — 2007-04 (Gen 4)
-  { stem: null, gen: 4, stage: 6, label: "Diamond",   mascots: [483], tint: "#38bdf8", primary: true },
+  { stem: "diamond", gen: 4, stage: 6, label: "Diamond", mascots: [483], tint: "#38bdf8", primary: true },
   { stem: null, gen: 4, stage: 6, label: "Pearl",     mascots: [484], tint: "#f9a8d4" },
   // Stage 7 — 2009-03 (Gen 4)
   { stem: null, gen: 4, stage: 7, label: "Platinum",  mascots: [487], tint: "#a855f7", primary: true },
