@@ -18,8 +18,9 @@ import {
 } from "../contest";
 
 // Contests are a Hoenn-only mechanic in Gen 3 (FR/LG has no contest hall),
-// so we lock this page to the R/S/E saves.
-const CONTEST_GAMES: GameStem[] = ["ruby", "sapphire", "emerald"];
+// so we lock this page to the R/S/E saves — plus Pokémon Box, which is just
+// a PC extension for R/S and holds mons that can be sent back for contests.
+const CONTEST_GAMES: GameStem[] = ["ruby", "sapphire", "emerald", "box"];
 
 type Row = {
   key: string;
@@ -151,7 +152,7 @@ export function Contest() {
         <h2 style={{ margin: "0 0 4px", display: "flex", alignItems: "baseline", gap: 10 }}>
           Contest Tier List
           <span style={{ fontSize: 13, fontWeight: 500, opacity: 0.7 }}>
-            {rows.length} mon · {loadedGames.length} Hoenn save{loadedGames.length === 1 ? "" : "s"}
+            {rows.length} mon · {loadedGames.length} save{loadedGames.length === 1 ? "" : "s"}
           </span>
         </h2>
         <div style={{ fontSize: 13, opacity: 0.7 }}>
@@ -173,7 +174,7 @@ export function Contest() {
             fontStyle: "italic",
           }}
         >
-          No Ruby, Sapphire, or Emerald saves loaded — contests are a Hoenn-only feature.
+          No Ruby, Sapphire, Emerald, or Pokémon Box saves loaded — contests are a Hoenn-only feature.
         </div>
       ) : (
         <>
