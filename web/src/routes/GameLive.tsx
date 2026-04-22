@@ -2,10 +2,12 @@ import { Navigate, useParams } from "react-router-dom";
 import { CHALLENGE_CHAIN, CODE_TO_STEM, GAME_DISPLAY_NAME, isGameStem } from "../chain";
 import { useLivingDex } from "../store";
 import { Pokeball, StatusBadge } from "../components/atoms";
-import { PokemonCard } from "../components/PokemonCard";
+import { PokemonCard, useAnyExpanded } from "../components/PokemonCard";
+import { pokemonKey } from "../format";
 import { Tabs } from "../components/controls";
 import { Encounters } from "../components/Encounters";
-import { ownershipIndex } from "../owned";
+import { FeebasMap } from "../components/FeebasMap";
+import { ownershipIndex, regionalDexStarEarned } from "../owned";
 
 export function GameLive() {
   const params = useParams<{ game: string }>();
@@ -21,14 +23,32 @@ export function GameLive() {
     lastUpdateAt,
     saves,
   } = useLivingDex();
+  // Must come before the early-return so hook order stays stable across
+  // renders (react-hooks/rules-of-hooks).
+  const partyKeys = party.flatMap((m) => (m ? [pokemonKey(m)] : []));
+  const anyExpanded = useAnyExpanded(partyKeys);
   if (!stem) return <Navigate to="/" replace />;
 
   const runningStem = game ? CODE_TO_STEM[game.code] : null;
   const canShowLive = connected && runningStem === stem;
-  const tint = CHALLENGE_CHAIN.find((c) => c.stem === stem)?.tint ?? "#6b7280";
+  const chainStep = CHALLENGE_CHAIN.find((c) => c.stem === stem);
+  const tint = chainStep?.tint ?? "#6b7280";
   const activeMon = party.find((p) => p !== null) ?? null;
   const activeEnemy = enemyParty.find((p) => p !== null) ?? null;
-  const ownership = ownershipIndex(saves, stem);
+  // Skip the encounter ownership tracker when it has nothing useful to say:
+  //  - secondary games in a stage (Ruby when Sapphire is the primary) don't
+  //    need their own living-dex pressure — progress happens in the primary
+  //  - primaries that have already earned the regional-dex trainer star
+  //    (Hoenn #1..200 for RSE — Jirachi/Deoxys excluded) don't need markers
+  const starEarned = regionalDexStarEarned(stem, saves[stem] ?? null);
+  const showEncounterOwnership = chainStep?.primary === true && !starEarned;
+  const ownership = showEncounterOwnership ? ownershipIndex(saves, stem) : undefined;
+  const save = saves[stem] ?? null;
+  const feebasSeed = save?.feebasSeed ?? null;
+  // Route 119 is mapGroup 0, mapNum 34 in R/S/E. Only show the Feebas map
+  // when we actually have a seed to compute it from.
+  const onRoute119 = location?.mapGroup === 0 && location?.mapNum === 34;
+  const showFeebas = feebasSeed !== null && (stem === "ruby" || stem === "sapphire" || stem === "emerald");
   const eggsInParty = party.filter((m) => m?.isEgg).length;
 
   return (
@@ -114,10 +134,18 @@ export function GameLive() {
             </div>
           )}
           <h2>Party</h2>
-          <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
+          <ol
+            style={{
+              listStyle: "none",
+              padding: 0,
+              display: "grid",
+              gridTemplateColumns: anyExpanded ? "1fr" : "repeat(2, minmax(0, 1fr))",
+              gap: 12,
+            }}
+          >
             {party.map((mon, i) => (
               <li key={i} style={mon ? undefined : { opacity: 0.4 }}>
-                {mon ? <PokemonCard mon={mon} movesRight linkToDetail /> : "—"}
+                {mon ? <PokemonCard mon={mon} linkToDetail collapsible /> : "—"}
               </li>
             ))}
           </ol>
@@ -172,8 +200,17 @@ export function GameLive() {
                 label: "Wild Encounters",
                 content: <Encounters location={location} ownership={ownership} />,
               },
+              ...(showFeebas
+                ? [{
+                    id: "feebas",
+                    label: "Feebas Tiles",
+                    content: (
+                      <FeebasMap seed={feebasSeed!} tint={tint} player={null} />
+                    ),
+                  }]
+                : []),
             ]}
-            initial={inBattle ? "matchup" : "encounters"}
+            initial={inBattle ? "matchup" : onRoute119 && showFeebas ? "feebas" : "encounters"}
             storageKey="living-dex:active-tab"
           />
         </>

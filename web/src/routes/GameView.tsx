@@ -8,7 +8,9 @@ import { BoxHeroCard } from "../components/BoxHeroCard";
 import { LivingDexGrid } from "../components/LivingDexGrid";
 import { Tabs } from "../components/controls";
 import { PCBoxes } from "../components/PCBoxes";
-import { PokemonCard } from "../components/PokemonCard";
+import { PokemonCard, useAnyExpanded } from "../components/PokemonCard";
+import { pokemonKey } from "../format";
+import type { DecodedPokemon } from "../../../hub/protocol.ts";
 import { TrainerSaveCard } from "../components/TrainerSaveCard";
 
 export function GameView() {
@@ -55,13 +57,7 @@ function SavedView({ stem, saveInfo }: { stem: GameStem; saveInfo: SaveInfo | nu
             id: "party",
             label: "Party",
             content: saveInfo.party.some((p) => p) ? (
-              <ol style={{ listStyle: "none", padding: 0, display: "grid", gap: 12 }}>
-                {saveInfo.party.map((mon, i) => (
-                  <li key={i} style={mon ? undefined : { opacity: 0.4 }}>
-                    {mon ? <PokemonCard mon={mon} movesRight linkToDetail /> : "—"}
-                  </li>
-                ))}
-              </ol>
+              <PartyGrid party={saveInfo.party} />
             ) : (
               <p style={{ opacity: 0.6, fontStyle: "italic" }}>No party Pokémon in this save.</p>
             ),
@@ -135,5 +131,27 @@ function BoxSavedView({ saveInfo }: { saveInfo: SaveInfo | null }) {
       </div>
       <PCBoxes saveInfo={saveInfo} />
     </>
+  );
+}
+
+function PartyGrid({ party }: { party: (DecodedPokemon | null)[] }) {
+  const keys = party.flatMap((m) => (m ? [pokemonKey(m)] : []));
+  const anyExpanded = useAnyExpanded(keys);
+  return (
+    <ol
+      style={{
+        listStyle: "none",
+        padding: 0,
+        display: "grid",
+        gridTemplateColumns: anyExpanded ? "1fr" : "repeat(2, minmax(0, 1fr))",
+        gap: 12,
+      }}
+    >
+      {party.map((mon, i) => (
+        <li key={i} style={mon ? undefined : { opacity: 0.4 }}>
+          {mon ? <PokemonCard mon={mon} linkToDetail collapsible /> : "—"}
+        </li>
+      ))}
+    </ol>
   );
 }

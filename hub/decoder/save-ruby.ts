@@ -143,6 +143,11 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
   // pokeruby/include/global.h: struct BattleTowerData.
   const battleTowerBestStreak = view.getUint16(sb2Base + 0xA8 + 0x4CA, true);
 
+  // gSaveBlock1.easyChatPairs[0].unk2 @ struct offset 0x2DD6 (after the u16
+  // bitfield at 0x2DD4). Seeds the Feebas tile PRNG on Route 119.
+  // pokeruby/include/global.h: struct EasyChatPair { u16 unk0:7:7:1; u16 unk2; ... }
+  const feebasSeed = sb1View ? sb1View.getUint16(0x2DD6, true) : null;
+
   // gPokemonStorage spans section IDs 5..13 (9 chunks), each holding up to 3968
   // bytes of the struct. Concatenate them in order so we can read BoxPokemon
   // entries without worrying about chunk boundaries.
@@ -196,6 +201,7 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
     battleTowerBestStreak,
     hallOfFame: parseHallOfFame(buf),
     secretBases: sb1 ? parseSecretBases(sb1) : [],
+    feebasSeed,
   };
 }
 

@@ -66,6 +66,20 @@ export function ownershipIndex(
   };
 }
 
+// Matches the in-game "regional dex" trainer-card star, not the player's
+// personal caught-anywhere set. Sapphire's Hoenn-dex star ignores Jirachi
+// and Deoxys (Hoenn #201/#202) — see trainerStarsBreakdown — so the living-
+// dex tracker on wild encounters should treat those as uncounted when
+// deciding whether to disappear.
+export function regionalDexStarEarned(stem: GameStem, saveInfo: SaveInfo | null): boolean {
+  if (!saveInfo) return false;
+  if (stem === "ruby" || stem === "sapphire" || stem === "emerald") {
+    const dexSet = new Set(saveInfo.pokedexOwned);
+    return hoennDex.filter((e) => e.hoennDex <= 200).every((e) => dexSet.has(e.nationalDex));
+  }
+  return false;
+}
+
 export function countOwnedSpecies(saveInfo: SaveInfo): Set<number> {
   const set = new Set<number>();
   const push = (mon: DecodedPokemon | null) => {

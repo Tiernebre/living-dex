@@ -1,3 +1,4 @@
+import { useSyncExternalStore } from "react";
 import { Link } from "react-router-dom";
 import type { DecodedPokemon } from "../../../hub/protocol.ts";
 import { lookup } from "../data";
@@ -8,11 +9,79 @@ import { Confetti, MovesList, TypeBadge } from "./atoms";
 import { GradeChip } from "./Grade";
 import { ExpProgress, StatsTable } from "./StatsTable";
 
+// Shared collapse store: one entry per pokemonKey marked "0" (expanded) or
+// "1" (collapsed). Stored in localStorage so the choice survives live-update
+// re-renders, and exposed through useSyncExternalStore so sibling components
+// (like the party grid) can react when any card is expanded.
+const COLLAPSE_STORAGE_KEY = "living-dex:card-collapsed";
+
+function loadCollapsedSet(): Set<string> {
+  if (typeof window === "undefined") return new Set();
+  try {
+    const raw = window.localStorage.getItem(COLLAPSE_STORAGE_KEY);
+    if (!raw) return new Set();
+    const arr = JSON.parse(raw);
+    return new Set(Array.isArray(arr) ? arr : []);
+  } catch {
+    return new Set();
+  }
+}
+
+let collapseSet: Set<string> = loadCollapsedSet();
+const collapseListeners = new Set<() => void>();
+
+function saveCollapseSet() {
+  try {
+    window.localStorage.setItem(COLLAPSE_STORAGE_KEY, JSON.stringify([...collapseSet]));
+  } catch {
+    // localStorage full or disabled — the UI still works without persistence.
+  }
+}
+
+function subscribeCollapse(l: () => void) {
+  collapseListeners.add(l);
+  return () => collapseListeners.delete(l);
+}
+
+function setCollapsed(key: string, collapsed: boolean) {
+  collapseSet = new Set(collapseSet);
+  collapseSet.delete(`${key}:${collapsed ? 0 : 1}`);
+  collapseSet.add(`${key}:${collapsed ? 1 : 0}`);
+  saveCollapseSet();
+  collapseListeners.forEach((l) => l());
+}
+
+function readCollapsed(key: string, defaultCollapsed: boolean): boolean {
+  if (collapseSet.has(`${key}:1`)) return true;
+  if (collapseSet.has(`${key}:0`)) return false;
+  return defaultCollapsed;
+}
+
+export function useCardCollapsed(key: string | null, defaultCollapsed: boolean): boolean {
+  return useSyncExternalStore(
+    subscribeCollapse,
+    () => (key ? readCollapsed(key, defaultCollapsed) : defaultCollapsed),
+    () => defaultCollapsed,
+  );
+}
+
+// True if any of the given keys is currently expanded. Lets a container
+// (e.g. the party grid) switch layouts when any of its cards is open.
+export function useAnyExpanded(keys: string[]): boolean {
+  return useSyncExternalStore(
+    subscribeCollapse,
+    () => keys.some((k) => !readCollapsed(k, true)),
+    () => false,
+  );
+}
+
 export function PokemonCard({
   mon,
   movesRight = false,
   fancyGrade = false,
   linkToDetail = false,
+  collapsible = false,
+  defaultCollapsed = true,
 }: {
   mon: DecodedPokemon;
   movesRight?: boolean;
@@ -23,6 +92,11 @@ export function PokemonCard({
   // detail page (which renders this card itself) and wild-encounter overlays
   // (mon isn't saved yet, has no detail page) can keep it static.
   linkToDetail?: boolean;
+  // When true, render a compact one-row summary with a toggle to expand to
+  // the full card. Expand state persists in localStorage by pokemonKey so it
+  // survives live-update re-renders.
+  collapsible?: boolean;
+  defaultCollapsed?: boolean;
 }) {
   const info = lookup(mon.species);
   const graded = info ? gradePokemon(mon.ivs, mon.nature, info.baseStats) : null;
@@ -30,14 +104,21 @@ export function PokemonCard({
   const level = effectiveLevel(mon, info);
   const detailHref = linkToDetail ? `/pokemon/${pokemonKey(mon)}` : null;
   const nameLabel = mon.nickname || (info ? formatSpeciesName(info.name) : "?");
+  const storageKey = collapsible ? pokemonKey(mon) : null;
+  const collapsed = useCardCollapsed(storageKey, defaultCollapsed);
+  const isCollapsed = collapsible && collapsed;
+  const toggleCollapsed = () => {
+    if (storageKey) setCollapsed(storageKey, !collapsed);
+  };
+  const thumbSize = isCollapsed ? 44 : 72;
   return (
     <div
       className={gradeClass}
       style={{
         display: "flex",
-        alignItems: "flex-start",
+        alignItems: isCollapsed ? "center" : "flex-start",
         gap: 12,
-        padding: 8,
+        padding: isCollapsed ? 6 : 8,
         border: "1px solid var(--accent)",
         borderRadius: 8,
         position: "relative",
@@ -52,12 +133,12 @@ export function PokemonCard({
         <img
           src={thumbnailUrl(info.nationalDex)}
           alt={info.name}
-          width={72}
-          height={72}
+          width={thumbSize}
+          height={thumbSize}
           style={{ flexShrink: 0 }}
         />
       )}
-      <div style={{ flex: 1, minWidth: 0 }}>
+      <div style={{ flex: 1, minWidth: 0, paddingRight: collapsible ? 28 : 0 }}>
         <div
           style={{
             fontWeight: 600,
@@ -131,7 +212,7 @@ export function PokemonCard({
             </span>
           )}
         </div>
-        {(() => {
+        {isCollapsed ? null : (() => {
           const hp = hiddenPower(mon.ivs);
           return (
             <div
@@ -151,10 +232,27 @@ export function PokemonCard({
             </div>
           );
         })()}
-        {info && <ExpProgress level={level} exp={mon.experience} rate={info.growthRate} />}
-        {movesRight ? (
-          <div style={{ display: "flex", gap: 12, alignItems: "flex-start", flexWrap: "wrap" }}>
-            <div style={{ flex: "1 1 240px", minWidth: 0 }}>
+        {!isCollapsed && info && (
+          <ExpProgress level={level} exp={mon.experience} rate={info.growthRate} />
+        )}
+        {!isCollapsed &&
+          (movesRight ? (
+            <div style={{ display: "flex", gap: 12, alignItems: "flex-start", flexWrap: "wrap" }}>
+              <div style={{ flex: "1 1 240px", minWidth: 0 }}>
+                <StatsTable
+                  ivs={mon.ivs}
+                  evs={mon.evs}
+                  nature={mon.nature}
+                  baseStats={info?.baseStats}
+                  level={level}
+                />
+              </div>
+              <div style={{ flex: "1 1 240px", minWidth: 0 }}>
+                <MovesList moves={mon.moves} />
+              </div>
+            </div>
+          ) : (
+            <>
               <StatsTable
                 ivs={mon.ivs}
                 evs={mon.evs}
@@ -162,24 +260,38 @@ export function PokemonCard({
                 baseStats={info?.baseStats}
                 level={level}
               />
-            </div>
-            <div style={{ flex: "1 1 240px", minWidth: 0 }}>
               <MovesList moves={mon.moves} />
-            </div>
-          </div>
-        ) : (
-          <>
-            <StatsTable
-              ivs={mon.ivs}
-              evs={mon.evs}
-              nature={mon.nature}
-              baseStats={info?.baseStats}
-              level={level}
-            />
-            <MovesList moves={mon.moves} />
-          </>
-        )}
+            </>
+          ))}
       </div>
+      {collapsible && (
+        <button
+          type="button"
+          onClick={toggleCollapsed}
+          aria-label={isCollapsed ? "Expand card" : "Collapse card"}
+          title={isCollapsed ? "Expand" : "Collapse"}
+          style={{
+            position: "absolute",
+            top: 6,
+            right: 6,
+            width: 24,
+            height: 24,
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            border: "1px solid color-mix(in srgb, var(--accent) 60%, transparent)",
+            background: "color-mix(in srgb, var(--accent) 10%, var(--bg-elevated))",
+            color: "var(--accent-strong)",
+            borderRadius: 6,
+            cursor: "pointer",
+            fontSize: 12,
+            lineHeight: 1,
+            padding: 0,
+          }}
+        >
+          {isCollapsed ? "▾" : "▴"}
+        </button>
+      )}
     </div>
   );
 }

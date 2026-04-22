@@ -109,6 +109,11 @@ export type SaveInfo = {
   // player's own base; 1..19 are mix-records. Empty slots filtered out.
   // R/S only — FR/LG/Emerald layouts differ and aren't handled yet.
   secretBases: SecretBase[];
+  // Seed used by the Feebas tile selection on Route 119. Games differ: R/S
+  // read a u16 from easyChatPairs[0].unk2; Emerald reads from
+  // dewfordTrends[0].rand (same semantics, different SaveBlock1 offset).
+  // null for games where the seed isn't parsed yet (FR/LG have no Feebas).
+  feebasSeed: number | null;
 };
 
 export type HallOfFameMon = {
