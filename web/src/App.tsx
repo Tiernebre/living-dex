@@ -20,6 +20,7 @@ import { GameView } from "./routes/GameView";
 import { GameLive } from "./routes/GameLive";
 import { AllPokemon } from "./routes/AllPokemon";
 import { Contest } from "./routes/Contest";
+import { Items } from "./routes/Items";
 import { PokemonDetail } from "./routes/PokemonDetail";
 import { HallOfFame } from "./routes/HallOfFame";
 import { SecretBases } from "./routes/SecretBases";
@@ -32,6 +33,7 @@ export function App() {
           <Route path="/" element={<Dashboard />} />
           <Route path="/pokemon" element={<AllPokemon />} />
           <Route path="/contest" element={<Contest />} />
+          <Route path="/items" element={<Items />} />
           <Route path="/:game" element={<GameView />} />
           <Route path="/:game/live" element={<GameLive />} />
           <Route path="/:game/hall-of-fame" element={<HallOfFame />} />
@@ -182,6 +184,12 @@ function Sidebar({
           to="/contest"
           icon={<span aria-hidden>★</span>}
           label="Contest Tiers"
+          collapsed={collapsed}
+        />
+        <SideNavLink
+          to="/items"
+          icon={<span aria-hidden>◈</span>}
+          label="Items"
           collapsed={collapsed}
         />
       </nav>

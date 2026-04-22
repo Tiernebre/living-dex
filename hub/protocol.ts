@@ -128,7 +128,16 @@ export type SaveInfo = {
   // gSaveBlock2.localTimeOffset @ SB2+0x98. The offset between the hardware
   // RTC and the game's clock, set once at InitTimeBasedEvents.
   localTimeOffset: { days: number; hours: number; minutes: number; seconds: number } | null;
+  // Bag pockets + PC storage. R/S ItemSlots are {u16 id, u16 quantity}, unencrypted
+  // (unlike Emerald/FRLG which XOR quantity against securityKey). Empty slots
+  // (id == 0) are dropped before emitting. Pocket names mirror the decomp field
+  // names; "pc" is the 50-slot pcItems array at SaveBlock1+0x498.
+  bag: Bag;
 };
+
+export type ItemSlot = { id: number; quantity: number };
+export type ItemLocation = "pc" | "items" | "balls" | "tms" | "berries" | "key";
+export type Bag = Record<ItemLocation, ItemSlot[]>;
 
 export type HallOfFameMon = {
   species: number;

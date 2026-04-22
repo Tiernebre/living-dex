@@ -9,9 +9,12 @@
 import { decodePokemon } from "./gen3.ts";
 import { parseHallOfFame } from "./hall-of-fame.ts";
 import type {
+  Bag,
   BoxInfo,
   DecodedPokemon,
   GameStem,
+  ItemLocation,
+  ItemSlot,
   SaveInfo,
   SecretBase,
   SecretBaseTeamMember,
@@ -217,6 +220,8 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
     });
   }
 
+  const bag: Bag = sb1View ? parseBag(sb1View) : emptyBag();
+
   return {
     game,
     playerName,
@@ -236,7 +241,41 @@ export function parseRubySave(buf: Uint8Array, game: GameStem = "ruby"): SaveInf
     mirageRnd,
     lotteryRnd,
     localTimeOffset,
+    bag,
   };
+}
+
+// R/S bag + PC storage. Offsets from gSaveBlock1 (pokeruby/include/global.h):
+//   pcItems[50]          @ 0x498
+//   bagPocket_Items[20]  @ 0x560
+//   bagPocket_KeyItems[20] @ 0x5B0
+//   bagPocket_PokeBalls[16] @ 0x600
+//   bagPocket_TMHM[64]   @ 0x640
+//   bagPocket_Berries[46]@ 0x740
+// ItemSlot = { u16 itemId, u16 quantity }. R/S don't XOR quantity (Emerald does).
+function parseBag(sb1View: DataView): Bag {
+  const readPocket = (offset: number, count: number): ItemSlot[] => {
+    const out: ItemSlot[] = [];
+    for (let i = 0; i < count; i++) {
+      const id = sb1View.getUint16(offset + i * 4, true);
+      if (id === 0) continue;
+      const quantity = sb1View.getUint16(offset + i * 4 + 2, true);
+      out.push({ id, quantity });
+    }
+    return out;
+  };
+  return {
+    pc: readPocket(0x498, 50),
+    items: readPocket(0x560, 20),
+    key: readPocket(0x5B0, 20),
+    balls: readPocket(0x600, 16),
+    tms: readPocket(0x640, 64),
+    berries: readPocket(0x740, 46),
+  };
+}
+
+function emptyBag(): Bag {
+  return { pc: [], items: [], balls: [], tms: [], berries: [], key: [] };
 }
 
 // SaveBlock1 @ 0x1A08: struct SecretBaseRecord secretBases[20] (160 bytes each).

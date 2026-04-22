@@ -140,5 +140,6 @@ export function parseRSBoxSave(buf: Uint8Array, game: GameStem = "box"): SaveInf
     mirageRnd: null,
     lotteryRnd: null,
     localTimeOffset: null,
+    bag: { pc: [], items: [], balls: [], tms: [], berries: [], key: [] },
   };
 }
